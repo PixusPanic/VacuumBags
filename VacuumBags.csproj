@@ -15,4 +15,7 @@
 			<HintPath>..\Mods\lib\androLib.dll</HintPath>
 		</Reference>
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="UI\" />
+	</ItemGroup>
 </Project>
