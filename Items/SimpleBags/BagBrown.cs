@@ -13,14 +13,10 @@ using System;
 namespace VacuumBags.Items
 {
 	public class BagBrown : SimpleBag {
-		protected override IDictionary<int, int> recipeIngredients => new Dictionary<int, int>() {
-			{ ItemID.BrownDye, 1 },
-			{ ItemID.WhiteString, 1 }
-		};
 		new public static void RegisterWithAndroLib(Mod mod) {
 			BagStorageID = StorageManager.RegisterVacuumStorageClass(
 				mod,//Mod
-				typeof(BagBlue),//type 
+				typeof(BagBrown),//type 
 				ItemAllowedToBeStored,//Is allowed function, Func<Item, bool>
 				null,//Localization Key name.  Attempts to determine automatically by treating the type as a ModItem, or you can specify.
 				20,//StorageSize
@@ -28,12 +24,31 @@ namespace VacuumBags.Items
 				() => new Color(25, 10, 3, androLib.Common.Configs.ConfigValues.UIAlpha),//Get color function. Func<using Microsoft.Xna.Framework.Color>
 				() => new Color(30, 10, 1, androLib.Common.Configs.ConfigValues.UIAlpha),//Get Scroll bar color function. Func<using Microsoft.Xna.Framework.Color>
 				() => new Color(50, 20, 6, androLib.Common.Configs.ConfigValues.UIAlpha),//Get Button hover color function. Func<using Microsoft.Xna.Framework.Color>
-				() => ModContent.ItemType<BagBlue>(),//Get ModItem type
+				() => ModContent.ItemType<BagBrown>(),//Get ModItem type
 				80,//UI Left
 				675//UI Top
 			);
 		}
-
-		protected override void EditRecipe(ref Recipe recipe) { }
+		public override void AddRecipes() {
+			if (!VacuumBags.serverConfig.HarderBagRecipes) {
+				CreateRecipe()
+				.AddTile(TileID.WorkBenches)
+				.AddIngredient(ItemID.Silk, 2)
+				.AddIngredient(ItemID.Leather, 5)
+				.AddIngredient(ItemID.WhiteString, 1)
+				.Register();
+			}
+			else {
+				CreateRecipe()
+				.AddTile(TileID.WorkBenches)
+				.AddIngredient(ItemID.Silk, 10)
+				.AddIngredient(ItemID.Leather, 10)
+				.AddIngredient(ItemID.BrownString, 1)
+				.AddIngredient(ItemID.Coconut, 2)
+				.AddIngredient(ItemID.BrownMoss, 1)
+				.AddIngredient(ItemID.FossilOre, 3)
+				.Register();
+			}
+		}
 	}
 }

@@ -13,10 +13,6 @@ using System;
 namespace VacuumBags.Items
 {
 	public class BagBlue : SimpleBag {
-		protected override IDictionary<int, int> recipeIngredients => new Dictionary<int, int>() {
-			{ ItemID.CyanHusk, 1 },
-			{ ItemID.WhiteString, 1 }
-		};
 		new public static void RegisterWithAndroLib(Mod mod) {
 			BagStorageID = StorageManager.RegisterVacuumStorageClass(
 				mod,//Mod
@@ -33,7 +29,26 @@ namespace VacuumBags.Items
 				675//UI Top
 			);
 		}
-
-		protected override void EditRecipe(ref Recipe recipe) { }
+		public override void AddRecipes() {
+			if (!VacuumBags.serverConfig.HarderBagRecipes) {
+				CreateRecipe()
+				.AddTile(TileID.WorkBenches)
+				.AddIngredient(ItemID.Silk, 2)
+				.AddIngredient(ItemID.CyanHusk, 1)
+				.AddIngredient(ItemID.WhiteString, 1)
+				.Register();
+			}
+			else {
+				CreateRecipe()
+				.AddTile(TileID.WorkBenches)
+				.AddIngredient(ItemID.Silk, 10)
+				.AddIngredient(ItemID.CyanHusk, 1)
+				.AddIngredient(ItemID.BlueString, 1)
+				.AddIngredient(ItemID.GlowingMushroom, 50)
+				.AddIngredient(ItemID.Sapphire, 1)
+				.AddIngredient(ItemID.JojaCola, 1)
+				.Register();
+			}
+		}
 	}
 }

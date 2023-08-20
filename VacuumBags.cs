@@ -11,6 +11,7 @@ namespace VacuumBags
 			BagBlue.RegisterWithAndroLib(this);
 			BagBrown.RegisterWithAndroLib(this);
 			BagGreen.RegisterWithAndroLib(this);
+			BagOrange.RegisterWithAndroLib(this);
 			BagPurple.RegisterWithAndroLib(this);
 			BagRed.RegisterWithAndroLib(this);
 			BagYellow.RegisterWithAndroLib(this);

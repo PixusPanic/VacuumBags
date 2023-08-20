@@ -15,7 +15,7 @@ namespace VacuumBags.Items
 	public  class AmmoBag : AndroModItem, ISoldByWitch {
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {
-            Item.maxStack = 99;
+            Item.maxStack = 1;
             Item.value = ContentSamples.ItemsByType[ItemID.AmmoBox].value;
 			Item.rare = ItemRarityID.Blue;
 			Item.width = 28;

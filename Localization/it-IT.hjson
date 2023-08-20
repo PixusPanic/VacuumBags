@@ -1,0 +1,110 @@
+Mods: {
+	VacuumBags: {
+		Items: {
+			BuildersBox: {
+				// Tooltip: ""
+				// DisplayName: Builders Box
+			}
+
+			BagBlue: {
+				// Tooltip: ""
+				// DisplayName: Bag (Blue)
+			}
+
+			BagBrown: {
+				// Tooltip: ""
+				// DisplayName: Bag (Brown)
+			}
+
+			BagGreen: {
+				// Tooltip: ""
+				// DisplayName: Bag (Green)
+			}
+
+			BagOrange: {
+				// Tooltip: ""
+				// DisplayName: Bag (Orange)
+			}
+
+			BagPurple: {
+				// Tooltip: ""
+				// DisplayName: Bag (Purple)
+			}
+
+			BagRed: {
+				// Tooltip: ""
+				// DisplayName: Bag (Red)
+			}
+
+			BagYellow: {
+				// Tooltip: ""
+				// DisplayName: Bag (Yellow)
+			}
+
+			AmmoBag: {
+				// Tooltip: ""
+				// DisplayName: Ammo Bag
+			}
+
+			HerbBag: {
+				// Tooltip: ""
+				// DisplayName: Herb Bag
+			}
+
+			PaintBag: {
+				// Tooltip: ""
+				// DisplayName: Paint Bag
+			}
+
+			PotionBag: {
+				// Tooltip: ""
+				// DisplayName: Potion Bag
+			}
+
+			HerbSatchel: {
+				// Tooltip: ""
+				// DisplayName: Herb Satchel
+			}
+
+			PaintBucket: {
+				// Tooltip: ""
+				// DisplayName: Paint Bucket
+			}
+
+			PotionFlask: {
+				// Tooltip: ""
+				// DisplayName: Potion Flask
+			}
+
+			WallEr: {
+				// Tooltip: ""
+				// DisplayName: Wall-Er
+			}
+		}
+
+		Configs: {
+			BagsClientConfig: {
+				// DisplayName: Bags Client Config
+
+				AllAmmoItemsGoIntoAmmoBag: {
+					// Label: All Ammo Items Go Into Ammo Bag
+					// Tooltip: ""
+				}
+			}
+
+			BagsServerConfig: {
+				// DisplayName: Bags Server Config
+
+				HarderBagRecipes: {
+					// Label: Harder Bag Recipes
+					// Tooltip: ""
+				}
+			}
+		}
+
+		Config: {
+			// BagStorageOptions: All Ammo Items Go Into Ammo Bag Header
+			// Crafting: Harder Bag Recipes Header
+		}
+	}
+}
