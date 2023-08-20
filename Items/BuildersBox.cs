@@ -21,12 +21,24 @@ namespace VacuumBags.Items
             Item.height = 32;
         }
         public override void AddRecipes() {
-            Recipe recipe = CreateRecipe();
-			recipe.AddTile(TileID.WorkBenches);
-			recipe.AddIngredient(ItemID.RedBrick, 50);
-			recipe.AddRecipeGroup("androLib:CommonGems", 5);
-			recipe.Register();
-        }
+			if (!VacuumBags.serverConfig.HarderBagRecipes) {
+				CreateRecipe()
+				.AddTile(TileID.WorkBenches)
+				.AddIngredient(ItemID.RedBrick, 50)
+				.AddRecipeGroup("androLib:CommonGems", 5)
+				.Register();
+			}
+			else {
+				CreateRecipe()
+				.AddTile(TileID.HeavyWorkBench)
+				.AddIngredient(ItemID.RedBrick, 50)
+				.AddIngredient(ItemID.Diamond, 5)
+				.AddIngredient(ItemID.Ruby, 5)
+				.AddIngredient(ItemID.Amber, 5)
+				.AddIngredient(ItemID.Cloud, 25)
+				.Register();
+			}
+		}
 
 		public static int BagStorageID;//Set this when registering with androLib.
 

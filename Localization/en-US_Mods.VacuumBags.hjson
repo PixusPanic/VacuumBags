@@ -38,4 +38,29 @@ Items: {
 		Tooltip: ""
 		DisplayName: Bag Yellow
 	}
+
+	AmmoBag: {
+		Tooltip: ""
+		DisplayName: Ammo Bag
+	}
+
+	HerbBag: {
+		Tooltip: ""
+		DisplayName: Herb Bag
+	}
+
+	PaintBag: {
+		Tooltip: ""
+		DisplayName: Paint Bag
+	}
+
+	PotionBag: {
+		Tooltip: ""
+		DisplayName: Potion Bag
+	}
+
+	WallBag: {
+		Tooltip: ""
+		DisplayName: Wall Bag
+	}
 }
