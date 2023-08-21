@@ -25,6 +25,8 @@ See androLib for more information on how to create your own bags:
 
 Feel free to reach out if you would like help creating a bag for your mod or if you find any issues with this mod.
 
+Portable Storage bag sprites are used in this mod (with permission).  Created by 
+
 Please give us your feedback!!!!!!
 https://discord.gg/mPywEhyV9b
 
