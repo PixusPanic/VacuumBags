@@ -46,7 +46,7 @@ namespace VacuumBags.Items
 				.AddIngredient(ItemID.Silk, 10)
 				.AddIngredient(ItemID.VioletHusk, 1)
 				.AddIngredient(ItemID.PurpleString, 1)
-				.AddIngredient(ItemID.PurpleMucos, 50)
+				.AddIngredient(ItemID.PurpleMucos, 2)
 				.AddIngredient(ItemID.Plum, 2)
 				.AddIngredient(ItemID.Amethyst, 15)
 				.Register();

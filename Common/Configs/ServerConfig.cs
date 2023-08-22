@@ -18,6 +18,7 @@ namespace VacuumBags.Common.Configs
 		[Header("$Mods.VacuumBags.Config.Crafting")]//TODO: Setup Localization
 
 		//[Label("$Mods.VacuumBags.Config.HarderBagRecipes.Label")]
+		[ReloadRequired]
 		[DefaultValue(false)]
 		public bool HarderBagRecipes;
 	}
@@ -30,6 +31,7 @@ namespace VacuumBags.Common.Configs
 
 		//[Label("$Mods.VacuumBags.Config.AllAmmoItemsGoIntoAmmoBag.Label")]
 		//[Tooltip("$Mods.VacuumBags.Config.AllAmmoItemsGoIntoAmmoBag.Tooltip")]
+		[ReloadRequired]
 		[DefaultValue(true)]
 		public bool AllAmmoItemsGoIntoAmmoBag;
 	}

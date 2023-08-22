@@ -25,15 +25,16 @@ namespace VacuumBags.Items
 			if (!VacuumBags.serverConfig.HarderBagRecipes) {
 				CreateRecipe()
 				.AddTile(TileID.WorkBenches)
-				.AddIngredient(ItemID.Silk, 2)
-				.AddIngredient(ItemID.WoodenArrow, 100)
-				.AddIngredient(ItemID.Shuriken, 100)
+				.AddIngredient(ItemID.Leather, 2)
+				.AddIngredient(ItemID.GrassSeeds, 3)
+				.AddIngredient(ItemID.DaybloomSeeds, 3)
+				.AddIngredient(ItemID.MoonglowSeeds, 3)
 				.Register();
 			}
 			else {
 				CreateRecipe()
 				.AddTile(TileID.HeavyWorkBench)
-				.AddIngredient(ItemID.Silk, 10)
+				.AddIngredient(ItemID.Leather, 5)
 				.AddIngredient(ItemID.Sunflower, 10)
 				.AddIngredient(ItemID.GrassSeeds, 10)
 				.AddIngredient(ItemID.MushroomGrassSeeds, 10)

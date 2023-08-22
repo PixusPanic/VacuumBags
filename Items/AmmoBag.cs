@@ -20,6 +20,7 @@ namespace VacuumBags.Items
 			Item.rare = ItemRarityID.Blue;
 			Item.width = 28;
             Item.height = 30;
+			Item.ammo = Type;
         }
         public override void AddRecipes() {
 			if (!VacuumBags.serverConfig.HarderBagRecipes) {
