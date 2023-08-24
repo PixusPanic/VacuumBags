@@ -9,10 +9,13 @@ using androLib.Items;
 using androLib.Common.Globals;
 using androLib;
 using static Terraria.ID.ContentSamples.CreativeHelper;
+using MonoMod.Cil;
+using System;
+using Mono.Cecil.Cil;
 
 namespace VacuumBags.Items
 {
-	public  class AmmoBag : AndroModItem, ISoldByWitch {
+	public class AmmoBag : AndroModItem, ISoldByWitch {
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {
             Item.maxStack = 1;
@@ -216,6 +219,130 @@ namespace VacuumBags.Items
 					continue;
 				}
 			}
+
+			foreach (int blackListItemType in BlackList) {
+				allowedItems.Remove(blackListItemType);
+			}
+		}
+
+		public static SortedSet<int> BlackList {
+			get {
+				if (blackList == null)
+					GetBlackList();
+
+				return blackList;
+			}
+		}
+		private static SortedSet<int> blackList = null;
+		private static void GetBlackList() {
+			blackList = new() {
+				ModContent.ItemType<AmmoBag>(),
+				ModContent.ItemType<PaintBucket>(),
+				ItemID.CopperCoin,
+				ItemID.SilverCoin,
+				ItemID.GoldCoin,
+				ItemID.PlatinumCoin,
+			};
+		}
+		public static Item OnChooseAmmo(On_Player.orig_ChooseAmmo orig, Player self, Item weapon) {
+			Item item = orig(self, weapon);
+			int AmmoBagID = ModContent.ItemType<AmmoBag>();
+			if (!self.HasItem(AmmoBagID))
+				return item;
+
+			Item fromBag = ChooseAmmoFromBag(self, weapon);
+			if (item == null) {
+				return fromBag;
+			}
+			else {
+				if (fromBag == null || self.whoAmI != Main.myPlayer)
+					return item;
+
+				Item[] inventory = self.inventory;
+				for (int j = 54; j < 58; j++) {
+					if (inventory[j].type == AmmoBagID)
+						return fromBag;
+
+					if (inventory[j].stack > 0 && ItemLoader.CanChooseAmmo(weapon, inventory[j], self)) {
+						return item;
+					}
+				}
+
+				for (int k = 0; k < 54; k++) {
+					if (inventory[k].type == AmmoBagID)
+						return fromBag;
+
+					if (inventory[k].stack > 0 && ItemLoader.CanChooseAmmo(weapon, inventory[k], self)) {
+						return item;
+					}
+				}
+			}
+
+			return item;
+		}
+
+		private static Item ChooseAmmoFromBag(Player player, Item weapon) {
+			if (player.whoAmI != Main.myPlayer)
+				return null;
+
+			foreach (Item item in StorageManager.GetItems(BagStorageID)) {
+				if (!item.NullOrAir() && item.stack > 0 && ItemLoader.CanChooseAmmo(weapon, item, player))
+					return item;
+			}
+			
+			return null;
+		}
+
+		internal static void OnDrawItemSlot(ILContext il) {
+			var c = new ILCursor(il);
+			/*
+	// if (item.useAmmo > 0)
+	IL_0cc8: ldloc.1
+	IL_0cc9: ldfld int32 Terraria.Item::useAmmo
+	IL_0cce: ldc.i4.0
+	IL_0ccf: ble.s IL_0d13
+
+	// _ = item.useAmmo;
+	IL_0cd1: ldloc.1
+	IL_0cd2: ldfld int32 Terraria.Item::useAmmo
+	IL_0cd7: pop
+	// num11 = 0;
+	IL_0cd8: ldc.i4.0
+	IL_0cd9: stloc.s 29
+			 */
+			//Note to self.  All instructions have to be perfectly in order if using TryGotoNext.  Use multiple calls of TryGotoNext if you need to skip instructions.
+			if (!c.TryGotoNext(MoveType.After,
+				i => i.MatchLdloc(1),
+				i => i.MatchLdfld<Item>("useAmmo"),
+				i => i.MatchPop(),
+				i => i.MatchLdcI4(0)
+			)) { throw new Exception("Failed to find instructions OnDrawItemSlot 1/2"); }
+
+			//Also works for jumping over instructions.
+			/*if (!c.TryGotoNext(MoveType.After,
+				//i => i.MatchLdloc(1),
+				i => i.MatchLdfld<Item>("useAmmo"),
+				i => i.MatchLdcI4(0)
+			)) { throw new Exception("Failed to find instructions OnDrawItemSlot 1/2"); }
+
+			if (!c.TryGotoNext(MoveType.After,
+				i => i.MatchLdcI4(0)
+			)) { throw new Exception("Failed to find instructions OnDrawItemSlot 2/2"); }*/
+			//c.LogRest(10);
+			c.Emit(OpCodes.Ldloc, 1);
+
+			c.EmitDelegate((int ammoCount, Item weapon) => {
+				int AmmoBagID = ModContent.ItemType<AmmoBag>();
+				if (!Main.LocalPlayer.HasItem(AmmoBagID))
+					return ammoCount;
+
+				foreach (Item item in StorageManager.GetItems(BagStorageID)) {
+					if (!item.NullOrAir() && item.stack > 0 && ItemLoader.CanChooseAmmo(weapon, item, Main.LocalPlayer))
+						ammoCount += item.stack;
+				}
+
+				return ammoCount;
+			});
 		}
 
 		#region AndroModItem attributes that you don't need.

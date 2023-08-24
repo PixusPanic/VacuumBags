@@ -9,6 +9,8 @@ using androLib.Items;
 using androLib.Common.Globals;
 using androLib;
 using static Terraria.ID.ContentSamples.CreativeHelper;
+using System;
+using MonoMod.Cil;
 
 namespace VacuumBags.Items
 {
@@ -20,7 +22,8 @@ namespace VacuumBags.Items
 			Item.rare = ItemRarityID.Blue;
 			Item.width = 32;
             Item.height = 28;
-        }
+			Item.ammo = Type;
+		}
         public override void AddRecipes() {
 			if (!VacuumBags.serverConfig.HarderBagRecipes) {
 				CreateRecipe()
@@ -62,6 +65,55 @@ namespace VacuumBags.Items
 			);
 		}
 		public static bool ItemAllowedToBeStored(Item item) => AllowedItems.Contains(item.type);
+
+		internal static Item OnFindPaintOrCoating(On_Player.orig_FindPaintOrCoating orig, Player self) {
+			Item item = orig(self);
+			int AmmoBagID = ModContent.ItemType<AmmoBag>();
+			if (!self.HasItem(AmmoBagID))
+				return item;
+
+			Item fromBag = ChooseAmmoFromBag(self);
+			if (item == null) {
+				return fromBag;
+			}
+			else {
+				if (fromBag == null || self.whoAmI != Main.myPlayer)
+					return item;
+
+				Item[] inventory = self.inventory;
+				for (int j = 54; j < 58; j++) {
+					if (inventory[j].type == AmmoBagID)
+						return fromBag;
+
+					if (inventory[j].stack > 0 && item.PaintOrCoating) {
+						return item;
+					}
+				}
+
+				for (int k = 0; k < 54; k++) {
+					if (inventory[k].type == AmmoBagID)
+						return fromBag;
+
+					if (inventory[k].stack > 0 && item.PaintOrCoating) {
+						return item;
+					}
+				}
+			}
+
+			return item;
+		}
+
+		private static Item ChooseAmmoFromBag(Player player) {
+			if (player.whoAmI != Main.myPlayer)
+				return null;
+
+			foreach (Item item in StorageManager.GetItems(BagStorageID)) {
+				if (!item.NullOrAir() && item.stack > 0 && item.PaintOrCoating)
+					return item;
+			}
+
+			return null;
+		}
 
 		public static SortedSet<int> AllowedItems {
 			get {
@@ -150,6 +202,67 @@ namespace VacuumBags.Items
 					continue;
 				}
 			}
+
+			foreach (int blackListItemType in BlackList) {
+				allowedItems.Remove(blackListItemType);
+			}
+		}
+		public static SortedSet<int> BlackList {
+			get {
+				if (blackList == null)
+					GetBlackList();
+
+				return blackList;
+			}
+		}
+		private static SortedSet<int> blackList = null;
+		private static void GetBlackList() {
+			blackList = new() {
+				ModContent.ItemType<PaintBucket>(),
+			};
+		}
+
+		internal static void OnItemCheck_CheckCanUse(ILContext il) {
+			var c = new ILCursor(il);
+			/*
+	// if (sItem.type == 1071 || sItem.type == 1072)
+	IL_02ae: ldarg.1
+	IL_02af: ldfld int32 Terraria.Item::'type'
+	IL_02b4: ldc.i4 1071
+	IL_02b9: beq.s IL_02c8
+
+	IL_02bb: ldarg.1
+	IL_02bc: ldfld int32 Terraria.Item::'type'
+	IL_02c1: ldc.i4 1072
+	IL_02c6: bne.un.s IL_02f7
+
+	// bool flag2 = false;
+	IL_02c8: ldc.i4.0
+	IL_02c9: stloc.s 9
+	// for (int i = 0; i < 58; i++)
+	IL_02cb: ldc.i4.0
+	IL_02cc: stloc.s 10
+	// if (this.inventory[i].PaintOrCoating)
+	IL_02ce: br.s IL_02eb 
+			*/
+			if (!c.TryGotoNext(MoveType.Before,
+				i => i.MatchLdcI4(0),
+				i => i.MatchStloc(9)
+			)) { throw new Exception("Failed to find instructions PaintBucket.OnItemCheck_CheckCanUse()"); }
+			c.Index++;
+
+			c.EmitDelegate((bool hasPaint) => {
+				int PaintBucketID = ModContent.ItemType<AmmoBag>();
+				if (!Main.LocalPlayer.HasItem(PaintBucketID))
+					return hasPaint;
+
+				foreach (Item item in StorageManager.GetItems(BagStorageID)) {
+					if (!item.NullOrAir() && item.stack > 0 && item.PaintOrCoating)
+						return true;
+				}
+
+				return hasPaint;
+			});
 		}
 
 		#region AndroModItem attributes that you don't need.
