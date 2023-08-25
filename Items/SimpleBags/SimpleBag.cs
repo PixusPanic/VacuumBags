@@ -15,7 +15,17 @@ namespace VacuumBags.Items
 	public abstract class SimpleBag : AndroModItem, ISoldByWitch {
 
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
+		public abstract int MyTileType { get; }
+		public static Color PanelColor => new Color(255, 255, 255, androLib.Common.Configs.ConfigValues.UIAlpha);
 		public override void SetDefaults() {
+			//Item.DefaultToPlaceableTile(MyTileType);
+			Item.createTile = MyTileType;
+			Item.consumable = true;
+			Item.useStyle = ItemUseStyleID.Swing;
+			Item.useTime = 10;
+			Item.useAnimation = 15;
+			Item.useTurn = true;
+			//Item.autoReuse = true;
             Item.maxStack = 1;
             Item.value = 100000;
 			Item.rare = ItemRarityID.Blue;
@@ -25,7 +35,8 @@ namespace VacuumBags.Items
 
 		public static int BagStorageID;//Set this when registering with androLib.
 
-		public static bool ItemAllowedToBeStored(Item item) => true;
+		public static bool ItemAllowedToBeStored(Item item) => !Blacklist.Contains(item.type);
+		public static SortedSet<int> Blacklist = new();
 
 		#region AndroModItem attributes that you don't need.
 
@@ -36,8 +47,7 @@ namespace VacuumBags.Items
 			$"Automatically stores items already contained in the bag.\n" +
 			$"When in your inventory, the contents of the bag are available for crafting.\n" +
 			$"Right click to open the bag.";
-		public override string Artist => "andro951";
-		public override string ArtModifiedBy => "@kingjoshington";
+		public override string Artist => "@kingjoshington";
 		public override string Designer => "@kingjoshington";
 
 		#endregion

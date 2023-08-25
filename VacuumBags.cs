@@ -1,3 +1,4 @@
+using androLib;
 using System;
 using Terraria;
 using Terraria.ModLoader;
@@ -11,12 +12,16 @@ namespace VacuumBags
 		public static BagsServerConfig serverConfig = ModContent.GetInstance<BagsServerConfig>();
 		public static BagsClientConfig clientConfig = ModContent.GetInstance<BagsClientConfig>();
 		public override void Load() {
+			BagBlack.RegisterWithAndroLib(this);
 			BagBlue.RegisterWithAndroLib(this);
 			BagBrown.RegisterWithAndroLib(this);
+			BagGray.RegisterWithAndroLib(this);
 			BagGreen.RegisterWithAndroLib(this);
 			BagOrange.RegisterWithAndroLib(this);
+			BagPink.RegisterWithAndroLib(this);
 			BagPurple.RegisterWithAndroLib(this);
 			BagRed.RegisterWithAndroLib(this);
+			BagWhite.RegisterWithAndroLib(this);
 			BagYellow.RegisterWithAndroLib(this);
 			BuildersBox.RegisterWithAndroLib(this);
 			WallEr.RegisterWithAndroLib(this);
@@ -24,6 +29,18 @@ namespace VacuumBags
 			PotionFlask.RegisterWithAndroLib(this);
 			HerbSatchel.RegisterWithAndroLib(this);
 			AmmoBag.RegisterWithAndroLib(this);
+
+			PackBlack.RegisterWithAndroLibItemTypeOnly();
+			PackBlue.RegisterWithAndroLibItemTypeOnly();
+			PackBrown.RegisterWithAndroLibItemTypeOnly();
+			PackGray.RegisterWithAndroLibItemTypeOnly();
+			PackGreen.RegisterWithAndroLibItemTypeOnly();
+			PackOrange.RegisterWithAndroLibItemTypeOnly();
+			PackPink.RegisterWithAndroLibItemTypeOnly();
+			PackPurple.RegisterWithAndroLibItemTypeOnly();
+			PackRed.RegisterWithAndroLibItemTypeOnly();
+			PackWhite.RegisterWithAndroLibItemTypeOnly();
+			PackYellow.RegisterWithAndroLibItemTypeOnly();
 
 			On_Player.ChooseAmmo += AmmoBag.OnChooseAmmo;
 			On_Player.FindPaintOrCoating += PaintBucket.OnFindPaintOrCoating;

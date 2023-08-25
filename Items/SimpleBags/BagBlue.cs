@@ -13,6 +13,23 @@ using System;
 namespace VacuumBags.Items
 {
 	public class BagBlue : SimpleBag {
+		new public static int BagStorageID;
+		public override int MyTileType => ModContent.TileType<Tiles.BagBlue>();
+		public static void CloseBag() => StorageManager.CloseBag(BagStorageID);
+		new public static SortedSet<int> Blacklist {
+			get {
+				if (blacklist == null) {
+					blacklist = new() {
+						ModContent.ItemType<BagBlue>(),
+						ModContent.ItemType<PackBlue>(),
+					};
+				}
+
+				return blacklist;
+			}
+		}
+		private static SortedSet<int> blacklist = null;
+		new public static Color PanelColor => new Color(10, 10, 80, androLib.Common.Configs.ConfigValues.UIAlpha);
 		new public static void RegisterWithAndroLib(Mod mod) {
 			BagStorageID = StorageManager.RegisterVacuumStorageClass(
 				mod,//Mod
@@ -21,7 +38,7 @@ namespace VacuumBags.Items
 				null,//Localization Key name.  Attempts to determine automatically by treating the type as a ModItem, or you can specify.
 				20,//StorageSize
 				null,//Can vacuum
-				() => new Color(10, 10, 80, androLib.Common.Configs.ConfigValues.UIAlpha), // Get color function. Func<using Microsoft.Xna.Framework.Color>
+				() => PanelColor, // Get color function. Func<using Microsoft.Xna.Framework.Color>
 				() => new Color(10, 10, 90, androLib.Common.Configs.ConfigValues.UIAlpha), // Get Scroll bar color function. Func<using Microsoft.Xna.Framework.Color>
 				() => new Color(0, 0, 120, androLib.Common.Configs.ConfigValues.UIAlpha), // Get Button hover color function. Func<using Microsoft.Xna.Framework.Color>
 				() => ModContent.ItemType<BagBlue>(),//Get ModItem type

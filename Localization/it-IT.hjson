@@ -6,6 +6,11 @@ Mods: {
 				// DisplayName: Builders Box
 			}
 
+			BagBlack: {
+				// Tooltip: ""
+				// DisplayName: Bag (Black)
+			}
+
 			BagBlue: {
 				// Tooltip: ""
 				// DisplayName: Bag (Blue)
@@ -14,6 +19,11 @@ Mods: {
 			BagBrown: {
 				// Tooltip: ""
 				// DisplayName: Bag (Brown)
+			}
+
+			BagGray: {
+				// Tooltip: ""
+				// DisplayName: Bag (Gray)
 			}
 
 			BagGreen: {
@@ -26,6 +36,11 @@ Mods: {
 				// DisplayName: Bag (Orange)
 			}
 
+			BagPink: {
+				// Tooltip: ""
+				// DisplayName: Bag (Pink)
+			}
+
 			BagPurple: {
 				// Tooltip: ""
 				// DisplayName: Bag (Purple)
@@ -34,6 +49,11 @@ Mods: {
 			BagRed: {
 				// Tooltip: ""
 				// DisplayName: Bag (Red)
+			}
+
+			BagWhite: {
+				// Tooltip: ""
+				// DisplayName: Bag (White)
 			}
 
 			BagYellow: {
@@ -78,7 +98,62 @@ Mods: {
 
 			WallEr: {
 				// Tooltip: ""
-				// DisplayName: Wall-Er
+				// DisplayName: Wall-Baggie
+			}
+
+			PackBlack: {
+				// Tooltip: ""
+				// DisplayName: Pack (Black)
+			}
+
+			PackBlue: {
+				// Tooltip: ""
+				// DisplayName: Pack (Blue)
+			}
+
+			PackBrown: {
+				// Tooltip: ""
+				// DisplayName: Pack (Brown)
+			}
+
+			PackGray: {
+				// Tooltip: ""
+				// DisplayName: Pack (Gray)
+			}
+
+			PackGreen: {
+				// Tooltip: ""
+				// DisplayName: Pack (Green)
+			}
+
+			PackOrange: {
+				// Tooltip: ""
+				// DisplayName: Pack (Orange)
+			}
+
+			PackPink: {
+				// Tooltip: ""
+				// DisplayName: Pack (Pink)
+			}
+
+			PackPurple: {
+				// Tooltip: ""
+				// DisplayName: Pack (Purple)
+			}
+
+			PackRed: {
+				// Tooltip: ""
+				// DisplayName: Pack (Red)
+			}
+
+			PackWhite: {
+				// Tooltip: ""
+				// DisplayName: Pack (White)
+			}
+
+			PackYellow: {
+				// Tooltip: ""
+				// DisplayName: Pack (Yellow)
 			}
 		}
 
@@ -105,6 +180,31 @@ Mods: {
 		Config: {
 			// BagStorageOptions: All Ammo Items Go Into Ammo Bag Header
 			// Crafting: Harder Bag Recipes Header
+		}
+
+		Tiles: {
+			// BagBlack.MapEntry: Bag Black
+			// BagBlue.MapEntry: Bag Blue
+			// BagBrown.MapEntry: Bag Brown
+			// BagGray.MapEntry: Bag Gray
+			// BagGreen.MapEntry: Bag Green
+			// BagOrange.MapEntry: Bag Orange
+			// BagPink.MapEntry: Bag Pink
+			// BagPurple.MapEntry: Bag Purple
+			// BagRed.MapEntry: Bag Red
+			// BagWhite.MapEntry: Bag White
+			// BagYellow.MapEntry: Bag Yellow
+			// PackBlack.MapEntry: Pack Black
+			// PackBlue.MapEntry: Pack Blue
+			// PackBrown.MapEntry: Pack Brown
+			// PackGray.MapEntry: Pack Gray
+			// PackGreen.MapEntry: Pack Green
+			// PackOrange.MapEntry: Pack Orange
+			// PackPink.MapEntry: Pack Pink
+			// PackPurple.MapEntry: Pack Purple
+			// PackRed.MapEntry: Pack Red
+			// PackWhite.MapEntry: Pack White
+			// PackYellow.MapEntry: Pack Yellow
 		}
 	}
 }
