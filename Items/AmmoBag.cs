@@ -176,7 +176,6 @@ namespace VacuumBags.Items
 				
 			};
 
-			SortedSet<int> stuffCannonItems = new(ItemID.Sets.ItemsForStuffCannon);
 			for (int i = 0; i < ItemLoader.ItemCount; i++) {
 				Item item = ContentSamples.ItemsByType[i];
 				if (item.NullOrAir())
@@ -206,11 +205,6 @@ namespace VacuumBags.Items
 						added = true;
 						break;
 					}
-				}
-
-				if (stuffCannonItems.Contains(item.type)) {
-					allowedItems.Add(item.type);
-					continue;
 				}
 
 				ItemGroupAndOrderInGroup group = new ItemGroupAndOrderInGroup(item);

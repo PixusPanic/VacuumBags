@@ -7,7 +7,7 @@ Vacuum Bags (100 inventory slots)  (Designed by @KingJoshington)
 	Herb Satchel - Seeds/Plants
 	Paint Bucket - Paint
 	Potion Flask - Potions/Food
-	Wall-Baggie - Walls
+	Wall-Er - Walls
 
 	These bags automatically pick up items if vacuum is toggled on if the item is allowed in the bag.
 
