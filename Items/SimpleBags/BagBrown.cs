@@ -29,6 +29,7 @@ namespace VacuumBags.Items
 			}
 		}
 		private static SortedSet<int> blacklist = null;
+		public static bool ItemAllowedToBeStored(Item item) => !Blacklist.Contains(item.type);
 		new public static Color PanelColor => new Color(25, 10, 3, androLib.Common.Configs.ConfigValues.UIAlpha);
 		new public static void RegisterWithAndroLib(Mod mod) {
 			BagStorageID = StorageManager.RegisterVacuumStorageClass(

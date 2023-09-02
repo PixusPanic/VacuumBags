@@ -35,9 +35,6 @@ namespace VacuumBags.Items
 
 		public static int BagStorageID;//Set this when registering with androLib.
 
-		public static bool ItemAllowedToBeStored(Item item) => !Blacklist.Contains(item.type);
-		public static SortedSet<int> Blacklist = new();
-
 		#region AndroModItem attributes that you don't need.
 
 		public virtual SellCondition SellCondition => SellCondition.Never;
