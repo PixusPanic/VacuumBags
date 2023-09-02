@@ -13,7 +13,7 @@ using static Terraria.ID.ContentSamples.CreativeHelper;
 
 namespace VacuumBags.Items
 {
-	public class WallEr : AndroModItem, ISoldByWitch
+	public class WallEr : VBModItem, ISoldByWitch
 	{
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {
@@ -66,6 +66,12 @@ namespace VacuumBags.Items
 		}
 
 		public static bool ItemAllowedToBeStored(Item item) => AllowedItems.Contains(item.type);
+		public static void RegisterWithGadgetGalore() {
+			if (!VacuumBags.gadgetGaloreEnabled)
+				return;
+
+			VacuumBags.GadgetGalore.Call("RegisterBuildInventory", () => StorageManager.GetItems(BagStorageID));
+		}
 
 		public static SortedSet<int> AllowedItems {
 			get {
@@ -79,7 +85,229 @@ namespace VacuumBags.Items
 
 		private static void GetAllowedItems() {
 			allowedItems = new() {
-
+				ItemID.WoodenBeam,
+				ItemID.AdamantiteBeam,
+				ItemID.BorealBeam,
+				ItemID.RichMahoganyBeam,
+				ItemID.MushroomBeam,
+				ItemID.GraniteColumn,
+				ItemID.SandstoneColumn,
+				ItemID.PalladiumColumn,
+				ItemID.MarbleColumn,
+				ItemID.WoodenFence,
+				ItemID.LeadFence,
+				ItemID.EbonwoodFence,
+				ItemID.RichMahoganyFence,
+				ItemID.PearlwoodFence,
+				ItemID.ShadewoodFence,
+				ItemID.IronFence,
+				ItemID.BorealWoodFence,
+				ItemID.PalmWoodFence,
+				ItemID.WroughtIronFence,
+				ItemID.BambooFence,
+				ItemID.AshWoodFence,
+				ItemID.StoneWall,
+				ItemID.DirtWall,
+				ItemID.WoodWall,
+				ItemID.GrayBrickWall,
+				ItemID.RedBrickWall,
+				ItemID.BlueBrickWall,
+				ItemID.GreenBrickWall,
+				ItemID.PinkBrickWall,
+				ItemID.GoldBrickWall,
+				ItemID.SilverBrickWall,
+				ItemID.CopperBrickWall,
+				ItemID.ObsidianBrickWall,
+				ItemID.GlassWall,
+				ItemID.PearlstoneBrickWall,
+				ItemID.IridescentBrickWall,
+				ItemID.MudstoneBrickWall,
+				ItemID.CobaltBrickWall,
+				ItemID.MythrilBrickWall,
+				ItemID.PlankedWall,
+				ItemID.PalladiumColumnWall,
+				ItemID.AdamantiteBeamWall,
+				ItemID.CandyCaneWall,
+				ItemID.GreenCandyCaneWall,
+				ItemID.SnowBrickWall,
+				ItemID.DemoniteBrickWall,
+				ItemID.SandstoneBrickWall,
+				ItemID.EbonstoneBrickWall,
+				ItemID.RedStuccoWall,
+				ItemID.YellowStuccoWall,
+				ItemID.GreenStuccoWall,
+				ItemID.GrayStuccoWall,
+				ItemID.EbonwoodWall,
+				ItemID.RichMahoganyWall,
+				ItemID.PearlwoodWall,
+				ItemID.RainbowBrickWall,
+				ItemID.TinBrickWall,
+				ItemID.TungstenBrickWall,
+				ItemID.PlatinumBrickWall,
+				ItemID.GrassWall,
+				ItemID.JungleWall,
+				ItemID.FlowerWall,
+				ItemID.CactusWall,
+				ItemID.CloudWall,
+				ItemID.MushroomWall,
+				ItemID.BoneBlockWall,
+				ItemID.SlimeBlockWall,
+				ItemID.FleshBlockWall,
+				ItemID.DiscWall,
+				ItemID.IceBrickWall,
+				ItemID.ShadewoodWall,
+				ItemID.LihzahrdBrickWall,
+				ItemID.HiveWall,
+				ItemID.BlueSlabWall,
+				ItemID.BlueTiledWall,
+				ItemID.PinkSlabWall,
+				ItemID.PinkTiledWall,
+				ItemID.GreenSlabWall,
+				ItemID.GreenTiledWall,
+				ItemID.PalladiumColumnWall,
+				ItemID.BubblegumBlockWall,
+				ItemID.TitanstoneBlockWall,
+				ItemID.LivingWoodWall,
+				ItemID.PumpkinWall,
+				ItemID.HayWall,
+				ItemID.SpookyWoodWall,
+				ItemID.ChristmasTreeWallpaper,
+				ItemID.OrnamentWallpaper,
+				ItemID.CandyCaneWallpaper,
+				ItemID.FestiveWallpaper,
+				ItemID.StarsWallpaper,
+				ItemID.SquigglesWallpaper,
+				ItemID.SnowflakeWallpaper,
+				ItemID.KrampusHornWallpaper,
+				ItemID.BluegreenWallpaper,
+				ItemID.GrinchFingerWallpaper,
+				ItemID.FancyGreyWallpaper,
+				ItemID.IceFloeWallpaper,
+				ItemID.MusicWallpaper,
+				ItemID.PurpleRainWallpaper,
+				ItemID.RainbowWallpaper,
+				ItemID.SparkleStoneWallpaper,
+				ItemID.StarlitHeavenWallpaper,
+				ItemID.BubbleWallpaper,
+				ItemID.CopperPipeWallpaper,
+				ItemID.DuckyWallpaper,
+				ItemID.WaterfallWall,
+				ItemID.LavafallWall,
+				ItemID.WhiteDynastyWall,
+				ItemID.BlueDynastyWall,
+				ItemID.ArcaneRuneWall,
+				ItemID.CopperPlatingWall,
+				ItemID.StoneSlabWall,
+				ItemID.BorealWoodWall,
+				ItemID.PalmWoodWall,
+				ItemID.AmberGemsparkWall,
+				ItemID.AmberGemsparkWallOff,
+				ItemID.AmethystGemsparkWall,
+				ItemID.AmethystGemsparkWallOff,
+				ItemID.DiamondGemsparkWall,
+				ItemID.DiamondGemsparkWallOff,
+				ItemID.EmeraldGemsparkWall,
+				ItemID.EmeraldGemsparkWallOff,
+				ItemID.RubyGemsparkWall,
+				ItemID.RubyGemsparkWallOff,
+				ItemID.SapphireGemsparkWall,
+				ItemID.SapphireGemsparkWallOff,
+				ItemID.TopazGemsparkWall,
+				ItemID.TopazGemsparkWallOff,
+				ItemID.TinPlatingWall,
+				ItemID.ConfettiWall,
+				ItemID.ConfettiWallBlack,
+				ItemID.HoneyfallWall,
+				ItemID.ChlorophyteBrickWall,
+				ItemID.CrimtaneBrickWall,
+				ItemID.ShroomitePlatingWall,
+				ItemID.MartianConduitWall,
+				ItemID.HellstoneBrickWall,
+				ItemID.MarbleWall,
+				ItemID.MarbleBlockWall,
+				ItemID.GraniteWall,
+				ItemID.GraniteBlockWall,
+				ItemID.MeteoriteBrickWall,
+				ItemID.CrystalBlockWall,
+				ItemID.SandstoneWall,
+				ItemID.HardenedSandWall,
+				ItemID.CorruptHardenedSandWall,
+				ItemID.CrimsonHardenedSandWall,
+				ItemID.HallowHardenedSandWall,
+				ItemID.CorruptSandstoneWall,
+				ItemID.CrimsonSandstoneWall,
+				ItemID.HallowSandstoneWall,
+				ItemID.DesertFossilWall,
+				ItemID.LunarBrickWall,
+				ItemID.LivingLeafWall,
+				ItemID.CogWall,
+				ItemID.SandFallWall,
+				ItemID.SnowFallWall,
+				ItemID.SillyBalloonPinkWall,
+				ItemID.SillyBalloonPurpleWall,
+				ItemID.SillyBalloonGreenWall,
+				ItemID.IronBrickWall,
+				ItemID.LeadBrickWall,
+				ItemID.LesionBlockWall,
+				ItemID.CrimstoneBrickWall,
+				ItemID.SmoothSandstoneWall,
+				ItemID.SpiderWall,
+				ItemID.SolarBrickWall,
+				ItemID.VortexBrickWall,
+				ItemID.NebulaBrickWall,
+				ItemID.StardustBrickWall,
+				ItemID.GoldStarryGlassWall,
+				ItemID.BlueStarryGlassWall,
+				ItemID.MudWallEcho,
+				ItemID.SnowWallEcho,
+				ItemID.CaveWall1Echo,
+				ItemID.CaveWall2Echo,
+				ItemID.LargeBambooBlockWall,
+				ItemID.BambooBlockWall,
+				ItemID.AmberStoneWallEcho,
+				ItemID.AshWoodWall,
+				ItemID.EchoWall,
+				ItemID.ReefWall,
+				ItemID.SpiderWallUnsafe,
+				ItemID.BlueBrickWallUnsafe,
+				ItemID.BlueSlabWallUnsafe,
+				ItemID.BlueTiledWallUnsafe,
+				ItemID.PinkBrickWallUnsafe,
+				ItemID.PinkSlabWallUnsafe,
+				ItemID.PinkTiledWallUnsafe,
+				ItemID.GreenBrickWallUnsafe,
+				ItemID.GreenSlabWallUnsafe,
+				ItemID.GreenTiledWallUnsafe,
+				ItemID.SandstoneWallUnsafe,
+				ItemID.HardenedSandWallUnsafe,
+				ItemID.LihzahrdWallUnsafe,
+				ItemID.PoopWall,
+				ItemID.ShimmerWall,
+				ItemID.ShimmerBrickWall,
+				ItemID.LunarRustBrickWall,
+				ItemID.DarkCelestialBrickWall,
+				ItemID.AstraBrickWall,
+				ItemID.CosmicEmberBrickWall,
+				ItemID.CryocoreBrickWall,
+				ItemID.MercuryBrickWall,
+				ItemID.StarRoyaleBrickWall,
+				ItemID.HeavenforgeBrickWall,
+				ItemID.AncientBlueDungeonBrickWall,
+				ItemID.AncientGreenDungeonBrickWall,
+				ItemID.AncientPinkDungeonBrickWall,
+				ItemID.AncientGoldBrickWall,
+				ItemID.AncientSilverBrickWall,
+				ItemID.AncientCopperBrickWall,
+				ItemID.AncientCobaltBrickWall,
+				ItemID.AncientMythrilBrickWall,
+				ItemID.AncientObsidianBrickWall,
+				ItemID.AncientHellstoneBrickWall,
+				ItemID.LavaMossBlockWall,
+				ItemID.ArgonMossBlockWall,
+				ItemID.KryptonMossBlockWall,
+				ItemID.XenonMossBlockWall,
+				ItemID.VioletMossBlockWall,
+				ItemID.RainbowMossBlockWall,
 			};
 
 			SortedSet<string> endWords = new() {
@@ -87,6 +315,9 @@ namespace VacuumBags.Items
 				"wallunsafe",
 				"wallpaper",
 				"echo",
+				"beam",
+				"column",
+				"fence",
 			};
 
 			SortedSet<string> searchWords = new() {
@@ -125,6 +356,34 @@ namespace VacuumBags.Items
 					continue;
 				}
 			}
+
+			foreach (int blackListItemType in BlackList) {
+				allowedItems.Remove(blackListItemType);
+			}
+		}
+		public static SortedSet<int> BlackList {
+			get {
+				if (blackList == null)
+					GetBlackList();
+
+				return blackList;
+			}
+		}
+		private static SortedSet<int> blackList = null;
+		private static void GetBlackList() {
+			blackList = new() {
+				
+			};
+
+			List<string> modItemBlacklist = new() {
+				
+			};
+
+			for (int i = ItemID.Count; i < ItemLoader.ItemCount; i++) {
+				Item item = ContentSamples.ItemsByType[i];
+				if (modItemBlacklist.Contains(item.ModFullName()))
+					blackList.Add(item.type);
+			}
 		}
 
 		#region AndroModItem attributes that you don't need.
@@ -136,6 +395,8 @@ namespace VacuumBags.Items
 			$"Automatically stores walling materials (walls, fences, beams, etc.)\n" +
 			$"When in your inventory, the contents of the bag are available for crafting.\n" +
 			$"Right click to open the bag.";
+
+		public override string LocalizationDisplayName => "Wall-Er";
 		public override string Artist => "andro951";
 		public override string Designer => "@kingjoshington";
 

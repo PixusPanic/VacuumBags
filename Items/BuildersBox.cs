@@ -11,7 +11,7 @@ using androLib;
 
 namespace VacuumBags.Items
 {
-	public  class BuildersBox : AndroModItem, ISoldByWitch {
+	public  class BuildersBox : VBModItem, ISoldByWitch {
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {
             Item.maxStack = 1;
@@ -60,6 +60,12 @@ namespace VacuumBags.Items
 			);
 		}
 		public static bool ItemAllowedToBeStored(Item item) => AllowedItems.Contains(item.type);
+		public static void RegisterWithGadgetGalore() {
+			if (!VacuumBags.gadgetGaloreEnabled)
+				return;
+
+			VacuumBags.GadgetGalore.Call("RegisterBuildInventory", () => StorageManager.GetItems(BagStorageID));
+		}
 
 		public static SortedSet<int> AllowedItems {
 			get {
@@ -143,7 +149,6 @@ namespace VacuumBags.Items
 				ItemID.RainbowMossBlock,
 				ItemID.GrayBrick,
 				ItemID.RedBrick,
-				ItemID.ClayBlock,
 				ItemID.BlueBrick,
 				ItemID.ChainLantern,
 				ItemID.GreenBrick,
@@ -200,6 +205,9 @@ namespace VacuumBags.Items
 				ItemID.AncientMythrilBrick,
 				ItemID.AncientObsidianBrick,
 				ItemID.AncientHellstoneBrick,
+				ItemID.SmoothSandstone,
+				ItemID.RedDynastyShingles,
+				ItemID.BlueDynastyShingles,
 			};
 
 			SortedSet<string> endWords = new() {
@@ -210,7 +218,7 @@ namespace VacuumBags.Items
 			};
 
 			SortedSet<string> searchWords = new() {
-				
+				"shingle",
 			};
 
 			for (int i = 0; i < ItemLoader.ItemCount; i++) {
@@ -238,6 +246,34 @@ namespace VacuumBags.Items
 						break;
 					}
 				}
+			}
+
+			foreach (int blackListItemType in BlackList) {
+				allowedItems.Remove(blackListItemType);
+			}
+		}
+		public static SortedSet<int> BlackList {
+			get {
+				if (blackList == null)
+					GetBlackList();
+
+				return blackList;
+			}
+		}
+		private static SortedSet<int> blackList = null;
+		private static void GetBlackList() {
+			blackList = new() {
+
+			};
+
+			List<string> modItemBlacklist = new() {
+				"CalamityMod/ThrowingBrick"
+			};
+
+			for (int i = ItemID.Count; i < ItemLoader.ItemCount; i++) {
+				Item item = ContentSamples.ItemsByType[i];
+				if (modItemBlacklist.Contains(item.ModFullName()))
+					blackList.Add(item.type);
 			}
 		}
 

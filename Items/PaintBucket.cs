@@ -14,7 +14,7 @@ using MonoMod.Cil;
 
 namespace VacuumBags.Items
 {
-	public  class PaintBucket : AndroModItem, ISoldByWitch {
+	public  class PaintBucket : VBModItem, ISoldByWitch {
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {
             Item.maxStack = 1;
@@ -65,6 +65,12 @@ namespace VacuumBags.Items
 			);
 		}
 		public static bool ItemAllowedToBeStored(Item item) => AllowedItems.Contains(item.type);
+		public static void RegisterWithGadgetGalore() {
+			if (!VacuumBags.gadgetGaloreEnabled)
+				return;
+
+			VacuumBags.GadgetGalore.Call("RegisterPaintInventory", () => StorageManager.GetItems(BagStorageID));
+		}
 
 		internal static Item OnFindPaintOrCoating(On_Player.orig_FindPaintOrCoating orig, Player self) {
 			Item item = orig(self);
@@ -170,6 +176,11 @@ namespace VacuumBags.Items
 				
 			};
 
+			SortedSet<string> modItems = new() {
+				"GadgetGalore/BucketOfPaintTools",
+				"GadgetGalore/GhostlyPainter",
+			};
+
 			for (int i = 0; i < ItemLoader.ItemCount; i++) {
 				Item item = ContentSamples.ItemsByType[i];
 				if (item.NullOrAir())
@@ -198,6 +209,14 @@ namespace VacuumBags.Items
 
 				ItemGroupAndOrderInGroup group = new ItemGroupAndOrderInGroup(item);
 				if (group.Group == ItemGroup.Paint) {
+					allowedItems.Add(item.type);
+					continue;
+				}
+
+				if (i < ItemID.Count)
+					continue;
+
+				if (modItems.Contains(item.ModFullName())) {
 					allowedItems.Add(item.type);
 					continue;
 				}

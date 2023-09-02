@@ -1,16 +1,21 @@
 using androLib;
+using androLib.Localization;
 using System;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.UI;
 using VacuumBags.Common.Configs;
 using VacuumBags.Items;
+using VacuumBags.Localization;
 
 namespace VacuumBags
 {
+
 	public class VacuumBags : Mod {
 		public static BagsServerConfig serverConfig = ModContent.GetInstance<BagsServerConfig>();
 		public static BagsClientConfig clientConfig = ModContent.GetInstance<BagsClientConfig>();
+		public static Mod GadgetGalore;
+		public static bool gadgetGaloreEnabled = ModLoader.TryGetMod("GadgetGalore", out GadgetGalore);
 		public override void Load() {
 			BagBlack.RegisterWithAndroLib(this);
 			BagBlue.RegisterWithAndroLib(this);
@@ -48,6 +53,12 @@ namespace VacuumBags
 			
 			IL_ItemSlot.Draw_SpriteBatch_ItemArray_int_int_Vector2_Color += AmmoBag.OnDrawItemSlot;
 			IL_Player.ItemCheck_CheckCanUse += PaintBucket.OnItemCheck_CheckCanUse;
+
+			VacuumBagsLocalizationData.RegisterSDataPackage();
+
+			BuildersBox.RegisterWithGadgetGalore();
+			WallEr.RegisterWithGadgetGalore();
+			PaintBucket.RegisterWithGadgetGalore();
 		}
 
 		private void OnRightClick_ItemArray_int_int(On_ItemSlot.orig_RightClick_ItemArray_int_int orig, Item[] inv, int context, int slot) {

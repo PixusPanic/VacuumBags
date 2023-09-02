@@ -12,7 +12,7 @@ using static Terraria.ID.ContentSamples.CreativeHelper;
 
 namespace VacuumBags.Items
 {
-	public  class PotionFlask : AndroModItem, ISoldByWitch {
+	public  class PotionFlask : VBModItem, ISoldByWitch {
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {
             Item.maxStack = 1;

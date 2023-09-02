@@ -15,7 +15,7 @@ using Mono.Cecil.Cil;
 
 namespace VacuumBags.Items
 {
-	public class AmmoBag : AndroModItem, ISoldByWitch {
+	public class AmmoBag : VBModItem, ISoldByWitch {
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {
             Item.maxStack = 1;
