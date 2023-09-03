@@ -9,6 +9,11 @@ using androLib.Items;
 using androLib.Common.Globals;
 using androLib;
 using static Terraria.ID.ContentSamples.CreativeHelper;
+using System;
+using System.Reflection;
+using Terraria.Audio;
+using Terraria.ModLoader.IO;
+using static Terraria.ModLoader.PlayerDrawLayer;
 
 namespace VacuumBags.Items
 {
@@ -188,6 +193,253 @@ namespace VacuumBags.Items
 			}
 		}
 
+		public static Item OnQuickBuff_PickBestFoodItem(On_Player.orig_QuickBuff_PickBestFoodItem orig, Player self) {
+			Item item = orig(self);
+
+			int potionFlaskID = ModContent.ItemType<PotionFlask>();
+			if (!self.HasItem(potionFlaskID))
+				return item;
+
+			int highestBuffNum = item != null ? QuickBuff_FindFoodPriority(item.buffType) : 0;
+			if (highestBuffNum < 1) {
+				//No food found by Vanilla, so need to check buffs again.
+				for (int i = 0; i < Player.MaxBuffs; i++) {
+					if (self.buffTime[i] >= 1) {
+						int num2 = QuickBuff_FindFoodPriority(self.buffType[i]);
+						if (highestBuffNum <= num2)
+							highestBuffNum = num2 + 1;
+					}
+				}
+			}
+			
+			if (highestBuffNum >= 4)
+				return item;
+
+			Item item2 = PickBestFoodItemFromFlask(highestBuffNum, item, self);
+			if (item2 != null)
+				return item2;
+
+			return item;
+		}
+
+		private static Item PickBestFoodItemFromFlask(int nextHighestBuffNum, Item foundFoodItem, Player player) {
+			if (player.whoAmI != Main.myPlayer)
+				return null;
+			
+			IEnumerable<Item> foodItems = StorageManager.GetItems(BagStorageID).Where(item => QuickBuff_FindFoodPriority(item.buffType) > 0);
+			bool anyFavoritedFood = foodItems.AnyFavoritedItem();
+			foreach (Item foodItem in (anyFavoritedFood ? foodItems.Where(item => item.favorited) : foodItems)) {
+				if (!foodItem.NullOrAir())
+					continue;
+
+				int buffNum = QuickBuff_FindFoodPriority(foodItem.buffType);
+				if (buffNum >= nextHighestBuffNum) {
+					if (buffNum > nextHighestBuffNum) {
+						nextHighestBuffNum = buffNum;
+						foundFoodItem = foodItem;
+					}
+					else if (foundFoodItem == null || foodItem.buffTime > foundFoodItem.buffTime) {
+						foundFoodItem = foodItem;
+					}
+				}
+			}
+
+			return foundFoodItem;
+		}
+
+		public static int QuickBuff_FindFoodPriority(int buffType) {//Copied from Player.cs QuickBuff_FindFoodPriority()
+			switch (buffType) {
+				case 26:
+					return 1;
+				case 206:
+					return 2;
+				case 207:
+					return 3;
+				default:
+					return 0;
+			}
+		}
+
+		public static void OnQuickBuff(On_Player.orig_QuickBuff orig, Player self) {//Copied/edited from Player.cs QuickBuff()
+			orig(self);
+
+			if (self.whoAmI != Main.myPlayer)
+				return;
+
+			if (self.cursed || self.CCed || self.dead)
+				return;
+
+			if (self.CountBuffs() == Player.MaxBuffs)
+				return;
+
+			int potionFlaskID = ModContent.ItemType<PotionFlask>();
+			if (!self.HasItem(potionFlaskID))
+				return;
+
+			MethodInfo itemCheck_CheckCanUse = typeof(Player).GetMethod("ItemCheck_CheckCanUse", BindingFlags.NonPublic | BindingFlags.Instance);
+			IEnumerable<Item> nonFoodBuffItems = StorageManager.GetItems(BagStorageID).Where(
+				item => !item.NullOrAir() && 
+				item.favorited &&
+				item.stack > 0 && 
+				item.buffType > 0 && 
+				QuickBuff_FindFoodPriority(item.buffType) < 1 && 
+				!item.CountsAsClass(DamageClass.Summon) &&
+				(bool)itemCheck_CheckCanUse.Invoke(self, new object[] { item })
+			);
+			if (!nonFoodBuffItems.Any())
+				return;
+
+			SoundStyle? legacySoundStyle = null;
+			MethodInfo quickBuff_ShouldBotherUsingThisBuff = typeof(Player).GetMethod("QuickBuff_ShouldBotherUsingThisBuff", BindingFlags.NonPublic | BindingFlags.Instance);
+			foreach (Item item in nonFoodBuffItems) {
+				int buffType = item.buffType;
+				bool shouldBotherUsingThisBuff = (bool)quickBuff_ShouldBotherUsingThisBuff.Invoke(self, new object[] { buffType });
+				if (item.mana > 0 && shouldBotherUsingThisBuff) {
+					if (self.CheckMana(item, -1, true, true)) {
+						self.manaRegenDelay = (int)self.maxRegenDelay;
+					}
+					else {
+						shouldBotherUsingThisBuff = false;
+					}
+				}
+
+				if (item.type == ItemID.Carrot && !Main.runningCollectorsEdition)
+					shouldBotherUsingThisBuff = false;
+
+				if (item.buffType == BuffID.FairyBlue) {
+					buffType = Main.rand.Next(3);
+					if (buffType == 0)
+						buffType = BuffID.FairyBlue;
+
+					if (buffType == 1)
+						buffType = BuffID.FairyRed;
+
+					if (buffType == 2)
+						buffType = BuffID.FairyGreen;
+				}
+
+				if (!shouldBotherUsingThisBuff)
+					continue;
+
+				ItemLoader.UseItem(item, self);
+
+				legacySoundStyle = item.UseSound;
+				int buffTime = item.buffTime;
+				if (buffTime == 0)
+					buffTime = 3600;
+
+				self.AddBuff(buffType, buffTime);
+				if (item.consumable && ItemLoader.ConsumeItem(item, self)) {
+					item.stack--;
+
+					if (item.stack <= 0)
+						item.TurnToAir(true);
+				}
+
+				if (self.CountBuffs() == Player.MaxBuffs)
+					break;
+			}
+
+			if (legacySoundStyle != null) {
+				SoundEngine.PlaySound(legacySoundStyle, self.position);
+				Recipe.FindRecipes();
+			}
+		}
+
+		public static Item OnQuickHeal_GetItemToUse(On_Player.orig_QuickHeal_GetItemToUse orig, Player self) {
+			Item foundHealItem = orig(self);
+
+			if (self.whoAmI != Main.myPlayer)
+				return foundHealItem;
+
+			int potionFlaskID = ModContent.ItemType<PotionFlask>();
+			if (!self.HasItem(potionFlaskID))
+				return foundHealItem;
+
+			IEnumerable<Item> healItems = StorageManager.GetItems(BagStorageID).Where(item => 
+				!item.NullOrAir() &&
+				item.stack > 0 &&
+				item.potion &&
+				item.healLife > 0 &&
+				CombinedHooks.CanUseItem(self, item)
+			);
+
+			if (!healItems.Any())
+				return foundHealItem;
+
+			if (healItems.AnyFavoritedItem())
+				healItems = healItems.Where(item => item.favorited);
+
+			int lifeThatCanBeHealed = self.statLifeMax2 - self.statLife;
+			int negativeMaxLife = -self.statLifeMax2;
+			foreach (Item healItem in healItems) {
+				int remainingLifeThatCanBeHealed = self.GetHealLife(healItem, true) - lifeThatCanBeHealed;
+				if (healItem.type == ItemID.RestorationPotion && remainingLifeThatCanBeHealed < 0) {
+					remainingLifeThatCanBeHealed += 30;
+					if (remainingLifeThatCanBeHealed > 0)
+						remainingLifeThatCanBeHealed = 0;
+				}
+
+				if (negativeMaxLife < 0) {
+					if (remainingLifeThatCanBeHealed > negativeMaxLife) {
+						foundHealItem = healItem;
+						negativeMaxLife = remainingLifeThatCanBeHealed;
+					}
+				}
+				else if (remainingLifeThatCanBeHealed < negativeMaxLife && remainingLifeThatCanBeHealed >= 0) {
+					foundHealItem = healItem;
+					negativeMaxLife = remainingLifeThatCanBeHealed;
+				}
+			}
+
+			return foundHealItem;
+		}
+
+		public static Item OnQuickMana_GetItemToUse(On_Player.orig_QuickMana_GetItemToUse orig, Player self) {
+			Item foundManaItem = orig(self);
+
+			if (self.whoAmI != Main.myPlayer)
+				return foundManaItem;
+
+			int potionFlaskID = ModContent.ItemType<PotionFlask>();
+			if (!self.HasItem(potionFlaskID))
+				return foundManaItem;
+
+			IEnumerable<Item> manaItems = StorageManager.GetItems(BagStorageID).Where(item =>
+				!item.NullOrAir() &&
+				item.stack > 0 &&
+				(!item.potion || self.potionDelay == 0) &&
+				item.healMana > 0 &&
+				CombinedHooks.CanUseItem(self, item)
+			);
+
+			if (!manaItems.Any())
+				return foundManaItem;
+
+			if (manaItems.AnyFavoritedItem())
+				manaItems = manaItems.Where(item => item.favorited);
+
+			return manaItems.First();
+
+			//int manaThatCanBeHealed = self.statManaMax2 - self.statMana;
+			//int negativeMaxMana = -self.statManaMax2;
+			//foreach (Item manaItem in manaItems) {
+			//	int remainingManaThatCanBeHealed = self.GetHealMana(manaItem, true) - manaThatCanBeHealed;
+			//	if (negativeMaxMana < 0) {
+			//		if (remainingManaThatCanBeHealed > negativeMaxMana) {
+			//			foundManaItem = manaItem;
+			//			negativeMaxMana = remainingManaThatCanBeHealed;
+			//		}
+			//	}
+			//	else if (remainingManaThatCanBeHealed < negativeMaxMana && remainingManaThatCanBeHealed >= 0) {
+			//		foundManaItem = manaItem;
+			//		negativeMaxMana = remainingManaThatCanBeHealed;
+			//	}
+			//}
+
+			//return foundManaItem;
+		}
+
 		#region AndroModItem attributes that you don't need.
 
 		public virtual SellCondition SellCondition => SellCondition.Never;
@@ -196,7 +448,11 @@ namespace VacuumBags.Items
 		public override string LocalizationTooltip =>
 			$"Automatically stores potions, food and drink.\n" +
 			$"When in your inventory, the contents of the bag are available for crafting.\n" +
-			$"Right click to open the bag.";
+			$"Right click to open the bag.\n" +
+			$"Quick Buff will use food items from the bag.  If any food items in the bag are favorited, only favorited food items will be used.\n" +
+			$"Quick Buff will use favorited potions from the bag.\n" +
+			$"Quick Heal will use healing items from the bag.  If any healing items in the bag are favorited, only favorited healing items will be used.\n" +
+			$"Quick Mana will use mana items from the bag.  If any mana items in the bag are favorited, only favorited mana items will be used.";
 		public override string Artist => "andro951";
 		public override string Designer => "@kingjoshington";
 

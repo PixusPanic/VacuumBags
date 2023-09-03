@@ -8,282 +8,292 @@ Mods: {
 
 		Items: {
 			AmmoBag: {
-				DisplayName: Ammo Bag
+				DisplayName: Torba na amunicję
 				Tooltip:
 					'''
-					Automatically stores throwables, arrows, bullets, flares, solutions.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Automatycznie przechowuje przedmioty do rzucania, strzały, kule, flary, roztwory.
+					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
+					Amunicja w torbie jest używana, jeśli torba z amunicją znajduje się w pierwszym znalezionym przedmiocie amunicji.
+					Jeśli dowolna amunicja w torbie, której można użyć w używanej przez ciebie broni, zostanie dodana do ulubionych, zostanie użyta tylko ulubiona amunicja.
 					'''
 			}
 
 			BagBlack: {
-				DisplayName: Bag (Black)
+				DisplayName: Torba (czarna)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
+					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
 
 			BagBlue: {
-				DisplayName: Bag (Blue)
+				DisplayName: Torba (niebieska)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
+					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
 
 			BagBrown: {
-				DisplayName: Bag (Brown)
+				DisplayName: Torba (brązowa)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
+					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
 
 			BagGray: {
-				DisplayName: Bag (Gray)
+				DisplayName: Torba (szara)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
+					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
 
 			BagGreen: {
-				DisplayName: Bag (Green)
+				DisplayName: Torba (zielona)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
+					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
 
 			BagOrange: {
-				DisplayName: Bag (Orange)
+				DisplayName: Torba (pomarańczowa)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
+					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
 
 			BagPink: {
-				DisplayName: Bag (Pink)
+				DisplayName: Torba (różowa)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
+					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
 
 			BagPurple: {
-				DisplayName: Bag (Purple)
+				DisplayName: Torba (fioletowa)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
+					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
 
 			BagRed: {
-				DisplayName: Bag (Red)
+				DisplayName: Torba (czerwona)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
+					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
 
 			BagWhite: {
-				DisplayName: Bag (White)
+				DisplayName: Torba (biała)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
+					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
 
 			BagYellow: {
-				DisplayName: Bag (Yellow)
+				DisplayName: Torba (żółta)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
+					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
 
 			BuildersBox: {
-				DisplayName: Builders Box
+				DisplayName: Pudełko konstruktorów
 				Tooltip:
 					'''
-					Automatically stores building materials (bricks, craftable blocks, etc.)
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Automatycznie przechowuje materiały budowlane (cegły, bloki do wytworzenia itp.)
+					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
+					Przedmioty można umieszczać ze skrzynki, klikając lewym przyciskiem myszy na polu. Jeśli jakiekolwiek elementy w polu są dodane do ulubionych, użyte zostaną tylko te elementy, które są ulubione.
 					'''
 			}
 
 			HerbSatchel: {
-				DisplayName: Herb Satchel
+				DisplayName: Torba na zioła
 				Tooltip:
 					'''
-					Automatically stores seeds, herbs, flowers, etc.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Automatycznie przechowuje nasiona, zioła, kwiaty itp.
+					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
 
 			PackBlack: {
-				DisplayName: Pack (Black)
+				DisplayName: Opakowanie (czarne)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
+					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
 
 			PackBlue: {
-				DisplayName: Pack (Blue)
+				DisplayName: Pakiet (niebieski)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
+					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
 
 			PackBrown: {
-				DisplayName: Pack (Brown)
+				DisplayName: Opakowanie (brązowy)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
+					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
 
 			PackGray: {
-				DisplayName: Pack (Gray)
+				DisplayName: Opakowanie (szary)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
+					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
 
 			PackGreen: {
-				DisplayName: Pack (Green)
+				DisplayName: Opakowanie (zielone)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
+					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
 
 			PackOrange: {
-				DisplayName: Pack (Orange)
+				DisplayName: Opakowanie (pomarańczowe)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
+					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
 
 			PackPink: {
-				DisplayName: Pack (Pink)
+				DisplayName: Opakowanie (różowe)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
+					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
 
 			PackPurple: {
-				DisplayName: Pack (Purple)
+				DisplayName: Opakowanie (fioletowe)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
+					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
 
 			PackRed: {
-				DisplayName: Pack (Red)
+				DisplayName: Opakowanie (czerwone)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
+					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
 
 			PackWhite: {
-				DisplayName: Pack (White)
+				DisplayName: Opakowanie (białe)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
+					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
 
 			PackYellow: {
-				DisplayName: Pack (Yellow)
+				DisplayName: Opakowanie (żółte)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
+					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
 
 			PaintBucket: {
-				DisplayName: Paint Bucket
+				DisplayName: Wiadro farby
 				Tooltip:
 					'''
-					Automatically stores paint
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Automatycznie przechowuje farbę
+					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
+					Farba w puszce jest używana, jeśli puszka z farbą znajduje się w pierwszym znalezionym przedmiocie z farbą.
+					Jeśli jakakolwiek farba w puszce, której można użyć za pomocą narzędzia do malowania, zostanie wybrana jako ulubiona, użyte zostaną tylko ulubione farby.
 					'''
 			}
 
 			PotionFlask: {
-				DisplayName: Potion Flask
+				DisplayName: Flaszka z eliksirami
 				Tooltip:
 					'''
-					Automatically stores potions, food and drink.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Automatycznie przechowuje mikstury, żywność i napoje.
+					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
+					Szybkie wzmocnienie użyje artykułów spożywczych z torby. Jeśli jakiekolwiek produkty spożywcze w torbie są ulubione, użyte zostaną tylko ulubione produkty spożywcze.
+					Szybkie wzmocnienie użyje ulubionych mikstur z torby.
+					Quick Heal użyje przedmiotów leczących z torby. Jeśli jakiekolwiek przedmioty lecznicze w torbie są ulubione, użyte zostaną tylko ulubione przedmioty lecznicze.
+					Szybka Mana użyje przedmiotów many z torby. Jeśli jakiekolwiek przedmioty z maną w torbie są ulubione, użyte zostaną tylko ulubione przedmioty z maną.
 					'''
 			}
 
 			WallEr: {
-				DisplayName: Wall-Er
+				DisplayName: Murarz dołowy
 				Tooltip:
 					'''
-					Automatically stores walling materials (walls, fences, beams, etc.)
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Automatycznie przechowuje materiały ścienne (ściany, płoty, belki itp.)
+					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
+					Elementy można umieszczać z Murarz dołowy, klikając lewym przyciskiem myszy Murarz dołowy. Jeśli jakiekolwiek elementy w Murarz dołowy zostaną dodane do ulubionych, użyte zostaną tylko te elementy, które są ulubione.
 					'''
 			}
 		}

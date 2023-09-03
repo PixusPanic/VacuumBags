@@ -69,7 +69,7 @@ namespace VacuumBags.Items
 			if (!VacuumBags.gadgetGaloreEnabled)
 				return;
 
-			VacuumBags.GadgetGalore.Call("RegisterPaintInventory", () => StorageManager.GetItems(BagStorageID));
+			VacuumBags.GadgetGalore.Call("RegisterPaintInventory", () => GetPaintsFromCan().ToArray());
 		}
 
 		internal static Item OnFindPaintOrCoating(On_Player.orig_FindPaintOrCoating orig, Player self) {
@@ -78,7 +78,7 @@ namespace VacuumBags.Items
 			if (!self.HasItem(AmmoBagID))
 				return item;
 
-			Item fromBag = ChooseAmmoFromBag(self);
+			Item fromBag = ChoosePaintFromCan(self);
 			if (item == null) {
 				return fromBag;
 			}
@@ -109,16 +109,25 @@ namespace VacuumBags.Items
 			return item;
 		}
 
-		private static Item ChooseAmmoFromBag(Player player) {
+		private static IEnumerable<Item> GetPaintsFromCan() {
+			IEnumerable<Item> items = StorageManager.GetItems(BagStorageID).Where(item => !item.NullOrAir() && item.stack > 0 && item.PaintOrCoating);
+			if (!items.Any())
+				return new Item[0];
+
+			if (items.AnyFavoritedItem())
+				items = items.Where(item => item.favorited);
+
+			return items;
+		}
+		private static Item ChoosePaintFromCan(Player player) {
 			if (player.whoAmI != Main.myPlayer)
 				return null;
 
-			foreach (Item item in StorageManager.GetItems(BagStorageID)) {
-				if (!item.NullOrAir() && item.stack > 0 && item.PaintOrCoating)
-					return item;
-			}
+			IEnumerable<Item> items = GetPaintsFromCan();
+			if (!items.Any())
+				return null;
 
-			return null;
+			return items.First();
 		}
 
 		public static SortedSet<int> AllowedItems {
@@ -292,7 +301,9 @@ namespace VacuumBags.Items
 		public override string LocalizationTooltip =>
 			$"Automatically stores paint\n" +
 			$"When in your inventory, the contents of the bag are available for crafting.\n" +
-			$"Right click to open the bag.";
+			$"Right click to open the bag.\n" +
+			$"Paint in the can is used if the Paint Can is in the first paint item found.\n" +
+			$"If any paint in the can that can be used by your paint tool is favorited, only favorited paints will be used.";
 		public override string Artist => "andro951";
 		public override string Designer => "@kingjoshington";
 

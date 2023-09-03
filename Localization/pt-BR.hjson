@@ -8,272 +8,281 @@ Mods: {
 
 		Items: {
 			AmmoBag: {
-				DisplayName: Ammo Bag
+				DisplayName: Saco de munição
 				Tooltip:
 					'''
-					Automatically stores throwables, arrows, bullets, flares, solutions.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Armazena automaticamente itens arremessáveis, flechas, balas, sinalizadores e soluções.
+					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
+					Clique com o botão direito para abrir a bolsa.
+					A munição na bolsa é usada se a bolsa de munição estiver no primeiro item de munição encontrado.
+					Se alguma munição na bolsa que possa ser usada pela sua arma equipada for favorita, apenas as munições favoritas serão usadas.
 					'''
 			}
 
 			BagBlack: {
-				DisplayName: Bag (Black)
+				DisplayName: Bolsa (Preta)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Armazena automaticamente itens já contidos na sacola.
+					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
+					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
 
 			BagBlue: {
-				DisplayName: Bag (Blue)
+				DisplayName: Bolsa (Azul)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Armazena automaticamente itens já contidos na sacola.
+					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
+					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
 
 			BagBrown: {
-				DisplayName: Bag (Brown)
+				DisplayName: Bolsa (Marrom)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Armazena automaticamente itens já contidos na sacola.
+					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
+					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
 
 			BagGray: {
-				DisplayName: Bag (Gray)
+				DisplayName: Bolsa (Cinza)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Armazena automaticamente itens já contidos na sacola.
+					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
+					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
 
 			BagGreen: {
-				DisplayName: Bag (Green)
+				DisplayName: Bolsa (Verde)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Armazena automaticamente itens já contidos na sacola.
+					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
+					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
 
 			BagOrange: {
-				DisplayName: Bag (Orange)
+				DisplayName: Bolsa (Laranja)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Armazena automaticamente itens já contidos na sacola.
+					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
+					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
 
 			BagPink: {
-				DisplayName: Bag (Pink)
+				DisplayName: Bolsa (Rosa)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Armazena automaticamente itens já contidos na sacola.
+					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
+					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
 
 			BagPurple: {
-				DisplayName: Bag (Purple)
+				DisplayName: Bolsa (roxa)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Armazena automaticamente itens já contidos na sacola.
+					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
+					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
 
 			BagRed: {
-				DisplayName: Bag (Red)
+				DisplayName: Bolsa (Vermelho)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Armazena automaticamente itens já contidos na sacola.
+					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
+					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
 
 			BagWhite: {
-				DisplayName: Bag (White)
+				DisplayName: Bolsa (Branca)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Armazena automaticamente itens já contidos na sacola.
+					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
+					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
 
 			BagYellow: {
-				DisplayName: Bag (Yellow)
+				DisplayName: Bolsa (Amarela)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Armazena automaticamente itens já contidos na sacola.
+					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
+					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
 
 			BuildersBox: {
-				DisplayName: Builders Box
+				DisplayName: Caixa de Construtores
 				Tooltip:
 					'''
-					Automatically stores building materials (bricks, craftable blocks, etc.)
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Armazena automaticamente materiais de construção (tijolos, blocos fabricáveis, etc.)
+					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
+					Clique com o botão direito para abrir a bolsa.
+					Os itens podem ser colocados na caixa clicando com o botão esquerdo na caixa. Se algum item da caixa for favorito, apenas os itens favoritos serão usados.
 					'''
 			}
 
 			HerbSatchel: {
-				DisplayName: Herb Satchel
+				DisplayName: Bolsa de Ervas
 				Tooltip:
 					'''
-					Automatically stores seeds, herbs, flowers, etc.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Armazena automaticamente sementes, ervas, flores, etc.
+					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
+					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
 
 			PackBlack: {
-				DisplayName: Pack (Black)
+				DisplayName: Pacote (preto)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Armazena automaticamente itens já contidos na sacola.
+					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
+					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
 
 			PackBlue: {
-				DisplayName: Pack (Blue)
+				DisplayName: Pacote (Azul)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Armazena automaticamente itens já contidos na sacola.
+					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
+					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
 
 			PackBrown: {
-				DisplayName: Pack (Brown)
+				DisplayName: Pacote (Marrom)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Armazena automaticamente itens já contidos na sacola.
+					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
+					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
 
 			PackGray: {
-				DisplayName: Pack (Gray)
+				DisplayName: Pacote (cinza)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Armazena automaticamente itens já contidos na sacola.
+					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
+					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
 
 			PackGreen: {
-				DisplayName: Pack (Green)
+				DisplayName: Pacote (Verde)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Armazena automaticamente itens já contidos na sacola.
+					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
+					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
 
 			PackOrange: {
-				DisplayName: Pack (Orange)
+				DisplayName: Pacote (Laranja)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Armazena automaticamente itens já contidos na sacola.
+					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
+					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
 
 			PackPink: {
-				DisplayName: Pack (Pink)
+				DisplayName: Pacote (Rosa)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Armazena automaticamente itens já contidos na sacola.
+					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
+					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
 
 			PackPurple: {
-				DisplayName: Pack (Purple)
+				DisplayName: Pacote (roxo)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Armazena automaticamente itens já contidos na sacola.
+					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
+					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
 
 			PackRed: {
-				DisplayName: Pack (Red)
+				DisplayName: Pacote (Vermelho)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Armazena automaticamente itens já contidos na sacola.
+					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
+					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
 
 			PackWhite: {
-				DisplayName: Pack (White)
+				DisplayName: Pacote (Branco)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Armazena automaticamente itens já contidos na sacola.
+					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
+					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
 
 			PackYellow: {
-				DisplayName: Pack (Yellow)
+				DisplayName: Pacote (Amarelo)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Armazena automaticamente itens já contidos na sacola.
+					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
+					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
 
 			PaintBucket: {
-				DisplayName: Paint Bucket
+				DisplayName: Balde de tinta
 				Tooltip:
 					'''
-					Automatically stores paint
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Armazena tinta automaticamente
+					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
+					Clique com o botão direito para abrir a bolsa.
+					A tinta na lata é usada se a lata de tinta estiver no primeiro item de tinta encontrado.
+					Se qualquer tinta da lata que possa ser usada pela sua ferramenta de pintura for favorita, apenas as tintas favoritas serão usadas.
 					'''
 			}
 
 			PotionFlask: {
-				DisplayName: Potion Flask
+				DisplayName: Frasco de Poção
 				Tooltip:
 					'''
-					Automatically stores potions, food and drink.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Armazena automaticamente poções, comida e bebida.
+					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
+					Clique com o botão direito para abrir a bolsa.
+					Quick Buff usará alimentos da sacola. Se algum alimento na sacola for favorito, apenas os alimentos favoritos serão usados.
+					Quick Buff usará poções favoritas da bolsa.
+					Quick Heal usará itens de cura da bolsa. Se algum item de cura na bolsa for favorito, apenas os itens de cura favoritos serão usados.
+					Quick Mana usará itens de mana da bolsa. Se algum item de mana na bolsa for favorito, apenas os itens de mana favoritos serão usados.
 					'''
 			}
 
@@ -281,9 +290,10 @@ Mods: {
 				DisplayName: Wall-Er
 				Tooltip:
 					'''
-					Automatically stores walling materials (walls, fences, beams, etc.)
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Armazena automaticamente materiais de parede (paredes, cercas, vigas, etc.)
+					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
+					Clique com o botão direito para abrir a bolsa.
+					Os itens podem ser colocados em Wall-Er clicando com o botão esquerdo em Wall-Er. Se algum item em Wall-Er for favorito, apenas os itens favoritos serão usados.
 					'''
 			}
 		}

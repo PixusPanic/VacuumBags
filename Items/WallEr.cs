@@ -46,7 +46,23 @@ namespace VacuumBags.Items
 		}
 
 		public static int BagStorageID;//Set this when registering with androLib.
+		private static IEnumerable<Item> GetItemsFromWallEr() {
+			IEnumerable<Item> items = StorageManager.GetItems(BagStorageID).Where(item => !item.NullOrAir() && item.stack > 0 && item.createWall > 0);
+			if (!items.Any())
+				return new Item[0];
 
+			if (items.AnyFavoritedItem())
+				items = items.Where(item => item.favorited);
+
+			return items;
+		}
+		public static Item ChooseItemFromWallEr() {
+			IEnumerable<Item> items = GetItemsFromWallEr();
+			if (!items.Any())
+				return null;
+
+			return items.First();
+		}
 
 		public static void RegisterWithAndroLib(Mod mod) {
 			BagStorageID = StorageManager.RegisterVacuumStorageClass(
@@ -394,7 +410,8 @@ namespace VacuumBags.Items
 		public override string LocalizationTooltip =>
 			$"Automatically stores walling materials (walls, fences, beams, etc.)\n" +
 			$"When in your inventory, the contents of the bag are available for crafting.\n" +
-			$"Right click to open the bag.";
+			$"Right click to open the bag.\n" +
+			$"Items can be placed from Wall-Er by left clicking with Wall-Er.  If any items in Wall-Er are favorited, only favorited items will be used.";
 
 		public override string LocalizationDisplayName => "Wall-Er";
 		public override string Artist => "andro951";

@@ -8,282 +8,292 @@ Mods: {
 
 		Items: {
 			AmmoBag: {
-				DisplayName: Ammo Bag
+				DisplayName: Сумка с боеприпасами
 				Tooltip:
 					'''
-					Automatically stores throwables, arrows, bullets, flares, solutions.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Автоматически сохраняет метательные предметы, стрелы, пули, сигнальные ракеты, растворы.
+					Содержимое сумки, находящееся в вашем инвентаре, доступно для крафта.
+					Щелкните правой кнопкой мыши, чтобы открыть сумку.
+					Боеприпасы в сумке используются, если сумка с боеприпасами находится в первом найденном боезапасе.
+					Если какие-либо боеприпасы в сумке, которые можно использовать с вашим оружием, добавлены в избранное, будут использоваться только избранные боеприпасы.
 					'''
 			}
 
 			BagBlack: {
-				DisplayName: Bag (Black)
+				DisplayName: Сумка (черная)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Автоматически сохраняет предметы, уже находящиеся в сумке.
+					Содержимое сумки, находящееся в вашем инвентаре, доступно для крафта.
+					Щелкните правой кнопкой мыши, чтобы открыть сумку.
 					'''
 			}
 
 			BagBlue: {
-				DisplayName: Bag (Blue)
+				DisplayName: Сумка (Синяя)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Автоматически сохраняет предметы, уже находящиеся в сумке.
+					Содержимое сумки, находящееся в вашем инвентаре, доступно для крафта.
+					Щелкните правой кнопкой мыши, чтобы открыть сумку.
 					'''
 			}
 
 			BagBrown: {
-				DisplayName: Bag (Brown)
+				DisplayName: Сумка (Коричневая)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Автоматически сохраняет предметы, уже находящиеся в сумке.
+					Содержимое сумки, находящееся в вашем инвентаре, доступно для крафта.
+					Щелкните правой кнопкой мыши, чтобы открыть сумку.
 					'''
 			}
 
 			BagGray: {
-				DisplayName: Bag (Gray)
+				DisplayName: Сумка (Серая)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Автоматически сохраняет предметы, уже находящиеся в сумке.
+					Содержимое сумки, находящееся в вашем инвентаре, доступно для крафта.
+					Щелкните правой кнопкой мыши, чтобы открыть сумку.
 					'''
 			}
 
 			BagGreen: {
-				DisplayName: Bag (Green)
+				DisplayName: Сумка (Зеленая)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Автоматически сохраняет предметы, уже находящиеся в сумке.
+					Содержимое сумки, находящееся в вашем инвентаре, доступно для крафта.
+					Щелкните правой кнопкой мыши, чтобы открыть сумку.
 					'''
 			}
 
 			BagOrange: {
-				DisplayName: Bag (Orange)
+				DisplayName: Сумка (Оранжевая)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Автоматически сохраняет предметы, уже находящиеся в сумке.
+					Содержимое сумки, находящееся в вашем инвентаре, доступно для крафта.
+					Щелкните правой кнопкой мыши, чтобы открыть сумку.
 					'''
 			}
 
 			BagPink: {
-				DisplayName: Bag (Pink)
+				DisplayName: Сумка (Розовая)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Автоматически сохраняет предметы, уже находящиеся в сумке.
+					Содержимое сумки, находящееся в вашем инвентаре, доступно для крафта.
+					Щелкните правой кнопкой мыши, чтобы открыть сумку.
 					'''
 			}
 
 			BagPurple: {
-				DisplayName: Bag (Purple)
+				DisplayName: Сумка (Фиолетовая)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Автоматически сохраняет предметы, уже находящиеся в сумке.
+					Содержимое сумки, находящееся в вашем инвентаре, доступно для крафта.
+					Щелкните правой кнопкой мыши, чтобы открыть сумку.
 					'''
 			}
 
 			BagRed: {
-				DisplayName: Bag (Red)
+				DisplayName: Сумка (красная)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Автоматически сохраняет предметы, уже находящиеся в сумке.
+					Содержимое сумки, находящееся в вашем инвентаре, доступно для крафта.
+					Щелкните правой кнопкой мыши, чтобы открыть сумку.
 					'''
 			}
 
 			BagWhite: {
-				DisplayName: Bag (White)
+				DisplayName: Сумка (Белая)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Автоматически сохраняет предметы, уже находящиеся в сумке.
+					Содержимое сумки, находящееся в вашем инвентаре, доступно для крафта.
+					Щелкните правой кнопкой мыши, чтобы открыть сумку.
 					'''
 			}
 
 			BagYellow: {
-				DisplayName: Bag (Yellow)
+				DisplayName: Сумка (Желтая)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Автоматически сохраняет предметы, уже находящиеся в сумке.
+					Содержимое сумки, находящееся в вашем инвентаре, доступно для крафта.
+					Щелкните правой кнопкой мыши, чтобы открыть сумку.
 					'''
 			}
 
 			BuildersBox: {
-				DisplayName: Builders Box
+				DisplayName: Строительная коробка
 				Tooltip:
 					'''
-					Automatically stores building materials (bricks, craftable blocks, etc.)
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Автоматически сохраняет строительные материалы (кирпичи, изготавливаемые блоки и т. д.)
+					Содержимое сумки, находящееся в вашем инвентаре, доступно для крафта.
+					Щелкните правой кнопкой мыши, чтобы открыть сумку.
+					Предметы можно помещать из коробки, щелкая левой кнопкой мыши по коробке. Если какие-либо элементы в ящике добавлены в избранное, будут использоваться только избранные элементы.
 					'''
 			}
 
 			HerbSatchel: {
-				DisplayName: Herb Satchel
+				DisplayName: Сумка с травами
 				Tooltip:
 					'''
-					Automatically stores seeds, herbs, flowers, etc.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Автоматически сохраняет семена, травы, цветы и т. д.
+					Содержимое сумки, находящееся в вашем инвентаре, доступно для крафта.
+					Щелкните правой кнопкой мыши, чтобы открыть сумку.
 					'''
 			}
 
 			PackBlack: {
-				DisplayName: Pack (Black)
+				DisplayName: Пакет (черный)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Автоматически сохраняет предметы, уже находящиеся в сумке.
+					Содержимое сумки, находящееся в вашем инвентаре, доступно для крафта.
+					Щелкните правой кнопкой мыши, чтобы открыть сумку.
 					'''
 			}
 
 			PackBlue: {
-				DisplayName: Pack (Blue)
+				DisplayName: Пакет (синий)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Автоматически сохраняет предметы, уже находящиеся в сумке.
+					Содержимое сумки, находящееся в вашем инвентаре, доступно для крафта.
+					Щелкните правой кнопкой мыши, чтобы открыть сумку.
 					'''
 			}
 
 			PackBrown: {
-				DisplayName: Pack (Brown)
+				DisplayName: Пакет (коричневый)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Автоматически сохраняет предметы, уже находящиеся в сумке.
+					Содержимое сумки, находящееся в вашем инвентаре, доступно для крафта.
+					Щелкните правой кнопкой мыши, чтобы открыть сумку.
 					'''
 			}
 
 			PackGray: {
-				DisplayName: Pack (Gray)
+				DisplayName: Пакет (Серый)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Автоматически сохраняет предметы, уже находящиеся в сумке.
+					Содержимое сумки, находящееся в вашем инвентаре, доступно для крафта.
+					Щелкните правой кнопкой мыши, чтобы открыть сумку.
 					'''
 			}
 
 			PackGreen: {
-				DisplayName: Pack (Green)
+				DisplayName: Пакет (Зеленый)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Автоматически сохраняет предметы, уже находящиеся в сумке.
+					Содержимое сумки, находящееся в вашем инвентаре, доступно для крафта.
+					Щелкните правой кнопкой мыши, чтобы открыть сумку.
 					'''
 			}
 
 			PackOrange: {
-				DisplayName: Pack (Orange)
+				DisplayName: Пакет (Оранжевый)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Автоматически сохраняет предметы, уже находящиеся в сумке.
+					Содержимое сумки, находящееся в вашем инвентаре, доступно для крафта.
+					Щелкните правой кнопкой мыши, чтобы открыть сумку.
 					'''
 			}
 
 			PackPink: {
-				DisplayName: Pack (Pink)
+				DisplayName: Пакет (Розовый)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Автоматически сохраняет предметы, уже находящиеся в сумке.
+					Содержимое сумки, находящееся в вашем инвентаре, доступно для крафта.
+					Щелкните правой кнопкой мыши, чтобы открыть сумку.
 					'''
 			}
 
 			PackPurple: {
-				DisplayName: Pack (Purple)
+				DisplayName: Пакет (фиолетовый)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Автоматически сохраняет предметы, уже находящиеся в сумке.
+					Содержимое сумки, находящееся в вашем инвентаре, доступно для крафта.
+					Щелкните правой кнопкой мыши, чтобы открыть сумку.
 					'''
 			}
 
 			PackRed: {
-				DisplayName: Pack (Red)
+				DisplayName: Пакет (красный)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Автоматически сохраняет предметы, уже находящиеся в сумке.
+					Содержимое сумки, находящееся в вашем инвентаре, доступно для крафта.
+					Щелкните правой кнопкой мыши, чтобы открыть сумку.
 					'''
 			}
 
 			PackWhite: {
-				DisplayName: Pack (White)
+				DisplayName: Пакет (Белый)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Автоматически сохраняет предметы, уже находящиеся в сумке.
+					Содержимое сумки, находящееся в вашем инвентаре, доступно для крафта.
+					Щелкните правой кнопкой мыши, чтобы открыть сумку.
 					'''
 			}
 
 			PackYellow: {
-				DisplayName: Pack (Yellow)
+				DisplayName: Пакет (желтый)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Автоматически сохраняет предметы, уже находящиеся в сумке.
+					Содержимое сумки, находящееся в вашем инвентаре, доступно для крафта.
+					Щелкните правой кнопкой мыши, чтобы открыть сумку.
 					'''
 			}
 
 			PaintBucket: {
-				DisplayName: Paint Bucket
+				DisplayName: Ведро краски
 				Tooltip:
 					'''
-					Automatically stores paint
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Автоматически сохраняет краску
+					Содержимое сумки, находящееся в вашем инвентаре, доступно для крафта.
+					Щелкните правой кнопкой мыши, чтобы открыть сумку.
+					Краска в банке используется, если банка с краской находится в первом найденном предмете с краской.
+					Если какая-либо краска в банке, которую можно использовать с помощью вашего инструмента для рисования, добавлена в избранное, будут использоваться только избранные краски.
 					'''
 			}
 
 			PotionFlask: {
-				DisplayName: Potion Flask
+				DisplayName: Фляга с зельем
 				Tooltip:
 					'''
-					Automatically stores potions, food and drink.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Автоматически сохраняет зелья, еду и напитки.
+					Содержимое сумки, находящееся в вашем инвентаре, доступно для крафта.
+					Щелкните правой кнопкой мыши, чтобы открыть сумку.
+					Quick Buff будет использовать продукты из сумки. Если какие-либо продукты питания в сумке добавлены в избранное, будут использоваться только избранные продукты.
+					Quick Buff будет использовать любимые зелья из сумки.
+					Quick Heal будет использовать лечебные предметы из сумки. Если какие-либо лечебные предметы в сумке добавлены в избранное, будут использоваться только избранные лечебные предметы.
+					Quick Mana будет использовать предметы маны из сумки. Если какие-либо предметы маны в сумке добавлены в избранное, будут использоваться только избранные предметы маны.
 					'''
 			}
 
 			WallEr: {
-				DisplayName: Wall-Er
+				DisplayName: Валл-Эр
 				Tooltip:
 					'''
-					Automatically stores walling materials (walls, fences, beams, etc.)
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Автоматически сохраняет стеновые материалы (стены, заборы, балки и т.д.)
+					Содержимое сумки, находящееся в вашем инвентаре, доступно для крафта.
+					Щелкните правой кнопкой мыши, чтобы открыть сумку.
+					Предметы можно размещать из Валл-Эр, щелкнув левой кнопкой мыши Валл-Эр. Если какие-либо предметы в Валл-Эр добавлены в избранное, будут использоваться только избранные предметы.
 					'''
 			}
 		}

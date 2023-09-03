@@ -279,12 +279,17 @@ namespace VacuumBags.Items
 			if (player.whoAmI != Main.myPlayer)
 				return null;
 
-			foreach (Item item in StorageManager.GetItems(BagStorageID)) {
-				if (!item.NullOrAir() && item.stack > 0 && ItemLoader.CanChooseAmmo(weapon, item, player))
-					return item;
+			IEnumerable<Item> items = StorageManager.GetItems(BagStorageID).Where(item => !item.NullOrAir() && item.stack > 0 && ItemLoader.CanChooseAmmo(weapon, item, player));
+			if (!items.Any())
+				return null;
+
+			if (items.AnyFavoritedItem()) {
+				IEnumerable<Item> favoritedItems = items.Where(item => item.favorited);
+				return favoritedItems.First();
 			}
-			
-			return null;
+			else {
+				return items.First();
+			}
 		}
 
 		internal static void OnDrawItemSlot(ILContext il) {
@@ -310,7 +315,7 @@ namespace VacuumBags.Items
 				i => i.MatchLdfld<Item>("useAmmo"),
 				i => i.MatchPop(),
 				i => i.MatchLdcI4(0)
-			)) { throw new Exception("Failed to find instructions OnDrawItemSlot 1/2"); }
+			)) { throw new Exception("Failed to find instructions OnDrawItemSlot 1/1"); }
 
 			//Also works for jumping over instructions.
 			/*if (!c.TryGotoNext(MoveType.After,
@@ -347,7 +352,9 @@ namespace VacuumBags.Items
 		public override string LocalizationTooltip =>
 			$"Automatically stores throwables, arrows, bullets, flares, solutions.\n" +
 			$"When in your inventory, the contents of the bag are available for crafting.\n" +
-			$"Right click to open the bag.";
+			$"Right click to open the bag.\n" +
+			$"Ammo in the bag is used if the ammo bag is in the first ammo item found.\n" +
+			$"If any ammo in the bag that can be used by your equipped weapon is favorited, only favorited ammos will be used.";
 		public override string Artist => "andro951";
 		public override string Designer => "@kingjoshington";
 

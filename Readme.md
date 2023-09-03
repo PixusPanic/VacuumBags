@@ -31,5 +31,8 @@ Portable Storage bag sprites are used in this mod (with permission).  Created by
 Please give us your feedback!!!!!!
 https://discord.gg/mPywEhyV9b
 
+Ko-Fi:
+https://ko-fi.com/andro951
+
 Patreon:
 https://www.patreon.com/andro951

@@ -8,6 +8,10 @@ using Microsoft.Xna.Framework;
 using androLib.Items;
 using androLib.Common.Globals;
 using androLib;
+using System;
+using static Terraria.ModLoader.PlayerDrawLayer;
+using MonoMod.Cil;
+using Mono.Cecil.Cil;
 
 namespace VacuumBags.Items
 {
@@ -276,16 +280,33 @@ namespace VacuumBags.Items
 					blackList.Add(item.type);
 			}
 		}
+		private static IEnumerable<Item> GetItemsFromBox() {
+			IEnumerable<Item> items = StorageManager.GetItems(BagStorageID).Where(item => !item.NullOrAir() && item.stack > 0 && item.createTile > 0);
+			if (!items.Any())
+				return new Item[0];
+
+			if (items.AnyFavoritedItem())
+				items = items.Where(item => item.favorited);
+
+			return items;
+		}
+		public static Item ChooseItemFromBox() {
+			IEnumerable<Item> items = GetItemsFromBox();
+			if (!items.Any())
+				return null;
+
+			return items.First();
+		}
 
 		#region AndroModItem attributes that you don't need.
-
 		public virtual SellCondition SellCondition => SellCondition.Never;
 		public virtual float SellPriceModifier => 1f;
 		public override List<WikiTypeID> WikiItemTypes => new() { WikiTypeID.Storage };
 		public override string LocalizationTooltip =>
-			$"Automatically stores building materials (bricks, craftable blocks, etc.)\n" +
-			$"When in your inventory, the contents of the bag are available for crafting.\n" +
-			$"Right click to open the bag.";
+		$"Automatically stores building materials (bricks, craftable blocks, etc.)\n" +
+		$"When in your inventory, the contents of the bag are available for crafting.\n" +
+		$"Right click to open the bag.\n" +
+		$"Items can be placed from the box by left clicking with the box.  If any items in the box are favorited, only favorited items will be used.";
 		public override string Artist => "andro951";
 		public override string Designer => "@kingjoshington";
 

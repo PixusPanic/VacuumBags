@@ -8,272 +8,281 @@ Mods: {
 
 		Items: {
 			AmmoBag: {
-				DisplayName: Ammo Bag
+				DisplayName: Munitionstasche
 				Tooltip:
 					'''
-					Automatically stores throwables, arrows, bullets, flares, solutions.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Speichert Wurfgeschosse, Pfeile, Kugeln, Leuchtraketen und Lösungen automatisch.
+					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
+					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
+					Munition im Beutel wird verwendet, wenn sich der Munitionsbeutel im ersten gefundenen Munitionsgegenstand befindet.
+					Wenn Munition in der Tasche, die von Ihrer ausgerüsteten Waffe verwendet werden kann, zu den Favoriten gehört, werden nur die bevorzugten Munitionen verwendet.
 					'''
 			}
 
 			BagBlack: {
-				DisplayName: Bag (Black)
+				DisplayName: Tasche (Schwarz)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
+					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
+					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
 
 			BagBlue: {
-				DisplayName: Bag (Blue)
+				DisplayName: Tasche (Blau)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
+					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
+					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
 
 			BagBrown: {
-				DisplayName: Bag (Brown)
+				DisplayName: Tasche (Braun)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
+					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
+					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
 
 			BagGray: {
-				DisplayName: Bag (Gray)
+				DisplayName: Tasche (Grau)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
+					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
+					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
 
 			BagGreen: {
-				DisplayName: Bag (Green)
+				DisplayName: Tasche (Grün)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
+					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
+					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
 
 			BagOrange: {
-				DisplayName: Bag (Orange)
+				DisplayName: Tasche (Orange)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
+					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
+					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
 
 			BagPink: {
-				DisplayName: Bag (Pink)
+				DisplayName: Tasche (Rosa)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
+					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
+					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
 
 			BagPurple: {
-				DisplayName: Bag (Purple)
+				DisplayName: Tasche (Lila)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
+					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
+					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
 
 			BagRed: {
-				DisplayName: Bag (Red)
+				DisplayName: Tasche (Rot)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
+					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
+					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
 
 			BagWhite: {
-				DisplayName: Bag (White)
+				DisplayName: Tasche (Weiß)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
+					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
+					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
 
 			BagYellow: {
-				DisplayName: Bag (Yellow)
+				DisplayName: Tasche (Gelb)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
+					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
+					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
 
 			BuildersBox: {
-				DisplayName: Builders Box
+				DisplayName: Baukasten
 				Tooltip:
 					'''
-					Automatically stores building materials (bricks, craftable blocks, etc.)
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Speichert automatisch Baumaterialien (Ziegel, herstellbare Blöcke usw.)
+					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
+					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
+					Elemente können aus der Box heraus platziert werden, indem Sie mit der linken Maustaste auf die Box klicken. Wenn Elemente in der Box zu den Favoriten gehören, werden nur die Favoriten verwendet.
 					'''
 			}
 
 			HerbSatchel: {
-				DisplayName: Herb Satchel
+				DisplayName: Kräutertasche
 				Tooltip:
 					'''
-					Automatically stores seeds, herbs, flowers, etc.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Automatische Speicherung von Samen, Kräutern, Blumen usw.
+					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
+					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
 
 			PackBlack: {
-				DisplayName: Pack (Black)
+				DisplayName: Packung (Schwarz)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
+					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
+					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
 
 			PackBlue: {
-				DisplayName: Pack (Blue)
+				DisplayName: Packung (Blau)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
+					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
+					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
 
 			PackBrown: {
-				DisplayName: Pack (Brown)
+				DisplayName: Packung (Braun)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
+					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
+					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
 
 			PackGray: {
-				DisplayName: Pack (Gray)
+				DisplayName: Packung (Grau)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
+					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
+					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
 
 			PackGreen: {
-				DisplayName: Pack (Green)
+				DisplayName: Packung (Grün)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
+					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
+					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
 
 			PackOrange: {
-				DisplayName: Pack (Orange)
+				DisplayName: Packung (Orange)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
+					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
+					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
 
 			PackPink: {
-				DisplayName: Pack (Pink)
+				DisplayName: Packung (Rosa)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
+					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
+					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
 
 			PackPurple: {
-				DisplayName: Pack (Purple)
+				DisplayName: Packung (Lila)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
+					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
+					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
 
 			PackRed: {
-				DisplayName: Pack (Red)
+				DisplayName: Packung (Rot)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
+					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
+					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
 
 			PackWhite: {
-				DisplayName: Pack (White)
+				DisplayName: Packung (Weiß)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
+					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
+					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
 
 			PackYellow: {
-				DisplayName: Pack (Yellow)
+				DisplayName: Packung (Gelb)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
+					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
+					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
 
 			PaintBucket: {
-				DisplayName: Paint Bucket
+				DisplayName: Farbeimer
 				Tooltip:
 					'''
-					Automatically stores paint
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Speichert Farbe automatisch
+					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
+					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
+					Farbe in der Dose wird verwendet, wenn sich die Farbdose im ersten gefundenen Farbartikel befindet.
+					Wenn eine beliebige Farbe in der Dose, die mit Ihrem Malwerkzeug verwendet werden kann, zu Ihren Favoriten gehört, werden nur die bevorzugten Farben verwendet.
 					'''
 			}
 
 			PotionFlask: {
-				DisplayName: Potion Flask
+				DisplayName: Trankflasche
 				Tooltip:
 					'''
-					Automatically stores potions, food and drink.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Tränke, Speisen und Getränke werden automatisch gespeichert.
+					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
+					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
+					Quick Buff verwendet Lebensmittel aus dem Beutel. Wenn Lebensmittel in der Tüte zu den Favoriten gehören, werden nur die bevorzugten Lebensmittel verwendet.
+					Quick Buff verwendet Lieblingstränke aus der Tasche.
+					Bei „Schnellheilung“ werden Heilgegenstände aus der Tasche verwendet. Wenn irgendwelche Heilgegenstände in der Tasche zu den Favoriten gehören, werden nur die bevorzugten Heilgegenstände verwendet.
+					Quick Mana verwendet Managegenstände aus der Tasche. Wenn irgendwelche Managegenstände in der Tasche zu den Favoriten gehören, werden nur die bevorzugten Managegenstände verwendet.
 					'''
 			}
 
@@ -281,9 +290,10 @@ Mods: {
 				DisplayName: Wall-Er
 				Tooltip:
 					'''
-					Automatically stores walling materials (walls, fences, beams, etc.)
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					Speichert Wandmaterialien (Wände, Zäune, Balken usw.) automatisch.
+					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
+					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
+					Elemente können von Wall-Er aus platziert werden, indem Sie mit der linken Maustaste mit Wall-Er klicken. Wenn Elemente in Wall-Er zu den Favoriten gehören, werden nur die Favoriten verwendet.
 					'''
 			}
 		}

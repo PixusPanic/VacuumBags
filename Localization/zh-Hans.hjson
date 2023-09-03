@@ -8,282 +8,292 @@ Mods: {
 
 		Items: {
 			AmmoBag: {
-				DisplayName: Ammo Bag
+				DisplayName: 弹药袋
 				Tooltip:
 					'''
-					Automatically stores throwables, arrows, bullets, flares, solutions.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					自动存储投掷物、箭头、子弹、照明弹、溶液。
+					当你在库存中时，包里的东西可以用来制作。
+					右键点击打开袋子。
+					如果弹药袋位于第一个找到的弹药物品中，则使用袋子中的弹药。
+					如果包里有任何可以被你所装备的武器使用的弹药被收藏，则只会使用收藏的弹药。
 					'''
 			}
 
 			BagBlack: {
-				DisplayName: Bag (Black)
+				DisplayName: 包袋（黑色）
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					自动存储袋子中已包含的物品。
+					当你在库存中时，包里的东西可以用来制作。
+					右键点击打开袋子。
 					'''
 			}
 
 			BagBlue: {
-				DisplayName: Bag (Blue)
+				DisplayName: 包袋(蓝色)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					自动存储袋子中已包含的物品。
+					当你在库存中时，包里的东西可以用来制作。
+					右键点击打开袋子。
 					'''
 			}
 
 			BagBrown: {
-				DisplayName: Bag (Brown)
+				DisplayName: 包袋(棕色)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					自动存储袋子中已包含的物品。
+					当你在库存中时，包里的东西可以用来制作。
+					右键点击打开袋子。
 					'''
 			}
 
 			BagGray: {
-				DisplayName: Bag (Gray)
+				DisplayName: 包袋(灰色)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					自动存储袋子中已包含的物品。
+					当你在库存中时，包里的东西可以用来制作。
+					右键点击打开袋子。
 					'''
 			}
 
 			BagGreen: {
-				DisplayName: Bag (Green)
+				DisplayName: 包袋（绿色）
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					自动存储袋子中已包含的物品。
+					当你在库存中时，包里的东西可以用来制作。
+					右键点击打开袋子。
 					'''
 			}
 
 			BagOrange: {
-				DisplayName: Bag (Orange)
+				DisplayName: 包袋（橙色）
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					自动存储袋子中已包含的物品。
+					当你在库存中时，包里的东西可以用来制作。
+					右键点击打开袋子。
 					'''
 			}
 
 			BagPink: {
-				DisplayName: Bag (Pink)
+				DisplayName: 包袋(粉色)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					自动存储袋子中已包含的物品。
+					当你在库存中时，包里的东西可以用来制作。
+					右键点击打开袋子。
 					'''
 			}
 
 			BagPurple: {
-				DisplayName: Bag (Purple)
+				DisplayName: 包袋(紫色)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					自动存储袋子中已包含的物品。
+					当你在库存中时，包里的东西可以用来制作。
+					右键点击打开袋子。
 					'''
 			}
 
 			BagRed: {
-				DisplayName: Bag (Red)
+				DisplayName: 包袋（红色）
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					自动存储袋子中已包含的物品。
+					当你在库存中时，包里的东西可以用来制作。
+					右键点击打开袋子。
 					'''
 			}
 
 			BagWhite: {
-				DisplayName: Bag (White)
+				DisplayName: 包袋(白色)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					自动存储袋子中已包含的物品。
+					当你在库存中时，包里的东西可以用来制作。
+					右键点击打开袋子。
 					'''
 			}
 
 			BagYellow: {
-				DisplayName: Bag (Yellow)
+				DisplayName: 袋子(黄色)
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					自动存储袋子中已包含的物品。
+					当你在库存中时，包里的东西可以用来制作。
+					右键点击打开袋子。
 					'''
 			}
 
 			BuildersBox: {
-				DisplayName: Builders Box
+				DisplayName: 建筑箱
 				Tooltip:
 					'''
-					Automatically stores building materials (bricks, craftable blocks, etc.)
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					自动存储建筑材料（砖块、可制作的方块等）
+					当你在库存中时，包里的东西可以用来制作。
+					右键点击打开袋子。
+					通过左键单击盒子可以从盒子中放置物品。 如果框中的任何项目被收藏，则仅使用收藏的项目。
 					'''
 			}
 
 			HerbSatchel: {
-				DisplayName: Herb Satchel
+				DisplayName: 香草挎包
 				Tooltip:
 					'''
-					Automatically stores seeds, herbs, flowers, etc.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					自动储存种子、草药、花卉等。
+					当你在库存中时，包里的东西可以用来制作。
+					右键点击打开袋子。
 					'''
 			}
 
 			PackBlack: {
-				DisplayName: Pack (Black)
+				DisplayName: 套装（黑色）
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					自动存储袋子中已包含的物品。
+					当你在库存中时，包里的东西可以用来制作。
+					右键点击打开袋子。
 					'''
 			}
 
 			PackBlue: {
-				DisplayName: Pack (Blue)
+				DisplayName: 套装（蓝色）
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					自动存储袋子中已包含的物品。
+					当你在库存中时，包里的东西可以用来制作。
+					右键点击打开袋子。
 					'''
 			}
 
 			PackBrown: {
-				DisplayName: Pack (Brown)
+				DisplayName: 套装（棕色）
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					自动存储袋子中已包含的物品。
+					当你在库存中时，包里的东西可以用来制作。
+					右键点击打开袋子。
 					'''
 			}
 
 			PackGray: {
-				DisplayName: Pack (Gray)
+				DisplayName: 套装（灰色）
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					自动存储袋子中已包含的物品。
+					当你在库存中时，包里的东西可以用来制作。
+					右键点击打开袋子。
 					'''
 			}
 
 			PackGreen: {
-				DisplayName: Pack (Green)
+				DisplayName: 包装（绿色）
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					自动存储袋子中已包含的物品。
+					当你在库存中时，包里的东西可以用来制作。
+					右键点击打开袋子。
 					'''
 			}
 
 			PackOrange: {
-				DisplayName: Pack (Orange)
+				DisplayName: 套装（橙色）
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					自动存储袋子中已包含的物品。
+					当你在库存中时，包里的东西可以用来制作。
+					右键点击打开袋子。
 					'''
 			}
 
 			PackPink: {
-				DisplayName: Pack (Pink)
+				DisplayName: 套装（粉色）
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					自动存储袋子中已包含的物品。
+					当你在库存中时，包里的东西可以用来制作。
+					右键点击打开袋子。
 					'''
 			}
 
 			PackPurple: {
-				DisplayName: Pack (Purple)
+				DisplayName: 套装（紫色）
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					自动存储袋子中已包含的物品。
+					当你在库存中时，包里的东西可以用来制作。
+					右键点击打开袋子。
 					'''
 			}
 
 			PackRed: {
-				DisplayName: Pack (Red)
+				DisplayName: 套装（红色）
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					自动存储袋子中已包含的物品。
+					当你在库存中时，包里的东西可以用来制作。
+					右键点击打开袋子。
 					'''
 			}
 
 			PackWhite: {
-				DisplayName: Pack (White)
+				DisplayName: 套装（白色）
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					自动存储袋子中已包含的物品。
+					当你在库存中时，包里的东西可以用来制作。
+					右键点击打开袋子。
 					'''
 			}
 
 			PackYellow: {
-				DisplayName: Pack (Yellow)
+				DisplayName: 套装（黄色）
 				Tooltip:
 					'''
-					Automatically stores items already contained in the bag.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					自动存储袋子中已包含的物品。
+					当你在库存中时，包里的东西可以用来制作。
+					右键点击打开袋子。
 					'''
 			}
 
 			PaintBucket: {
-				DisplayName: Paint Bucket
+				DisplayName: 油漆桶
 				Tooltip:
 					'''
-					Automatically stores paint
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					自动储存油漆
+					当你在库存中时，包里的东西可以用来制作。
+					右键点击打开袋子。
+					如果油漆罐位于找到的第一个油漆项目中，则使用罐中油漆。
+					如果您的绘画工具可以使用罐中的任何油漆被收藏，则只会使用收藏的油漆。
 					'''
 			}
 
 			PotionFlask: {
-				DisplayName: Potion Flask
+				DisplayName: 药水瓶
 				Tooltip:
 					'''
-					Automatically stores potions, food and drink.
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					自动储存药水、食物和饮料。
+					当你在库存中时，包里的东西可以用来制作。
+					右键点击打开袋子。
+					快速增益会使用袋子里的食物。 如果袋子中的任何食物被收藏，则仅使用收藏的食物。
+					快速增益会使用包里最喜欢的药水。
+					快速治疗将使用包里的治疗物品。 如果包里有任何治疗物品被收藏，则只会使用收藏的治疗物品。
+					快速法力将使用包中的法力物品。 如果袋子中的任何法术力物品被收藏，则仅使用收藏的法术力物品。
 					'''
 			}
 
 			WallEr: {
-				DisplayName: Wall-Er
+				DisplayName: 沃尔尔
 				Tooltip:
 					'''
-					Automatically stores walling materials (walls, fences, beams, etc.)
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
+					自动存储墙体材料（墙壁、栅栏、横梁等）
+					当你在库存中时，包里的东西可以用来制作。
+					右键点击打开袋子。
+					可以通过用 沃尔尔 左键单击来从 沃尔尔 放置物品。 如果 沃尔尔 中的任何物品被收藏，则仅使用收藏的物品。
 					'''
 			}
 		}

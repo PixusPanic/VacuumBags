@@ -18,7 +18,7 @@ namespace VacuumBags.Localization
 	public class VacuumBagsLocalizationData
 	{
 		public static void RegisterSDataPackage() {
-			AndroLogModSystem.RegisterModLocalizationSDataPackage(new(ModContent.GetInstance<VacuumBags>, () => AllData));
+			AndroLogModSystem.RegisterModLocalizationSDataPackage(new(ModContent.GetInstance<VacuumBags>, () => AllData, () => ChangedData, () => RenamedKeys, () => RenamedFullKeys, () => SameAsEnglish));
 		}
 
 		private static SortedDictionary<string, SData> allData;
@@ -96,25 +96,25 @@ namespace VacuumBags.Localization
 		public static Dictionary<CultureName, List<string>> SameAsEnglish = new() {
 			{ CultureName.German,
 				new() {
-					
+					"Wall-Er"
 				}
 			},
 			{
 				CultureName.Spanish,
 				new() {
-					
+					"Wall-Er"
 				}
 			},
 			{
 				CultureName.French,
 				new() {
-					
+					"Wall-Er"
 				}
 			},
 			{
 				CultureName.Italian,
 				new() {
-					
+					"Wall-Er"
 				}
 			},
 			{
@@ -126,7 +126,7 @@ namespace VacuumBags.Localization
 			{
 				CultureName.Portuguese,
 				new() {
-					
+					"Wall-Er"
 				}
 			},
 			{
