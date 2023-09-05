@@ -146,8 +146,7 @@ namespace VacuumBags.Items
 					continue;
 				}
 
-				if (item.Name.ToLower().EndsWith("relic")
-					&& item.createTile > -1
+				if (lowerName.Contains("relic")
 					&& item.useStyle == ItemUseStyleID.Swing
 					&& item.useTurn
 					&& item.autoReuse
@@ -181,9 +180,8 @@ namespace VacuumBags.Items
 							if (lootItem.defense > 0)
 								continue;
 
-							if (lootItem.accessory && lootItem.createTile < 0 && lootItem.createWall < 0) {
+							if (lootItem.accessory)
 								continue;
-							}
 
 							if (lootItem.material && lootItem.createTile < 0 && lootItem.createWall < 0 && (lootItem.consumable || lootItem.shoot <= ProjectileID.None && lootItem.buffType <= 0))
 								continue;
