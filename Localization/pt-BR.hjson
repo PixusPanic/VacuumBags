@@ -296,6 +296,11 @@ Mods: {
 					Os itens podem ser colocados em Wall-Er clicando com o botão esquerdo em Wall-Er. Se algum item em Wall-Er for favorito, apenas os itens favoritos serão usados.
 					'''
 			}
+
+			BossBag: {
+				// Tooltip: ""
+				// DisplayName: Boss Bag
+			}
 		}
 
 		Tiles: {

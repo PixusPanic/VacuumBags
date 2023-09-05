@@ -22,6 +22,7 @@
     <None Remove="Items\Sprites\BagRed.png" />
     <None Remove="Items\Sprites\BagWhite.png" />
     <None Remove="Items\Sprites\BagYellow.png" />
+    <None Remove="Items\Sprites\bossBag.png" />
     <None Remove="Items\Sprites\BuildersBox.png" />
     <None Remove="Items\Sprites\HerbSatchel.png" />
     <None Remove="Items\Sprites\PackBlack.png" />

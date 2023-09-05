@@ -35,6 +35,7 @@ namespace VacuumBags
 			PotionFlask.RegisterWithAndroLib(this);
 			HerbSatchel.RegisterWithAndroLib(this);
 			AmmoBag.RegisterWithAndroLib(this);
+			BossBag.RegisterWithAndroLib(this);
 
 			PackBlack.RegisterWithAndroLibItemTypeOnly();
 			PackBlue.RegisterWithAndroLibItemTypeOnly();

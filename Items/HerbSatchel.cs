@@ -192,7 +192,7 @@ namespace VacuumBags.Items
 			$"Automatically stores seeds, herbs, flowers, etc.\n" +
 			$"When in your inventory, the contents of the bag are available for crafting.\n" +
 			$"Right click to open the bag.";
-		public override string Artist => "andro951";
+		public override string Artist => "anodomani";
 		public override string Designer => "@kingjoshington";
 
 		#endregion

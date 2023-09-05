@@ -304,7 +304,7 @@ namespace VacuumBags.Items
 			$"Right click to open the bag.\n" +
 			$"Paint in the can is used if the Paint Can is in the first paint item found.\n" +
 			$"If any paint in the can that can be used by your paint tool is favorited, only favorited paints will be used.";
-		public override string Artist => "andro951";
+		public override string Artist => "@kingjoshington";
 		public override string Designer => "@kingjoshington";
 
 		#endregion

@@ -453,7 +453,7 @@ namespace VacuumBags.Items
 			$"Quick Buff will use favorited potions from the bag.\n" +
 			$"Quick Heal will use healing items from the bag.  If any healing items in the bag are favorited, only favorited healing items will be used.\n" +
 			$"Quick Mana will use mana items from the bag.  If any mana items in the bag are favorited, only favorited mana items will be used.";
-		public override string Artist => "andro951";
+		public override string Artist => "anodomani";
 		public override string Designer => "@kingjoshington";
 
 		#endregion

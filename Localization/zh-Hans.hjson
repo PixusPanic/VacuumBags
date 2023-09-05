@@ -296,6 +296,11 @@ Mods: {
 					可以通过用 沃尔尔 左键单击来从 沃尔尔 放置物品。 如果 沃尔尔 中的任何物品被收藏，则仅使用收藏的物品。
 					'''
 			}
+
+			BossBag: {
+				// Tooltip: ""
+				// DisplayName: Boss Bag
+			}
 		}
 
 		Tiles: {

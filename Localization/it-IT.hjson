@@ -296,6 +296,11 @@ Mods: {
 					Gli oggetti possono essere posizionati da Wall-Er facendo clic con il pulsante sinistro del mouse su Wall-Er. Se qualche elemento in Wall-Er viene aggiunto ai preferiti, verranno utilizzati solo gli elementi preferiti.
 					'''
 			}
+
+			BossBag: {
+				// Tooltip: ""
+				// DisplayName: Boss Bag
+			}
 		}
 
 		Tiles: {

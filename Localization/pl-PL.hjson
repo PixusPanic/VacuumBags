@@ -296,6 +296,11 @@ Mods: {
 					Elementy można umieszczać z Murarz dołowy, klikając lewym przyciskiem myszy Murarz dołowy. Jeśli jakiekolwiek elementy w Murarz dołowy zostaną dodane do ulubionych, użyte zostaną tylko te elementy, które są ulubione.
 					'''
 			}
+
+			BossBag: {
+				// Tooltip: ""
+				// DisplayName: Boss Bag
+			}
 		}
 
 		Tiles: {

@@ -307,7 +307,7 @@ namespace VacuumBags.Items
 		$"When in your inventory, the contents of the bag are available for crafting.\n" +
 		$"Right click to open the bag.\n" +
 		$"Items can be placed from the box by left clicking with the box.  If any items in the box are favorited, only favorited items will be used.";
-		public override string Artist => "andro951";
+		public override string Artist => "anodomani";
 		public override string Designer => "@kingjoshington";
 
 		#endregion

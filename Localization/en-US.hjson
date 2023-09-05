@@ -296,6 +296,11 @@ Mods: {
 					Items can be placed from Wall-Er by left clicking with Wall-Er.  If any items in Wall-Er are favorited, only favorited items will be used.
 					'''
 			}
+
+			BossBag: {
+				Tooltip: ""
+				DisplayName: Boss Bag
+			}
 		}
 
 		Tiles: {

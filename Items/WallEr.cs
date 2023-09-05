@@ -414,7 +414,7 @@ namespace VacuumBags.Items
 			$"Items can be placed from Wall-Er by left clicking with Wall-Er.  If any items in Wall-Er are favorited, only favorited items will be used.";
 
 		public override string LocalizationDisplayName => "Wall-Er";
-		public override string Artist => "andro951";
+		public override string Artist => "@kingjoshington";
 		public override string Designer => "@kingjoshington";
 
 		#endregion

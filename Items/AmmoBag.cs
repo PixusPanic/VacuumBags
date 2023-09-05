@@ -355,7 +355,7 @@ namespace VacuumBags.Items
 			$"Right click to open the bag.\n" +
 			$"Ammo in the bag is used if the ammo bag is in the first ammo item found.\n" +
 			$"If any ammo in the bag that can be used by your equipped weapon is favorited, only favorited ammos will be used.";
-		public override string Artist => "andro951";
+		public override string Artist => "anodomani";
 		public override string Designer => "@kingjoshington";
 
 		#endregion

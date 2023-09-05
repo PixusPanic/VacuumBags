@@ -296,6 +296,11 @@ Mods: {
 					Elemente können von Wall-Er aus platziert werden, indem Sie mit der linken Maustaste mit Wall-Er klicken. Wenn Elemente in Wall-Er zu den Favoriten gehören, werden nur die Favoriten verwendet.
 					'''
 			}
+
+			BossBag: {
+				// Tooltip: ""
+				// DisplayName: Boss Bag
+			}
 		}
 
 		Tiles: {
