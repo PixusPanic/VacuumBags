@@ -2,8 +2,8 @@
 Mods: {
 	VacuumBags: {
 		Config: {
-			// BagStorageOptions: All Ammo Items Go Into Ammo Bag Header
 			// Crafting: Harder Bag Recipes Header
+			// BagStorageOptions: All Ammo Items Go Into Ammo Bag Header
 		}
 
 		Items: {
@@ -126,6 +126,17 @@ Mods: {
 					自动存储袋子中已包含的物品。
 					当你在库存中时，包里的东西可以用来制作。
 					右键点击打开袋子。
+					'''
+			}
+
+			BossBag: {
+				DisplayName: 老板包
+				Tooltip:
+					'''
+					自动存储 老板 包、奖杯、老板 雕像和化妆品 老板 掉落物。
+					当你在库存中时，包里的东西可以用来制作。
+					右键点击打开袋子。
+					使用 老板清单 将修改的项目添加到允许的项目（如果启用）。
 					'''
 			}
 
@@ -296,56 +307,51 @@ Mods: {
 					可以通过用 沃尔尔 左键单击来从 沃尔尔 放置物品。 如果 沃尔尔 中的任何物品被收藏，则仅使用收藏的物品。
 					'''
 			}
+		}
 
-			BossBag: {
-				// Tooltip: ""
-				// DisplayName: Boss Bag
+		Configs: {
+			BagsServerConfig: {
+				HarderBagRecipes: {
+					// Tooltip: ""
+					// Label: Harder Bag Recipes
+				}
+
+				// DisplayName: Bags Server Config
+			}
+
+			BagsClientConfig: {
+				AllAmmoItemsGoIntoAmmoBag: {
+					// Tooltip: ""
+					// Label: All Ammo Items Go Into Ammo Bag
+				}
+
+				// DisplayName: Bags Client Config
 			}
 		}
 
 		Tiles: {
-			// BagBlack.MapEntry: Bag Black
-			// BagBlue.MapEntry: Bag Blue
-			// BagBrown.MapEntry: Bag Brown
-			// BagGray.MapEntry: Bag Gray
-			// BagGreen.MapEntry: Bag Green
-			// BagOrange.MapEntry: Bag Orange
-			// BagPink.MapEntry: Bag Pink
-			// BagPurple.MapEntry: Bag Purple
-			// BagRed.MapEntry: Bag Red
-			// BagWhite.MapEntry: Bag White
-			// BagYellow.MapEntry: Bag Yellow
-			// PackBlack.MapEntry: Pack Black
-			// PackBlue.MapEntry: Pack Blue
-			// PackBrown.MapEntry: Pack Brown
-			// PackGray.MapEntry: Pack Gray
-			// PackGreen.MapEntry: Pack Green
-			// PackOrange.MapEntry: Pack Orange
-			// PackPink.MapEntry: Pack Pink
-			// PackPurple.MapEntry: Pack Purple
-			// PackRed.MapEntry: Pack Red
-			// PackWhite.MapEntry: Pack White
 			// PackYellow.MapEntry: Pack Yellow
-		}
-
-		Configs: {
-			BagsClientConfig: {
-				// DisplayName: Bags Client Config
-
-				AllAmmoItemsGoIntoAmmoBag: {
-					// Label: All Ammo Items Go Into Ammo Bag
-					// Tooltip: ""
-				}
-			}
-
-			BagsServerConfig: {
-				// DisplayName: Bags Server Config
-
-				HarderBagRecipes: {
-					// Label: Harder Bag Recipes
-					// Tooltip: ""
-				}
-			}
+			// PackWhite.MapEntry: Pack White
+			// PackRed.MapEntry: Pack Red
+			// PackPurple.MapEntry: Pack Purple
+			// PackPink.MapEntry: Pack Pink
+			// PackOrange.MapEntry: Pack Orange
+			// PackGreen.MapEntry: Pack Green
+			// PackGray.MapEntry: Pack Gray
+			// PackBrown.MapEntry: Pack Brown
+			// PackBlue.MapEntry: Pack Blue
+			// PackBlack.MapEntry: Pack Black
+			// BagYellow.MapEntry: Bag Yellow
+			// BagWhite.MapEntry: Bag White
+			// BagRed.MapEntry: Bag Red
+			// BagPurple.MapEntry: Bag Purple
+			// BagPink.MapEntry: Bag Pink
+			// BagOrange.MapEntry: Bag Orange
+			// BagGreen.MapEntry: Bag Green
+			// BagGray.MapEntry: Bag Gray
+			// BagBrown.MapEntry: Bag Brown
+			// BagBlue.MapEntry: Bag Blue
+			// BagBlack.MapEntry: Bag Black
 		}
 	}
 }

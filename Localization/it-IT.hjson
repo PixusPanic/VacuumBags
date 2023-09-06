@@ -2,8 +2,8 @@
 Mods: {
 	VacuumBags: {
 		Config: {
-			// BagStorageOptions: All Ammo Items Go Into Ammo Bag Header
 			// Crafting: Harder Bag Recipes Header
+			// BagStorageOptions: All Ammo Items Go Into Ammo Bag Header
 		}
 
 		Items: {
@@ -126,6 +126,17 @@ Mods: {
 					Memorizza automaticamente gli oggetti già contenuti nella borsa.
 					Quando sei nel tuo inventario, il contenuto della borsa è disponibile per la creazione.
 					Fare clic con il tasto destro per aprire la borsa.
+					'''
+			}
+
+			BossBag: {
+				DisplayName: Borsa del capo
+				Tooltip:
+					'''
+					Memorizza automaticamente borse dei boss, trofei, statue dei boss e oggetti cosmetici.
+					Quando sei nel tuo inventario, il contenuto della borsa è disponibile per la creazione.
+					Fare clic con il tasto destro per aprire la borsa.
+					Utilizza l'elenco di controllo del boss per aggiungere elementi modificati agli elementi consentiti se è abilitato.
 					'''
 			}
 
@@ -296,56 +307,51 @@ Mods: {
 					Gli oggetti possono essere posizionati da Wall-Er facendo clic con il pulsante sinistro del mouse su Wall-Er. Se qualche elemento in Wall-Er viene aggiunto ai preferiti, verranno utilizzati solo gli elementi preferiti.
 					'''
 			}
+		}
 
-			BossBag: {
-				// Tooltip: ""
-				// DisplayName: Boss Bag
+		Configs: {
+			BagsServerConfig: {
+				HarderBagRecipes: {
+					// Tooltip: ""
+					// Label: Harder Bag Recipes
+				}
+
+				// DisplayName: Bags Server Config
+			}
+
+			BagsClientConfig: {
+				AllAmmoItemsGoIntoAmmoBag: {
+					// Tooltip: ""
+					// Label: All Ammo Items Go Into Ammo Bag
+				}
+
+				// DisplayName: Bags Client Config
 			}
 		}
 
 		Tiles: {
-			// BagBlack.MapEntry: Bag Black
-			// BagBlue.MapEntry: Bag Blue
-			// BagBrown.MapEntry: Bag Brown
-			// BagGray.MapEntry: Bag Gray
-			// BagGreen.MapEntry: Bag Green
-			// BagOrange.MapEntry: Bag Orange
-			// BagPink.MapEntry: Bag Pink
-			// BagPurple.MapEntry: Bag Purple
-			// BagRed.MapEntry: Bag Red
-			// BagWhite.MapEntry: Bag White
-			// BagYellow.MapEntry: Bag Yellow
-			// PackBlack.MapEntry: Pack Black
-			// PackBlue.MapEntry: Pack Blue
-			// PackBrown.MapEntry: Pack Brown
-			// PackGray.MapEntry: Pack Gray
-			// PackGreen.MapEntry: Pack Green
-			// PackOrange.MapEntry: Pack Orange
-			// PackPink.MapEntry: Pack Pink
-			// PackPurple.MapEntry: Pack Purple
-			// PackRed.MapEntry: Pack Red
-			// PackWhite.MapEntry: Pack White
 			// PackYellow.MapEntry: Pack Yellow
-		}
-
-		Configs: {
-			BagsClientConfig: {
-				// DisplayName: Bags Client Config
-
-				AllAmmoItemsGoIntoAmmoBag: {
-					// Label: All Ammo Items Go Into Ammo Bag
-					// Tooltip: ""
-				}
-			}
-
-			BagsServerConfig: {
-				// DisplayName: Bags Server Config
-
-				HarderBagRecipes: {
-					// Label: Harder Bag Recipes
-					// Tooltip: ""
-				}
-			}
+			// PackWhite.MapEntry: Pack White
+			// PackRed.MapEntry: Pack Red
+			// PackPurple.MapEntry: Pack Purple
+			// PackPink.MapEntry: Pack Pink
+			// PackOrange.MapEntry: Pack Orange
+			// PackGreen.MapEntry: Pack Green
+			// PackGray.MapEntry: Pack Gray
+			// PackBrown.MapEntry: Pack Brown
+			// PackBlue.MapEntry: Pack Blue
+			// PackBlack.MapEntry: Pack Black
+			// BagYellow.MapEntry: Bag Yellow
+			// BagWhite.MapEntry: Bag White
+			// BagRed.MapEntry: Bag Red
+			// BagPurple.MapEntry: Bag Purple
+			// BagPink.MapEntry: Bag Pink
+			// BagOrange.MapEntry: Bag Orange
+			// BagGreen.MapEntry: Bag Green
+			// BagGray.MapEntry: Bag Gray
+			// BagBrown.MapEntry: Bag Brown
+			// BagBlue.MapEntry: Bag Blue
+			// BagBlack.MapEntry: Bag Black
 		}
 	}
 }
