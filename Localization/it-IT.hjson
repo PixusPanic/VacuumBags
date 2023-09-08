@@ -2,8 +2,8 @@
 Mods: {
 	VacuumBags: {
 		Config: {
-			// Crafting: Harder Bag Recipes Header
 			// BagStorageOptions: All Ammo Items Go Into Ammo Bag Header
+			// Crafting: Harder Bag Recipes Header
 		}
 
 		Items: {
@@ -151,11 +151,51 @@ Mods: {
 					'''
 			}
 
+			CalamitousCauldron: {
+				DisplayName: Calderone calamitoso
+				Tooltip:
+					'''
+					Memorizza automaticamente gli oggetti di Calamity.
+					Quando sei nel tuo inventario, il contenuto della borsa è disponibile per la creazione.
+					Fare clic con il tasto destro per aprire la borsa.
+					'''
+			}
+
+			EssenceOfGathering: {
+				DisplayName: Essenza dell'incontro
+				Tooltip:
+					'''
+					Memorizza automaticamente gli articoli da Stars Above.
+					Quando sei nel tuo inventario, il contenuto della borsa è disponibile per la creazione.
+					Fare clic con il tasto destro per aprire la borsa.
+					'''
+			}
+
+			FargosMementos: {
+				DisplayName: I ricordi di Fargo
+				Tooltip:
+					'''
+					Memorizza automaticamente gli articoli da Fargos.
+					Quando sei nel tuo inventario, il contenuto della borsa è disponibile per la creazione.
+					Fare clic con il tasto destro per aprire la borsa.
+					'''
+			}
+
 			HerbSatchel: {
 				DisplayName: Borsa per erbe
 				Tooltip:
 					'''
 					Memorizza automaticamente semi, erbe, fiori, ecc.
+					Quando sei nel tuo inventario, il contenuto della borsa è disponibile per la creazione.
+					Fare clic con il tasto destro per aprire la borsa.
+					'''
+			}
+
+			LokisTesseract: {
+				DisplayName: Tesseract di Loki
+				Tooltip:
+					'''
+					Memorizza automaticamente gli oggetti del torio.
 					Quando sei nel tuo inventario, il contenuto della borsa è disponibile per la creazione.
 					Fare clic con il tasto destro per aprire la borsa.
 					'''
@@ -309,49 +349,49 @@ Mods: {
 			}
 		}
 
-		Configs: {
-			BagsServerConfig: {
-				HarderBagRecipes: {
-					// Tooltip: ""
-					// Label: Harder Bag Recipes
-				}
-
-				// DisplayName: Bags Server Config
-			}
-
-			BagsClientConfig: {
-				AllAmmoItemsGoIntoAmmoBag: {
-					// Tooltip: ""
-					// Label: All Ammo Items Go Into Ammo Bag
-				}
-
-				// DisplayName: Bags Client Config
-			}
+		Tiles: {
+			// BagBlack.MapEntry: Bag Black
+			// BagBlue.MapEntry: Bag Blue
+			// BagBrown.MapEntry: Bag Brown
+			// BagGray.MapEntry: Bag Gray
+			// BagGreen.MapEntry: Bag Green
+			// BagOrange.MapEntry: Bag Orange
+			// BagPink.MapEntry: Bag Pink
+			// BagPurple.MapEntry: Bag Purple
+			// BagRed.MapEntry: Bag Red
+			// BagWhite.MapEntry: Bag White
+			// BagYellow.MapEntry: Bag Yellow
+			// PackBlack.MapEntry: Pack Black
+			// PackBlue.MapEntry: Pack Blue
+			// PackBrown.MapEntry: Pack Brown
+			// PackGray.MapEntry: Pack Gray
+			// PackGreen.MapEntry: Pack Green
+			// PackOrange.MapEntry: Pack Orange
+			// PackPink.MapEntry: Pack Pink
+			// PackPurple.MapEntry: Pack Purple
+			// PackRed.MapEntry: Pack Red
+			// PackWhite.MapEntry: Pack White
+			// PackYellow.MapEntry: Pack Yellow
 		}
 
-		Tiles: {
-			// PackYellow.MapEntry: Pack Yellow
-			// PackWhite.MapEntry: Pack White
-			// PackRed.MapEntry: Pack Red
-			// PackPurple.MapEntry: Pack Purple
-			// PackPink.MapEntry: Pack Pink
-			// PackOrange.MapEntry: Pack Orange
-			// PackGreen.MapEntry: Pack Green
-			// PackGray.MapEntry: Pack Gray
-			// PackBrown.MapEntry: Pack Brown
-			// PackBlue.MapEntry: Pack Blue
-			// PackBlack.MapEntry: Pack Black
-			// BagYellow.MapEntry: Bag Yellow
-			// BagWhite.MapEntry: Bag White
-			// BagRed.MapEntry: Bag Red
-			// BagPurple.MapEntry: Bag Purple
-			// BagPink.MapEntry: Bag Pink
-			// BagOrange.MapEntry: Bag Orange
-			// BagGreen.MapEntry: Bag Green
-			// BagGray.MapEntry: Bag Gray
-			// BagBrown.MapEntry: Bag Brown
-			// BagBlue.MapEntry: Bag Blue
-			// BagBlack.MapEntry: Bag Black
+		Configs: {
+			BagsClientConfig: {
+				// DisplayName: Bags Client Config
+
+				AllAmmoItemsGoIntoAmmoBag: {
+					// Label: All Ammo Items Go Into Ammo Bag
+					// Tooltip: ""
+				}
+			}
+
+			BagsServerConfig: {
+				// DisplayName: Bags Server Config
+
+				HarderBagRecipes: {
+					// Label: Harder Bag Recipes
+					// Tooltip: ""
+				}
+			}
 		}
 	}
 }

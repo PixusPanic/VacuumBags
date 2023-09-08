@@ -24,7 +24,11 @@
     <None Remove="Items\Sprites\BagYellow.png" />
     <None Remove="Items\Sprites\bossBag.png" />
     <None Remove="Items\Sprites\BuildersBox.png" />
+    <None Remove="Items\Sprites\CalamitousCauldron.png" />
+    <None Remove="Items\Sprites\EssenceOfGathering.png" />
+    <None Remove="Items\Sprites\FargosMementos.png" />
     <None Remove="Items\Sprites\HerbSatchel.png" />
+    <None Remove="Items\Sprites\LokisTesseract.png" />
     <None Remove="Items\Sprites\PackBlack.png" />
     <None Remove="Items\Sprites\PackBlue.png" />
     <None Remove="Items\Sprites\PackBrown.png" />

@@ -19,7 +19,7 @@ namespace VacuumBags.Items
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {
             Item.maxStack = 1;
-            Item.value = ContentSamples.ItemsByType[ItemID.AmmoBox].value;
+            Item.value = 100000;
 			Item.rare = ItemRarityID.Blue;
 			Item.width = 28;
             Item.height = 30;

@@ -18,6 +18,11 @@ namespace VacuumBags
 		public static Mod GadgetGalore;
 		public static bool gadgetGaloreEnabled = ModLoader.TryGetMod("GadgetGalore", out GadgetGalore);
 		public override void Load() {
+			CalamitousCauldron.RegisterWithAndroLib(this);
+			LokisTesseract.RegisterWithAndroLib(this);
+			EssenceOfGathering.RegisterWithAndroLib(this);
+			FargosMementos.RegisterWithAndroLib(this);
+
 			BagBlack.RegisterWithAndroLib(this);
 			BagBlue.RegisterWithAndroLib(this);
 			BagBrown.RegisterWithAndroLib(this);
