@@ -159,7 +159,7 @@ namespace VacuumBags.Items
 				if (item.NullOrAir())
 					continue;
 
-				string lowerName = item.Name.ToLower();
+				string lowerName = item.GetItemInternalName().ToLower();
 				bool added = false;
 				foreach (string endWord in endWords) {
 					if (lowerName.EndsWith(endWord)) {

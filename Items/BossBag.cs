@@ -116,7 +116,7 @@ namespace VacuumBags.Items
 					continue;
 				}
 
-				string lowerName = item.Name.ToLower();
+				string lowerName = item.GetItemInternalName().ToLower();
 				bool added = false;
 				foreach (string endWord in endWords) {
 					if (lowerName.EndsWith(endWord)) {
@@ -223,7 +223,7 @@ namespace VacuumBags.Items
 			int bossTrophyValue = Item.sellPrice(0, 1);
 			for (int i = 0; i < ItemLoader.ItemCount; i++) {
 				Item item = ContentSamples.ItemsByType[i];
-				string lowerName = item.Name.ToLower();
+				string lowerName = item.GetItemInternalName().ToLower();
 				if (lowerName.EndsWith("trophy")
 					&& item.useStyle == ItemUseStyleID.Swing
 					&& item.useTurn == true
