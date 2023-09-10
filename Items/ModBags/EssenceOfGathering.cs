@@ -9,6 +9,7 @@ using Terraria.ModLoader;
 using Terraria;
 using Microsoft.Xna.Framework;
 using Terraria.ModLoader.Default;
+using androLib.Common.Globals;
 
 namespace VacuumBags.Items
 {
@@ -20,16 +21,28 @@ namespace VacuumBags.Items
 		new public static int BagStorageID;
 		public static SortedSet<int> Blacklist {
 			get {
-				if (blacklist == null) {
-					blacklist = new() {
-
-					};
-				}
+				if (blacklist == null)
+					GetBlackList();
 
 				return blacklist;
 			}
 		}
 		private static SortedSet<int> blacklist = null;
+		private static void GetBlackList() {
+			blacklist = new() {
+
+			};
+
+			SortedSet<string> modItemBlacklist = new() {
+				"StarsAbove/Starlight"
+			};
+
+			for (int i = ItemID.Count; i < ItemLoader.ItemCount; i++) {
+				Item item = ContentSamples.ItemsByType[i];
+				if (modItemBlacklist.Contains(item.ModFullName()))
+					blacklist.Add(item.type);
+			}
+		}
 		public static bool ItemAllowedToBeStored(Item item) => item?.ModItem != null && (item.ModItem is UnloadedItem unloadedItem ? unloadedItem.ModName : item.ModItem.Mod.Name) == AndroMod.starsAboveModName && !Blacklist.Contains(item.type);
 		new public static Color PanelColor => new Color(152, 59, 137, androLib.Common.Configs.ConfigValues.UIAlpha);
 		new public static Color ScrollBarColor => new Color(44, 60, 180, androLib.Common.Configs.ConfigValues.UIAlpha);

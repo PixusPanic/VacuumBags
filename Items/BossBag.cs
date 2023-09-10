@@ -255,6 +255,7 @@ namespace VacuumBags.Items
 			SortedSet<string> modItemBlacklist = new() {
 				"WeaponEnchantments/PowerBooster",
 				"WeaponEnchantments/UltraPowerBooster",
+				"StarsAbove/Starlight"
 			};
 
 			for (int i = ItemID.Count; i < ItemLoader.ItemCount; i++) {
