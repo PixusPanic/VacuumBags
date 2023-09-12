@@ -1,36 +1,37 @@
-#Contributors: @Shiro ᵘʷᵘ#6942, @Fischstäbchen#2603  (All others Google Translated.  Needs review)
+#
 Mods: {
 	VacuumBags: {
 		Config: {
-			BagStorageOptions: Bag Storage Options
-			Crafting: Crafting
 			BagStorageOptions: {
 				AllAmmoItemsGoIntoAmmoBag: {
 					Label: All Ammo Items Go Into Ammo Bag
-					Tooltip: 
+					Tooltip:
 						'''
 						If true, all items that are used as ammo for anything will go into the bag.
 						If false, only the selected ammo items whitelist will be allowed which excludes a few items like stars.
 						'''
 				}
+
 				SimpleBagStorageSize: {
 					Label: Simple Bag Storage Size
-					Tooltip: 
+					Tooltip:
 						'''
 						The number of slots in the simple bag storage.
 						If this option is used while the player has more items in their bag, the bag size will be reduced to the number of items still in the bag.
 						Setting this number very high could cause lag or possibly a crash from using too much memory if you don't have much RAM.  Use at your own risk.
 						'''
 				}
+
 				SimpleBagsVacuumAllItems: {
 					Label: Simple Bags Vacuum All Items
-					Tooltip: 
+					Tooltip:
 						'''
 						If true, all items will be vacuumed into the simple bags.
 						If false, only items that are the same type as an item in the bag will be vacuumed.
 						'''
 				}
 			}
+
 			Crafting: {
 				HarderBagRecipes: {
 					Label: Harder Bag Recipes
@@ -38,10 +39,11 @@ Mods: {
 				}
 			}
 		}
+
 		Items: {
 			AmmoBag: {
 				DisplayName: Munitionstasche
-				Tooltip: 
+				Tooltip:
 					'''
 					Speichert Wurfgeschosse, Pfeile, Kugeln, Leuchtraketen und Lösungen automatisch.
 					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
@@ -50,108 +52,120 @@ Mods: {
 					Wenn Munition in der Tasche, die von Ihrer ausgerüsteten Waffe verwendet werden kann, zu den Favoriten gehört, werden nur die bevorzugten Munitionen verwendet.
 					'''
 			}
+
 			BagBlack: {
 				DisplayName: Tasche (Schwarz)
-				Tooltip: 
+				Tooltip:
 					'''
 					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
 					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
 					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
+
 			BagBlue: {
 				DisplayName: Tasche (Blau)
-				Tooltip: 
+				Tooltip:
 					'''
 					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
 					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
 					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
+
 			BagBrown: {
 				DisplayName: Tasche (Braun)
-				Tooltip: 
+				Tooltip:
 					'''
 					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
 					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
 					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
+
 			BagGray: {
 				DisplayName: Tasche (Grau)
-				Tooltip: 
+				Tooltip:
 					'''
 					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
 					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
 					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
+
 			BagGreen: {
 				DisplayName: Tasche (Grün)
-				Tooltip: 
+				Tooltip:
 					'''
 					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
 					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
 					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
+
 			BagOrange: {
 				DisplayName: Tasche (Orange)
-				Tooltip: 
+				Tooltip:
 					'''
 					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
 					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
 					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
+
 			BagPink: {
 				DisplayName: Tasche (Rosa)
-				Tooltip: 
+				Tooltip:
 					'''
 					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
 					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
 					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
+
 			BagPurple: {
 				DisplayName: Tasche (Lila)
-				Tooltip: 
+				Tooltip:
 					'''
 					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
 					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
 					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
+
 			BagRed: {
 				DisplayName: Tasche (Rot)
-				Tooltip: 
+				Tooltip:
 					'''
 					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
 					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
 					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
+
 			BagWhite: {
 				DisplayName: Tasche (Weiß)
-				Tooltip: 
+				Tooltip:
 					'''
 					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
 					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
 					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
+
 			BagYellow: {
 				DisplayName: Tasche (Gelb)
-				Tooltip: 
+				Tooltip:
 					'''
 					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
 					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
 					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
+
 			BossBag: {
 				DisplayName: Boss-Tasche
-				Tooltip: 
+				Tooltip:
 					'''
 					Speichert automatisch Boss-Taschen, Trophäen, Boss-Statuen und kosmetische Boss-Drops.
 					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
@@ -159,9 +173,10 @@ Mods: {
 					Verwendet die Boss-Checkliste, um modifizierte Elemente zu den zulässigen Elementen hinzuzufügen, sofern diese aktiviert ist.
 					'''
 			}
+
 			BuildersBox: {
 				DisplayName: Baukasten
-				Tooltip: 
+				Tooltip:
 					'''
 					Speichert automatisch Baumaterialien (Ziegel, herstellbare Blöcke usw.)
 					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
@@ -169,153 +184,170 @@ Mods: {
 					Elemente können aus der Box heraus platziert werden, indem Sie mit der linken Maustaste auf die Box klicken. Wenn Elemente in der Box zu den Favoriten gehören, werden nur die Favoriten verwendet.
 					'''
 			}
+
 			CalamitousCauldron: {
 				DisplayName: Unglücklicher Kessel
-				Tooltip: 
+				Tooltip:
 					'''
 					Speichert automatisch Gegenstände aus Calamity.
 					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
 					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
+
 			EssenceOfGathering: {
 				DisplayName: Essenz des Sammelns
-				Tooltip: 
+				Tooltip:
 					'''
 					Speichert automatisch Artikel von Stars Above.
 					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
 					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
+
 			FargosMementos: {
 				DisplayName: Fargos Erinnerungsstücke
-				Tooltip: 
+				Tooltip:
 					'''
 					Speichert Artikel von Fargos automatisch.
 					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
 					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
+
 			HerbSatchel: {
 				DisplayName: Kräutertasche
-				Tooltip: 
+				Tooltip:
 					'''
 					Automatische Speicherung von Samen, Kräutern, Blumen usw.
 					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
 					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
+
 			LokisTesseract: {
 				DisplayName: Lokis Tesserakt
-				Tooltip: 
+				Tooltip:
 					'''
 					Speichert automatisch Gegenstände aus Thorium.
 					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
 					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
+
 			PackBlack: {
 				DisplayName: Packung (Schwarz)
-				Tooltip: 
+				Tooltip:
 					'''
 					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
 					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
 					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
+
 			PackBlue: {
 				DisplayName: Packung (Blau)
-				Tooltip: 
+				Tooltip:
 					'''
 					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
 					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
 					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
+
 			PackBrown: {
 				DisplayName: Packung (Braun)
-				Tooltip: 
+				Tooltip:
 					'''
 					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
 					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
 					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
+
 			PackGray: {
 				DisplayName: Packung (Grau)
-				Tooltip: 
+				Tooltip:
 					'''
 					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
 					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
 					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
+
 			PackGreen: {
 				DisplayName: Packung (Grün)
-				Tooltip: 
+				Tooltip:
 					'''
 					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
 					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
 					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
+
 			PackOrange: {
 				DisplayName: Packung (Orange)
-				Tooltip: 
+				Tooltip:
 					'''
 					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
 					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
 					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
+
 			PackPink: {
 				DisplayName: Packung (Rosa)
-				Tooltip: 
+				Tooltip:
 					'''
 					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
 					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
 					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
+
 			PackPurple: {
 				DisplayName: Packung (Lila)
-				Tooltip: 
+				Tooltip:
 					'''
 					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
 					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
 					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
+
 			PackRed: {
 				DisplayName: Packung (Rot)
-				Tooltip: 
+				Tooltip:
 					'''
 					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
 					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
 					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
+
 			PackWhite: {
 				DisplayName: Packung (Weiß)
-				Tooltip: 
+				Tooltip:
 					'''
 					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
 					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
 					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
+
 			PackYellow: {
 				DisplayName: Packung (Gelb)
-				Tooltip: 
+				Tooltip:
 					'''
 					Verstaut bereits in der Tasche enthaltene Gegenstände automatisch.
 					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
 					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
+
 			PaintBucket: {
 				DisplayName: Farbeimer
-				Tooltip: 
+				Tooltip:
 					'''
 					Speichert Farbe automatisch
 					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
@@ -324,9 +356,10 @@ Mods: {
 					Wenn eine beliebige Farbe in der Dose, die mit Ihrem Malwerkzeug verwendet werden kann, zu Ihren Favoriten gehört, werden nur die bevorzugten Farben verwendet.
 					'''
 			}
+
 			PotionFlask: {
 				DisplayName: Trankflasche
-				Tooltip: 
+				Tooltip:
 					'''
 					Tränke, Speisen und Getränke werden automatisch gespeichert.
 					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
@@ -337,15 +370,71 @@ Mods: {
 					Quick Mana verwendet Managegenstände aus der Tasche. Wenn irgendwelche Managegenstände in der Tasche zu den Favoriten gehören, werden nur die bevorzugten Managegenstände verwendet.
 					'''
 			}
+
 			WallEr: {
 				DisplayName: Wall-Er
-				Tooltip: 
+				Tooltip:
 					'''
 					Speichert Wandmaterialien (Wände, Zäune, Balken usw.) automatisch.
 					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
 					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					Elemente können von Wall-Er aus platziert werden, indem Sie mit der linken Maustaste mit Wall-Er klicken. Wenn Elemente in Wall-Er zu den Favoriten gehören, werden nur die Favoriten verwendet.
 					'''
+			}
+		}
+
+		Tiles: {
+			// BagBlack.MapEntry: Bag Black
+			// BagBlue.MapEntry: Bag Blue
+			// BagBrown.MapEntry: Bag Brown
+			// BagGray.MapEntry: Bag Gray
+			// BagGreen.MapEntry: Bag Green
+			// BagOrange.MapEntry: Bag Orange
+			// BagPink.MapEntry: Bag Pink
+			// BagPurple.MapEntry: Bag Purple
+			// BagRed.MapEntry: Bag Red
+			// BagWhite.MapEntry: Bag White
+			// BagYellow.MapEntry: Bag Yellow
+			// PackBlack.MapEntry: Pack Black
+			// PackBlue.MapEntry: Pack Blue
+			// PackBrown.MapEntry: Pack Brown
+			// PackGray.MapEntry: Pack Gray
+			// PackGreen.MapEntry: Pack Green
+			// PackOrange.MapEntry: Pack Orange
+			// PackPink.MapEntry: Pack Pink
+			// PackPurple.MapEntry: Pack Purple
+			// PackRed.MapEntry: Pack Red
+			// PackWhite.MapEntry: Pack White
+			// PackYellow.MapEntry: Pack Yellow
+		}
+
+		Configs: {
+			BagsClientConfig: {
+				// DisplayName: Bags Client Config
+
+				SimpleBagStorageSize: {
+					// Label: Simple Bag Storage Size
+					// Tooltip: ""
+				}
+
+				SimpleBagsVacuumAllItems: {
+					// Label: Simple Bags Vacuum All Items
+					// Tooltip: ""
+				}
+
+				AllAmmoItemsGoIntoAmmoBag: {
+					// Label: All Ammo Items Go Into Ammo Bag
+					// Tooltip: ""
+				}
+			}
+
+			BagsServerConfig: {
+				// DisplayName: Bags Server Config
+
+				HarderBagRecipes: {
+					// Label: Harder Bag Recipes
+					// Tooltip: ""
+				}
 			}
 		}
 	}
