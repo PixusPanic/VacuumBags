@@ -37,8 +37,8 @@ namespace VacuumBags.Items
 				typeof(BagYellow),//type 
 				ItemAllowedToBeStored,//Is allowed function, Func<Item, bool>
 				null,//Localization Key name.  Attempts to determine automatically by treating the type as a ModItem, or you can specify.
-				20,//StorageSize
-				null,//Can vacuum
+				BagSize,//StorageSize
+				IsVacuumBag,//Can vacuum
 				() => PanelColor,  // Get color function. Func<using Microsoft.Xna.Framework.Color>
 				() => new Color(130, 130, 10, androLib.Common.Configs.ConfigValues.UIAlpha),  // Get Scroll bar color function. Func<using Microsoft.Xna.Framework.Color>
 				() => new Color(150, 150, 0, androLib.Common.Configs.ConfigValues.UIAlpha),   // Get Button hover color function. Func<using Microsoft.Xna.Framework.Color>

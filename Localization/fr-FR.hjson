@@ -1,15 +1,47 @@
-#
+#Contributors: @Soluna#1422, @Olixx12#5354  (All others Google Translated.  Needs review)
 Mods: {
 	VacuumBags: {
 		Config: {
-			// BagStorageOptions: All Ammo Items Go Into Ammo Bag Header
-			// Crafting: Harder Bag Recipes Header
+			BagStorageOptions: Bag Storage Options
+			Crafting: Crafting
+			BagStorageOptions: {
+				AllAmmoItemsGoIntoAmmoBag: {
+					Label: All Ammo Items Go Into Ammo Bag
+					Tooltip: 
+						'''
+						If true, all items that are used as ammo for anything will go into the bag.
+						If false, only the selected ammo items whitelist will be allowed which excludes a few items like stars.
+						'''
+				}
+				SimpleBagStorageSize: {
+					Label: Simple Bag Storage Size
+					Tooltip: 
+						'''
+						The number of slots in the simple bag storage.
+						If this option is used while the player has more items in their bag, the bag size will be reduced to the number of items still in the bag.
+						Setting this number very high could cause lag or possibly a crash from using too much memory if you don't have much RAM.  Use at your own risk.
+						'''
+				}
+				SimpleBagsVacuumAllItems: {
+					Label: Simple Bags Vacuum All Items
+					Tooltip: 
+						'''
+						If true, all items will be vacuumed into the simple bags.
+						If false, only items that are the same type as an item in the bag will be vacuumed.
+						'''
+				}
+			}
+			Crafting: {
+				HarderBagRecipes: {
+					Label: Harder Bag Recipes
+					Tooltip: Makes the bag recipes require more items and some are more difficult to get.
+				}
+			}
 		}
-
 		Items: {
 			AmmoBag: {
 				DisplayName: Sac de munitions
-				Tooltip:
+				Tooltip: 
 					'''
 					Stocke automatiquement les objets jetables, les flèches, les balles, les fusées éclairantes et les solutions.
 					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
@@ -18,120 +50,108 @@ Mods: {
 					Si des munitions dans le sac pouvant être utilisées par votre arme équipée sont favorites, seules les munitions favorites seront utilisées.
 					'''
 			}
-
 			BagBlack: {
 				DisplayName: Sac (Noir)
-				Tooltip:
+				Tooltip: 
 					'''
 					Stocke automatiquement les articles déjà contenus dans le sac.
 					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
 					Faites un clic droit pour ouvrir le sac.
 					'''
 			}
-
 			BagBlue: {
 				DisplayName: Sac (bleu)
-				Tooltip:
+				Tooltip: 
 					'''
 					Stocke automatiquement les articles déjà contenus dans le sac.
 					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
 					Faites un clic droit pour ouvrir le sac.
 					'''
 			}
-
 			BagBrown: {
 				DisplayName: Sac (Marron)
-				Tooltip:
+				Tooltip: 
 					'''
 					Stocke automatiquement les articles déjà contenus dans le sac.
 					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
 					Faites un clic droit pour ouvrir le sac.
 					'''
 			}
-
 			BagGray: {
 				DisplayName: Sac (Gris)
-				Tooltip:
+				Tooltip: 
 					'''
 					Stocke automatiquement les articles déjà contenus dans le sac.
 					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
 					Faites un clic droit pour ouvrir le sac.
 					'''
 			}
-
 			BagGreen: {
 				DisplayName: Sac (Vert)
-				Tooltip:
+				Tooltip: 
 					'''
 					Stocke automatiquement les articles déjà contenus dans le sac.
 					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
 					Faites un clic droit pour ouvrir le sac.
 					'''
 			}
-
 			BagOrange: {
 				DisplayName: Sac (Orange)
-				Tooltip:
+				Tooltip: 
 					'''
 					Stocke automatiquement les articles déjà contenus dans le sac.
 					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
 					Faites un clic droit pour ouvrir le sac.
 					'''
 			}
-
 			BagPink: {
 				DisplayName: Sac (Rose)
-				Tooltip:
+				Tooltip: 
 					'''
 					Stocke automatiquement les articles déjà contenus dans le sac.
 					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
 					Faites un clic droit pour ouvrir le sac.
 					'''
 			}
-
 			BagPurple: {
 				DisplayName: Sac (violet)
-				Tooltip:
+				Tooltip: 
 					'''
 					Stocke automatiquement les articles déjà contenus dans le sac.
 					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
 					Faites un clic droit pour ouvrir le sac.
 					'''
 			}
-
 			BagRed: {
 				DisplayName: Sac (Rouge)
-				Tooltip:
+				Tooltip: 
 					'''
 					Stocke automatiquement les articles déjà contenus dans le sac.
 					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
 					Faites un clic droit pour ouvrir le sac.
 					'''
 			}
-
 			BagWhite: {
 				DisplayName: Sac (Blanc)
-				Tooltip:
+				Tooltip: 
 					'''
 					Stocke automatiquement les articles déjà contenus dans le sac.
 					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
 					Faites un clic droit pour ouvrir le sac.
 					'''
 			}
-
 			BagYellow: {
 				DisplayName: Sac (Jaune)
-				Tooltip:
+				Tooltip: 
 					'''
 					Stocke automatiquement les articles déjà contenus dans le sac.
 					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
 					Faites un clic droit pour ouvrir le sac.
 					'''
 			}
-
 			BossBag: {
 				DisplayName: Sac de patron
-				Tooltip:
+				Tooltip: 
 					'''
 					Stocke automatiquement les sacs de boss, les trophées, les statues de boss et les objets cosmétiques de boss.
 					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
@@ -139,10 +159,9 @@ Mods: {
 					Utilise la liste de contrôle du patron pour ajouter des éléments modifiés aux éléments autorisés si elle est activée.
 					'''
 			}
-
 			BuildersBox: {
 				DisplayName: Boîte de constructeurs
-				Tooltip:
+				Tooltip: 
 					'''
 					Stocke automatiquement les matériaux de construction (briques, blocs à fabriquer, etc.)
 					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
@@ -150,170 +169,153 @@ Mods: {
 					Les éléments peuvent être placés depuis la boîte en cliquant avec le bouton gauche sur la boîte. Si des éléments de la boîte sont favoris, seuls les éléments favoris seront utilisés.
 					'''
 			}
-
 			CalamitousCauldron: {
 				DisplayName: Chaudron calamiteux
-				Tooltip:
+				Tooltip: 
 					'''
 					Stocke automatiquement les éléments de Calamity.
 					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
 					Faites un clic droit pour ouvrir le sac.
 					'''
 			}
-
 			EssenceOfGathering: {
 				DisplayName: Essence de rassemblement
-				Tooltip:
+				Tooltip: 
 					'''
 					Stocke automatiquement les éléments de Stars Above.
 					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
 					Faites un clic droit pour ouvrir le sac.
 					'''
 			}
-
 			FargosMementos: {
 				DisplayName: Les souvenirs de Fargo
-				Tooltip:
+				Tooltip: 
 					'''
 					Stocke automatiquement les articles de Fargos.
 					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
 					Faites un clic droit pour ouvrir le sac.
 					'''
 			}
-
 			HerbSatchel: {
 				DisplayName: Sacoche aux herbes
-				Tooltip:
+				Tooltip: 
 					'''
 					Stocke automatiquement les graines, herbes, fleurs, etc.
 					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
 					Faites un clic droit pour ouvrir le sac.
 					'''
 			}
-
 			LokisTesseract: {
 				DisplayName: Le Tesseract de Loki
-				Tooltip:
+				Tooltip: 
 					'''
 					Stocke automatiquement les éléments du Thorium.
 					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
 					Faites un clic droit pour ouvrir le sac.
 					'''
 			}
-
 			PackBlack: {
 				DisplayName: Paquet (noir)
-				Tooltip:
+				Tooltip: 
 					'''
 					Stocke automatiquement les articles déjà contenus dans le sac.
 					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
 					Faites un clic droit pour ouvrir le sac.
 					'''
 			}
-
 			PackBlue: {
 				DisplayName: Pack (Bleu)
-				Tooltip:
+				Tooltip: 
 					'''
 					Stocke automatiquement les articles déjà contenus dans le sac.
 					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
 					Faites un clic droit pour ouvrir le sac.
 					'''
 			}
-
 			PackBrown: {
 				DisplayName: Paquet (Marron)
-				Tooltip:
+				Tooltip: 
 					'''
 					Stocke automatiquement les articles déjà contenus dans le sac.
 					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
 					Faites un clic droit pour ouvrir le sac.
 					'''
 			}
-
 			PackGray: {
 				DisplayName: Pack (Gris)
-				Tooltip:
+				Tooltip: 
 					'''
 					Stocke automatiquement les articles déjà contenus dans le sac.
 					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
 					Faites un clic droit pour ouvrir le sac.
 					'''
 			}
-
 			PackGreen: {
 				DisplayName: Pack (Vert)
-				Tooltip:
+				Tooltip: 
 					'''
 					Stocke automatiquement les articles déjà contenus dans le sac.
 					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
 					Faites un clic droit pour ouvrir le sac.
 					'''
 			}
-
 			PackOrange: {
 				DisplayName: Paquet (Orange)
-				Tooltip:
+				Tooltip: 
 					'''
 					Stocke automatiquement les articles déjà contenus dans le sac.
 					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
 					Faites un clic droit pour ouvrir le sac.
 					'''
 			}
-
 			PackPink: {
 				DisplayName: Paquet (rose)
-				Tooltip:
+				Tooltip: 
 					'''
 					Stocke automatiquement les articles déjà contenus dans le sac.
 					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
 					Faites un clic droit pour ouvrir le sac.
 					'''
 			}
-
 			PackPurple: {
 				DisplayName: Pack (Violet)
-				Tooltip:
+				Tooltip: 
 					'''
 					Stocke automatiquement les articles déjà contenus dans le sac.
 					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
 					Faites un clic droit pour ouvrir le sac.
 					'''
 			}
-
 			PackRed: {
 				DisplayName: Pack (Rouge)
-				Tooltip:
+				Tooltip: 
 					'''
 					Stocke automatiquement les articles déjà contenus dans le sac.
 					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
 					Faites un clic droit pour ouvrir le sac.
 					'''
 			}
-
 			PackWhite: {
 				DisplayName: Paquet (Blanc)
-				Tooltip:
+				Tooltip: 
 					'''
 					Stocke automatiquement les articles déjà contenus dans le sac.
 					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
 					Faites un clic droit pour ouvrir le sac.
 					'''
 			}
-
 			PackYellow: {
 				DisplayName: Paquet (jaune)
-				Tooltip:
+				Tooltip: 
 					'''
 					Stocke automatiquement les articles déjà contenus dans le sac.
 					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
 					Faites un clic droit pour ouvrir le sac.
 					'''
 			}
-
 			PaintBucket: {
 				DisplayName: Seau de peinture
-				Tooltip:
+				Tooltip: 
 					'''
 					Stocke automatiquement la peinture
 					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
@@ -322,10 +324,9 @@ Mods: {
 					Si une peinture dans le pot pouvant être utilisée par votre outil de peinture est favorite, seules les peintures favorites seront utilisées.
 					'''
 			}
-
 			PotionFlask: {
 				DisplayName: Flacon de potions
-				Tooltip:
+				Tooltip: 
 					'''
 					Stocke automatiquement les potions, la nourriture et les boissons.
 					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
@@ -336,61 +337,15 @@ Mods: {
 					Quick Mana utilisera les objets de mana du sac. Si des objets de mana dans le sac sont favoris, seuls les objets de mana favoris seront utilisés.
 					'''
 			}
-
 			WallEr: {
 				DisplayName: Wall-Er
-				Tooltip:
+				Tooltip: 
 					'''
 					Stocke automatiquement les matériaux de construction de murs (murs, clôtures, poutres, etc.)
 					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
 					Faites un clic droit pour ouvrir le sac.
 					Les objets peuvent être placés depuis Wall-Er en cliquant avec le bouton gauche avec Wall-Er. Si des éléments de Wall-Er sont favoris, seuls les éléments favoris seront utilisés.
 					'''
-			}
-		}
-
-		Tiles: {
-			// BagBlack.MapEntry: Bag Black
-			// BagBlue.MapEntry: Bag Blue
-			// BagBrown.MapEntry: Bag Brown
-			// BagGray.MapEntry: Bag Gray
-			// BagGreen.MapEntry: Bag Green
-			// BagOrange.MapEntry: Bag Orange
-			// BagPink.MapEntry: Bag Pink
-			// BagPurple.MapEntry: Bag Purple
-			// BagRed.MapEntry: Bag Red
-			// BagWhite.MapEntry: Bag White
-			// BagYellow.MapEntry: Bag Yellow
-			// PackBlack.MapEntry: Pack Black
-			// PackBlue.MapEntry: Pack Blue
-			// PackBrown.MapEntry: Pack Brown
-			// PackGray.MapEntry: Pack Gray
-			// PackGreen.MapEntry: Pack Green
-			// PackOrange.MapEntry: Pack Orange
-			// PackPink.MapEntry: Pack Pink
-			// PackPurple.MapEntry: Pack Purple
-			// PackRed.MapEntry: Pack Red
-			// PackWhite.MapEntry: Pack White
-			// PackYellow.MapEntry: Pack Yellow
-		}
-
-		Configs: {
-			BagsClientConfig: {
-				// DisplayName: Bags Client Config
-
-				AllAmmoItemsGoIntoAmmoBag: {
-					// Label: All Ammo Items Go Into Ammo Bag
-					// Tooltip: ""
-				}
-			}
-
-			BagsServerConfig: {
-				// DisplayName: Bags Server Config
-
-				HarderBagRecipes: {
-					// Label: Harder Bag Recipes
-					// Tooltip: ""
-				}
 			}
 		}
 	}

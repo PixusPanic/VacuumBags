@@ -15,9 +15,10 @@ namespace VacuumBags.Common.Configs
 		public override ConfigScope Mode => ConfigScope.ServerSide;
 
 		//Crafting
-		[Header("$Mods.VacuumBags.Config.Crafting")]//TODO: Setup Localization
+		[JsonIgnore]
+		public const string CraftingHeaderKey = "Crafting";
+		[Header($"$Mods.VacuumBags.Config.{CraftingHeaderKey}")]
 
-		//[Label("$Mods.VacuumBags.Config.HarderBagRecipes.Label")]
 		[ReloadRequired]
 		[DefaultValue(false)]
 		public bool HarderBagRecipes;
@@ -26,11 +27,20 @@ namespace VacuumBags.Common.Configs
 	public class BagsClientConfig : ModConfig {
 		public override ConfigScope Mode => ConfigScope.ClientSide;
 
-		//Display Settings
-		[Header("$Mods.VacuumBags.Config.BagStorageOptions")]
+		//Storage Options
+		[JsonIgnore]
+		public const string BagStorageOptionsKey = "BagStorageOptions";
+		[Header($"$Mods.VacuumBags.Config.{BagStorageOptionsKey}")]
 
-		//[Label("$Mods.VacuumBags.Config.AllAmmoItemsGoIntoAmmoBag.Label")]
-		//[Tooltip("$Mods.VacuumBags.Config.AllAmmoItemsGoIntoAmmoBag.Tooltip")]
+		[ReloadRequired]
+		[Range(1, 10000)]
+		[DefaultValue(40)]
+		public int SimpleBagStorageSize;
+
+		[ReloadRequired]
+		[DefaultValue(false)]
+		public bool SimpleBagsVacuumAllItems;
+
 		[ReloadRequired]
 		[DefaultValue(true)]
 		public bool AllAmmoItemsGoIntoAmmoBag;

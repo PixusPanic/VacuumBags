@@ -1,15 +1,47 @@
-#
+#(Google Translated.  No contributions yet)
 Mods: {
 	VacuumBags: {
 		Config: {
-			// BagStorageOptions: All Ammo Items Go Into Ammo Bag Header
-			// Crafting: Harder Bag Recipes Header
+			BagStorageOptions: Bag Storage Options
+			Crafting: Crafting
+			BagStorageOptions: {
+				AllAmmoItemsGoIntoAmmoBag: {
+					Label: All Ammo Items Go Into Ammo Bag
+					Tooltip: 
+						'''
+						If true, all items that are used as ammo for anything will go into the bag.
+						If false, only the selected ammo items whitelist will be allowed which excludes a few items like stars.
+						'''
+				}
+				SimpleBagStorageSize: {
+					Label: Simple Bag Storage Size
+					Tooltip: 
+						'''
+						The number of slots in the simple bag storage.
+						If this option is used while the player has more items in their bag, the bag size will be reduced to the number of items still in the bag.
+						Setting this number very high could cause lag or possibly a crash from using too much memory if you don't have much RAM.  Use at your own risk.
+						'''
+				}
+				SimpleBagsVacuumAllItems: {
+					Label: Simple Bags Vacuum All Items
+					Tooltip: 
+						'''
+						If true, all items will be vacuumed into the simple bags.
+						If false, only items that are the same type as an item in the bag will be vacuumed.
+						'''
+				}
+			}
+			Crafting: {
+				HarderBagRecipes: {
+					Label: Harder Bag Recipes
+					Tooltip: Makes the bag recipes require more items and some are more difficult to get.
+				}
+			}
 		}
-
 		Items: {
 			AmmoBag: {
 				DisplayName: Torba na amunicję
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatycznie przechowuje przedmioty do rzucania, strzały, kule, flary, roztwory.
 					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
@@ -18,120 +50,108 @@ Mods: {
 					Jeśli dowolna amunicja w torbie, której można użyć w używanej przez ciebie broni, zostanie dodana do ulubionych, zostanie użyta tylko ulubiona amunicja.
 					'''
 			}
-
 			BagBlack: {
 				DisplayName: Torba (czarna)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
 					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
 					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
-
 			BagBlue: {
 				DisplayName: Torba (niebieska)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
 					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
 					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
-
 			BagBrown: {
 				DisplayName: Torba (brązowa)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
 					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
 					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
-
 			BagGray: {
 				DisplayName: Torba (szara)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
 					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
 					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
-
 			BagGreen: {
 				DisplayName: Torba (zielona)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
 					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
 					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
-
 			BagOrange: {
 				DisplayName: Torba (pomarańczowa)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
 					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
 					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
-
 			BagPink: {
 				DisplayName: Torba (różowa)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
 					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
 					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
-
 			BagPurple: {
 				DisplayName: Torba (fioletowa)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
 					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
 					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
-
 			BagRed: {
 				DisplayName: Torba (czerwona)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
 					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
 					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
-
 			BagWhite: {
 				DisplayName: Torba (biała)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
 					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
 					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
-
 			BagYellow: {
 				DisplayName: Torba (żółta)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
 					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
 					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
-
 			BossBag: {
 				DisplayName: Torba szefa
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatycznie przechowuje torby z bossami, trofea, posągi bossów i kosmetyczne dropy z bossów.
 					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
@@ -139,10 +159,9 @@ Mods: {
 					Używa listy kontrolnej szefa, aby dodać zmodyfikowane elementy do dozwolonych przedmiotów, jeśli jest ona włączona.
 					'''
 			}
-
 			BuildersBox: {
 				DisplayName: Pudełko konstruktorów
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatycznie przechowuje materiały budowlane (cegły, bloki do wytworzenia itp.)
 					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
@@ -150,170 +169,153 @@ Mods: {
 					Przedmioty można umieszczać ze skrzynki, klikając lewym przyciskiem myszy na polu. Jeśli jakiekolwiek elementy w polu są dodane do ulubionych, użyte zostaną tylko te elementy, które są ulubione.
 					'''
 			}
-
 			CalamitousCauldron: {
 				DisplayName: Nieszczęsny Kocioł
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatycznie przechowuje przedmioty z Calamity.
 					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
 					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
-
 			EssenceOfGathering: {
 				DisplayName: Esencja zgromadzenia
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatycznie przechowuje przedmioty z Stars Above.
 					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
 					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
-
 			FargosMementos: {
 				DisplayName: Pamiątki Fargo
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatycznie przechowuje przedmioty z Fargos.
 					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
 					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
-
 			HerbSatchel: {
 				DisplayName: Torba na zioła
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatycznie przechowuje nasiona, zioła, kwiaty itp.
 					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
 					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
-
 			LokisTesseract: {
 				DisplayName: Tesserakt Lokiego
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatycznie przechowuje przedmioty z Thorium.
 					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
 					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
-
 			PackBlack: {
 				DisplayName: Opakowanie (czarne)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
 					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
 					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
-
 			PackBlue: {
 				DisplayName: Pakiet (niebieski)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
 					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
 					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
-
 			PackBrown: {
 				DisplayName: Opakowanie (brązowy)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
 					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
 					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
-
 			PackGray: {
 				DisplayName: Opakowanie (szary)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
 					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
 					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
-
 			PackGreen: {
 				DisplayName: Opakowanie (zielone)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
 					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
 					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
-
 			PackOrange: {
 				DisplayName: Opakowanie (pomarańczowe)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
 					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
 					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
-
 			PackPink: {
 				DisplayName: Opakowanie (różowe)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
 					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
 					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
-
 			PackPurple: {
 				DisplayName: Opakowanie (fioletowe)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
 					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
 					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
-
 			PackRed: {
 				DisplayName: Opakowanie (czerwone)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
 					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
 					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
-
 			PackWhite: {
 				DisplayName: Opakowanie (białe)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
 					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
 					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
-
 			PackYellow: {
 				DisplayName: Opakowanie (żółte)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatycznie przechowuje przedmioty znajdujące się już w torbie.
 					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
 					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
-
 			PaintBucket: {
 				DisplayName: Wiadro farby
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatycznie przechowuje farbę
 					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
@@ -322,10 +324,9 @@ Mods: {
 					Jeśli jakakolwiek farba w puszce, której można użyć za pomocą narzędzia do malowania, zostanie wybrana jako ulubiona, użyte zostaną tylko ulubione farby.
 					'''
 			}
-
 			PotionFlask: {
 				DisplayName: Flaszka z eliksirami
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatycznie przechowuje mikstury, żywność i napoje.
 					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
@@ -336,61 +337,15 @@ Mods: {
 					Szybka Mana użyje przedmiotów many z torby. Jeśli jakiekolwiek przedmioty z maną w torbie są ulubione, użyte zostaną tylko ulubione przedmioty z maną.
 					'''
 			}
-
 			WallEr: {
 				DisplayName: Murarz dołowy
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatycznie przechowuje materiały ścienne (ściany, płoty, belki itp.)
 					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
 					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					Elementy można umieszczać z Murarz dołowy, klikając lewym przyciskiem myszy Murarz dołowy. Jeśli jakiekolwiek elementy w Murarz dołowy zostaną dodane do ulubionych, użyte zostaną tylko te elementy, które są ulubione.
 					'''
-			}
-		}
-
-		Tiles: {
-			// BagBlack.MapEntry: Bag Black
-			// BagBlue.MapEntry: Bag Blue
-			// BagBrown.MapEntry: Bag Brown
-			// BagGray.MapEntry: Bag Gray
-			// BagGreen.MapEntry: Bag Green
-			// BagOrange.MapEntry: Bag Orange
-			// BagPink.MapEntry: Bag Pink
-			// BagPurple.MapEntry: Bag Purple
-			// BagRed.MapEntry: Bag Red
-			// BagWhite.MapEntry: Bag White
-			// BagYellow.MapEntry: Bag Yellow
-			// PackBlack.MapEntry: Pack Black
-			// PackBlue.MapEntry: Pack Blue
-			// PackBrown.MapEntry: Pack Brown
-			// PackGray.MapEntry: Pack Gray
-			// PackGreen.MapEntry: Pack Green
-			// PackOrange.MapEntry: Pack Orange
-			// PackPink.MapEntry: Pack Pink
-			// PackPurple.MapEntry: Pack Purple
-			// PackRed.MapEntry: Pack Red
-			// PackWhite.MapEntry: Pack White
-			// PackYellow.MapEntry: Pack Yellow
-		}
-
-		Configs: {
-			BagsClientConfig: {
-				// DisplayName: Bags Client Config
-
-				AllAmmoItemsGoIntoAmmoBag: {
-					// Label: All Ammo Items Go Into Ammo Bag
-					// Tooltip: ""
-				}
-			}
-
-			BagsServerConfig: {
-				// DisplayName: Bags Server Config
-
-				HarderBagRecipes: {
-					// Label: Harder Bag Recipes
-					// Tooltip: ""
-				}
 			}
 		}
 	}

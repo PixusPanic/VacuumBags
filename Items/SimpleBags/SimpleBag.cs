@@ -17,15 +17,15 @@ namespace VacuumBags.Items
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public abstract int MyTileType { get; }
 		public static Color PanelColor => new Color(255, 255, 255, androLib.Common.Configs.ConfigValues.UIAlpha);
+		public static int BagSize => VacuumBags.clientConfig.SimpleBagStorageSize;
+		public static bool? IsVacuumBag = VacuumBags.clientConfig.SimpleBagsVacuumAllItems ? true : null;
 		public override void SetDefaults() {
-			//Item.DefaultToPlaceableTile(MyTileType);
 			Item.createTile = MyTileType;
 			Item.consumable = true;
 			Item.useStyle = ItemUseStyleID.Swing;
 			Item.useTime = 10;
 			Item.useAnimation = 15;
 			Item.useTurn = true;
-			//Item.autoReuse = true;
 			Item.maxStack = 1;
 			Item.value = 100000;
 			Item.rare = ItemRarityID.Blue;

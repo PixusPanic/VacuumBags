@@ -1,15 +1,47 @@
-#
+#Contributors: @DaviReM#8740, @JoeDolca, @Haturok#8191, @Kokopai#2506  (All others Google Translated.  Needs review)
 Mods: {
 	VacuumBags: {
 		Config: {
-			// BagStorageOptions: All Ammo Items Go Into Ammo Bag Header
-			// Crafting: Harder Bag Recipes Header
+			BagStorageOptions: Bag Storage Options
+			Crafting: Crafting
+			BagStorageOptions: {
+				AllAmmoItemsGoIntoAmmoBag: {
+					Label: All Ammo Items Go Into Ammo Bag
+					Tooltip: 
+						'''
+						If true, all items that are used as ammo for anything will go into the bag.
+						If false, only the selected ammo items whitelist will be allowed which excludes a few items like stars.
+						'''
+				}
+				SimpleBagStorageSize: {
+					Label: Simple Bag Storage Size
+					Tooltip: 
+						'''
+						The number of slots in the simple bag storage.
+						If this option is used while the player has more items in their bag, the bag size will be reduced to the number of items still in the bag.
+						Setting this number very high could cause lag or possibly a crash from using too much memory if you don't have much RAM.  Use at your own risk.
+						'''
+				}
+				SimpleBagsVacuumAllItems: {
+					Label: Simple Bags Vacuum All Items
+					Tooltip: 
+						'''
+						If true, all items will be vacuumed into the simple bags.
+						If false, only items that are the same type as an item in the bag will be vacuumed.
+						'''
+				}
+			}
+			Crafting: {
+				HarderBagRecipes: {
+					Label: Harder Bag Recipes
+					Tooltip: Makes the bag recipes require more items and some are more difficult to get.
+				}
+			}
 		}
-
 		Items: {
 			AmmoBag: {
 				DisplayName: Bolsa de munición
-				Tooltip:
+				Tooltip: 
 					'''
 					Almacena automáticamente objetos arrojadizos, flechas, balas, bengalas y soluciones.
 					Cuando esté en su inventario, el contenido de la bolsa estará disponible para su elaboración.
@@ -18,120 +50,108 @@ Mods: {
 					Si alguna munición en la bolsa que pueda ser usada por tu arma equipada es favorita, solo se usarán las municiones favoritas.
 					'''
 			}
-
 			BagBlack: {
 				DisplayName: Bolsa (Negro)
-				Tooltip:
+				Tooltip: 
 					'''
 					Almacena automáticamente los artículos que ya están contenidos en la bolsa.
 					Cuando esté en su inventario, el contenido de la bolsa estará disponible para su elaboración.
 					Haga clic derecho para abrir la bolsa.
 					'''
 			}
-
 			BagBlue: {
 				DisplayName: Bolsa (Azul)
-				Tooltip:
+				Tooltip: 
 					'''
 					Almacena automáticamente los artículos que ya están contenidos en la bolsa.
 					Cuando esté en su inventario, el contenido de la bolsa estará disponible para su elaboración.
 					Haga clic derecho para abrir la bolsa.
 					'''
 			}
-
 			BagBrown: {
 				DisplayName: Bolsa (marrón)
-				Tooltip:
+				Tooltip: 
 					'''
 					Almacena automáticamente los artículos que ya están contenidos en la bolsa.
 					Cuando esté en su inventario, el contenido de la bolsa estará disponible para su elaboración.
 					Haga clic derecho para abrir la bolsa.
 					'''
 			}
-
 			BagGray: {
 				DisplayName: Bolsa (Gris)
-				Tooltip:
+				Tooltip: 
 					'''
 					Almacena automáticamente los artículos que ya están contenidos en la bolsa.
 					Cuando esté en su inventario, el contenido de la bolsa estará disponible para su elaboración.
 					Haga clic derecho para abrir la bolsa.
 					'''
 			}
-
 			BagGreen: {
 				DisplayName: Bolsa (verde)
-				Tooltip:
+				Tooltip: 
 					'''
 					Almacena automáticamente los artículos que ya están contenidos en la bolsa.
 					Cuando esté en su inventario, el contenido de la bolsa estará disponible para su elaboración.
 					Haga clic derecho para abrir la bolsa.
 					'''
 			}
-
 			BagOrange: {
 				DisplayName: Bolsa (naranja)
-				Tooltip:
+				Tooltip: 
 					'''
 					Almacena automáticamente los artículos que ya están contenidos en la bolsa.
 					Cuando esté en su inventario, el contenido de la bolsa estará disponible para su elaboración.
 					Haga clic derecho para abrir la bolsa.
 					'''
 			}
-
 			BagPink: {
 				DisplayName: Bolsa (rosa)
-				Tooltip:
+				Tooltip: 
 					'''
 					Almacena automáticamente los artículos que ya están contenidos en la bolsa.
 					Cuando esté en su inventario, el contenido de la bolsa estará disponible para su elaboración.
 					Haga clic derecho para abrir la bolsa.
 					'''
 			}
-
 			BagPurple: {
 				DisplayName: Bolsa (púrpura)
-				Tooltip:
+				Tooltip: 
 					'''
 					Almacena automáticamente los artículos que ya están contenidos en la bolsa.
 					Cuando esté en su inventario, el contenido de la bolsa estará disponible para su elaboración.
 					Haga clic derecho para abrir la bolsa.
 					'''
 			}
-
 			BagRed: {
 				DisplayName: Bolsa (Roja)
-				Tooltip:
+				Tooltip: 
 					'''
 					Almacena automáticamente los artículos que ya están contenidos en la bolsa.
 					Cuando esté en su inventario, el contenido de la bolsa estará disponible para su elaboración.
 					Haga clic derecho para abrir la bolsa.
 					'''
 			}
-
 			BagWhite: {
 				DisplayName: Bolsa (Blanco)
-				Tooltip:
+				Tooltip: 
 					'''
 					Almacena automáticamente los artículos que ya están contenidos en la bolsa.
 					Cuando esté en su inventario, el contenido de la bolsa estará disponible para su elaboración.
 					Haga clic derecho para abrir la bolsa.
 					'''
 			}
-
 			BagYellow: {
 				DisplayName: Bolsa (amarilla)
-				Tooltip:
+				Tooltip: 
 					'''
 					Almacena automáticamente los artículos que ya están contenidos en la bolsa.
 					Cuando esté en su inventario, el contenido de la bolsa estará disponible para su elaboración.
 					Haga clic derecho para abrir la bolsa.
 					'''
 			}
-
 			BossBag: {
 				DisplayName: Bolsa de jefe
-				Tooltip:
+				Tooltip: 
 					'''
 					Almacena automáticamente bolsas de jefes, trofeos, estatuas de jefes y artículos cosméticos para jefes.
 					Cuando esté en su inventario, el contenido de la bolsa estará disponible para su elaboración.
@@ -139,10 +159,9 @@ Mods: {
 					Utiliza Boss Checklist para agregar elementos modificados a los elementos permitidos si está habilitado.
 					'''
 			}
-
 			BuildersBox: {
 				DisplayName: Caja de constructores
-				Tooltip:
+				Tooltip: 
 					'''
 					Almacena automáticamente materiales de construcción (ladrillos, bloques fabricables, etc.)
 					Cuando esté en su inventario, el contenido de la bolsa estará disponible para su elaboración.
@@ -150,170 +169,153 @@ Mods: {
 					Los elementos se pueden colocar desde el cuadro haciendo clic izquierdo en el cuadro. Si algún elemento del cuadro es favorito, solo se utilizarán los elementos favoritos.
 					'''
 			}
-
 			CalamitousCauldron: {
 				DisplayName: Caldero calamitoso
-				Tooltip:
+				Tooltip: 
 					'''
 					Almacena automáticamente artículos de Calamity.
 					Cuando esté en su inventario, el contenido de la bolsa estará disponible para su elaboración.
 					Haga clic derecho para abrir la bolsa.
 					'''
 			}
-
 			EssenceOfGathering: {
 				DisplayName: Esencia de reunión
-				Tooltip:
+				Tooltip: 
 					'''
 					Almacena automáticamente artículos de Stars Above.
 					Cuando esté en su inventario, el contenido de la bolsa estará disponible para su elaboración.
 					Haga clic derecho para abrir la bolsa.
 					'''
 			}
-
 			FargosMementos: {
 				DisplayName: Recuerdos de Fargo
-				Tooltip:
+				Tooltip: 
 					'''
 					Almacena automáticamente artículos de Fargos.
 					Cuando esté en su inventario, el contenido de la bolsa estará disponible para su elaboración.
 					Haga clic derecho para abrir la bolsa.
 					'''
 			}
-
 			HerbSatchel: {
 				DisplayName: Cartera de hierbas
-				Tooltip:
+				Tooltip: 
 					'''
 					Almacena automáticamente semillas, hierbas, flores, etc.
 					Cuando esté en su inventario, el contenido de la bolsa estará disponible para su elaboración.
 					Haga clic derecho para abrir la bolsa.
 					'''
 			}
-
 			LokisTesseract: {
 				DisplayName: Teseracto de Loki
-				Tooltip:
+				Tooltip: 
 					'''
 					Almacena automáticamente artículos de Thorium.
 					Cuando esté en su inventario, el contenido de la bolsa estará disponible para su elaboración.
 					Haga clic derecho para abrir la bolsa.
 					'''
 			}
-
 			PackBlack: {
 				DisplayName: Paquete (negro)
-				Tooltip:
+				Tooltip: 
 					'''
 					Almacena automáticamente los artículos que ya están contenidos en la bolsa.
 					Cuando esté en su inventario, el contenido de la bolsa estará disponible para su elaboración.
 					Haga clic derecho para abrir la bolsa.
 					'''
 			}
-
 			PackBlue: {
 				DisplayName: Paquete (azul)
-				Tooltip:
+				Tooltip: 
 					'''
 					Almacena automáticamente los artículos que ya están contenidos en la bolsa.
 					Cuando esté en su inventario, el contenido de la bolsa estará disponible para su elaboración.
 					Haga clic derecho para abrir la bolsa.
 					'''
 			}
-
 			PackBrown: {
 				DisplayName: Paquete (marrón)
-				Tooltip:
+				Tooltip: 
 					'''
 					Almacena automáticamente los artículos que ya están contenidos en la bolsa.
 					Cuando esté en su inventario, el contenido de la bolsa estará disponible para su elaboración.
 					Haga clic derecho para abrir la bolsa.
 					'''
 			}
-
 			PackGray: {
 				DisplayName: Paquete (gris)
-				Tooltip:
+				Tooltip: 
 					'''
 					Almacena automáticamente los artículos que ya están contenidos en la bolsa.
 					Cuando esté en su inventario, el contenido de la bolsa estará disponible para su elaboración.
 					Haga clic derecho para abrir la bolsa.
 					'''
 			}
-
 			PackGreen: {
 				DisplayName: Paquete (verde)
-				Tooltip:
+				Tooltip: 
 					'''
 					Almacena automáticamente los artículos que ya están contenidos en la bolsa.
 					Cuando esté en su inventario, el contenido de la bolsa estará disponible para su elaboración.
 					Haga clic derecho para abrir la bolsa.
 					'''
 			}
-
 			PackOrange: {
 				DisplayName: Paquete (naranja)
-				Tooltip:
+				Tooltip: 
 					'''
 					Almacena automáticamente los artículos que ya están contenidos en la bolsa.
 					Cuando esté en su inventario, el contenido de la bolsa estará disponible para su elaboración.
 					Haga clic derecho para abrir la bolsa.
 					'''
 			}
-
 			PackPink: {
 				DisplayName: Paquete (rosa)
-				Tooltip:
+				Tooltip: 
 					'''
 					Almacena automáticamente los artículos que ya están contenidos en la bolsa.
 					Cuando esté en su inventario, el contenido de la bolsa estará disponible para su elaboración.
 					Haga clic derecho para abrir la bolsa.
 					'''
 			}
-
 			PackPurple: {
 				DisplayName: Paquete (púrpura)
-				Tooltip:
+				Tooltip: 
 					'''
 					Almacena automáticamente los artículos que ya están contenidos en la bolsa.
 					Cuando esté en su inventario, el contenido de la bolsa estará disponible para su elaboración.
 					Haga clic derecho para abrir la bolsa.
 					'''
 			}
-
 			PackRed: {
 				DisplayName: Paquete (rojo)
-				Tooltip:
+				Tooltip: 
 					'''
 					Almacena automáticamente los artículos que ya están contenidos en la bolsa.
 					Cuando esté en su inventario, el contenido de la bolsa estará disponible para su elaboración.
 					Haga clic derecho para abrir la bolsa.
 					'''
 			}
-
 			PackWhite: {
 				DisplayName: Paquete (blanco)
-				Tooltip:
+				Tooltip: 
 					'''
 					Almacena automáticamente los artículos que ya están contenidos en la bolsa.
 					Cuando esté en su inventario, el contenido de la bolsa estará disponible para su elaboración.
 					Haga clic derecho para abrir la bolsa.
 					'''
 			}
-
 			PackYellow: {
 				DisplayName: Paquete (amarillo)
-				Tooltip:
+				Tooltip: 
 					'''
 					Almacena automáticamente los artículos que ya están contenidos en la bolsa.
 					Cuando esté en su inventario, el contenido de la bolsa estará disponible para su elaboración.
 					Haga clic derecho para abrir la bolsa.
 					'''
 			}
-
 			PaintBucket: {
 				DisplayName: Bote de pintura
-				Tooltip:
+				Tooltip: 
 					'''
 					Almacena pintura automáticamente
 					Cuando esté en su inventario, el contenido de la bolsa estará disponible para su elaboración.
@@ -322,10 +324,9 @@ Mods: {
 					Si alguna pintura en la lata que pueda ser utilizada por su herramienta de pintura es favorita, solo se usarán pinturas favoritas.
 					'''
 			}
-
 			PotionFlask: {
 				DisplayName: Frasco de poción
-				Tooltip:
+				Tooltip: 
 					'''
 					Almacena automáticamente pociones, comida y bebida.
 					Cuando esté en su inventario, el contenido de la bolsa estará disponible para su elaboración.
@@ -336,61 +337,15 @@ Mods: {
 					Quick Mana utilizará elementos de maná de la bolsa. Si algún elemento de maná en la bolsa es favorito, solo se usarán los elementos de maná favoritos.
 					'''
 			}
-
 			WallEr: {
 				DisplayName: Wall-Er
-				Tooltip:
+				Tooltip: 
 					'''
 					Almacena automáticamente materiales de pared (paredes, cercas, vigas, etc.)
 					Cuando esté en su inventario, el contenido de la bolsa estará disponible para su elaboración.
 					Haga clic derecho para abrir la bolsa.
 					Los elementos se pueden colocar desde Wall-Er haciendo clic izquierdo con Wall-Er. Si algún elemento de Wall-Er es favorito, solo se utilizarán los elementos favoritos.
 					'''
-			}
-		}
-
-		Tiles: {
-			// BagBlack.MapEntry: Bag Black
-			// BagBlue.MapEntry: Bag Blue
-			// BagBrown.MapEntry: Bag Brown
-			// BagGray.MapEntry: Bag Gray
-			// BagGreen.MapEntry: Bag Green
-			// BagOrange.MapEntry: Bag Orange
-			// BagPink.MapEntry: Bag Pink
-			// BagPurple.MapEntry: Bag Purple
-			// BagRed.MapEntry: Bag Red
-			// BagWhite.MapEntry: Bag White
-			// BagYellow.MapEntry: Bag Yellow
-			// PackBlack.MapEntry: Pack Black
-			// PackBlue.MapEntry: Pack Blue
-			// PackBrown.MapEntry: Pack Brown
-			// PackGray.MapEntry: Pack Gray
-			// PackGreen.MapEntry: Pack Green
-			// PackOrange.MapEntry: Pack Orange
-			// PackPink.MapEntry: Pack Pink
-			// PackPurple.MapEntry: Pack Purple
-			// PackRed.MapEntry: Pack Red
-			// PackWhite.MapEntry: Pack White
-			// PackYellow.MapEntry: Pack Yellow
-		}
-
-		Configs: {
-			BagsClientConfig: {
-				// DisplayName: Bags Client Config
-
-				AllAmmoItemsGoIntoAmmoBag: {
-					// Label: All Ammo Items Go Into Ammo Bag
-					// Tooltip: ""
-				}
-			}
-
-			BagsServerConfig: {
-				// DisplayName: Bags Server Config
-
-				HarderBagRecipes: {
-					// Label: Harder Bag Recipes
-					// Tooltip: ""
-				}
 			}
 		}
 	}

@@ -1,15 +1,47 @@
-#
+#Contributors: @Ninguém#8017, @pedro_123444#8294
 Mods: {
 	VacuumBags: {
 		Config: {
-			// BagStorageOptions: All Ammo Items Go Into Ammo Bag Header
-			// Crafting: Harder Bag Recipes Header
+			BagStorageOptions: Bag Storage Options
+			Crafting: Crafting
+			BagStorageOptions: {
+				AllAmmoItemsGoIntoAmmoBag: {
+					Label: All Ammo Items Go Into Ammo Bag
+					Tooltip: 
+						'''
+						If true, all items that are used as ammo for anything will go into the bag.
+						If false, only the selected ammo items whitelist will be allowed which excludes a few items like stars.
+						'''
+				}
+				SimpleBagStorageSize: {
+					Label: Simple Bag Storage Size
+					Tooltip: 
+						'''
+						The number of slots in the simple bag storage.
+						If this option is used while the player has more items in their bag, the bag size will be reduced to the number of items still in the bag.
+						Setting this number very high could cause lag or possibly a crash from using too much memory if you don't have much RAM.  Use at your own risk.
+						'''
+				}
+				SimpleBagsVacuumAllItems: {
+					Label: Simple Bags Vacuum All Items
+					Tooltip: 
+						'''
+						If true, all items will be vacuumed into the simple bags.
+						If false, only items that are the same type as an item in the bag will be vacuumed.
+						'''
+				}
+			}
+			Crafting: {
+				HarderBagRecipes: {
+					Label: Harder Bag Recipes
+					Tooltip: Makes the bag recipes require more items and some are more difficult to get.
+				}
+			}
 		}
-
 		Items: {
 			AmmoBag: {
 				DisplayName: Saco de munição
-				Tooltip:
+				Tooltip: 
 					'''
 					Armazena automaticamente itens arremessáveis, flechas, balas, sinalizadores e soluções.
 					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
@@ -18,120 +50,108 @@ Mods: {
 					Se alguma munição na bolsa que possa ser usada pela sua arma equipada for favorita, apenas as munições favoritas serão usadas.
 					'''
 			}
-
 			BagBlack: {
 				DisplayName: Bolsa (Preta)
-				Tooltip:
+				Tooltip: 
 					'''
 					Armazena automaticamente itens já contidos na sacola.
 					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
 					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
-
 			BagBlue: {
 				DisplayName: Bolsa (Azul)
-				Tooltip:
+				Tooltip: 
 					'''
 					Armazena automaticamente itens já contidos na sacola.
 					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
 					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
-
 			BagBrown: {
 				DisplayName: Bolsa (Marrom)
-				Tooltip:
+				Tooltip: 
 					'''
 					Armazena automaticamente itens já contidos na sacola.
 					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
 					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
-
 			BagGray: {
 				DisplayName: Bolsa (Cinza)
-				Tooltip:
+				Tooltip: 
 					'''
 					Armazena automaticamente itens já contidos na sacola.
 					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
 					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
-
 			BagGreen: {
 				DisplayName: Bolsa (Verde)
-				Tooltip:
+				Tooltip: 
 					'''
 					Armazena automaticamente itens já contidos na sacola.
 					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
 					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
-
 			BagOrange: {
 				DisplayName: Bolsa (Laranja)
-				Tooltip:
+				Tooltip: 
 					'''
 					Armazena automaticamente itens já contidos na sacola.
 					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
 					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
-
 			BagPink: {
 				DisplayName: Bolsa (Rosa)
-				Tooltip:
+				Tooltip: 
 					'''
 					Armazena automaticamente itens já contidos na sacola.
 					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
 					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
-
 			BagPurple: {
 				DisplayName: Bolsa (roxa)
-				Tooltip:
+				Tooltip: 
 					'''
 					Armazena automaticamente itens já contidos na sacola.
 					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
 					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
-
 			BagRed: {
 				DisplayName: Bolsa (Vermelho)
-				Tooltip:
+				Tooltip: 
 					'''
 					Armazena automaticamente itens já contidos na sacola.
 					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
 					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
-
 			BagWhite: {
 				DisplayName: Bolsa (Branca)
-				Tooltip:
+				Tooltip: 
 					'''
 					Armazena automaticamente itens já contidos na sacola.
 					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
 					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
-
 			BagYellow: {
 				DisplayName: Bolsa (Amarela)
-				Tooltip:
+				Tooltip: 
 					'''
 					Armazena automaticamente itens já contidos na sacola.
 					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
 					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
-
 			BossBag: {
 				DisplayName: Bolsa Chefe
-				Tooltip:
+				Tooltip: 
 					'''
 					Armazena automaticamente bolsas de chefe, troféus, estátuas de chefe e itens cosméticos de chefe.
 					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
@@ -139,10 +159,9 @@ Mods: {
 					Usa a lista de verificação do chefe para adicionar itens modificados aos itens permitidos, se estiver ativado.
 					'''
 			}
-
 			BuildersBox: {
 				DisplayName: Caixa de Construtores
-				Tooltip:
+				Tooltip: 
 					'''
 					Armazena automaticamente materiais de construção (tijolos, blocos fabricáveis, etc.)
 					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
@@ -150,170 +169,153 @@ Mods: {
 					Os itens podem ser colocados na caixa clicando com o botão esquerdo na caixa. Se algum item da caixa for favorito, apenas os itens favoritos serão usados.
 					'''
 			}
-
 			CalamitousCauldron: {
 				DisplayName: Caldeirão Calamitoso
-				Tooltip:
+				Tooltip: 
 					'''
 					Armazena automaticamente itens do Calamity.
 					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
 					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
-
 			EssenceOfGathering: {
 				DisplayName: Essência da Reunião
-				Tooltip:
+				Tooltip: 
 					'''
 					Armazena automaticamente itens de Stars Above.
 					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
 					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
-
 			FargosMementos: {
 				DisplayName: Lembranças de Fargo
-				Tooltip:
+				Tooltip: 
 					'''
 					Armazena automaticamente itens de Fargos.
 					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
 					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
-
 			HerbSatchel: {
 				DisplayName: Bolsa de Ervas
-				Tooltip:
+				Tooltip: 
 					'''
 					Armazena automaticamente sementes, ervas, flores, etc.
 					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
 					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
-
 			LokisTesseract: {
 				DisplayName: Tesserato de Loki
-				Tooltip:
+				Tooltip: 
 					'''
 					Armazena automaticamente itens do Thorium.
 					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
 					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
-
 			PackBlack: {
 				DisplayName: Pacote (preto)
-				Tooltip:
+				Tooltip: 
 					'''
 					Armazena automaticamente itens já contidos na sacola.
 					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
 					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
-
 			PackBlue: {
 				DisplayName: Pacote (Azul)
-				Tooltip:
+				Tooltip: 
 					'''
 					Armazena automaticamente itens já contidos na sacola.
 					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
 					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
-
 			PackBrown: {
 				DisplayName: Pacote (Marrom)
-				Tooltip:
+				Tooltip: 
 					'''
 					Armazena automaticamente itens já contidos na sacola.
 					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
 					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
-
 			PackGray: {
 				DisplayName: Pacote (cinza)
-				Tooltip:
+				Tooltip: 
 					'''
 					Armazena automaticamente itens já contidos na sacola.
 					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
 					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
-
 			PackGreen: {
 				DisplayName: Pacote (Verde)
-				Tooltip:
+				Tooltip: 
 					'''
 					Armazena automaticamente itens já contidos na sacola.
 					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
 					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
-
 			PackOrange: {
 				DisplayName: Pacote (Laranja)
-				Tooltip:
+				Tooltip: 
 					'''
 					Armazena automaticamente itens já contidos na sacola.
 					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
 					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
-
 			PackPink: {
 				DisplayName: Pacote (Rosa)
-				Tooltip:
+				Tooltip: 
 					'''
 					Armazena automaticamente itens já contidos na sacola.
 					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
 					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
-
 			PackPurple: {
 				DisplayName: Pacote (roxo)
-				Tooltip:
+				Tooltip: 
 					'''
 					Armazena automaticamente itens já contidos na sacola.
 					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
 					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
-
 			PackRed: {
 				DisplayName: Pacote (Vermelho)
-				Tooltip:
+				Tooltip: 
 					'''
 					Armazena automaticamente itens já contidos na sacola.
 					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
 					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
-
 			PackWhite: {
 				DisplayName: Pacote (Branco)
-				Tooltip:
+				Tooltip: 
 					'''
 					Armazena automaticamente itens já contidos na sacola.
 					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
 					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
-
 			PackYellow: {
 				DisplayName: Pacote (Amarelo)
-				Tooltip:
+				Tooltip: 
 					'''
 					Armazena automaticamente itens já contidos na sacola.
 					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
 					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
-
 			PaintBucket: {
 				DisplayName: Balde de tinta
-				Tooltip:
+				Tooltip: 
 					'''
 					Armazena tinta automaticamente
 					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
@@ -322,10 +324,9 @@ Mods: {
 					Se qualquer tinta da lata que possa ser usada pela sua ferramenta de pintura for favorita, apenas as tintas favoritas serão usadas.
 					'''
 			}
-
 			PotionFlask: {
 				DisplayName: Frasco de Poção
-				Tooltip:
+				Tooltip: 
 					'''
 					Armazena automaticamente poções, comida e bebida.
 					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
@@ -336,61 +337,15 @@ Mods: {
 					Quick Mana usará itens de mana da bolsa. Se algum item de mana na bolsa for favorito, apenas os itens de mana favoritos serão usados.
 					'''
 			}
-
 			WallEr: {
 				DisplayName: Wall-Er
-				Tooltip:
+				Tooltip: 
 					'''
 					Armazena automaticamente materiais de parede (paredes, cercas, vigas, etc.)
 					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
 					Clique com o botão direito para abrir a bolsa.
 					Os itens podem ser colocados em Wall-Er clicando com o botão esquerdo em Wall-Er. Se algum item em Wall-Er for favorito, apenas os itens favoritos serão usados.
 					'''
-			}
-		}
-
-		Tiles: {
-			// BagBlack.MapEntry: Bag Black
-			// BagBlue.MapEntry: Bag Blue
-			// BagBrown.MapEntry: Bag Brown
-			// BagGray.MapEntry: Bag Gray
-			// BagGreen.MapEntry: Bag Green
-			// BagOrange.MapEntry: Bag Orange
-			// BagPink.MapEntry: Bag Pink
-			// BagPurple.MapEntry: Bag Purple
-			// BagRed.MapEntry: Bag Red
-			// BagWhite.MapEntry: Bag White
-			// BagYellow.MapEntry: Bag Yellow
-			// PackBlack.MapEntry: Pack Black
-			// PackBlue.MapEntry: Pack Blue
-			// PackBrown.MapEntry: Pack Brown
-			// PackGray.MapEntry: Pack Gray
-			// PackGreen.MapEntry: Pack Green
-			// PackOrange.MapEntry: Pack Orange
-			// PackPink.MapEntry: Pack Pink
-			// PackPurple.MapEntry: Pack Purple
-			// PackRed.MapEntry: Pack Red
-			// PackWhite.MapEntry: Pack White
-			// PackYellow.MapEntry: Pack Yellow
-		}
-
-		Configs: {
-			BagsClientConfig: {
-				// DisplayName: Bags Client Config
-
-				AllAmmoItemsGoIntoAmmoBag: {
-					// Label: All Ammo Items Go Into Ammo Bag
-					// Tooltip: ""
-				}
-			}
-
-			BagsServerConfig: {
-				// DisplayName: Bags Server Config
-
-				HarderBagRecipes: {
-					// Label: Harder Bag Recipes
-					// Tooltip: ""
-				}
 			}
 		}
 	}

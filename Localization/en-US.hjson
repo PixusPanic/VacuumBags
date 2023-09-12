@@ -2,14 +2,46 @@
 Mods: {
 	VacuumBags: {
 		Config: {
-			BagStorageOptions: All Ammo Items Go Into Ammo Bag Header
-			Crafting: Harder Bag Recipes Header
+			BagStorageOptions: Bag Storage Options
+			Crafting: Crafting
+			BagStorageOptions: {
+				AllAmmoItemsGoIntoAmmoBag: {
+					Label: All Ammo Items Go Into Ammo Bag
+					Tooltip: 
+						'''
+						If true, all items that are used as ammo for anything will go into the bag.
+						If false, only the selected ammo items whitelist will be allowed which excludes a few items like stars.
+						'''
+				}
+				SimpleBagStorageSize: {
+					Label: Simple Bag Storage Size
+					Tooltip: 
+						'''
+						The number of slots in the simple bag storage.
+						If this option is used while the player has more items in their bag, the bag size will be reduced to the number of items still in the bag.
+						Setting this number very high could cause lag or possibly a crash from using too much memory if you don't have much RAM.  Use at your own risk.
+						'''
+				}
+				SimpleBagsVacuumAllItems: {
+					Label: Simple Bags Vacuum All Items
+					Tooltip: 
+						'''
+						If true, all items will be vacuumed into the simple bags.
+						If false, only items that are the same type as an item in the bag will be vacuumed.
+						'''
+				}
+			}
+			Crafting: {
+				HarderBagRecipes: {
+					Label: Harder Bag Recipes
+					Tooltip: Makes the bag recipes require more items and some are more difficult to get.
+				}
+			}
 		}
-
 		Items: {
 			AmmoBag: {
 				DisplayName: Ammo Bag
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatically stores throwables, arrows, bullets, flares, solutions.
 					When in your inventory, the contents of the bag are available for crafting.
@@ -18,120 +50,108 @@ Mods: {
 					If any ammo in the bag that can be used by your equipped weapon is favorited, only favorited ammos will be used.
 					'''
 			}
-
 			BagBlack: {
 				DisplayName: Bag (Black)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatically stores items already contained in the bag.
 					When in your inventory, the contents of the bag are available for crafting.
 					Right click to open the bag.
 					'''
 			}
-
 			BagBlue: {
 				DisplayName: Bag (Blue)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatically stores items already contained in the bag.
 					When in your inventory, the contents of the bag are available for crafting.
 					Right click to open the bag.
 					'''
 			}
-
 			BagBrown: {
 				DisplayName: Bag (Brown)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatically stores items already contained in the bag.
 					When in your inventory, the contents of the bag are available for crafting.
 					Right click to open the bag.
 					'''
 			}
-
 			BagGray: {
 				DisplayName: Bag (Gray)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatically stores items already contained in the bag.
 					When in your inventory, the contents of the bag are available for crafting.
 					Right click to open the bag.
 					'''
 			}
-
 			BagGreen: {
 				DisplayName: Bag (Green)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatically stores items already contained in the bag.
 					When in your inventory, the contents of the bag are available for crafting.
 					Right click to open the bag.
 					'''
 			}
-
 			BagOrange: {
 				DisplayName: Bag (Orange)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatically stores items already contained in the bag.
 					When in your inventory, the contents of the bag are available for crafting.
 					Right click to open the bag.
 					'''
 			}
-
 			BagPink: {
 				DisplayName: Bag (Pink)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatically stores items already contained in the bag.
 					When in your inventory, the contents of the bag are available for crafting.
 					Right click to open the bag.
 					'''
 			}
-
 			BagPurple: {
 				DisplayName: Bag (Purple)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatically stores items already contained in the bag.
 					When in your inventory, the contents of the bag are available for crafting.
 					Right click to open the bag.
 					'''
 			}
-
 			BagRed: {
 				DisplayName: Bag (Red)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatically stores items already contained in the bag.
 					When in your inventory, the contents of the bag are available for crafting.
 					Right click to open the bag.
 					'''
 			}
-
 			BagWhite: {
 				DisplayName: Bag (White)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatically stores items already contained in the bag.
 					When in your inventory, the contents of the bag are available for crafting.
 					Right click to open the bag.
 					'''
 			}
-
 			BagYellow: {
 				DisplayName: Bag (Yellow)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatically stores items already contained in the bag.
 					When in your inventory, the contents of the bag are available for crafting.
 					Right click to open the bag.
 					'''
 			}
-
 			BossBag: {
 				DisplayName: Boss Bag
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatically stores boss bags, trophies, boss statues, and cosmetic boss drops.
 					When in your inventory, the contents of the bag are available for crafting.
@@ -139,10 +159,9 @@ Mods: {
 					Uses Boss Checklist to add modded items to the allowed items if it is enabled.
 					'''
 			}
-
 			BuildersBox: {
 				DisplayName: Builders Box
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatically stores building materials (bricks, craftable blocks, etc.)
 					When in your inventory, the contents of the bag are available for crafting.
@@ -150,170 +169,153 @@ Mods: {
 					Items can be placed from the box by left clicking with the box.  If any items in the box are favorited, only favorited items will be used.
 					'''
 			}
-
 			CalamitousCauldron: {
 				DisplayName: Calamitous Cauldron
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatically stores items from Calamity.
 					When in your inventory, the contents of the bag are available for crafting.
 					Right click to open the bag.
 					'''
 			}
-
 			EssenceOfGathering: {
 				DisplayName: Essence of Gathering
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatically stores items from Stars Above.
 					When in your inventory, the contents of the bag are available for crafting.
 					Right click to open the bag.
 					'''
 			}
-
 			FargosMementos: {
 				DisplayName: Fargo's Mementos
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatically stores items from Fargos.
 					When in your inventory, the contents of the bag are available for crafting.
 					Right click to open the bag.
 					'''
 			}
-
 			HerbSatchel: {
 				DisplayName: Herb Satchel
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatically stores seeds, herbs, flowers, etc.
 					When in your inventory, the contents of the bag are available for crafting.
 					Right click to open the bag.
 					'''
 			}
-
 			LokisTesseract: {
 				DisplayName: Loki's Tesseract
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatically stores items from Thorium.
 					When in your inventory, the contents of the bag are available for crafting.
 					Right click to open the bag.
 					'''
 			}
-
 			PackBlack: {
 				DisplayName: Pack (Black)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatically stores items already contained in the bag.
 					When in your inventory, the contents of the bag are available for crafting.
 					Right click to open the bag.
 					'''
 			}
-
 			PackBlue: {
 				DisplayName: Pack (Blue)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatically stores items already contained in the bag.
 					When in your inventory, the contents of the bag are available for crafting.
 					Right click to open the bag.
 					'''
 			}
-
 			PackBrown: {
 				DisplayName: Pack (Brown)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatically stores items already contained in the bag.
 					When in your inventory, the contents of the bag are available for crafting.
 					Right click to open the bag.
 					'''
 			}
-
 			PackGray: {
 				DisplayName: Pack (Gray)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatically stores items already contained in the bag.
 					When in your inventory, the contents of the bag are available for crafting.
 					Right click to open the bag.
 					'''
 			}
-
 			PackGreen: {
 				DisplayName: Pack (Green)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatically stores items already contained in the bag.
 					When in your inventory, the contents of the bag are available for crafting.
 					Right click to open the bag.
 					'''
 			}
-
 			PackOrange: {
 				DisplayName: Pack (Orange)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatically stores items already contained in the bag.
 					When in your inventory, the contents of the bag are available for crafting.
 					Right click to open the bag.
 					'''
 			}
-
 			PackPink: {
 				DisplayName: Pack (Pink)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatically stores items already contained in the bag.
 					When in your inventory, the contents of the bag are available for crafting.
 					Right click to open the bag.
 					'''
 			}
-
 			PackPurple: {
 				DisplayName: Pack (Purple)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatically stores items already contained in the bag.
 					When in your inventory, the contents of the bag are available for crafting.
 					Right click to open the bag.
 					'''
 			}
-
 			PackRed: {
 				DisplayName: Pack (Red)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatically stores items already contained in the bag.
 					When in your inventory, the contents of the bag are available for crafting.
 					Right click to open the bag.
 					'''
 			}
-
 			PackWhite: {
 				DisplayName: Pack (White)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatically stores items already contained in the bag.
 					When in your inventory, the contents of the bag are available for crafting.
 					Right click to open the bag.
 					'''
 			}
-
 			PackYellow: {
 				DisplayName: Pack (Yellow)
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatically stores items already contained in the bag.
 					When in your inventory, the contents of the bag are available for crafting.
 					Right click to open the bag.
 					'''
 			}
-
 			PaintBucket: {
 				DisplayName: Paint Bucket
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatically stores paint
 					When in your inventory, the contents of the bag are available for crafting.
@@ -322,10 +324,9 @@ Mods: {
 					If any paint in the can that can be used by your paint tool is favorited, only favorited paints will be used.
 					'''
 			}
-
 			PotionFlask: {
 				DisplayName: Potion Flask
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatically stores potions, food and drink.
 					When in your inventory, the contents of the bag are available for crafting.
@@ -336,61 +337,15 @@ Mods: {
 					Quick Mana will use mana items from the bag.  If any mana items in the bag are favorited, only favorited mana items will be used.
 					'''
 			}
-
 			WallEr: {
 				DisplayName: Wall-Er
-				Tooltip:
+				Tooltip: 
 					'''
 					Automatically stores walling materials (walls, fences, beams, etc.)
 					When in your inventory, the contents of the bag are available for crafting.
 					Right click to open the bag.
 					Items can be placed from Wall-Er by left clicking with Wall-Er.  If any items in Wall-Er are favorited, only favorited items will be used.
 					'''
-			}
-		}
-
-		Tiles: {
-			BagBlack.MapEntry: Bag Black
-			BagBlue.MapEntry: Bag Blue
-			BagBrown.MapEntry: Bag Brown
-			BagGray.MapEntry: Bag Gray
-			BagGreen.MapEntry: Bag Green
-			BagOrange.MapEntry: Bag Orange
-			BagPink.MapEntry: Bag Pink
-			BagPurple.MapEntry: Bag Purple
-			BagRed.MapEntry: Bag Red
-			BagWhite.MapEntry: Bag White
-			BagYellow.MapEntry: Bag Yellow
-			PackBlack.MapEntry: Pack Black
-			PackBlue.MapEntry: Pack Blue
-			PackBrown.MapEntry: Pack Brown
-			PackGray.MapEntry: Pack Gray
-			PackGreen.MapEntry: Pack Green
-			PackOrange.MapEntry: Pack Orange
-			PackPink.MapEntry: Pack Pink
-			PackPurple.MapEntry: Pack Purple
-			PackRed.MapEntry: Pack Red
-			PackWhite.MapEntry: Pack White
-			PackYellow.MapEntry: Pack Yellow
-		}
-
-		Configs: {
-			BagsClientConfig: {
-				DisplayName: Bags Client Config
-
-				AllAmmoItemsGoIntoAmmoBag: {
-					Label: All Ammo Items Go Into Ammo Bag
-					Tooltip: ""
-				}
-			}
-
-			BagsServerConfig: {
-				DisplayName: Bags Server Config
-
-				HarderBagRecipes: {
-					Label: Harder Bag Recipes
-					Tooltip: ""
-				}
 			}
 		}
 	}

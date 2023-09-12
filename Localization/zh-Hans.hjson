@@ -1,15 +1,47 @@
-#
+#1090549930 Kiritan - Github, @2578359679#1491, @An unilolusiality, and @huamx1#1050
 Mods: {
 	VacuumBags: {
 		Config: {
-			// BagStorageOptions: All Ammo Items Go Into Ammo Bag Header
-			// Crafting: Harder Bag Recipes Header
+			BagStorageOptions: Bag Storage Options
+			Crafting: Crafting
+			BagStorageOptions: {
+				AllAmmoItemsGoIntoAmmoBag: {
+					Label: All Ammo Items Go Into Ammo Bag
+					Tooltip: 
+						'''
+						If true, all items that are used as ammo for anything will go into the bag.
+						If false, only the selected ammo items whitelist will be allowed which excludes a few items like stars.
+						'''
+				}
+				SimpleBagStorageSize: {
+					Label: Simple Bag Storage Size
+					Tooltip: 
+						'''
+						The number of slots in the simple bag storage.
+						If this option is used while the player has more items in their bag, the bag size will be reduced to the number of items still in the bag.
+						Setting this number very high could cause lag or possibly a crash from using too much memory if you don't have much RAM.  Use at your own risk.
+						'''
+				}
+				SimpleBagsVacuumAllItems: {
+					Label: Simple Bags Vacuum All Items
+					Tooltip: 
+						'''
+						If true, all items will be vacuumed into the simple bags.
+						If false, only items that are the same type as an item in the bag will be vacuumed.
+						'''
+				}
+			}
+			Crafting: {
+				HarderBagRecipes: {
+					Label: Harder Bag Recipes
+					Tooltip: Makes the bag recipes require more items and some are more difficult to get.
+				}
+			}
 		}
-
 		Items: {
 			AmmoBag: {
 				DisplayName: 弹药袋
-				Tooltip:
+				Tooltip: 
 					'''
 					自动存储投掷物、箭头、子弹、照明弹、溶液。
 					当你在库存中时，包里的东西可以用来制作。
@@ -18,120 +50,108 @@ Mods: {
 					如果包里有任何可以被你所装备的武器使用的弹药被收藏，则只会使用收藏的弹药。
 					'''
 			}
-
 			BagBlack: {
 				DisplayName: 包袋（黑色）
-				Tooltip:
+				Tooltip: 
 					'''
 					自动存储袋子中已包含的物品。
 					当你在库存中时，包里的东西可以用来制作。
 					右键点击打开袋子。
 					'''
 			}
-
 			BagBlue: {
 				DisplayName: 包袋(蓝色)
-				Tooltip:
+				Tooltip: 
 					'''
 					自动存储袋子中已包含的物品。
 					当你在库存中时，包里的东西可以用来制作。
 					右键点击打开袋子。
 					'''
 			}
-
 			BagBrown: {
 				DisplayName: 包袋(棕色)
-				Tooltip:
+				Tooltip: 
 					'''
 					自动存储袋子中已包含的物品。
 					当你在库存中时，包里的东西可以用来制作。
 					右键点击打开袋子。
 					'''
 			}
-
 			BagGray: {
 				DisplayName: 包袋(灰色)
-				Tooltip:
+				Tooltip: 
 					'''
 					自动存储袋子中已包含的物品。
 					当你在库存中时，包里的东西可以用来制作。
 					右键点击打开袋子。
 					'''
 			}
-
 			BagGreen: {
 				DisplayName: 包袋（绿色）
-				Tooltip:
+				Tooltip: 
 					'''
 					自动存储袋子中已包含的物品。
 					当你在库存中时，包里的东西可以用来制作。
 					右键点击打开袋子。
 					'''
 			}
-
 			BagOrange: {
 				DisplayName: 包袋（橙色）
-				Tooltip:
+				Tooltip: 
 					'''
 					自动存储袋子中已包含的物品。
 					当你在库存中时，包里的东西可以用来制作。
 					右键点击打开袋子。
 					'''
 			}
-
 			BagPink: {
 				DisplayName: 包袋(粉色)
-				Tooltip:
+				Tooltip: 
 					'''
 					自动存储袋子中已包含的物品。
 					当你在库存中时，包里的东西可以用来制作。
 					右键点击打开袋子。
 					'''
 			}
-
 			BagPurple: {
 				DisplayName: 包袋(紫色)
-				Tooltip:
+				Tooltip: 
 					'''
 					自动存储袋子中已包含的物品。
 					当你在库存中时，包里的东西可以用来制作。
 					右键点击打开袋子。
 					'''
 			}
-
 			BagRed: {
 				DisplayName: 包袋（红色）
-				Tooltip:
+				Tooltip: 
 					'''
 					自动存储袋子中已包含的物品。
 					当你在库存中时，包里的东西可以用来制作。
 					右键点击打开袋子。
 					'''
 			}
-
 			BagWhite: {
 				DisplayName: 包袋(白色)
-				Tooltip:
+				Tooltip: 
 					'''
 					自动存储袋子中已包含的物品。
 					当你在库存中时，包里的东西可以用来制作。
 					右键点击打开袋子。
 					'''
 			}
-
 			BagYellow: {
 				DisplayName: 袋子(黄色)
-				Tooltip:
+				Tooltip: 
 					'''
 					自动存储袋子中已包含的物品。
 					当你在库存中时，包里的东西可以用来制作。
 					右键点击打开袋子。
 					'''
 			}
-
 			BossBag: {
 				DisplayName: 老板包
-				Tooltip:
+				Tooltip: 
 					'''
 					自动存储 老板 包、奖杯、老板 雕像和化妆品 老板 掉落物。
 					当你在库存中时，包里的东西可以用来制作。
@@ -139,10 +159,9 @@ Mods: {
 					使用 老板清单 将修改的项目添加到允许的项目（如果启用）。
 					'''
 			}
-
 			BuildersBox: {
 				DisplayName: 建筑箱
-				Tooltip:
+				Tooltip: 
 					'''
 					自动存储建筑材料（砖块、可制作的方块等）
 					当你在库存中时，包里的东西可以用来制作。
@@ -150,170 +169,153 @@ Mods: {
 					通过左键单击盒子可以从盒子中放置物品。 如果框中的任何项目被收藏，则仅使用收藏的项目。
 					'''
 			}
-
 			CalamitousCauldron: {
 				DisplayName: 灾难大锅
-				Tooltip:
+				Tooltip: 
 					'''
 					自动存储灾难中的物品。
 					当你在库存中时，包里的东西可以用来制作。
 					右键点击打开袋子。
 					'''
 			}
-
 			EssenceOfGathering: {
 				DisplayName: 采集精华
-				Tooltip:
+				Tooltip: 
 					'''
 					自动存储来自星空的物品。
 					当你在库存中时，包里的东西可以用来制作。
 					右键点击打开袋子。
 					'''
 			}
-
 			FargosMementos: {
 				DisplayName: 法戈的纪念品
-				Tooltip:
+				Tooltip: 
 					'''
 					自动存储来自法戈斯的物品。
 					当你在库存中时，包里的东西可以用来制作。
 					右键点击打开袋子。
 					'''
 			}
-
 			HerbSatchel: {
 				DisplayName: 香草挎包
-				Tooltip:
+				Tooltip: 
 					'''
 					自动储存种子、草药、花卉等。
 					当你在库存中时，包里的东西可以用来制作。
 					右键点击打开袋子。
 					'''
 			}
-
 			LokisTesseract: {
 				DisplayName: 洛基的宇宙立方
-				Tooltip:
+				Tooltip: 
 					'''
 					自动储存瑟银物品。
 					当你在库存中时，包里的东西可以用来制作。
 					右键点击打开袋子。
 					'''
 			}
-
 			PackBlack: {
 				DisplayName: 套装（黑色）
-				Tooltip:
+				Tooltip: 
 					'''
 					自动存储袋子中已包含的物品。
 					当你在库存中时，包里的东西可以用来制作。
 					右键点击打开袋子。
 					'''
 			}
-
 			PackBlue: {
 				DisplayName: 套装（蓝色）
-				Tooltip:
+				Tooltip: 
 					'''
 					自动存储袋子中已包含的物品。
 					当你在库存中时，包里的东西可以用来制作。
 					右键点击打开袋子。
 					'''
 			}
-
 			PackBrown: {
 				DisplayName: 套装（棕色）
-				Tooltip:
+				Tooltip: 
 					'''
 					自动存储袋子中已包含的物品。
 					当你在库存中时，包里的东西可以用来制作。
 					右键点击打开袋子。
 					'''
 			}
-
 			PackGray: {
 				DisplayName: 套装（灰色）
-				Tooltip:
+				Tooltip: 
 					'''
 					自动存储袋子中已包含的物品。
 					当你在库存中时，包里的东西可以用来制作。
 					右键点击打开袋子。
 					'''
 			}
-
 			PackGreen: {
 				DisplayName: 包装（绿色）
-				Tooltip:
+				Tooltip: 
 					'''
 					自动存储袋子中已包含的物品。
 					当你在库存中时，包里的东西可以用来制作。
 					右键点击打开袋子。
 					'''
 			}
-
 			PackOrange: {
 				DisplayName: 套装（橙色）
-				Tooltip:
+				Tooltip: 
 					'''
 					自动存储袋子中已包含的物品。
 					当你在库存中时，包里的东西可以用来制作。
 					右键点击打开袋子。
 					'''
 			}
-
 			PackPink: {
 				DisplayName: 套装（粉色）
-				Tooltip:
+				Tooltip: 
 					'''
 					自动存储袋子中已包含的物品。
 					当你在库存中时，包里的东西可以用来制作。
 					右键点击打开袋子。
 					'''
 			}
-
 			PackPurple: {
 				DisplayName: 套装（紫色）
-				Tooltip:
+				Tooltip: 
 					'''
 					自动存储袋子中已包含的物品。
 					当你在库存中时，包里的东西可以用来制作。
 					右键点击打开袋子。
 					'''
 			}
-
 			PackRed: {
 				DisplayName: 套装（红色）
-				Tooltip:
+				Tooltip: 
 					'''
 					自动存储袋子中已包含的物品。
 					当你在库存中时，包里的东西可以用来制作。
 					右键点击打开袋子。
 					'''
 			}
-
 			PackWhite: {
 				DisplayName: 套装（白色）
-				Tooltip:
+				Tooltip: 
 					'''
 					自动存储袋子中已包含的物品。
 					当你在库存中时，包里的东西可以用来制作。
 					右键点击打开袋子。
 					'''
 			}
-
 			PackYellow: {
 				DisplayName: 套装（黄色）
-				Tooltip:
+				Tooltip: 
 					'''
 					自动存储袋子中已包含的物品。
 					当你在库存中时，包里的东西可以用来制作。
 					右键点击打开袋子。
 					'''
 			}
-
 			PaintBucket: {
 				DisplayName: 油漆桶
-				Tooltip:
+				Tooltip: 
 					'''
 					自动储存油漆
 					当你在库存中时，包里的东西可以用来制作。
@@ -322,10 +324,9 @@ Mods: {
 					如果您的绘画工具可以使用罐中的任何油漆被收藏，则只会使用收藏的油漆。
 					'''
 			}
-
 			PotionFlask: {
 				DisplayName: 药水瓶
-				Tooltip:
+				Tooltip: 
 					'''
 					自动储存药水、食物和饮料。
 					当你在库存中时，包里的东西可以用来制作。
@@ -336,61 +337,15 @@ Mods: {
 					快速法力将使用包中的法力物品。 如果袋子中的任何法术力物品被收藏，则仅使用收藏的法术力物品。
 					'''
 			}
-
 			WallEr: {
 				DisplayName: 沃尔尔
-				Tooltip:
+				Tooltip: 
 					'''
 					自动存储墙体材料（墙壁、栅栏、横梁等）
 					当你在库存中时，包里的东西可以用来制作。
 					右键点击打开袋子。
 					可以通过用 沃尔尔 左键单击来从 沃尔尔 放置物品。 如果 沃尔尔 中的任何物品被收藏，则仅使用收藏的物品。
 					'''
-			}
-		}
-
-		Tiles: {
-			// BagBlack.MapEntry: Bag Black
-			// BagBlue.MapEntry: Bag Blue
-			// BagBrown.MapEntry: Bag Brown
-			// BagGray.MapEntry: Bag Gray
-			// BagGreen.MapEntry: Bag Green
-			// BagOrange.MapEntry: Bag Orange
-			// BagPink.MapEntry: Bag Pink
-			// BagPurple.MapEntry: Bag Purple
-			// BagRed.MapEntry: Bag Red
-			// BagWhite.MapEntry: Bag White
-			// BagYellow.MapEntry: Bag Yellow
-			// PackBlack.MapEntry: Pack Black
-			// PackBlue.MapEntry: Pack Blue
-			// PackBrown.MapEntry: Pack Brown
-			// PackGray.MapEntry: Pack Gray
-			// PackGreen.MapEntry: Pack Green
-			// PackOrange.MapEntry: Pack Orange
-			// PackPink.MapEntry: Pack Pink
-			// PackPurple.MapEntry: Pack Purple
-			// PackRed.MapEntry: Pack Red
-			// PackWhite.MapEntry: Pack White
-			// PackYellow.MapEntry: Pack Yellow
-		}
-
-		Configs: {
-			BagsClientConfig: {
-				// DisplayName: Bags Client Config
-
-				AllAmmoItemsGoIntoAmmoBag: {
-					// Label: All Ammo Items Go Into Ammo Bag
-					// Tooltip: ""
-				}
-			}
-
-			BagsServerConfig: {
-				// DisplayName: Bags Server Config
-
-				HarderBagRecipes: {
-					// Label: Harder Bag Recipes
-					// Tooltip: ""
-				}
 			}
 		}
 	}

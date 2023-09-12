@@ -12,6 +12,9 @@ using androLib.Common.Utility;
 using androLib.Common.Globals;
 using androLib.Common.Configs;
 using androLib.Localization;
+using static VacuumBags.Common.Configs.BagsServerConfig;
+using static VacuumBags.Common.Configs.BagsClientConfig;
+using static VacuumBags.VacuumBags;
 
 namespace VacuumBags.Localization
 {
@@ -30,29 +33,39 @@ namespace VacuumBags.Localization
 							//Intentionally empty.  Filled automatically
 						}) },
 						{ L_ID1.Config.ToString(), new(children: new() {
-							//{ nameof(AndroClientConfig.PrintLocalizationLists), new(dict: new() {
-							//	{ L_ID3.Label.ToString(), "Log all translation lists" },
-							//	{ L_ID3.Tooltip.ToString(), "The lists are printed to the client.log when you enter a world.\nThe client.log default location is C:\\Steam\\SteamApps\\common\\tModLoader\\tModLoader-Logs" }
-							//}) },
+							{ CraftingHeaderKey, new(children: new() {
+								{ nameof(serverConfig.HarderBagRecipes), new(dict: new() {
+									{ L_ID3.Label.ToString(), "Harder Bag Recipes" },
+									{ L_ID3.Tooltip.ToString(), "Makes the bag recipes require more items and some are more difficult to get." }
+								}) },
+							}) },
+							{ BagStorageOptionsKey, new(children: new() {
+								{ nameof(clientConfig.SimpleBagStorageSize), new(dict: new() {
+									{ L_ID3.Label.ToString(), "Simple Bag Storage Size" },
+									{ L_ID3.Tooltip.ToString(), 
+										"The number of slots in the simple bag storage.\n" +
+										"If this option is used while the player has more items in their bag, the bag size will be reduced to the number of items still in the bag.\n" +
+										"Setting this number very high could cause lag or possibly a crash from using too much memory if you don't have much RAM.  Use at your own risk." }
+								}) },
+								{ nameof(clientConfig.SimpleBagsVacuumAllItems), new(dict: new() {
+									{ L_ID3.Label.ToString(), "Simple Bags Vacuum All Items" },
+									{ L_ID3.Tooltip.ToString(), 
+										"If true, all items will be vacuumed into the simple bags.\n" +
+										"If false, only items that are the same type as an item in the bag will be vacuumed."  }
+								}) },
+								{ nameof(clientConfig.AllAmmoItemsGoIntoAmmoBag), new(dict: new() {
+									{ L_ID3.Label.ToString(), "All Ammo Items Go Into Ammo Bag" },
+									{ L_ID3.Tooltip.ToString(), 
+										"If true, all items that are used as ammo for anything will go into the bag.\n" +
+										"If false, only the selected ammo items whitelist will be allowed which excludes a few items like stars." }
+								}) },
+							}) },
 							}, dict: new() {
-								//{ "DisplaySettings", "Display Settings" },
-								//{ "LoggingInformation", "Logging Information" }
+								{ CraftingHeaderKey, CraftingHeaderKey.AddSpaces() },
+								{ BagStorageOptionsKey, BagStorageOptionsKey.AddSpaces() }
 								/*,
 								{ "", "" },
 								{ "", "" },
-								{ "", "" },
-								{ "", "" },
-								{ "", "" },
-								{ "", "" },
-								{ "", "" },
-								{ "", "" },
-								{ "", "" },
-								{ "", "" },
-								{ "", "" },
-								{ "", "" },
-								{ "", "" },
-								{ "", "" },
-								{ "", "" }
 								*/
 						}) }
 					};
