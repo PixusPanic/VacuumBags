@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using androLib;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,10 +20,12 @@ namespace VacuumBags.Tiles
     public class BagBlack : SimpleBagTile
     {
 		public override Color MapColor => Items.BagBlack.PanelColor;
-		public override void KillMultiTile(int i, int j, int frameX, int frameY)
-        {
-            if (!Main.LocalPlayer.HasItem(ModContent.ItemType<Items.BagBlack>()))
-                Items.BagBlack.CloseBag();
+		public override void KillMultiTile(int i, int j, int frameX, int frameY) {
+			if (Main.netMode == NetmodeID.Server)
+				return;
+
+			if (!StorageManager.HasRequiredItemToUseStorageFromBagType(Main.LocalPlayer, ModContent.ItemType<Items.BagBlack>(), out _))
+				Items.BagBlack.CloseBag();
         }
     }
 }

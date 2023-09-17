@@ -2,6 +2,47 @@
 Mods: {
 	VacuumBags: {
 		Config: {
+			BagEffectOptions: {
+				BannerBagNumberOfBannersInInventory: {
+					Label: Banner Bag Number Of Banners In Inventory
+					Tooltip:
+						'''
+						When the Banner bag is in your inventory, the first X number of banners will apply their buffs.
+						Favoriting a banner or banners gives them priority over non-favorited ones.
+						Set to -1 for all banners in the bag to give their buffs.
+						'''
+				}
+
+				BannerBagNumberOfBannersWhenPlaced: {
+					Label: Banner Bag Number Of Banners When Placed
+					Tooltip:
+						'''
+						When the Banner bag is placed in the world, the first X number of banners will apply their buffs.
+						Favoriting a banner or banners gives them priority over non-favorited ones.Set to -1 for all banners in the bag to give their buffs.
+						'''
+				}
+
+				PortableStationNumberOfStationsInInventory: {
+					Label: Portable Station Number Of Stations In Inventory
+					Tooltip:
+						'''
+						When the Portable Station is in your inventory, the first X number of stations will be available for crafting.
+						Favoriting a station or stations gives them priority over non-favorited ones.
+						Set to -1 for all stations in the Portable Station to be available for crafting.
+						'''
+				}
+
+				PortableStationNumberOfStationsWhenPlaced: {
+					Label: Portable Station Number Of Stations When Placed
+					Tooltip:
+						'''
+						When the Portable Station is placed in the world, the first X number of stations will be available for crafting.
+						Favoriting a station or stations gives them priority over non-favorited ones.
+						Set to -1 for all stations in the Portable Station to be available for crafting.
+						'''
+				}
+			}
+
 			BagStorageOptions: {
 				AllAmmoItemsGoIntoAmmoBag: {
 					Label: All Ammo Items Go Into Ammo Bag
@@ -163,6 +204,21 @@ Mods: {
 					'''
 			}
 
+			BannerBag: {
+				DisplayName: Banner Bag
+				Tooltip:
+					'''
+					Automatically stores banners.
+					When in your inventory, the contents of the bag are available for crafting.
+					Right click to open the bag.
+					The bag provides up to 3 banner effects by default when in your inventory.
+					When placed, it provides all of your banner effects by default, but in the normal banner range.  Each banner bag shares it's inventory.
+					When selecting banner buffs to give you, banners will be ignored if you already have them nearby.
+					The background of banners is yellow when there buff is being granted by the banner bag.
+					The background is purple if you already have the banner buff from another source.
+					'''
+			}
+
 			BossBag: {
 				DisplayName: Boss Bag
 				Tooltip:
@@ -215,6 +271,19 @@ Mods: {
 					'''
 			}
 
+			FishingBelt: {
+				DisplayName: Fishing Belt
+				Tooltip:
+					'''
+					Automatically stores fishing related items such as fish, bait and angler rewards.
+					When in your inventory, the contents of the belt are available for crafting.
+					Right click to open the belt.
+					Bait in the belt is used if the fishing belt is in the first bait item found.
+					If any bait in the belt that can be used is favorited, only favorited baits will be used.
+					Information accessories that are favorited will show their info as if they are in your inventory.
+					'''
+			}
+
 			HerbSatchel: {
 				DisplayName: Herb Satchel
 				Tooltip:
@@ -225,6 +294,19 @@ Mods: {
 					'''
 			}
 
+			JarOfDirt: {
+				DisplayName: Jar of Dirt
+				Tooltip:
+					'''
+					Automatically stores dirt and other natural blocks (dirt, mud, clay, sand, stone, ice, etc.)
+					When in your inventory, the contents of the jar are available for crafting.
+					Right click to open the jar.
+					Items can be placed from the jar by left clicking with the jar.  If any items in the jar are favorited, only favorited items will be used.
+
+					..........guess what's inside it....
+					'''
+			}
+
 			LokisTesseract: {
 				DisplayName: Loki's Tesseract
 				Tooltip:
@@ -232,6 +314,18 @@ Mods: {
 					Automatically stores items from Thorium.
 					When in your inventory, the contents of the bag are available for crafting.
 					Right click to open the bag.
+					'''
+			}
+
+			MechanicsToolbelt: {
+				DisplayName: Mechanic's Toolbelt
+				Tooltip:
+					'''
+					Automatically stores wiring related items such as traps and statues.
+					When in your inventory, the contents of the belt are available for crafting.
+					Right click to open the belt.
+					Items can be placed from the belt by left clicking with the belt.  If any items in the belt are favorited, only favorited items will be used.
+					Wire in the belt can be used by wiring tools as if it were in your inventory.
 					'''
 			}
 
@@ -350,10 +444,25 @@ Mods: {
 				Tooltip:
 					'''
 					Automatically stores paint
-					When in your inventory, the contents of the bag are available for crafting.
-					Right click to open the bag.
-					Paint in the can is used if the Paint Can is in the first paint item found.
-					If any paint in the can that can be used by your paint tool is favorited, only favorited paints will be used.
+					When in your inventory, the contents of the bucket are available for crafting.
+					Right click to open the bucket.
+					Paint in the bucket is used if the paint bucket is in the first paint item found.
+					If any paint in the bucket that can be used by your paint tool is favorited, only favorited paints will be used.
+					'''
+			}
+
+			PortableStation: {
+				DisplayName: Portable Station
+				Tooltip:
+					'''
+					Automatically stores crafting stations and buff stations.
+					When in your inventory, the contents of the station are available for crafting.
+					Right click to open the station.
+					When in your inventory, the Portable Station provinces up to 3 station for crafting by default when in your inventory.
+					When placed, it provides all of your stations for crafting by default, but in the normal tile range.  Each Portable Station shares it's inventory.
+					The background of stations is yellow when they are being provided for crafting by the Portable Station.
+					The background is purple if there is already that type of station nearby, however it will not automatically skip stations you are near when selecting
+					stations from the Portable Station because more is not necessarily better with crafting recipes. you already have the banner buff from another source.
 					'''
 			}
 
@@ -371,6 +480,18 @@ Mods: {
 					'''
 			}
 
+			SlayersSack: {
+				DisplayName: Slayer's Sack
+				Tooltip:
+					'''
+					Automatically stores materials dropped by enemies and other items found while adventuring such as torches, rope and keys.
+					When in your inventory, the contents of the sack are available for crafting.
+					Right click to open the sack.
+					Rope can be placed from the sack by left clicking with the sack.  If any rope in the sack is favorited, only favorited rope will be used.
+					Torches and glowsticks can be used from the bag when holding shift as if they were in your inventory.
+					'''
+			}
+
 			WallEr: {
 				DisplayName: Wall-Er
 				Tooltip:
@@ -380,6 +501,11 @@ Mods: {
 					Right click to open the bag.
 					Items can be placed from Wall-Er by left clicking with Wall-Er.  If any items in Wall-Er are favorited, only favorited items will be used.
 					'''
+			}
+
+			OreBag: {
+				Tooltip: ""
+				DisplayName: Ore Bag
 			}
 		}
 
@@ -395,6 +521,7 @@ Mods: {
 			BagRed.MapEntry: Bag Red
 			BagWhite.MapEntry: Bag White
 			BagYellow.MapEntry: Bag Yellow
+			BannerBag.MapEntry: Banner Bag
 			PackBlack.MapEntry: Pack Black
 			PackBlue.MapEntry: Pack Blue
 			PackBrown.MapEntry: Pack Brown
@@ -406,6 +533,7 @@ Mods: {
 			PackRed.MapEntry: Pack Red
 			PackWhite.MapEntry: Pack White
 			PackYellow.MapEntry: Pack Yellow
+			PortableStation.MapEntry: Portable Station
 		}
 
 		Configs: {
@@ -433,6 +561,26 @@ Mods: {
 
 				HarderBagRecipes: {
 					Label: Harder Bag Recipes
+					Tooltip: ""
+				}
+
+				BannerBagNumberOfBannersInInventory: {
+					Label: Banner Bag Number Of Banners In Inventory
+					Tooltip: ""
+				}
+
+				BannerBagNumberOfBannersWhenPlaced: {
+					Label: Banner Bag Number Of Banners When Placed
+					Tooltip: ""
+				}
+
+				PortableStationNumberOfStationsInInventory: {
+					Label: Portable Station Number Of Stations In Inventory
+					Tooltip: ""
+				}
+
+				PortableStationNumberOfStationsWhenPlaced: {
+					Label: Portable Station Number Of Stations When Placed
 					Tooltip: ""
 				}
 			}

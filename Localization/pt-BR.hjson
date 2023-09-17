@@ -2,40 +2,81 @@
 Mods: {
 	VacuumBags: {
 		Config: {
-			BagStorageOptions: {
-				AllAmmoItemsGoIntoAmmoBag: {
-					Label: All Ammo Items Go Into Ammo Bag
+			BagEffectOptions: {
+				BannerBagNumberOfBannersInInventory: {
+					Label: Saco de banner Número de banners em estoque
 					Tooltip:
 						'''
-						If true, all items that are used as ammo for anything will go into the bag.
-						If false, only the selected ammo items whitelist will be allowed which excludes a few items like stars.
+						Quando a sacola de estandartes estiver em seu inventário, o primeiro número X de estandartes aplicará seus buffs.
+						Favoritar um banner ou banners dá-lhes prioridade sobre os não favoritos.
+						Defina como -1 para todos os banners na sacola para concederem seus buffs.
+						'''
+				}
+
+				BannerBagNumberOfBannersWhenPlaced: {
+					Label: Saco de banner Número de banners quando colocados
+					Tooltip:
+						'''
+						Quando a sacola de Banner for colocada no mundo, o primeiro número X de banners aplicará seus buffs.
+						Favoritar um banner ou banners lhes dá prioridade sobre os não favoritos. Defina como -1 para que todos os banners na sacola concedam seus buffs.
+						'''
+				}
+
+				PortableStationNumberOfStationsInInventory: {
+					Label: Número de estações portáteis em estoque
+					Tooltip:
+						'''
+						Quando a Estação Portátil estiver em seu inventário, o primeiro número X de estações estará disponível para fabricação.
+						Favoritar uma estação ou estações lhes dá prioridade sobre as não favoritas.
+						Defina como -1 para que todas as estações na Estação Portátil estejam disponíveis para fabricação.
+						'''
+				}
+
+				PortableStationNumberOfStationsWhenPlaced: {
+					Label: Número de estações portáteis quando colocadas
+					Tooltip:
+						'''
+						Quando a Estação Portátil for colocada no mundo, o primeiro número X de estações estará disponível para fabricação.
+						Favoritar uma estação ou estações lhes dá prioridade sobre as não favoritas.
+						Defina como -1 para que todas as estações na Estação Portátil estejam disponíveis para fabricação.
+						'''
+				}
+			}
+
+			BagStorageOptions: {
+				AllAmmoItemsGoIntoAmmoBag: {
+					Label: Todos os itens de munição vão para a bolsa de munição
+					Tooltip:
+						'''
+						Se for verdade, todos os itens usados como munição para qualquer coisa irão para a bolsa.
+						Se for falso, apenas a lista de permissões de itens de munição selecionados será permitida, o que exclui alguns itens como estrelas.
 						'''
 				}
 
 				SimpleBagStorageSize: {
-					Label: Simple Bag Storage Size
+					Label: Tamanho simples de armazenamento de bolsa
 					Tooltip:
 						'''
-						The number of slots in the simple bag storage.
-						If this option is used while the player has more items in their bag, the bag size will be reduced to the number of items still in the bag.
-						Setting this number very high could cause lag or possibly a crash from using too much memory if you don't have much RAM.  Use at your own risk.
+						O número de slots no armazenamento de bolsa simples.
+						Se esta opção for usada enquanto o jogador tiver mais itens na sacola, o tamanho da sacola será reduzido ao número de itens ainda na sacola.
+						Definir esse número muito alto pode causar atraso ou possivelmente travamento por usar muita memória se você não tiver muita RAM. Use por sua conta e risco.
 						'''
 				}
 
 				SimpleBagsVacuumAllItems: {
-					Label: Simple Bags Vacuum All Items
+					Label: Sacos simples aspiram todos os itens
 					Tooltip:
 						'''
-						If true, all items will be vacuumed into the simple bags.
-						If false, only items that are the same type as an item in the bag will be vacuumed.
+						Se for verdade, todos os itens serão aspirados em sacos simples.
+						Se for falso, apenas os itens do mesmo tipo de um item na sacola serão aspirados.
 						'''
 				}
 			}
 
 			Crafting: {
 				HarderBagRecipes: {
-					Label: Harder Bag Recipes
-					Tooltip: Makes the bag recipes require more items and some are more difficult to get.
+					Label: Receitas de sacos mais difíceis
+					Tooltip: Faz com que as receitas da sacola exijam mais itens e alguns sejam mais difíceis de conseguir.
 				}
 			}
 		}
@@ -163,6 +204,21 @@ Mods: {
 					'''
 			}
 
+			BannerBag: {
+				DisplayName: Bolsa de banner
+				Tooltip:
+					'''
+					Armazena banners automaticamente.
+					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
+					Clique com o botão direito para abrir a bolsa.
+					A bolsa fornece até 3 efeitos de banner por padrão quando está em seu inventário.
+					Quando colocado, ele fornece todos os efeitos do seu banner por padrão, mas no intervalo normal do banner. Cada sacola de banner compartilha seu inventário.
+					Ao selecionar buffs de banner para lhe dar, os banners serão ignorados se você já os tiver por perto.
+					O fundo dos banners fica amarelo quando o buff está sendo concedido pela sacola do banner.
+					O fundo é roxo se você já possui o buff de banner de outra fonte.
+					'''
+			}
+
 			BossBag: {
 				DisplayName: Bolsa Chefe
 				Tooltip:
@@ -215,6 +271,19 @@ Mods: {
 					'''
 			}
 
+			FishingBelt: {
+				DisplayName: Cinto de Pesca
+				Tooltip:
+					'''
+					Armazena automaticamente itens relacionados à pesca, como recompensas de peixes, iscas e pescadores.
+					Quando estiver em seu inventário, o conteúdo do cinto estará disponível para fabricação.
+					Clique com o botão direito para abrir o cinto.
+					A isca no cinto é usada se o cinto de pesca estiver na primeira isca encontrada.
+					Se alguma isca do cinto que puder ser usada for favorita, apenas as iscas favoritas serão usadas.
+					Os acessórios de informação favoritos mostrarão suas informações como se estivessem em seu inventário.
+					'''
+			}
+
 			HerbSatchel: {
 				DisplayName: Bolsa de Ervas
 				Tooltip:
@@ -225,6 +294,19 @@ Mods: {
 					'''
 			}
 
+			JarOfDirt: {
+				DisplayName: Jarra de terra
+				Tooltip:
+					'''
+					Armazena automaticamente sujeira e outros blocos naturais (sujeira, lama, argila, areia, pedra, gelo, etc.)
+					Quando estiver em seu inventário, o conteúdo do frasco estará disponível para fabricação.
+					Clique com o botão direito para abrir o frasco.
+					Os itens podem ser colocados no jarro clicando com o botão esquerdo no jarro. Se algum item do jar for favorito, apenas os itens favoritos serão usados.
+
+					.......... adivinhe o que tem dentro dele....
+					'''
+			}
+
 			LokisTesseract: {
 				DisplayName: Tesserato de Loki
 				Tooltip:
@@ -232,6 +314,18 @@ Mods: {
 					Armazena automaticamente itens do Thorium.
 					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
 					Clique com o botão direito para abrir a bolsa.
+					'''
+			}
+
+			MechanicsToolbelt: {
+				DisplayName: Cinto de ferramentas do mecânico
+				Tooltip:
+					'''
+					Armazena automaticamente itens relacionados à fiação, como armadilhas e estátuas.
+					Quando estiver em seu inventário, o conteúdo do cinto estará disponível para fabricação.
+					Clique com o botão direito para abrir o cinto.
+					Os itens podem ser colocados no cinto clicando com o botão esquerdo no cinto. Se algum item do cinto for favorito, apenas os itens favoritos serão usados.
+					O fio no cinto pode ser usado para conectar ferramentas como se estivesse em seu inventário.
 					'''
 			}
 
@@ -350,10 +444,25 @@ Mods: {
 				Tooltip:
 					'''
 					Armazena tinta automaticamente
-					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
-					Clique com o botão direito para abrir a bolsa.
-					A tinta na lata é usada se a lata de tinta estiver no primeiro item de tinta encontrado.
-					Se qualquer tinta da lata que possa ser usada pela sua ferramenta de pintura for favorita, apenas as tintas favoritas serão usadas.
+					Quando estiver em seu inventário, o conteúdo do balde estará disponível para fabricação.
+					Clique com o botão direito para abrir o balde.
+					A tinta no balde é usada se o balde de tinta estiver no primeiro item de tinta encontrado.
+					Se qualquer tinta no balde que possa ser usada pela sua ferramenta de pintura for favorita, apenas as tintas favoritas serão usadas.
+					'''
+			}
+
+			PortableStation: {
+				DisplayName: Estação Portátil
+				Tooltip:
+					'''
+					Armazena automaticamente estações de artesanato e estações de buff.
+					Quando estiver em seu inventário, o conteúdo da estação estará disponível para elaboração.
+					Clique com o botão direito para abrir a estação.
+					Quando estiver em seu inventário, a Estação Portátil reserva até 3 estações para fabricação por padrão quando estiver em seu inventário.
+					Quando colocado, ele fornece todas as suas estações para elaboração por padrão, mas no intervalo normal de peças. Cada Estação Portátil compartilha seu inventário.
+					O fundo das estações fica amarelo quando elas estão sendo fornecidas para fabricação pela Estação Portátil.
+					O fundo é roxo se já existir esse tipo de estação por perto, no entanto, ele não irá pular automaticamente as estações perto de você ao selecionar
+					estações da Estação Portátil porque mais não é necessariamente melhor na elaboração de receitas. você já tem o buff de banner de outra fonte.
 					'''
 			}
 
@@ -371,6 +480,18 @@ Mods: {
 					'''
 			}
 
+			SlayersSack: {
+				DisplayName: Saco do Assassino
+				Tooltip:
+					'''
+					Armazena automaticamente materiais derrubados por inimigos e outros itens encontrados durante a aventura, como tochas, cordas e chaves.
+					Quando estiver em seu inventário, o conteúdo do saco estará disponível para confecção.
+					Clique com o botão direito para abrir o saco.
+					A corda pode ser colocada no saco clicando com o botão esquerdo no saco. Se alguma corda do saco for favorita, apenas a corda favorita será usada.
+					Tochas e bastões luminosos podem ser usados ​​da bolsa ao segurar o turno, como se estivessem em seu inventário.
+					'''
+			}
+
 			WallEr: {
 				DisplayName: Wall-Er
 				Tooltip:
@@ -380,6 +501,11 @@ Mods: {
 					Clique com o botão direito para abrir a bolsa.
 					Os itens podem ser colocados em Wall-Er clicando com o botão esquerdo em Wall-Er. Se algum item em Wall-Er for favorito, apenas os itens favoritos serão usados.
 					'''
+			}
+
+			OreBag: {
+				// Tooltip: ""
+				// DisplayName: Ore Bag
 			}
 		}
 
@@ -395,6 +521,7 @@ Mods: {
 			// BagRed.MapEntry: Bag Red
 			// BagWhite.MapEntry: Bag White
 			// BagYellow.MapEntry: Bag Yellow
+			// BannerBag.MapEntry: Banner Bag
 			// PackBlack.MapEntry: Pack Black
 			// PackBlue.MapEntry: Pack Blue
 			// PackBrown.MapEntry: Pack Brown
@@ -406,6 +533,7 @@ Mods: {
 			// PackRed.MapEntry: Pack Red
 			// PackWhite.MapEntry: Pack White
 			// PackYellow.MapEntry: Pack Yellow
+			// PortableStation.MapEntry: Portable Station
 		}
 
 		Configs: {
@@ -433,6 +561,26 @@ Mods: {
 
 				HarderBagRecipes: {
 					// Label: Harder Bag Recipes
+					// Tooltip: ""
+				}
+
+				BannerBagNumberOfBannersInInventory: {
+					// Label: Banner Bag Number Of Banners In Inventory
+					// Tooltip: ""
+				}
+
+				BannerBagNumberOfBannersWhenPlaced: {
+					// Label: Banner Bag Number Of Banners When Placed
+					// Tooltip: ""
+				}
+
+				PortableStationNumberOfStationsInInventory: {
+					// Label: Portable Station Number Of Stations In Inventory
+					// Tooltip: ""
+				}
+
+				PortableStationNumberOfStationsWhenPlaced: {
+					// Label: Portable Station Number Of Stations When Placed
 					// Tooltip: ""
 				}
 			}

@@ -12,6 +12,7 @@ using System;
 
 namespace VacuumBags.Items
 {
+	[Autoload(false)]
 	public class BagBlue : SimpleBag {
 		new public static int BagStorageID;
 		public override int MyTileType => ModContent.TileType<Tiles.BagBlue>();
@@ -29,6 +30,7 @@ namespace VacuumBags.Items
 			}
 		}
 		private static SortedSet<int> blacklist = null;
+
 		public static bool ItemAllowedToBeStored(Item item) => !Blacklist.Contains(item.type);
 		new public static Color PanelColor => new Color(10, 10, 80, androLib.Common.Configs.ConfigValues.UIAlpha);
 		new public static void RegisterWithAndroLib(Mod mod) {

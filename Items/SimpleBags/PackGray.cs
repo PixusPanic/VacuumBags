@@ -12,6 +12,7 @@ using System;
 
 namespace VacuumBags.Items
 {
+	[Autoload(false)]
 	public class PackGray : BagGray {
 		public override int MyTileType => ModContent.TileType<Tiles.PackGray>();
 		public static void RegisterWithAndroLibItemTypeOnly() {

@@ -12,6 +12,7 @@ using Terraria.ModLoader.Default;
 
 namespace VacuumBags.Items
 {
+	[Autoload(false)]
 	public class CalamitousCauldron : ModBag {
 		public override string ModDisplayNameTooltip => "Calamity";
 		public override string LocalizationDisplayName => "Calamitous Cauldron";

@@ -10,7 +10,7 @@ using Terraria.ID;
 
 namespace VacuumBags.Items
 {
-	public abstract class ModBag : VBModItem, ISoldByWitch
+	public abstract class ModBag : BagModItem, ISoldByWitch
 	{
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public abstract string ModDisplayNameTooltip { get; }

@@ -18,7 +18,8 @@ using androLib.Common.Globals;
 
 namespace VacuumBags.Items
 {
-	public class BossBag : VBModItem, ISoldByWitch
+	[Autoload(false)]
+	public class BossBag : BagModItem, ISoldByWitch, INeedsSetUpAllowedList
 	{
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {
@@ -32,8 +33,8 @@ namespace VacuumBags.Items
 			if (!VacuumBags.serverConfig.HarderBagRecipes) {
 				CreateRecipe()
 				.AddTile(TileID.WorkBenches)
-				.AddRecipeGroup("VacuumBags:AnyBossTrophy", 1)
-				.AddRecipeGroup("VacuumBags:AnyBossBag", 1)
+				.AddRecipeGroup($"{VacuumBags.ModName}:{VacuumBagSystem.AnyBossTrophy}", 1)
+				.AddRecipeGroup($"{VacuumBags.ModName}:{VacuumBagSystem.AnyBossBag}", 1)
 				.AddIngredient(ItemID.GoldChest, 1)
 				.Register();
 			}
@@ -67,202 +68,184 @@ namespace VacuumBags.Items
 		}
 		public static bool ItemAllowedToBeStored(Item item) => AllowedItems.Contains(item.type);
 
-		public static SortedSet<int> AllowedItems {
-			get {
-				if (allowedItems == null)
-					GetAllowedItems();
+		public static SortedSet<int> AllowedItems => AllowedItemsManager.AllowedItems;
+		public static AllowedItemsManager AllowedItemsManager = new(DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
+		public AllowedItemsManager GetAllowedItemsManager => AllowedItemsManager;
+		protected static bool? DevCheck(ItemSetInfo info, SortedSet<ItemGroup> itemGroups, SortedSet<string> endWords, SortedSet<string> searchWords) {
+			if (info.BossTrophyOrRelic || info.BossSpawner)
+				return true;
 
-				return allowedItems;
-			}
+			return null;
 		}
-		private static SortedSet<int> allowedItems = null;
-
-		private static void GetAllowedItems() {
-			allowedItems = new() {
-				
+		protected static SortedSet<int> DevWhiteList() {
+			SortedSet<int> devWhiteList = new() {
+				ItemID.GuideVoodooDoll,
+				ItemID.RedsWings,
+				ItemID.RedsHelmet,
+				ItemID.RedsBreastplate,
+				ItemID.RedsLeggings,
+				ItemID.LihzahrdPowerCell,
+				ItemID.ClothierVoodooDoll,
+				ItemID.CenxsTiara,
+				ItemID.CenxsBreastplate,
+				ItemID.CenxsLeggings,
+				ItemID.CrownosMask,
+				ItemID.CrownosBreastplate,
+				ItemID.CrownosLeggings,
+				ItemID.WillsHelmet,
+				ItemID.WillsBreastplate,
+				ItemID.WillsLeggings,
+				ItemID.JimsHelmet,
+				ItemID.JimsBreastplate,
+				ItemID.JimsLeggings,
+				ItemID.AaronsHelmet,
+				ItemID.AaronsBreastplate,
+				ItemID.AaronsLeggings,
+				ItemID.DTownsHelmet,
+				ItemID.DTownsBreastplate,
+				ItemID.DTownsLeggings,
+				ItemID.DTownsWings,
+				ItemID.WillsWings,
+				ItemID.CrownosWings,
+				ItemID.CenxsWings,
+				ItemID.CenxsDress,
+				ItemID.CenxsDressPants,
+				ItemID.BejeweledValkyrieHead,
+				ItemID.BejeweledValkyrieBody,
+				ItemID.BejeweledValkyrieWing,
+				ItemID.Yoraiz0rShirt,
+				ItemID.Yoraiz0rPants,
+				ItemID.Yoraiz0rWings,
+				ItemID.Yoraiz0rDarkness,
+				ItemID.JimsWings,
+				ItemID.Yoraiz0rHead,
+				ItemID.SkiphsHelm,
+				ItemID.SkiphsShirt,
+				ItemID.SkiphsPants,
+				ItemID.SkiphsWings,
+				ItemID.LokisHelm,
+				ItemID.LokisShirt,
+				ItemID.LokisShirt,
+				ItemID.LokisShirt,
+				ItemID.DD2ElderCrystalStand,
+				ItemID.DD2ElderCrystal,
+				ItemID.ArkhalisHat,
+				ItemID.ArkhalisShirt,
+				ItemID.ArkhalisPants,
+				ItemID.ArkhalisWings,
+				ItemID.LeinforsHat,
+				ItemID.LeinforsShirt,
+				ItemID.LeinforsPants,
+				ItemID.LeinforsWings,
+				ItemID.LeinforsAccessory,
+				ItemID.GhostarSkullPin,
+				ItemID.GhostarShirt,
+				ItemID.GhostarPants,
+				ItemID.GhostarsWings,
+				ItemID.SafemanWings,
+				ItemID.SafemanSunHair,
+				ItemID.SafemanSunDress,
+				ItemID.SafemanSunDress,
+				ItemID.FoodBarbarianWings,
+				ItemID.FoodBarbarianWings,
+				ItemID.FoodBarbarianArmor,
+				ItemID.FoodBarbarianGreaves,
+				ItemID.GroxTheGreatWings,
+				ItemID.GroxTheGreatHelm,
+				ItemID.GroxTheGreatArmor,
+				ItemID.GroxTheGreatGreaves,
 			};
 
-			SortedSet<string> endWords = new() {
-				
-			};
+			devWhiteList.UnionWith(BossBagsData.BossBags);
 
-			SortedSet<string> searchWords = new() {
-
-			};
-
-			foreach (int bossTrophyType in BossTrophies) {
-				allowedItems.Add(bossTrophyType);
-			}
-
-			foreach (int bossBagType in BossBagsData.BossBags) {
-				allowedItems.Add(bossBagType);
-			}
-
-			for (int i = 0; i < ItemLoader.ItemCount; i++) {
-				if (allowedItems.Contains(i))
-					continue;
-
-				Item item = ContentSamples.ItemsByType[i];
-				if (item.NullOrAir())
-					continue;
-
-				if (ItemID.Sets.SortingPriorityBossSpawns[i] > -1
-					&& item.useStyle == ItemUseStyleID.HoldUp
-					&& item.consumable
-					&& item.useAnimation == 45
-					&& item.useTime == 45
-					) {
-					allowedItems.Add(item.type);
-					continue;
-				}
-
-				string lowerName = item.GetItemInternalName().ToLower();
-				bool added = false;
-				foreach (string endWord in endWords) {
-					if (lowerName.EndsWith(endWord)) {
-						allowedItems.Add(item.type);
-						added = true;
-						break;
+			if (BossChecklistIntegration.BossInfos != null) {
+				foreach (BossChecklistBossInfo bossChecklistInfo in BossChecklistIntegration.BossInfos.Select(p => p.Value)) {
+					foreach (int bossSummonType in bossChecklistInfo.spawnItem) {
+						devWhiteList.Add(bossSummonType);
 					}
 				}
 
-				if (added)
-					continue;
+				foreach (BossChecklistBossInfo bossChecklistInfo in BossChecklistIntegration.BossInfos.Select(p => p.Value)) {
+					foreach (int itemType in bossChecklistInfo.loot) {
+						if (devWhiteList.Contains(itemType))
+							continue;
 
-				foreach (string searchWord in searchWords) {
-					if (lowerName.Contains(searchWord)) {
-						allowedItems.Add(item.type);
-						added = true;
-						break;
-					}
-				}
+						ItemSetInfo info = new(itemType);
 
-				if (added)
-					continue;
-
-				ItemGroupAndOrderInGroup group = new ItemGroupAndOrderInGroup(item);
-				if (group.Group == ItemGroup.BossBags || group.Group == ItemGroup.BossSpawners || group.Group == ItemGroup.EventItem || group.Group == ItemGroup.BossItem) {
-					allowedItems.Add(item.type);
-					continue;
-				}
-
-				if (lowerName.Contains("relic")
-					&& item.useStyle == ItemUseStyleID.Swing
-					&& item.useTurn
-					&& item.autoReuse
-					&& item.consumable
-					) {
-					allowedItems.Add(item.type);
-					continue;
-				}
-
-				if (BossChecklistIntegration.BossInfos != null) {
-					foreach (BossChecklistBossInfo bossChecklistInfo in BossChecklistIntegration.BossInfos.Select(p => p.Value)) {
-						foreach (int bossSummonType in bossChecklistInfo.spawnItem) {
-							allowedItems.Add(bossSummonType);
+						if (info.Vanity) {
+							devWhiteList.Add(itemType);
+							continue;
 						}
-					}
-					foreach (BossChecklistBossInfo bossChecklistInfo in BossChecklistIntegration.BossInfos.Select(p => p.Value)) {
-						foreach (int itemType in bossChecklistInfo.loot) {
-							if (allowedItems.Contains(itemType))
-								continue;
 
-							Item lootItem = ContentSamples.ItemsByType[itemType];
+						if (info.Equipment)
+							continue;
 
-							if (lootItem.vanity) {
-								allowedItems.Add(itemType);
-								continue;
-							}
+						if (info.Potion)
+							continue;
 
-							if (lootItem.damage > 0)
-								continue;
+						if (info.Ammo)
+							continue;
 
-							if (lootItem.defense > 0)
-								continue;
+						if (info.Consumable && !info.CreateTile && !info.CreateWall)
+							continue;
 
-							if (lootItem.accessory)
-								continue;
+						if (info.Material && !info.CreateTile && !info.CreateWall && (info.Consumable || !info.CanShoot && !info.HasBuff))
+							continue;
 
-							if (lootItem.material && lootItem.createTile < 0 && lootItem.createWall < 0 && (lootItem.consumable || lootItem.shoot <= ProjectileID.None && lootItem.buffType <= 0))
-								continue;
-
-							if (lootItem.potion)
-								continue;
-
-							if (lootItem.ammo > 0)
-								continue;
-
-							if (lootItem.consumable && lootItem.createTile < 0 && lootItem.createWall < 0)
-								continue;
-
-							allowedItems.Add(itemType);
-						}
+						devWhiteList.Add(itemType);
 					}
 				}
 			}
 
-			foreach (int blackListItemType in BlackList) {
-				allowedItems.Remove(blackListItemType);
-			}
+			return devWhiteList;
 		}
-		public static SortedSet<int> BossTrophies {
-			get {
-				if (bossTrophies == null)
-					GetBossTrophies();
+		protected static SortedSet<string> DevModWhiteList() {
+			SortedSet<string> devModWhiteList = new() {
 
-				return bossTrophies;
-			}
-		}
-
-		public static SortedSet<int> bossTrophies = null;
-		private static void GetBossTrophies() {
-			bossTrophies = new() {
-				
 			};
 
-			int bossTrophyValue = Item.sellPrice(0, 1);
-			for (int i = 0; i < ItemLoader.ItemCount; i++) {
-				Item item = ContentSamples.ItemsByType[i];
-				string lowerName = item.GetItemInternalName().ToLower();
-				if (lowerName.EndsWith("trophy")
-					&& item.useStyle == ItemUseStyleID.Swing
-					&& item.useTurn == true
-					&& item.autoReuse == true
-					&& item.consumable == true
-					&& item.createTile > -1
-					&& item.value == bossTrophyValue
-					&& item.rare == ItemRarityID.Blue
-					) {
-					bossTrophies.Add(item.type);
-				}
-			}
+			return devModWhiteList;
 		}
+		protected static SortedSet<int> DevBlackList() {
+			SortedSet<int> devBlackList = new() {
 
-		public static SortedSet<int> BlackList {
-			get {
-				if (blackList == null)
-					GetBlackList();
-
-				return blackList;
-			}
-		}
-		private static SortedSet<int> blackList = null;
-		private static void GetBlackList() {
-			blackList = new() {
-				
 			};
 
-			SortedSet<string> modItemBlacklist = new() {
+			return devBlackList;
+		}
+		protected static SortedSet<string> DevModBlackList() {
+			SortedSet<string> devModBlackList = new() {
 				"WeaponEnchantments/PowerBooster",
 				"WeaponEnchantments/UltraPowerBooster",
 				"StarsAbove/Starlight"
 			};
 
-			for (int i = ItemID.Count; i < ItemLoader.ItemCount; i++) {
-				Item item = ContentSamples.ItemsByType[i];
-				if (modItemBlacklist.Contains(item.ModFullName()))
-					blackList.Add(item.type);
-			}
+			return devModBlackList;
+		}
+		protected static SortedSet<ItemGroup> ItemGroups() {
+			SortedSet<ItemGroup> itemGroups = new() {
+				ItemGroup.BossBags,
+				ItemGroup.BossSpawners,
+				ItemGroup.EventItem,
+				ItemGroup.BossItem
+			};
+			
+			return itemGroups;
+		}
+		protected static SortedSet<string> EndWords() {
+			SortedSet<string> endWords = new() {
+
+			};
+
+			return endWords;
+		}
+
+		protected static SortedSet<string> SearchWords() {
+			SortedSet<string> searchWords = new() {
+
+			};
+
+			return searchWords;
 		}
 
 		#region AndroModItem attributes that you don't need.

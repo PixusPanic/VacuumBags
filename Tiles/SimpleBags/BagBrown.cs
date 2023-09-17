@@ -13,6 +13,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 using Microsoft.Xna.Framework;
+using androLib;
 
 namespace VacuumBags.Tiles
 {
@@ -20,10 +21,12 @@ namespace VacuumBags.Tiles
     {
 		public override Color MapColor => Items.BagBrown.PanelColor;
 
-		public override void KillMultiTile(int i, int j, int frameX, int frameY)
-        {
-            if (!Main.LocalPlayer.HasItem(ModContent.ItemType<Items.BagBrown>()))
-                Items.BagBrown.CloseBag();
+		public override void KillMultiTile(int i, int j, int frameX, int frameY) {
+			if (Main.netMode == NetmodeID.Server)
+				return;
+
+			if (!StorageManager.HasRequiredItemToUseStorageFromBagType(Main.LocalPlayer, ModContent.ItemType<Items.BagBrown>(), out _))
+				Items.BagBrown.CloseBag();
         }
     }
 }

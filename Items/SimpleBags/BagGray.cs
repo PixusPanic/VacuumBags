@@ -12,6 +12,7 @@ using System;
 
 namespace VacuumBags.Items
 {
+	[Autoload(false)]
 	public class BagGray : SimpleBag {
 		new public static int BagStorageID;
 		public override int MyTileType => ModContent.TileType<Tiles.BagGray>();

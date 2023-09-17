@@ -2,40 +2,81 @@
 Mods: {
 	VacuumBags: {
 		Config: {
-			BagStorageOptions: {
-				AllAmmoItemsGoIntoAmmoBag: {
-					Label: All Ammo Items Go Into Ammo Bag
+			BagEffectOptions: {
+				BannerBagNumberOfBannersInInventory: {
+					Label: Borsa banner Numero di banner nell'inventario
 					Tooltip:
 						'''
-						If true, all items that are used as ammo for anything will go into the bag.
-						If false, only the selected ammo items whitelist will be allowed which excludes a few items like stars.
+						Quando la borsa degli stendardi è nel tuo inventario, il primo numero X di stendardi applicherà i propri potenziamenti.
+						Preferire uno o più banner dà loro la priorità rispetto a quelli non preferiti.
+						Imposta a -1 tutti gli stendardi nella borsa per dare i loro buff.
+						'''
+				}
+
+				BannerBagNumberOfBannersWhenPlaced: {
+					Label: Borsa banner Numero di banner posizionati
+					Tooltip:
+						'''
+						Quando la borsa degli stendardi viene posizionata nel mondo, il primo numero X di stendardi applicherà i propri potenziamenti.
+						Preferire uno o più banner dà loro la priorità su quelli non preferiti. Imposta su -1 affinché tutti i banner nel sacchetto diano i loro buff.
+						'''
+				}
+
+				PortableStationNumberOfStationsInInventory: {
+					Label: Stazione portatile Numero di stazioni nell'inventario
+					Tooltip:
+						'''
+						Quando la stazione portatile è nel tuo inventario, il primo numero X di stazioni sarà disponibile per la creazione.
+						Preferire una o più stazioni dà loro la priorità rispetto a quelle non preferite.
+						Imposta su -1 affinché tutte le stazioni nella stazione portatile siano disponibili per la creazione.
+						'''
+				}
+
+				PortableStationNumberOfStationsWhenPlaced: {
+					Label: Stazione portatile Numero di stazioni quando posizionate
+					Tooltip:
+						'''
+						Quando la stazione portatile verrà posizionata nel mondo, il primo numero X di stazioni sarà disponibile per la creazione.
+						Preferire una o più stazioni dà loro la priorità rispetto a quelle non preferite.
+						Imposta su -1 affinché tutte le stazioni nella stazione portatile siano disponibili per la creazione.
+						'''
+				}
+			}
+
+			BagStorageOptions: {
+				AllAmmoItemsGoIntoAmmoBag: {
+					Label: Tutte le munizioni vanno nella borsa delle munizioni
+					Tooltip:
+						'''
+						Se è vero, tutti gli oggetti utilizzati come munizioni per qualsiasi cosa finiranno nella borsa.
+						Se false, sarà consentita solo la lista bianca degli elementi munizioni selezionati, escludendo alcuni elementi come le stelle.
 						'''
 				}
 
 				SimpleBagStorageSize: {
-					Label: Simple Bag Storage Size
+					Label: Dimensioni semplici per riporre la borsa
 					Tooltip:
 						'''
-						The number of slots in the simple bag storage.
-						If this option is used while the player has more items in their bag, the bag size will be reduced to the number of items still in the bag.
-						Setting this number very high could cause lag or possibly a crash from using too much memory if you don't have much RAM.  Use at your own risk.
+						Il numero di slot nella custodia semplice della borsa.
+						Se questa opzione viene utilizzata mentre il giocatore ha più oggetti nella borsa, la dimensione della borsa verrà ridotta al numero di oggetti ancora nella borsa.
+						L'impostazione di questo numero su un valore molto elevato potrebbe causare ritardi o addirittura un arresto anomalo dovuto all'utilizzo di troppa memoria se non si dispone di molta RAM. Utilizzare a proprio rischio.
 						'''
 				}
 
 				SimpleBagsVacuumAllItems: {
-					Label: Simple Bags Vacuum All Items
+					Label: I sacchetti semplici aspirano tutti gli articoli
 					Tooltip:
 						'''
-						If true, all items will be vacuumed into the simple bags.
-						If false, only items that are the same type as an item in the bag will be vacuumed.
+						Se vero, tutti gli articoli verranno aspirati nei sacchetti semplici.
+						Se falso, verranno aspirati solo gli articoli dello stesso tipo di un articolo nel sacchetto.
 						'''
 				}
 			}
 
 			Crafting: {
 				HarderBagRecipes: {
-					Label: Harder Bag Recipes
-					Tooltip: Makes the bag recipes require more items and some are more difficult to get.
+					Label: Ricette per borse più dure
+					Tooltip: Le ricette della borsa richiedono più oggetti e alcune sono più difficili da ottenere.
 				}
 			}
 		}
@@ -163,6 +204,21 @@ Mods: {
 					'''
 			}
 
+			BannerBag: {
+				DisplayName: Borsa per striscioni
+				Tooltip:
+					'''
+					Memorizza automaticamente i banner.
+					Quando sei nel tuo inventario, il contenuto della borsa è disponibile per la creazione.
+					Fare clic con il tasto destro per aprire la borsa.
+					La borsa fornisce fino a 3 effetti banner per impostazione predefinita quando è nel tuo inventario.
+					Una volta posizionato, fornisce tutti gli effetti del banner per impostazione predefinita, ma nell'intervallo del banner normale. Ogni borsa banner condivide il suo inventario.
+					Quando selezioni i potenziamenti per gli stendardi da darti, gli stendardi verranno ignorati se li hai già nelle vicinanze.
+					Lo sfondo degli stendardi è giallo quando il potenziamento viene concesso dalla borsa degli stendardi.
+					Lo sfondo è viola se hai già il potenziamento del banner da un'altra fonte.
+					'''
+			}
+
 			BossBag: {
 				DisplayName: Borsa del capo
 				Tooltip:
@@ -215,6 +271,19 @@ Mods: {
 					'''
 			}
 
+			FishingBelt: {
+				DisplayName: Cintura da pesca
+				Tooltip:
+					'''
+					Memorizza automaticamente oggetti relativi alla pesca come pesci, esche e premi per i pescatori.
+					Quando sei nel tuo inventario, il contenuto della cintura è disponibile per la lavorazione.
+					Fare clic con il tasto destro per aprire la cintura.
+					L'esca nella cintura viene utilizzata se la cintura da pesca si trova nel primo esca trovato.
+					Se una qualsiasi esca nella cintura che può essere utilizzata viene preferita, verranno utilizzate solo le esche preferite.
+					Gli accessori informativi preferiti mostreranno le loro informazioni come se fossero nel tuo inventario.
+					'''
+			}
+
 			HerbSatchel: {
 				DisplayName: Borsa per erbe
 				Tooltip:
@@ -225,6 +294,19 @@ Mods: {
 					'''
 			}
 
+			JarOfDirt: {
+				DisplayName: Vaso di terra
+				Tooltip:
+					'''
+					Conserva automaticamente lo sporco e altri blocchi naturali (terra, fango, argilla, sabbia, pietra, ghiaccio, ecc.)
+					Quando sei nel tuo inventario, il contenuto del barattolo è disponibile per la lavorazione.
+					Fare clic con il tasto destro per aprire il barattolo.
+					Gli oggetti possono essere posizionati dal barattolo facendo clic con il pulsante sinistro del mouse sul barattolo. Se qualche elemento nel vaso viene aggiunto ai preferiti, verranno utilizzati solo gli elementi preferiti.
+
+					..........indovina cosa c'è dentro....
+					'''
+			}
+
 			LokisTesseract: {
 				DisplayName: Tesseract di Loki
 				Tooltip:
@@ -232,6 +314,18 @@ Mods: {
 					Memorizza automaticamente gli oggetti del torio.
 					Quando sei nel tuo inventario, il contenuto della borsa è disponibile per la creazione.
 					Fare clic con il tasto destro per aprire la borsa.
+					'''
+			}
+
+			MechanicsToolbelt: {
+				DisplayName: Cintura degli attrezzi del meccanico
+				Tooltip:
+					'''
+					Memorizza automaticamente gli oggetti relativi al cablaggio come trappole e statue.
+					Quando sei nel tuo inventario, il contenuto della cintura è disponibile per la lavorazione.
+					Fare clic con il tasto destro per aprire la cintura.
+					Gli oggetti possono essere posizionati dalla cintura facendo clic con il pulsante sinistro del mouse sulla cintura. Se qualche articolo nella cintura è preferito, verranno utilizzati solo gli articoli preferiti.
+					Il filo nella cintura può essere utilizzato dagli strumenti di cablaggio come se fosse nel tuo inventario.
 					'''
 			}
 
@@ -350,10 +444,25 @@ Mods: {
 				Tooltip:
 					'''
 					Memorizza automaticamente la vernice
-					Quando sei nel tuo inventario, il contenuto della borsa è disponibile per la creazione.
-					Fare clic con il tasto destro per aprire la borsa.
-					La vernice nella lattina viene utilizzata se la lattina di vernice si trova nel primo oggetto di vernice trovato.
-					Se una qualsiasi vernice nel barattolo che può essere utilizzata dal tuo strumento di pittura è preferita, verranno utilizzate solo le vernici preferite.
+					Quando sei nel tuo inventario, il contenuto del secchio è disponibile per la creazione.
+					Fare clic con il tasto destro per aprire il secchio.
+					La vernice nel secchio viene utilizzata se il secchio di vernice si trova nel primo oggetto di vernice trovato.
+					Se una qualsiasi vernice nel secchio che può essere utilizzata dal tuo strumento di pittura è preferita, verranno utilizzate solo le vernici preferite.
+					'''
+			}
+
+			PortableStation: {
+				DisplayName: Stazione portatile
+				Tooltip:
+					'''
+					Memorizza automaticamente le stazioni di creazione e le stazioni di potenziamento.
+					Quando sei nel tuo inventario, i contenuti della stazione sono disponibili per la creazione.
+					Fare clic con il tasto destro per aprire la stazione.
+					Quando sei nel tuo inventario, la stazione portatile assegna fino a 3 stazioni per la creazione per impostazione predefinita quando è nel tuo inventario.
+					Una volta posizionato, fornisce tutte le tue stazioni per la creazione per impostazione predefinita, ma nel normale intervallo di tessere. Ogni stazione portatile condivide il proprio inventario.
+					Lo sfondo delle stazioni è giallo quando vengono fornite per la creazione dalla stazione portatile.
+					Lo sfondo è viola se è già presente quel tipo di stazione nelle vicinanze, tuttavia non salterà automaticamente le stazioni vicine durante la selezione
+					stazioni dalla stazione portatile perché di più non è necessariamente meglio con le ricette di creazione. hai già il potenziamento del banner da un'altra fonte.
 					'''
 			}
 
@@ -371,6 +480,18 @@ Mods: {
 					'''
 			}
 
+			SlayersSack: {
+				DisplayName: Il sacco dell'uccisore
+				Tooltip:
+					'''
+					Memorizza automaticamente i materiali lasciati cadere dai nemici e altri oggetti trovati durante le avventure come torce, corde e chiavi.
+					Quando sei nel tuo inventario, il contenuto del sacco è disponibile per la creazione.
+					Fare clic con il tasto destro per aprire il sacco.
+					La corda può essere posizionata dal sacco facendo clic con il pulsante sinistro del mouse sul sacco. Se una qualsiasi corda nel sacco è preferita, verrà utilizzata solo la corda preferita.
+					Torce e bastoncini luminosi possono essere utilizzati dalla borsa mentre si tiene il turno come se fossero nel proprio inventario.
+					'''
+			}
+
 			WallEr: {
 				DisplayName: Wall-Er
 				Tooltip:
@@ -380,6 +501,11 @@ Mods: {
 					Fare clic con il tasto destro per aprire la borsa.
 					Gli oggetti possono essere posizionati da Wall-Er facendo clic con il pulsante sinistro del mouse su Wall-Er. Se qualche elemento in Wall-Er viene aggiunto ai preferiti, verranno utilizzati solo gli elementi preferiti.
 					'''
+			}
+
+			OreBag: {
+				// Tooltip: ""
+				// DisplayName: Ore Bag
 			}
 		}
 
@@ -395,6 +521,7 @@ Mods: {
 			// BagRed.MapEntry: Bag Red
 			// BagWhite.MapEntry: Bag White
 			// BagYellow.MapEntry: Bag Yellow
+			// BannerBag.MapEntry: Banner Bag
 			// PackBlack.MapEntry: Pack Black
 			// PackBlue.MapEntry: Pack Blue
 			// PackBrown.MapEntry: Pack Brown
@@ -406,6 +533,7 @@ Mods: {
 			// PackRed.MapEntry: Pack Red
 			// PackWhite.MapEntry: Pack White
 			// PackYellow.MapEntry: Pack Yellow
+			// PortableStation.MapEntry: Portable Station
 		}
 
 		Configs: {
@@ -433,6 +561,26 @@ Mods: {
 
 				HarderBagRecipes: {
 					// Label: Harder Bag Recipes
+					// Tooltip: ""
+				}
+
+				BannerBagNumberOfBannersInInventory: {
+					// Label: Banner Bag Number Of Banners In Inventory
+					// Tooltip: ""
+				}
+
+				BannerBagNumberOfBannersWhenPlaced: {
+					// Label: Banner Bag Number Of Banners When Placed
+					// Tooltip: ""
+				}
+
+				PortableStationNumberOfStationsInInventory: {
+					// Label: Portable Station Number Of Stations In Inventory
+					// Tooltip: ""
+				}
+
+				PortableStationNumberOfStationsWhenPlaced: {
+					// Label: Portable Station Number Of Stations When Placed
 					// Tooltip: ""
 				}
 			}

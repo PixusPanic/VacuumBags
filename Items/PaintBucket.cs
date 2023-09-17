@@ -14,7 +14,9 @@ using MonoMod.Cil;
 
 namespace VacuumBags.Items
 {
-	public  class PaintBucket : VBModItem, ISoldByWitch {
+	[Autoload(false)]
+	public  class PaintBucket : BagModItem, ISoldByWitch, INeedsSetUpAllowedList
+	{
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {
             Item.maxStack = 1;
@@ -61,7 +63,8 @@ namespace VacuumBags.Items
 				() => new Color(255, 250, 240, androLib.Common.Configs.ConfigValues.UIAlpha),  // Get Button hover color function. Func<using Microsoft.Xna.Framework.Color>
 				() => ModContent.ItemType<PaintBucket>(),//Get ModItem type
 				80,//UI Left
-				675//UI Top
+				675,//UI Top
+				() => ChoosePaintFromBucket(Main.LocalPlayer)
 			);
 		}
 		public static bool ItemAllowedToBeStored(Item item) => AllowedItems.Contains(item.type);
@@ -69,7 +72,7 @@ namespace VacuumBags.Items
 			if (!VacuumBags.gadgetGaloreEnabled)
 				return;
 
-			VacuumBags.GadgetGalore.Call("RegisterPaintInventory", () => GetPaintsFromCan().ToArray());
+			VacuumBags.GadgetGalore.Call("RegisterPaintInventory", () => StorageManager.GetItems(BagStorageID).Where(item => item.NullOrAir()));
 		}
 
 		internal static Item OnFindPaintOrCoating(On_Player.orig_FindPaintOrCoating orig, Player self) {
@@ -78,7 +81,7 @@ namespace VacuumBags.Items
 			if (!self.HasItem(AmmoBagID))
 				return item;
 
-			Item fromBag = ChoosePaintFromCan(self);
+			Item fromBag = ChoosePaintFromBucket(self);
 			if (item == null) {
 				return fromBag;
 			}
@@ -108,148 +111,7 @@ namespace VacuumBags.Items
 
 			return item;
 		}
-
-		private static IEnumerable<Item> GetPaintsFromCan() {
-			IEnumerable<Item> items = StorageManager.GetItems(BagStorageID).Where(item => !item.NullOrAir() && item.stack > 0 && item.PaintOrCoating);
-			if (!items.Any())
-				return new Item[0];
-
-			if (items.AnyFavoritedItem())
-				items = items.Where(item => item.favorited);
-
-			return items;
-		}
-		private static Item ChoosePaintFromCan(Player player) {
-			if (player.whoAmI != Main.myPlayer)
-				return null;
-
-			IEnumerable<Item> items = GetPaintsFromCan();
-			if (!items.Any())
-				return null;
-
-			return items.First();
-		}
-
-		public static SortedSet<int> AllowedItems {
-			get {
-				if (allowedItems == null)
-					GetAllowedItems();
-
-				return allowedItems;
-			}
-		}
-		private static SortedSet<int> allowedItems = null;
-
-		private static void GetAllowedItems() {
-			allowedItems = new() {
-				ItemID.GlowPaint,
-				ItemID.RedPaint,
-				ItemID.OrangePaint,
-				ItemID.YellowPaint,
-				ItemID.LimePaint,
-				ItemID.GreenPaint,
-				ItemID.TealPaint,
-				ItemID.CyanPaint,
-				ItemID.SkyBluePaint,
-				ItemID.BluePaint,
-				ItemID.PurplePaint,
-				ItemID.VioletPaint,
-				ItemID.PinkPaint,
-				ItemID.DeepRedPaint,
-				ItemID.DeepOrangePaint,
-				ItemID.DeepYellowPaint,
-				ItemID.DeepLimePaint,
-				ItemID.DeepGreenPaint,
-				ItemID.DeepTealPaint,
-				ItemID.DeepCyanPaint,
-				ItemID.DeepSkyBluePaint,
-				ItemID.DeepBluePaint,
-				ItemID.DeepPurplePaint,
-				ItemID.DeepVioletPaint,
-				ItemID.DeepPinkPaint,
-				ItemID.BlackPaint,
-				ItemID.WhitePaint,
-				ItemID.GrayPaint,
-				ItemID.BrownPaint,
-				ItemID.ShadowPaint,
-				ItemID.NegativePaint,
-				ItemID.EchoCoating,
-			};
-
-			SortedSet<string> endWords = new() {
-				"paint",
-				"coating"
-			};
-
-			SortedSet<string> searchWords = new() {
-				
-			};
-
-			SortedSet<string> modItems = new() {
-				"GadgetGalore/BucketOfPaintTools",
-				"GadgetGalore/GhostlyPainter",
-			};
-
-			for (int i = 0; i < ItemLoader.ItemCount; i++) {
-				Item item = ContentSamples.ItemsByType[i];
-				if (item.NullOrAir())
-					continue;
-
-				string lowerName = item.GetItemInternalName().ToLower();
-				bool added = false;
-				foreach (string endWord in endWords) {
-					if (lowerName.EndsWith(endWord)) {
-						allowedItems.Add(item.type);
-						added = true;
-						break;
-					}
-				}
-
-				if (added)
-					continue;
-
-				foreach (string searchWord in searchWords) {
-					if (lowerName.Contains(searchWord)) {
-						allowedItems.Add(item.type);
-						added = true;
-						break;
-					}
-				}
-
-				ItemGroupAndOrderInGroup group = new ItemGroupAndOrderInGroup(item);
-				if (group.Group == ItemGroup.Paint) {
-					allowedItems.Add(item.type);
-					continue;
-				}
-
-				if (i < ItemID.Count)
-					continue;
-
-				if (modItems.Contains(item.ModFullName())) {
-					allowedItems.Add(item.type);
-					continue;
-				}
-			}
-
-			foreach (int blackListItemType in BlackList) {
-				allowedItems.Remove(blackListItemType);
-			}
-		}
-		public static SortedSet<int> BlackList {
-			get {
-				if (blackList == null)
-					GetBlackList();
-
-				return blackList;
-			}
-		}
-		private static SortedSet<int> blackList = null;
-		private static void GetBlackList() {
-			blackList = new() {
-				ModContent.ItemType<PaintBucket>(),
-			};
-		}
-
+		private static Item ChoosePaintFromBucket(Player player) => ChooseFromBag(BagStorageID, (Item item) => item.PaintOrCoating, player, selectItems: false);
 		internal static void OnItemCheck_CheckCanUse(ILContext il) {
 			var c = new ILCursor(il);
 			/*
@@ -292,6 +154,124 @@ namespace VacuumBags.Items
 				return hasPaint;
 			});
 		}
+		
+		public static SortedSet<int> AllowedItems => AllowedItemsManager.AllowedItems;
+		public static AllowedItemsManager AllowedItemsManager = new(DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
+		public AllowedItemsManager GetAllowedItemsManager => AllowedItemsManager;
+		protected static bool? DevCheck(ItemSetInfo info, SortedSet<ItemGroup> itemGroups, SortedSet<string> endWords, SortedSet<string> searchWords) {
+			if (info.Equipment)
+				return false;
+
+			return null;
+		}
+		protected static SortedSet<int> DevWhiteList() {
+			SortedSet<int> devWhiteList = new() {
+				ItemID.GlowPaint,
+				ItemID.RedPaint,
+				ItemID.OrangePaint,
+				ItemID.YellowPaint,
+				ItemID.LimePaint,
+				ItemID.GreenPaint,
+				ItemID.TealPaint,
+				ItemID.CyanPaint,
+				ItemID.SkyBluePaint,
+				ItemID.BluePaint,
+				ItemID.PurplePaint,
+				ItemID.VioletPaint,
+				ItemID.PinkPaint,
+				ItemID.DeepRedPaint,
+				ItemID.DeepOrangePaint,
+				ItemID.DeepYellowPaint,
+				ItemID.DeepLimePaint,
+				ItemID.DeepGreenPaint,
+				ItemID.DeepTealPaint,
+				ItemID.DeepCyanPaint,
+				ItemID.DeepSkyBluePaint,
+				ItemID.DeepBluePaint,
+				ItemID.DeepPurplePaint,
+				ItemID.DeepVioletPaint,
+				ItemID.DeepPinkPaint,
+				ItemID.BlackPaint,
+				ItemID.WhitePaint,
+				ItemID.GrayPaint,
+				ItemID.BrownPaint,
+				ItemID.ShadowPaint,
+				ItemID.NegativePaint,
+				ItemID.EchoCoating,
+				ItemID.TealMushroom,
+				ItemID.GreenMushroom,
+				ItemID.SkyBlueFlower,
+				ItemID.YellowMarigold,
+				ItemID.BlueBerries,
+				ItemID.LimeKelp,
+				ItemID.PinkPricklyPear,
+				ItemID.OrangeBloodroot,
+				ItemID.RedHusk,
+				ItemID.CyanHusk,
+				ItemID.VioletHusk,
+				ItemID.BlackInk,
+				ItemID.StrangePlant1,
+				ItemID.StrangePlant2,
+				ItemID.StrangePlant3,
+				ItemID.StrangePlant4,
+			};
+
+			foreach (int itemType in ItemID.Sets.NonColorfulDyeItems) {
+				devWhiteList.Add(itemType);
+			}
+
+			return devWhiteList;
+		}
+		protected static SortedSet<string> DevModWhiteList() {
+			SortedSet<string> devModWhiteList = new() {
+				"GadgetGalore/BucketOfPaintTools",
+				"GadgetGalore/GhostlyPainter",
+			};
+
+			return devModWhiteList;
+		}
+		protected static SortedSet<int> DevBlackList() {
+			SortedSet<int> devBlackList = new() {
+
+			};
+
+			return devBlackList;
+		}
+		protected static SortedSet<string> DevModBlackList() {
+			SortedSet<string> devModBlackList = new() {
+
+			};
+
+			return devModBlackList;
+		}
+		protected static SortedSet<ItemGroup> ItemGroups() {
+			SortedSet<ItemGroup> itemGroups = new() {
+				ItemGroup.Paint,
+				ItemGroup.Dye,
+				ItemGroup.DyeMaterial
+			};
+
+			return itemGroups;
+		}
+		protected static SortedSet<string> EndWords() {
+			SortedSet<string> endWords = new() {
+				"paint",
+				"coating",
+				"dye"
+			};
+
+			return endWords;
+		}
+
+		protected static SortedSet<string> SearchWords() {
+			SortedSet<string> searchWords = new() {
+				"paintbrush",
+				"paintroller",
+				"paintscraper"
+			};
+
+			return searchWords;
+		}
 
 		#region AndroModItem attributes that you don't need.
 
@@ -300,10 +280,10 @@ namespace VacuumBags.Items
 		public override List<WikiTypeID> WikiItemTypes => new() { WikiTypeID.Storage };
 		public override string LocalizationTooltip =>
 			$"Automatically stores paint\n" +
-			$"When in your inventory, the contents of the bag are available for crafting.\n" +
-			$"Right click to open the bag.\n" +
-			$"Paint in the can is used if the Paint Can is in the first paint item found.\n" +
-			$"If any paint in the can that can be used by your paint tool is favorited, only favorited paints will be used.";
+			$"When in your inventory, the contents of the bucket are available for crafting.\n" +
+			$"Right click to open the bucket.\n" +
+			$"Paint in the bucket is used if the paint bucket is in the first paint item found.\n" +
+			$"If any paint in the bucket that can be used by your paint tool is favorited, only favorited paints will be used.";
 		public override string Artist => "@kingjoshington";
 		public override string Designer => "@kingjoshington";
 

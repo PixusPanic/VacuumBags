@@ -12,7 +12,8 @@ using System;
 
 namespace VacuumBags.Items
 {
-    public class BagBlack : SimpleBag {
+	[Autoload(false)]
+	public class BagBlack : SimpleBag {
 		new public static int BagStorageID;
 		public override int MyTileType => ModContent.TileType<Tiles.BagBlack>();
 		public static void CloseBag() => StorageManager.CloseBag(BagStorageID);

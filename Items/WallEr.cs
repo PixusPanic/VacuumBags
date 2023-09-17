@@ -8,12 +8,12 @@ using Microsoft.Xna.Framework;
 using androLib.Items;
 using androLib.Common.Globals;
 using androLib;
-using System.Text.Json.Serialization;
 using static Terraria.ID.ContentSamples.CreativeHelper;
 
 namespace VacuumBags.Items
 {
-	public class WallEr : VBModItem, ISoldByWitch
+	[Autoload(false)]
+	public class WallEr : BagModItem, ISoldByWitch, INeedsSetUpAllowedList
 	{
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {
@@ -46,23 +46,6 @@ namespace VacuumBags.Items
 		}
 
 		public static int BagStorageID;//Set this when registering with androLib.
-		private static IEnumerable<Item> GetItemsFromWallEr() {
-			IEnumerable<Item> items = StorageManager.GetItems(BagStorageID).Where(item => !item.NullOrAir() && item.stack > 0 && item.createWall > 0);
-			if (!items.Any())
-				return new Item[0];
-
-			if (items.AnyFavoritedItem())
-				items = items.Where(item => item.favorited);
-
-			return items;
-		}
-		public static Item ChooseItemFromWallEr() {
-			IEnumerable<Item> items = GetItemsFromWallEr();
-			if (!items.Any())
-				return null;
-
-			return items.First();
-		}
 
 		public static void RegisterWithAndroLib(Mod mod) {
 			BagStorageID = StorageManager.RegisterVacuumStorageClass(
@@ -77,7 +60,8 @@ namespace VacuumBags.Items
 				() => new Color(150, 80, 0, androLib.Common.Configs.ConfigValues.UIAlpha),     // Get Button hover color function. Func<using Microsoft.Xna.Framework.Color>
 				() => ModContent.ItemType<WallEr>(),//Get ModItem type
 				80,//UI Left
-				675//UI Top
+				675,//UI Top
+				() => ChooseItemFromWallEr(Main.LocalPlayer)
 			);
 		}
 
@@ -86,21 +70,18 @@ namespace VacuumBags.Items
 			if (!VacuumBags.gadgetGaloreEnabled)
 				return;
 
-			VacuumBags.GadgetGalore.Call("RegisterBuildInventory", () => StorageManager.GetItems(BagStorageID));
+			VacuumBags.GadgetGalore.Call("RegisterBuildInventory", () => StorageManager.GetItems(BagStorageID).Where(item => item.NullOrAir()));
 		}
+		public static Item ChooseItemFromWallEr(Player player) => ChooseFromBag(BagStorageID, (Item item) => item.createWall > -1, player);
 
-		public static SortedSet<int> AllowedItems {
-			get {
-				if (allowedItems == null)
-					GetAllowedItems();
-
-				return allowedItems;
-			}
+		public static SortedSet<int> AllowedItems => AllowedItemsManager.AllowedItems;
+		public static AllowedItemsManager AllowedItemsManager = new(DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
+		public AllowedItemsManager GetAllowedItemsManager => AllowedItemsManager;
+		protected static bool? DevCheck(ItemSetInfo info, SortedSet<ItemGroup> itemGroups, SortedSet<string> endWords, SortedSet<string> searchWords) {
+			return info.CreateWall;
 		}
-		private static SortedSet<int> allowedItems = null;
-
-		private static void GetAllowedItems() {
-			allowedItems = new() {
+		protected static SortedSet<int> DevWhiteList() {
+			SortedSet<int> devWhiteList = new() {
 				ItemID.WoodenBeam,
 				ItemID.AdamantiteBeam,
 				ItemID.BorealBeam,
@@ -326,6 +307,37 @@ namespace VacuumBags.Items
 				ItemID.RainbowMossBlockWall,
 			};
 
+			return devWhiteList;
+		}
+		protected static SortedSet<string> DevModWhiteList() {
+			SortedSet<string> devModWhiteList = new() {
+
+			};
+
+			return devModWhiteList;
+		}
+		protected static SortedSet<int> DevBlackList() {
+			SortedSet<int> devBlackList = new() {
+
+			};
+
+			return devBlackList;
+		}
+		protected static SortedSet<string> DevModBlackList() {
+			SortedSet<string> devModBlackList = new() {
+
+			};
+
+			return devModBlackList;
+		}
+		protected static SortedSet<ItemGroup> ItemGroups() {
+			SortedSet<ItemGroup> itemGroups = new() {
+				ItemGroup.Walls
+			};
+
+			return itemGroups;
+		}
+		protected static SortedSet<string> EndWords() {
 			SortedSet<string> endWords = new() {
 				"wall",
 				"wallunsafe",
@@ -336,70 +348,15 @@ namespace VacuumBags.Items
 				"fence",
 			};
 
+			return endWords;
+		}
+
+		protected static SortedSet<string> SearchWords() {
 			SortedSet<string> searchWords = new() {
 				"slabwall",
 			};
 
-			for (int i = 0; i < ItemLoader.ItemCount; i++) {
-				Item item = ContentSamples.ItemsByType[i];
-				if (item.NullOrAir())
-					continue;
-
-				string lowerName = item.GetItemInternalName().ToLower();
-				bool added = false;
-				foreach (string endWord in endWords) {
-					if (lowerName.EndsWith(endWord)) {
-						allowedItems.Add(item.type);
-						added = true;
-						break;
-					}
-				}
-
-				if (added)
-					continue;
-
-				foreach (string searchWord in searchWords) {
-					if (lowerName.Contains(searchWord)) {
-						allowedItems.Add(item.type);
-						added = true;
-						break;
-					}
-				}
-
-				ItemGroupAndOrderInGroup group = new ItemGroupAndOrderInGroup(item);
-				if (group.Group == ItemGroup.Walls) {
-					allowedItems.Add(item.type);
-					continue;
-				}
-			}
-
-			foreach (int blackListItemType in BlackList) {
-				allowedItems.Remove(blackListItemType);
-			}
-		}
-		public static SortedSet<int> BlackList {
-			get {
-				if (blackList == null)
-					GetBlackList();
-
-				return blackList;
-			}
-		}
-		private static SortedSet<int> blackList = null;
-		private static void GetBlackList() {
-			blackList = new() {
-				
-			};
-
-			List<string> modItemBlacklist = new() {
-				
-			};
-
-			for (int i = ItemID.Count; i < ItemLoader.ItemCount; i++) {
-				Item item = ContentSamples.ItemsByType[i];
-				if (modItemBlacklist.Contains(item.ModFullName()))
-					blackList.Add(item.type);
-			}
+			return searchWords;
 		}
 
 		#region AndroModItem attributes that you don't need.

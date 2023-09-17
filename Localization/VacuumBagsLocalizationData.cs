@@ -15,6 +15,7 @@ using androLib.Localization;
 using static VacuumBags.Common.Configs.BagsServerConfig;
 using static VacuumBags.Common.Configs.BagsClientConfig;
 using static VacuumBags.VacuumBags;
+using VacuumBags.Items;
 
 namespace VacuumBags.Localization
 {
@@ -54,15 +55,42 @@ namespace VacuumBags.Localization
 										"If false, only items that are the same type as an item in the bag will be vacuumed."  }
 								}) },
 								{ nameof(clientConfig.AllAmmoItemsGoIntoAmmoBag), new(dict: new() {
-									{ L_ID3.Label.ToString(), "All Ammo Items Go Into Ammo Bag" },
+									{ L_ID3.Label.ToString(), nameof(clientConfig.AllAmmoItemsGoIntoAmmoBag).AddSpaces() },
 									{ L_ID3.Tooltip.ToString(), 
 										"If true, all items that are used as ammo for anything will go into the bag.\n" +
 										"If false, only the selected ammo items whitelist will be allowed which excludes a few items like stars." }
 								}) },
 							}) },
+							{ BagEffectOptionsKey, new(children: new() {
+								{ nameof(serverConfig.BannerBagNumberOfBannersInInventory), new(dict: new() {
+									{ L_ID3.Label.ToString(), nameof(serverConfig.BannerBagNumberOfBannersInInventory).AddSpaces() },
+									{ L_ID3.Tooltip.ToString(), "When the Banner bag is in your inventory, the first X number of banners will apply their buffs.\n" +
+										"Favoriting a banner or banners gives them priority over non-favorited ones.\n" +
+										$"Set to {BannerBag.FirstXItemsChooseAllItems} for all banners in the bag to give their buffs." }
+								}) },
+								{ nameof(serverConfig.BannerBagNumberOfBannersWhenPlaced), new(dict: new() {
+									{ L_ID3.Label.ToString(), nameof(serverConfig.BannerBagNumberOfBannersWhenPlaced).AddSpaces() },
+									{ L_ID3.Tooltip.ToString(), "When the Banner bag is placed in the world, the first X number of banners will apply their buffs.\n" +
+										"Favoriting a banner or banners gives them priority over non-favorited ones." +
+										$"Set to {BannerBag.FirstXItemsChooseAllItems} for all banners in the bag to give their buffs." }
+								}) },
+								{ nameof(serverConfig.PortableStationNumberOfStationsInInventory), new(dict: new() {
+									{ L_ID3.Label.ToString(), nameof(serverConfig.PortableStationNumberOfStationsInInventory).AddSpaces() },
+									{ L_ID3.Tooltip.ToString(), "When the Portable Station is in your inventory, the first X number of stations will be available for crafting.\n" +
+										"Favoriting a station or stations gives them priority over non-favorited ones.\n" +
+										$"Set to {BannerBag.FirstXItemsChooseAllItems} for all stations in the Portable Station to be available for crafting." }
+								}) },
+								{ nameof(serverConfig.PortableStationNumberOfStationsWhenPlaced), new(dict: new() {
+									{ L_ID3.Label.ToString(), nameof(serverConfig.PortableStationNumberOfStationsWhenPlaced).AddSpaces() },
+									{ L_ID3.Tooltip.ToString(), "When the Portable Station is placed in the world, the first X number of stations will be available for crafting.\n" +
+										"Favoriting a station or stations gives them priority over non-favorited ones.\n" +
+										$"Set to {BannerBag.FirstXItemsChooseAllItems} for all stations in the Portable Station to be available for crafting." }
+								}) },
+							}) },
 							}, dict: new() {
 								{ CraftingHeaderKey, CraftingHeaderKey.AddSpaces() },
-								{ BagStorageOptionsKey, BagStorageOptionsKey.AddSpaces() }
+								{ BagStorageOptionsKey, BagStorageOptionsKey.AddSpaces() },
+								{ BagEffectOptionsKey, BagEffectOptionsKey.AddSpaces() },
 								/*,
 								{ "", "" },
 								{ "", "" },

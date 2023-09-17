@@ -12,10 +12,13 @@ using static Terraria.ID.ContentSamples.CreativeHelper;
 using MonoMod.Cil;
 using System;
 using Mono.Cecil.Cil;
+using Ionic.Zip;
 
 namespace VacuumBags.Items
 {
-	public class AmmoBag : VBModItem, ISoldByWitch {
+	[Autoload(false)]
+	public class AmmoBag : BagModItem, ISoldByWitch, INeedsSetUpAllowedList
+	{
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {
             Item.maxStack = 1;
@@ -62,23 +65,139 @@ namespace VacuumBags.Items
 				() => new Color(120, 120, 120, androLib.Common.Configs.ConfigValues.UIAlpha), // Get Button hover color function. Func<using Microsoft.Xna.Framework.Color>
 				() => ModContent.ItemType<AmmoBag>(),//Get ModItem type
 				80,//UI Left
-				675//UI Top
+				675,//UI Top
+				() => Main.LocalPlayer.ChooseAmmo(Main.LocalPlayer.HeldItem)
 			);
 		}
 		public static bool ItemAllowedToBeStored(Item item) => AllowedItems.Contains(item.type);
+		public static Item OnChooseAmmo(On_Player.orig_ChooseAmmo orig, Player self, Item weapon) {
+			Item item = orig(self, weapon);
+			if (weapon.useAmmo == AmmoID.None)
+				return null;
 
-		public static SortedSet<int> AllowedItems {
-			get {
-				if (allowedItems == null)
-					GetAllowedItems();
+			Item bagAmmo = ChooseAmmoFromBag(item, weapon, self);
 
-				return allowedItems;
-			}
+			return bagAmmo ?? item;
 		}
-		private static SortedSet<int> allowedItems = null;
+		private static Item ChooseAmmoFromBag(Item vanillaChosenItem, Item weapon, Player player) {
+			return ChooseFromBagOnlyIfFirstInInventory(
+				vanillaChosenItem,
+				player,
+				BagStorageID,
+				(Item item) => ItemLoader.CanChooseAmmo(weapon, item, player)
+			);
+		}
+		internal static void OnItemCheck_ApplyHoldStyle_Inner(ILContext il) {
+			//IL_01ee: ldloc.s 4
+			//IL_01f0: ldc.i4 931
+			//IL_01f5: beq.s IL_021f
 
-		private static void GetAllowedItems() {
-			allowedItems = new() {
+			var c = new ILCursor(il);
+
+			if (!c.TryGotoNext(MoveType.Before,
+				i => i.MatchLdloc(4),
+				i => i.MatchLdcI4(ItemID.Flare)
+			)) { throw new Exception("Failed to find instructions OnItemCheck_ApplyHoldStyle_Inner 1/2"); }
+
+			if (!c.TryGotoNext(MoveType.Before,
+				i => i.MatchLdcI4(ItemID.Flare)
+			)) { throw new Exception("Failed to find instructions OnItemCheck_ApplyHoldStyle_Inner 2/2"); }
+
+			c.Emit(OpCodes.Ldarg_0);
+			c.Emit(OpCodes.Ldarg_2);
+			c.EmitDelegate((int flairType, Player player, Item heldItem) => {
+				if (heldItem.useAmmo != ItemID.Flare)
+					return flairType;
+
+				Item vanillaChosenItem = flairType > ItemID.None ? new(flairType) : null;
+				Item bagAmmo = ChooseAmmoFromBag(vanillaChosenItem, heldItem, player);
+
+				if (bagAmmo != null)
+					flairType = bagAmmo.type;
+
+				return flairType;
+			});
+		}
+		internal static void OnSmartSelect_PickToolForStrategy(ILContext il) {
+			//IL_01b5: ldloc.2
+			//IL_01b6: brfalse IL_0398
+
+			//// this.SmartSelect_SelectItem(i);
+			//IL_01bb: ldarg.0
+			//IL_01bc: ldloc.0
+			//IL_01bd: call instance void Terraria.Player::SmartSelect_SelectItem(int32)
+			//// return;
+			//IL_01c2: ret
+
+			var c = new ILCursor(il);
+
+			if (!c.TryGotoNext(MoveType.Before,
+				i => i.MatchLdloc(2),
+				i => i.MatchBrfalse(out _),
+				i => i.MatchLdarg(0),
+				i => i.MatchLdloc(0),
+				i => i.MatchCall<Player>("SmartSelect_SelectItem")
+			)) { throw new Exception("Failed to find instructions OnSmartSelect_PickToolForStrategy 1/2"); }
+
+			if (!c.TryGotoNext(MoveType.Before,
+				i => i.MatchBrfalse(out _),
+				i => i.MatchLdarg(0),
+				i => i.MatchLdloc(0),
+				i => i.MatchCall<Player>("SmartSelect_SelectItem")
+			)) { throw new Exception("Failed to find instructions OnSmartSelect_PickToolForStrategy 2/2"); }
+
+			c.Emit(OpCodes.Ldarg_0);
+
+			c.EmitDelegate(HasFlairGunAmmo);
+
+			if (!c.TryGotoNext(MoveType.Before,
+				i => i.MatchLdloc(5),
+				i => i.MatchBrfalse(out _),
+				i => i.MatchLdarg(0),
+				i => i.MatchLdloc(0),
+				i => i.MatchCall<Player>("SmartSelect_SelectItem")
+			)) { throw new Exception("Failed to find instructions OnSmartSelect_PickToolForStrategy 3/4"); }
+
+			if (!c.TryGotoNext(MoveType.Before,
+				i => i.MatchBrfalse(out _),
+				i => i.MatchLdarg(0),
+				i => i.MatchLdloc(0),
+				i => i.MatchCall<Player>("SmartSelect_SelectItem")
+			)) { throw new Exception("Failed to find instructions OnSmartSelect_PickToolForStrategy 4/4"); }
+
+			c.Emit(OpCodes.Ldarg_0);
+
+			c.EmitDelegate(HasFlairGunAmmo);
+		}
+		private static bool HasFlairGunAmmo(bool hasFlare, Player player) {
+			if (hasFlare)
+				return hasFlare;
+
+			Item bagAmmo = ChooseFromBag(BagStorageID, (Item item) => item.ammo == ItemID.Flare, player);
+
+			if (bagAmmo != null)
+				hasFlare = true;
+
+			return hasFlare;
+		}
+
+		public static SortedSet<int> AllowedItems => AllowedItemsManager.AllowedItems;
+		public static AllowedItemsManager AllowedItemsManager = new(DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
+		public AllowedItemsManager GetAllowedItemsManager => AllowedItemsManager;
+		protected static bool? DevCheck(ItemSetInfo info, SortedSet<ItemGroup> itemGroups, SortedSet<string> endWords, SortedSet<string> searchWords) {
+			if (VacuumBags.clientConfig.AllAmmoItemsGoIntoAmmoBag && (info.Ammo || info.CheckItemGroup(ItemGroup.Ammo)))
+				return true;
+
+			if (info.ConsumableWeapon)
+				return true;
+
+			if (info.Bomb)
+				return true;
+
+			return null;
+		}
+		protected static SortedSet<int> DevWhiteList() {
+			SortedSet<int> devWhiteList = new() {
 				ItemID.EmptyBullet,
 				ItemID.WoodenArrow,
 				ItemID.FlamingArrow,
@@ -165,183 +284,64 @@ namespace VacuumBags.Items
 				ItemID.RedSolution,
 				ItemID.SandSolution,
 				ItemID.SnowSolution,
-				ItemID.DirtSolution
+				ItemID.DirtSolution,
+				ItemID.Bomb,
+				ItemID.Dynamite,
+				ItemID.HolyWater,
+				ItemID.UnholyWater,
+				ItemID.Cannonball,
+				ItemID.Flare,
+				ItemID.BlueFlare,
 			};
 
-			SortedSet<string> endWords = new() {
-				
-			};
-
-			SortedSet<string> searchWords = new() {
-				
-			};
-
-			for (int i = 0; i < ItemLoader.ItemCount; i++) {
-				Item item = ContentSamples.ItemsByType[i];
-				if (item.NullOrAir())
-					continue;
-
-				if (VacuumBags.clientConfig.AllAmmoItemsGoIntoAmmoBag && item.ammo != AmmoID.None) {
-					allowedItems.Add(item.type);
-					continue;
-				}
-
-				string lowerName = item.GetItemInternalName().ToLower();
-				bool added = false;
-				foreach (string endWord in endWords) {
-					if (lowerName.EndsWith(endWord)) {
-						allowedItems.Add(item.type);
-						added = true;
-						break;
-					}
-				}
-
-				if (added)
-					continue;
-
-				foreach (string searchWord in searchWords) {
-					if (lowerName.Contains(searchWord)) {
-						allowedItems.Add(item.type);
-						added = true;
-						break;
-					}
-				}
-
-				ItemGroupAndOrderInGroup group = new ItemGroupAndOrderInGroup(item);
-				if (group.Group == ItemGroup.Solutions || VacuumBags.clientConfig.AllAmmoItemsGoIntoAmmoBag && group.Group == ItemGroup.Ammo) {
-					allowedItems.Add(item.type);
-					continue;
-				}
-			}
-
-			foreach (int blackListItemType in BlackList) {
-				allowedItems.Remove(blackListItemType);
-			}
+			return devWhiteList;
 		}
+		protected static SortedSet<string> DevModWhiteList() {
+			SortedSet<string> devModWhiteList = new() {
 
-		public static SortedSet<int> BlackList {
-			get {
-				if (blackList == null)
-					GetBlackList();
+			};
 
-				return blackList;
-			}
+			return devModWhiteList;
 		}
-		private static SortedSet<int> blackList = null;
-		private static void GetBlackList() {
-			blackList = new() {
-				ModContent.ItemType<AmmoBag>(),
-				ModContent.ItemType<PaintBucket>(),
+		protected static SortedSet<int> DevBlackList() {
+			SortedSet<int> devBlackList = new() {
 				ItemID.CopperCoin,
 				ItemID.SilverCoin,
 				ItemID.GoldCoin,
 				ItemID.PlatinumCoin,
 			};
+
+			return devBlackList;
 		}
-		public static Item OnChooseAmmo(On_Player.orig_ChooseAmmo orig, Player self, Item weapon) {
-			Item item = orig(self, weapon);
-			int AmmoBagID = ModContent.ItemType<AmmoBag>();
-			if (!self.HasItem(AmmoBagID))
-				return item;
+		protected static SortedSet<string> DevModBlackList() {
+			SortedSet<string> devModBlackList = new() {
+				
+			};
 
-			Item fromBag = ChooseAmmoFromBag(self, weapon);
-			if (item == null) {
-				return fromBag;
-			}
-			else {
-				if (fromBag == null || self.whoAmI != Main.myPlayer)
-					return item;
+			return devModBlackList;
+		}
+		protected static SortedSet<ItemGroup> ItemGroups() {
+			SortedSet<ItemGroup> itemGroups = new() {
 
-				Item[] inventory = self.inventory;
-				for (int j = 54; j < 58; j++) {
-					if (inventory[j].type == AmmoBagID)
-						return fromBag;
+			};
 
-					if (inventory[j].stack > 0 && ItemLoader.CanChooseAmmo(weapon, inventory[j], self)) {
-						return item;
-					}
-				}
+			return itemGroups;
+		}
+		protected static SortedSet<string> EndWords() {
+			SortedSet<string> endWords = new() {
+				"bomb",
+				"dynamite"
+			};
 
-				for (int k = 0; k < 54; k++) {
-					if (inventory[k].type == AmmoBagID)
-						return fromBag;
-
-					if (inventory[k].stack > 0 && ItemLoader.CanChooseAmmo(weapon, inventory[k], self)) {
-						return item;
-					}
-				}
-			}
-
-			return item;
+			return endWords;
 		}
 
-		private static Item ChooseAmmoFromBag(Player player, Item weapon) {
-			if (player.whoAmI != Main.myPlayer)
-				return null;
+		protected static SortedSet<string> SearchWords() {
+			SortedSet<string> searchWords = new() {
+				
+			};
 
-			IEnumerable<Item> items = StorageManager.GetItems(BagStorageID).Where(item => !item.NullOrAir() && item.stack > 0 && ItemLoader.CanChooseAmmo(weapon, item, player));
-			if (!items.Any())
-				return null;
-
-			if (items.AnyFavoritedItem()) {
-				IEnumerable<Item> favoritedItems = items.Where(item => item.favorited);
-				return favoritedItems.First();
-			}
-			else {
-				return items.First();
-			}
-		}
-
-		internal static void OnDrawItemSlot(ILContext il) {
-			var c = new ILCursor(il);
-			/*
-	// if (item.useAmmo > 0)
-	IL_0cc8: ldloc.1
-	IL_0cc9: ldfld int32 Terraria.Item::useAmmo
-	IL_0cce: ldc.i4.0
-	IL_0ccf: ble.s IL_0d13
-
-	// _ = item.useAmmo;
-	IL_0cd1: ldloc.1
-	IL_0cd2: ldfld int32 Terraria.Item::useAmmo
-	IL_0cd7: pop
-	// num11 = 0;
-	IL_0cd8: ldc.i4.0
-	IL_0cd9: stloc.s 29
-			 */
-			//Note to self.  All instructions have to be perfectly in order if using TryGotoNext.  Use multiple calls of TryGotoNext if you need to skip instructions.
-			if (!c.TryGotoNext(MoveType.After,
-				i => i.MatchLdloc(1),
-				i => i.MatchLdfld<Item>("useAmmo"),
-				i => i.MatchPop(),
-				i => i.MatchLdcI4(0)
-			)) { throw new Exception("Failed to find instructions OnDrawItemSlot 1/1"); }
-
-			//Also works for jumping over instructions.
-			/*if (!c.TryGotoNext(MoveType.After,
-				//i => i.MatchLdloc(1),
-				i => i.MatchLdfld<Item>("useAmmo"),
-				i => i.MatchLdcI4(0)
-			)) { throw new Exception("Failed to find instructions OnDrawItemSlot 1/2"); }
-
-			if (!c.TryGotoNext(MoveType.After,
-				i => i.MatchLdcI4(0)
-			)) { throw new Exception("Failed to find instructions OnDrawItemSlot 2/2"); }*/
-			//c.LogRest(10);
-			c.Emit(OpCodes.Ldloc, 1);
-
-			c.EmitDelegate((int ammoCount, Item weapon) => {
-				int AmmoBagID = ModContent.ItemType<AmmoBag>();
-				if (!Main.LocalPlayer.HasItem(AmmoBagID))
-					return ammoCount;
-
-				foreach (Item item in StorageManager.GetItems(BagStorageID)) {
-					if (!item.NullOrAir() && item.stack > 0 && ItemLoader.CanChooseAmmo(weapon, item, Main.LocalPlayer))
-						ammoCount += item.stack;
-				}
-
-				return ammoCount;
-			});
+			return searchWords;
 		}
 
 		#region AndroModItem attributes that you don't need.

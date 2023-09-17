@@ -2,40 +2,81 @@
 Mods: {
 	VacuumBags: {
 		Config: {
-			BagStorageOptions: {
-				AllAmmoItemsGoIntoAmmoBag: {
-					Label: All Ammo Items Go Into Ammo Bag
+			BagEffectOptions: {
+				BannerBagNumberOfBannersInInventory: {
+					Label: Torba z banerem Liczba banerów w ekwipunku
 					Tooltip:
 						'''
-						If true, all items that are used as ammo for anything will go into the bag.
-						If false, only the selected ammo items whitelist will be allowed which excludes a few items like stars.
+						Kiedy torba ze sztandarami znajdzie się w twoim ekwipunku, pierwsze X sztandarów zastosuje swoje wzmocnienia.
+						Faworyzowanie banera lub banerów daje im pierwszeństwo przed nieulubionymi.
+						Ustaw na -1 dla wszystkich sztandarów w torbie, aby zapewnić wzmocnienia.
+						'''
+				}
+
+				BannerBagNumberOfBannersWhenPlaced: {
+					Label: Torba z banerem Liczba banerów po umieszczeniu
+					Tooltip:
+						'''
+						Kiedy torba ze sztandarami zostanie umieszczona na świecie, pierwsze X sztandarów zastosuje swoje wzmocnienia.
+						Faworyzowanie banera lub banerów daje im pierwszeństwo przed nieulubionymi. Ustaw na -1 dla wszystkich banerów w worku, aby zapewnić premie.
+						'''
+				}
+
+				PortableStationNumberOfStationsInInventory: {
+					Label: Stacja przenośna Liczba stacji w magazynie
+					Tooltip:
+						'''
+						Gdy stacja przenośna znajdzie się w twoim ekwipunku, pierwsze X stacji będzie dostępnych do wytworzenia.
+						Dodanie stacji do ulubionych daje im pierwszeństwo przed stacjami, które nie zostały dodane do ulubionych.
+						Ustaw na -1, aby wszystkie stacje w Stacji Przenośnej były dostępne do wytwarzania.
+						'''
+				}
+
+				PortableStationNumberOfStationsWhenPlaced: {
+					Label: Stacja przenośna Liczba stacji po umieszczeniu
+					Tooltip:
+						'''
+						Kiedy stacja przenośna zostanie umieszczona na świecie, pierwsze X stacji będzie dostępnych do wytworzenia.
+						Dodanie stacji do ulubionych daje im pierwszeństwo przed stacjami, które nie zostały dodane do ulubionych.
+						Ustaw na -1, aby wszystkie stacje w Stacji Przenośnej były dostępne do wytwarzania.
+						'''
+				}
+			}
+
+			BagStorageOptions: {
+				AllAmmoItemsGoIntoAmmoBag: {
+					Label: Wszystkie elementy amunicji trafiają do torby z amunicją
+					Tooltip:
+						'''
+						Jeśli to prawda, wszystkie przedmioty użyte jako amunicja do czegokolwiek trafią do torby.
+						Jeśli fałsz, dozwolona będzie tylko biała lista wybranych elementów amunicji, co wyklucza kilka elementów, takich jak gwiazdki.
 						'''
 				}
 
 				SimpleBagStorageSize: {
-					Label: Simple Bag Storage Size
+					Label: Prosty rozmiar torby do przechowywania
 					Tooltip:
 						'''
-						The number of slots in the simple bag storage.
-						If this option is used while the player has more items in their bag, the bag size will be reduced to the number of items still in the bag.
-						Setting this number very high could cause lag or possibly a crash from using too much memory if you don't have much RAM.  Use at your own risk.
+						Liczba miejsc w prostym schowku na torby.
+						Jeśli ta opcja zostanie użyta, gdy gracz ma więcej przedmiotów w torbie, rozmiar torby zostanie zmniejszony do liczby przedmiotów znajdujących się jeszcze w torbie.
+						Ustawienie tej liczby na bardzo wysoką może spowodować opóźnienie lub awarię z powodu użycia zbyt dużej ilości pamięci, jeśli nie masz dużo pamięci RAM. Używaj na własne ryzyko.
 						'''
 				}
 
 				SimpleBagsVacuumAllItems: {
-					Label: Simple Bags Vacuum All Items
+					Label: Proste torby Odkurz wszystkie przedmioty
 					Tooltip:
 						'''
-						If true, all items will be vacuumed into the simple bags.
-						If false, only items that are the same type as an item in the bag will be vacuumed.
+						Jeśli to prawda, wszystkie przedmioty zostaną odkurzone w prostych workach.
+						W przypadku wartości fałszywej odkurzane będą tylko przedmioty tego samego typu co przedmioty w worku.
 						'''
 				}
 			}
 
 			Crafting: {
 				HarderBagRecipes: {
-					Label: Harder Bag Recipes
-					Tooltip: Makes the bag recipes require more items and some are more difficult to get.
+					Label: Przepisy na trudniejsze torby
+					Tooltip: Sprawia, że przepisy na torby wymagają większej liczby elementów, a niektóre są trudniejsze do zdobycia.
 				}
 			}
 		}
@@ -163,6 +204,21 @@ Mods: {
 					'''
 			}
 
+			BannerBag: {
+				DisplayName: Torba banerowa
+				Tooltip:
+					'''
+					Automatycznie przechowuje banery.
+					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
+					Torba domyślnie zapewnia do 3 efektów sztandarów, gdy znajduje się w ekwipunku.
+					Po umieszczeniu domyślnie zapewnia wszystkie efekty banerów, ale w normalnym zakresie banerów. Każda torba banerowa ma taki sam ekwipunek.
+					Wybierając premie do banerów, które chcesz otrzymać, banery zostaną zignorowane, jeśli masz je już w pobliżu.
+					Tło sztandarów jest żółte, gdy worek sztandarów zapewnia wzmocnienie.
+					Tło jest fioletowe, jeśli masz już wzmocnienie banera z innego źródła.
+					'''
+			}
+
 			BossBag: {
 				DisplayName: Torba szefa
 				Tooltip:
@@ -215,6 +271,19 @@ Mods: {
 					'''
 			}
 
+			FishingBelt: {
+				DisplayName: Pas wędkarski
+				Tooltip:
+					'''
+					Automatycznie przechowuje przedmioty związane z wędkarstwem, takie jak ryby, przynęty i nagrody dla wędkarzy.
+					Gdy znajdziesz się w ekwipunku, zawartość paska będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć pasek.
+					Przynęta w pasku jest używana, jeśli pasek wędkarski znajduje się w pierwszej znalezionej przynęcie.
+					Jeśli dowolna przynęta na pasku, której można użyć, jest ulubiona, zostaną użyte tylko ulubione przynęty.
+					Akcesoria informacyjne, które zostaną dodane do ulubionych, będą wyświetlać swoje informacje tak, jakby znajdowały się w Twoim ekwipunku.
+					'''
+			}
+
 			HerbSatchel: {
 				DisplayName: Torba na zioła
 				Tooltip:
@@ -225,6 +294,19 @@ Mods: {
 					'''
 			}
 
+			JarOfDirt: {
+				DisplayName: Słoik ziemi
+				Tooltip:
+					'''
+					Automatycznie zatrzymuje brud i inne naturalne bloki (brud, błoto, glinę, piasek, kamień, lód itp.)
+					Gdy znajdziesz się w ekwipunku, zawartość słoika będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć słoik.
+					Przedmioty można umieszczać ze słoika, klikając słoik lewym przyciskiem myszy. Jeśli jakiekolwiek elementy w słoiku są dodane do ulubionych, użyte zostaną tylko te elementy, które są ulubione.
+
+					...........zgadnij co jest w środku....
+					'''
+			}
+
 			LokisTesseract: {
 				DisplayName: Tesserakt Lokiego
 				Tooltip:
@@ -232,6 +314,18 @@ Mods: {
 					Automatycznie przechowuje przedmioty z Thorium.
 					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
 					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
+					'''
+			}
+
+			MechanicsToolbelt: {
+				DisplayName: Pas narzędziowy mechanika
+				Tooltip:
+					'''
+					Automatycznie przechowuje elementy związane z okablowaniem, takie jak pułapki i posągi.
+					Gdy znajdziesz się w ekwipunku, zawartość paska będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć pasek.
+					Przedmioty można umieszczać z paska klikając lewym przyciskiem paska. Jeśli jakiekolwiek elementy na pasku są ulubione, użyte zostaną tylko te elementy, które są ulubione.
+					Drutu w pasku można używać za pomocą narzędzi do okablowania tak, jakby znajdował się w ekwipunku.
 					'''
 			}
 
@@ -350,10 +444,25 @@ Mods: {
 				Tooltip:
 					'''
 					Automatycznie przechowuje farbę
-					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
-					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
-					Farba w puszce jest używana, jeśli puszka z farbą znajduje się w pierwszym znalezionym przedmiocie z farbą.
-					Jeśli jakakolwiek farba w puszce, której można użyć za pomocą narzędzia do malowania, zostanie wybrana jako ulubiona, użyte zostaną tylko ulubione farby.
+					Gdy znajdziesz się w ekwipunku, zawartość wiadra będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć wiadro.
+					Farba w wiadrze jest używana, jeśli wiadro z farbą znajduje się w pierwszym znalezionym przedmiocie z farbą.
+					Jeśli jakakolwiek farba w wiadrze, której można użyć za pomocą narzędzia do malowania, zostanie wybrana jako ulubiona, użyte zostaną tylko ulubione farby.
+					'''
+			}
+
+			PortableStation: {
+				DisplayName: Stacja przenośna
+				Tooltip:
+					'''
+					Automatycznie przechowuje stacje rzemieślnicze i stacje wzmacniające.
+					Gdy zawartość stacji znajduje się w twoim ekwipunku, możesz ją wytworzyć.
+					Kliknij prawym przyciskiem myszy, aby otworzyć stację.
+					Stacja przenośna, znajdująca się w twoim ekwipunku, domyślnie przydziela do 3 stanowisk do wytwarzania, gdy znajduje się w twoim ekwipunku.
+					Po umieszczeniu domyślnie udostępnia wszystkie twoje stanowiska do wytwarzania, ale w normalnym zasięgu płytek. Każda stacja przenośna udostępnia swoje zasoby.
+					Tło stacji jest żółte, gdy są one udostępniane do tworzenia przez Stację Przenośną.
+					Tło jest fioletowe, jeśli w pobliżu znajduje się już stacja tego typu, jednak podczas wybierania stacje, w pobliżu których się znajdujesz, nie zostaną automatycznie pominięte
+					stacje ze Stacji Przenośnej, ponieważ więcej niekoniecznie znaczy lepiej w przypadku przepisów rzemieślniczych. masz już wzmocnienie sztandaru z innego źródła.
 					'''
 			}
 
@@ -371,6 +480,18 @@ Mods: {
 					'''
 			}
 
+			SlayersSack: {
+				DisplayName: Worek Zabójcy
+				Tooltip:
+					'''
+					Automatycznie przechowuje materiały upuszczone przez wrogów i inne przedmioty znalezione podczas przygód, takie jak pochodnie, liny i klucze.
+					Gdy znajdziesz się w ekwipunku, zawartość worka będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć worek.
+					Linę można wyjąć z worka klikając lewym przyciskiem myszy na worku. Jeśli jakakolwiek lina w worku jest ulubiona, zostanie użyta tylko ulubiona lina.
+					Pochodni i świec żarowych można używać z torby, trzymając Shift, tak jakby były w ekwipunku.
+					'''
+			}
+
 			WallEr: {
 				DisplayName: Murarz dołowy
 				Tooltip:
@@ -380,6 +501,11 @@ Mods: {
 					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					Elementy można umieszczać z Murarz dołowy, klikając lewym przyciskiem myszy Murarz dołowy. Jeśli jakiekolwiek elementy w Murarz dołowy zostaną dodane do ulubionych, użyte zostaną tylko te elementy, które są ulubione.
 					'''
+			}
+
+			OreBag: {
+				// Tooltip: ""
+				// DisplayName: Ore Bag
 			}
 		}
 
@@ -395,6 +521,7 @@ Mods: {
 			// BagRed.MapEntry: Bag Red
 			// BagWhite.MapEntry: Bag White
 			// BagYellow.MapEntry: Bag Yellow
+			// BannerBag.MapEntry: Banner Bag
 			// PackBlack.MapEntry: Pack Black
 			// PackBlue.MapEntry: Pack Blue
 			// PackBrown.MapEntry: Pack Brown
@@ -406,6 +533,7 @@ Mods: {
 			// PackRed.MapEntry: Pack Red
 			// PackWhite.MapEntry: Pack White
 			// PackYellow.MapEntry: Pack Yellow
+			// PortableStation.MapEntry: Portable Station
 		}
 
 		Configs: {
@@ -433,6 +561,26 @@ Mods: {
 
 				HarderBagRecipes: {
 					// Label: Harder Bag Recipes
+					// Tooltip: ""
+				}
+
+				BannerBagNumberOfBannersInInventory: {
+					// Label: Banner Bag Number Of Banners In Inventory
+					// Tooltip: ""
+				}
+
+				BannerBagNumberOfBannersWhenPlaced: {
+					// Label: Banner Bag Number Of Banners When Placed
+					// Tooltip: ""
+				}
+
+				PortableStationNumberOfStationsInInventory: {
+					// Label: Portable Station Number Of Stations In Inventory
+					// Tooltip: ""
+				}
+
+				PortableStationNumberOfStationsWhenPlaced: {
+					// Label: Portable Station Number Of Stations When Placed
 					// Tooltip: ""
 				}
 			}

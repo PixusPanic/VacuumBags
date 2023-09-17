@@ -12,6 +12,7 @@ using Terraria.ModLoader.Default;
 
 namespace VacuumBags.Items
 {
+	[Autoload(false)]
 	public class FargosMementos : ModBag
 	{
 		public override string ModDisplayNameTooltip => "Fargos";

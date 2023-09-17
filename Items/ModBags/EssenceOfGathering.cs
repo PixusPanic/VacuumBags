@@ -13,6 +13,7 @@ using androLib.Common.Globals;
 
 namespace VacuumBags.Items
 {
+	[Autoload(false)]
 	public class EssenceOfGathering : ModBag
 	{
 		public override string ModDisplayNameTooltip => "Stars Above";

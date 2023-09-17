@@ -10,6 +10,7 @@
   <ItemGroup>
     <None Remove="icon.png" />
     <None Remove="icon_workshop.png" />
+    <None Remove="Items\Sprites\AdventurerBag.png" />
     <None Remove="Items\Sprites\AmmoBag.png" />
     <None Remove="Items\Sprites\BagBlack.png" />
     <None Remove="Items\Sprites\BagBlue.png" />
@@ -22,13 +23,17 @@
     <None Remove="Items\Sprites\BagRed.png" />
     <None Remove="Items\Sprites\BagWhite.png" />
     <None Remove="Items\Sprites\BagYellow.png" />
+    <None Remove="Items\Sprites\BannerBag.png" />
     <None Remove="Items\Sprites\bossBag.png" />
     <None Remove="Items\Sprites\BuildersBox.png" />
     <None Remove="Items\Sprites\CalamitousCauldron.png" />
     <None Remove="Items\Sprites\EssenceOfGathering.png" />
     <None Remove="Items\Sprites\FargosMementos.png" />
+    <None Remove="Items\Sprites\FishingBelt.png" />
     <None Remove="Items\Sprites\HerbSatchel.png" />
+    <None Remove="Items\Sprites\JarOfDirt.png" />
     <None Remove="Items\Sprites\LokisTesseract.png" />
+    <None Remove="Items\Sprites\MechanicsToolbelt.png" />
     <None Remove="Items\Sprites\PackBlack.png" />
     <None Remove="Items\Sprites\PackBlue.png" />
     <None Remove="Items\Sprites\PackBrown.png" />
@@ -41,7 +46,9 @@
     <None Remove="Items\Sprites\PackWhite.png" />
     <None Remove="Items\Sprites\PackYellow.png" />
     <None Remove="Items\Sprites\PaintBucket.png" />
+    <None Remove="Items\Sprites\PortableStation.png" />
     <None Remove="Items\Sprites\PotionFlask.png" />
+    <None Remove="Items\Sprites\SlayersSack.png" />
     <None Remove="Items\Sprites\WallEr.png" />
     <None Remove="Localization\de-DE.hjson" />
     <None Remove="Localization\en-UI.hjson" />
@@ -74,6 +81,8 @@
     <None Remove="Tiles\Sprites\BagWhite_Highlight.png" />
     <None Remove="Tiles\Sprites\BagYellow.png" />
     <None Remove="Tiles\Sprites\BagYellow_Highlight.png" />
+    <None Remove="Tiles\Sprites\BannerBag.png" />
+    <None Remove="Tiles\Sprites\BannerBag_Highlight.png" />
     <None Remove="Tiles\Sprites\PackBlack.png" />
     <None Remove="Tiles\Sprites\PackBlack_Highlight.png" />
     <None Remove="Tiles\Sprites\PackBlue.png" />
@@ -96,6 +105,8 @@
     <None Remove="Tiles\Sprites\PackWhite_Highlight.png" />
     <None Remove="Tiles\Sprites\PackYellow.png" />
     <None Remove="Tiles\Sprites\PackYellow_Highlight.png" />
+    <None Remove="Tiles\Sprites\PortableStation.png" />
+    <None Remove="Tiles\Sprites\PortableStation_Highlight.png" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="tModLoader.CodeAssist" Version="0.1.*" />

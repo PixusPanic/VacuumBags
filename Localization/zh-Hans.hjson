@@ -2,40 +2,81 @@
 Mods: {
 	VacuumBags: {
 		Config: {
-			BagStorageOptions: {
-				AllAmmoItemsGoIntoAmmoBag: {
-					Label: All Ammo Items Go Into Ammo Bag
+			BagEffectOptions: {
+				BannerBagNumberOfBannersInInventory: {
+					Label: 横幅袋 库存横幅数量
 					Tooltip:
 						'''
-						If true, all items that are used as ammo for anything will go into the bag.
-						If false, only the selected ammo items whitelist will be allowed which excludes a few items like stars.
+						当横幅包出现在您的库存中时，前 X 个横幅将应用它们的增益。
+						收藏一个或多个横幅可使其优先于未收藏的横幅。
+						将包中的所有横幅设置为 -1 以给予增益。
+						'''
+				}
+
+				BannerBagNumberOfBannersWhenPlaced: {
+					Label: 横幅袋放置时横幅数量
+					Tooltip:
+						'''
+						当横幅包被放置在世界中时，前 X 个横幅将应用它们的增益。
+						收藏一个或多个横幅后，它们的优先级高于未收藏的横幅。将包中的所有横幅设置为 -1 以给予其增益。
+						'''
+				}
+
+				PortableStationNumberOfStationsInInventory: {
+					Label: 便携式工作站 库存工作站数量
+					Tooltip:
+						'''
+						当便携式工作站出现在您的库存中时，前 X 个工作站将可用于制作。
+						收藏一个或多个电台使其优先于未收藏的电台。
+						将便携式工作站中的所有工作站设置为 -1 即可用于制作。
+						'''
+				}
+
+				PortableStationNumberOfStationsWhenPlaced: {
+					Label: 便携式工作站放置时的工作站数量
+					Tooltip:
+						'''
+						当便携式站放置在世界上时，前 X 个站将可用于制作。
+						收藏一个或多个电台使其优先于未收藏的电台。
+						将便携式工作站中的所有工作站设置为 -1 即可用于制作。
+						'''
+				}
+			}
+
+			BagStorageOptions: {
+				AllAmmoItemsGoIntoAmmoBag: {
+					Label: 所有弹药物品都放入弹药袋中
+					Tooltip:
+						'''
+						如果为真，则所有用作弹药的物品都将放入包中。
+						如果为 错误的，则仅允许选定的弹药项目白名单，其中排除了一些项目，例如星星。
 						'''
 				}
 
 				SimpleBagStorageSize: {
-					Label: Simple Bag Storage Size
+					Label: 简易包收纳尺寸
 					Tooltip:
 						'''
-						The number of slots in the simple bag storage.
-						If this option is used while the player has more items in their bag, the bag size will be reduced to the number of items still in the bag.
-						Setting this number very high could cause lag or possibly a crash from using too much memory if you don't have much RAM.  Use at your own risk.
+						简单包存储中的插槽数量。
+						如果在玩家的包中有更多物品时使用此选项，则包的大小将减少到包中仍包含的物品数量。
+						如果您没有太多 RAM，将此数字设置得太高可能会导致延迟，甚至可能因使用过多内存而崩溃。 使用风险自负。
 						'''
 				}
 
 				SimpleBagsVacuumAllItems: {
-					Label: Simple Bags Vacuum All Items
+					Label: 简单的包包 可吸尘所有物品
 					Tooltip:
 						'''
-						If true, all items will be vacuumed into the simple bags.
-						If false, only items that are the same type as an item in the bag will be vacuumed.
+						如果属实，所有物品都将被吸尘到简易袋中。
+						如果为 错误的，则只有与袋子中的物品类型相同的物品才会被吸尘。
 						'''
 				}
 			}
 
 			Crafting: {
 				HarderBagRecipes: {
-					Label: Harder Bag Recipes
-					Tooltip: Makes the bag recipes require more items and some are more difficult to get.
+					Label: 较硬的袋子食谱
+					Tooltip: 使得袋子配方需要更多的物品，并且有些更难获得。
 				}
 			}
 		}
@@ -163,6 +204,21 @@ Mods: {
 					'''
 			}
 
+			BannerBag: {
+				DisplayName: 横幅袋
+				Tooltip:
+					'''
+					自动存储横幅。
+					当你在库存中时，包里的东西可以用来制作。
+					右键点击打开袋子。
+					当您的库存中时，该包默认提供最多 3 种横幅效果。
+					放置后，它默认提供所有横幅效果，但在正常横幅范围内。 每个横幅包共享其库存。
+					当选择给予你的横幅增益时，如果你附近已有横幅，那么横幅将被忽略。
+					当横幅包授予增益时，横幅背景为黄色。
+					如果您已经从其他来源获得了横幅增益，则背景为紫色。
+					'''
+			}
+
 			BossBag: {
 				DisplayName: 老板包
 				Tooltip:
@@ -215,6 +271,19 @@ Mods: {
 					'''
 			}
 
+			FishingBelt: {
+				DisplayName: 钓鱼腰带
+				Tooltip:
+					'''
+					自动存储与钓鱼相关的物品，例如鱼、鱼饵和钓鱼者奖励。
+					当您在库存中时，腰带上的物品可用于制作。
+					右键单击打开腰带。
+					如果钓鱼带位于第一个找到的诱饵项目中，则使用带中的诱饵。
+					如果腰带中任何可用的饵料被收藏，则仅使用收藏的饵料。
+					收藏的信息配件将显示其信息，就像它们在您的库存中一样。
+					'''
+			}
+
 			HerbSatchel: {
 				DisplayName: 香草挎包
 				Tooltip:
@@ -225,6 +294,19 @@ Mods: {
 					'''
 			}
 
+			JarOfDirt: {
+				DisplayName: 一罐泥土
+				Tooltip:
+					'''
+					自动存储泥土和其他天然方块（泥土、泥土、粘土、沙子、石头、冰等）
+					当你在库存中时，罐子里的东西可以用来制作。
+					右键单击打开罐子。
+					通过左键单击罐子可以从罐子中放置物品。 如果罐子中的任何物品被收藏，则仅使用收藏的物品。
+
+					……猜猜里面是什么……
+					'''
+			}
+
 			LokisTesseract: {
 				DisplayName: 洛基的宇宙立方
 				Tooltip:
@@ -232,6 +314,18 @@ Mods: {
 					自动储存瑟银物品。
 					当你在库存中时，包里的东西可以用来制作。
 					右键点击打开袋子。
+					'''
+			}
+
+			MechanicsToolbelt: {
+				DisplayName: 机械师的工具带
+				Tooltip:
+					'''
+					自动存储与布线相关的物品，例如陷阱和雕像。
+					当您在库存中时，腰带上的物品可用于制作。
+					右键单击打开腰带。
+					左键单击腰带即可从腰带上放置物品。 如果腰带中的任何物品被收藏，则仅使用收藏的物品。
+					皮带中的电线可以由接线工具使用，就像它在您的库存中一样。
 					'''
 			}
 
@@ -350,10 +444,25 @@ Mods: {
 				Tooltip:
 					'''
 					自动储存油漆
-					当你在库存中时，包里的东西可以用来制作。
-					右键点击打开袋子。
-					如果油漆罐位于找到的第一个油漆项目中，则使用罐中油漆。
-					如果您的绘画工具可以使用罐中的任何油漆被收藏，则只会使用收藏的油漆。
+					当您在库存中时，桶中的内容可用于制作。
+					右键单击打开桶。
+					如果油漆桶位于找到的第一个油漆项目中，则使用桶中的油漆。
+					如果您的绘画工具可以使用桶中的任何油漆被收藏，则只会使用收藏的油漆。
+					'''
+			}
+
+			PortableStation: {
+				DisplayName: 便携式站
+				Tooltip:
+					'''
+					自动存储制作站和抛光站。
+					当您在库存中时，空间站的内容可用于制作。
+					右键单击打开电台。
+					在您的库存中时，便携式工作站默认最多可容纳 3 个工作站用于制作。
+					放置后，它默认提供所有用于制作的工作站，但在正常的图块范围内。 每个便携式工作站共享其库存。
+					当便携式工作站提供用于制作时，工作站的背景为黄色。
+					如果附近已有该类型的电台，则背景为紫色，但选择时不会自动跳过您附近的电台
+					来自便携式工作站的工作站，因为制作配方越多并不一定越好。 你已经从其他来源获得了横幅增益。
 					'''
 			}
 
@@ -371,6 +480,18 @@ Mods: {
 					'''
 			}
 
+			SlayersSack: {
+				DisplayName: 杀手的麻袋
+				Tooltip:
+					'''
+					自动存储敌人掉落的材料以及冒险时发现的其他物品，例如火把、绳子和钥匙。
+					当你在库存中时，袋子里的东西可以用来制作。
+					右键点击打开袋子。
+					左键单击麻袋即可将绳子从麻袋中取出。 如果麻袋中的任何绳子被收藏，则仅使用收藏的绳子。
+					拿着shift时，可以从包里使用手电筒和荧光棒，就像它们在你的库存中一样。
+					'''
+			}
+
 			WallEr: {
 				DisplayName: 沃尔尔
 				Tooltip:
@@ -380,6 +501,11 @@ Mods: {
 					右键点击打开袋子。
 					可以通过用 沃尔尔 左键单击来从 沃尔尔 放置物品。 如果 沃尔尔 中的任何物品被收藏，则仅使用收藏的物品。
 					'''
+			}
+
+			OreBag: {
+				// Tooltip: ""
+				// DisplayName: Ore Bag
 			}
 		}
 
@@ -395,6 +521,7 @@ Mods: {
 			// BagRed.MapEntry: Bag Red
 			// BagWhite.MapEntry: Bag White
 			// BagYellow.MapEntry: Bag Yellow
+			// BannerBag.MapEntry: Banner Bag
 			// PackBlack.MapEntry: Pack Black
 			// PackBlue.MapEntry: Pack Blue
 			// PackBrown.MapEntry: Pack Brown
@@ -406,6 +533,7 @@ Mods: {
 			// PackRed.MapEntry: Pack Red
 			// PackWhite.MapEntry: Pack White
 			// PackYellow.MapEntry: Pack Yellow
+			// PortableStation.MapEntry: Portable Station
 		}
 
 		Configs: {
@@ -433,6 +561,26 @@ Mods: {
 
 				HarderBagRecipes: {
 					// Label: Harder Bag Recipes
+					// Tooltip: ""
+				}
+
+				BannerBagNumberOfBannersInInventory: {
+					// Label: Banner Bag Number Of Banners In Inventory
+					// Tooltip: ""
+				}
+
+				BannerBagNumberOfBannersWhenPlaced: {
+					// Label: Banner Bag Number Of Banners When Placed
+					// Tooltip: ""
+				}
+
+				PortableStationNumberOfStationsInInventory: {
+					// Label: Portable Station Number Of Stations In Inventory
+					// Tooltip: ""
+				}
+
+				PortableStationNumberOfStationsWhenPlaced: {
+					// Label: Portable Station Number Of Stations When Placed
 					// Tooltip: ""
 				}
 			}

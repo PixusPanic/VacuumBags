@@ -12,10 +12,13 @@ using System;
 using static Terraria.ModLoader.PlayerDrawLayer;
 using MonoMod.Cil;
 using Mono.Cecil.Cil;
+using static Terraria.ID.ContentSamples.CreativeHelper;
 
 namespace VacuumBags.Items
 {
-	public  class BuildersBox : VBModItem, ISoldByWitch {
+	[Autoload(false)]
+	public  class BuildersBox : BagModItem, ISoldByWitch, INeedsSetUpAllowedList
+	{
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {
             Item.maxStack = 1;
@@ -29,7 +32,7 @@ namespace VacuumBags.Items
 				CreateRecipe()
 				.AddTile(TileID.WorkBenches)
 				.AddIngredient(ItemID.RedBrick, 50)
-				.AddRecipeGroup("androLib:CommonGems", 5)
+				.AddRecipeGroup($"{AndroMod.ModName}:{AndroModSystem.AnyCommonGem}", 5)
 				.Register();
 			}
 			else {
@@ -60,7 +63,8 @@ namespace VacuumBags.Items
 				() => new Color(120, 0, 0, androLib.Common.Configs.ConfigValues.UIAlpha),//Get Button hover color function. Func<using Microsoft.Xna.Framework.Color>
 				() => ModContent.ItemType<BuildersBox>(),//Get ModItem type
 				80,//UI Left
-				675//UI Top
+				675,//UI Top
+				() => ChooseItemFromBox(Main.LocalPlayer)
 			);
 		}
 		public static bool ItemAllowedToBeStored(Item item) => AllowedItems.Contains(item.type);
@@ -68,22 +72,27 @@ namespace VacuumBags.Items
 			if (!VacuumBags.gadgetGaloreEnabled)
 				return;
 
-			VacuumBags.GadgetGalore.Call("RegisterBuildInventory", () => StorageManager.GetItems(BagStorageID));
+			VacuumBags.GadgetGalore.Call("RegisterBuildInventory", () => StorageManager.GetItems(BagStorageID).Where(item => item.NullOrAir()));
 		}
+		public static Item ChooseItemFromBox(Player player) => ChooseFromBag(BagStorageID, (Item item) => item.createTile > -1, player);
 
-		public static SortedSet<int> AllowedItems {
-			get {
-				if (allowedItems == null)
-					GetAllowedItems();
+		public static SortedSet<int> AllowedItems => AllowedItemsManager.AllowedItems;
+		public static AllowedItemsManager AllowedItemsManager = new(DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
+		public AllowedItemsManager GetAllowedItemsManager => AllowedItemsManager;
+		protected static bool? DevCheck(ItemSetInfo info, SortedSet<ItemGroup> itemGroups, SortedSet<string> endWords, SortedSet<string> searchWords) {
+			if (info.Equipment)
+				return false;
 
-				return allowedItems;
-			}
+			if (!info.CreateTile)
+				return false;
+
+			if (info.RequiredTile)
+				return false;
+
+			return null;
 		}
-		private static SortedSet<int> allowedItems = null;
-
-		private static void GetAllowedItems() {
-			allowedItems = new() {
-				ItemID.Hay,
+		protected static SortedSet<int> DevWhiteList() {
+			SortedSet<int> devWhiteList = new() {
 				ItemID.CopperPlating,
 				ItemID.TinPlating,
 				ItemID.ShroomitePlating,
@@ -127,9 +136,7 @@ namespace VacuumBags.Items
 				ItemID.CrystalBlock,
 				ItemID.SandFallBlock,
 				ItemID.SnowFallBlock,
-				ItemID.SnowCloudBlock,
 				ItemID.LesionBlock,
-				ItemID.ShellPileBlock,
 				ItemID.SpiderBlock,
 				ItemID.GoldStarryGlassBlock,
 				ItemID.BlueStarryGlassBlock,
@@ -144,7 +151,6 @@ namespace VacuumBags.Items
 				ItemID.DiamondStoneBlock,
 				ItemID.AmberStoneBlock,
 				ItemID.ReefBlock,
-				ItemID.PoopBlock,
 				ItemID.LavaMossBlock,
 				ItemID.ArgonMossBlock,
 				ItemID.KryptonMossBlock,
@@ -212,93 +218,103 @@ namespace VacuumBags.Items
 				ItemID.SmoothSandstone,
 				ItemID.RedDynastyShingles,
 				ItemID.BlueDynastyShingles,
+				ItemID.Glass,
+				ItemID.Sign,
+				ItemID.Piano,
+				ItemID.Bench,
+				ItemID.TikiTorch,
+				ItemID.TrashCan,
+				ItemID.PinkVase,
+				ItemID.Throne,
+				ItemID.Mannequin,
+				ItemID.CandyCaneBlock,
+				ItemID.GreenCandyCaneBlock,
+				ItemID.BlueLight,
+				ItemID.RedLight,
+				ItemID.GreenLight,
+				ItemID.RichMahogany,
+				ItemID.BoneBlock,
+				ItemID.Cannon,
+				ItemID.SnowballLauncher,
+				ItemID.BunnyCannon,
+				ItemID.Cog,
+				ItemID.DungeonShelf,
+				ItemID.BubbleMachine,
+				ItemID.Hay,
+				ItemID.Jackelier,
+				ItemID.PineTreeBlock,
+				ItemID.ChristmasTree,
+				ItemID.Womannquin,
+				ItemID.CoralstoneBlock,
+				ItemID.FireworksBox,
+				ItemID.FireworkFountain,
+				ItemID.MartianConduitPlating,
+				ItemID.SmokeBlock,
+				ItemID.Bubble,
+				ItemID.ItemFrame,
+				ItemID.Fireplace,
+				ItemID.Chimney,
+				ItemID.ConfettiCannon,
+				ItemID.PortalGunStation,
+				ItemID.PixelBox,
+				ItemID.LesionBlock,
+				ItemID.AntiPortalBlock,
+				ItemID.FoodPlatter,
+				ItemID.PlasmaLamp,
+				ItemID.FogMachine,
 			};
 
-			SortedSet<string> endWords = new() {
-				"plating",
-				"slab",
-				"stucco",
-				"brick",
-			};
-
-			SortedSet<string> searchWords = new() {
-				"shingle",
-			};
-
-			for (int i = 0; i < ItemLoader.ItemCount; i++) {
-				Item item = ContentSamples.ItemsByType[i];
-				if (item.NullOrAir())
-					continue;
-
-				string lowerName = item.GetItemInternalName().ToLower();
-				bool added = false;
-				foreach (string endWord in endWords) {
-					if (lowerName.EndsWith(endWord)) {
-						allowedItems.Add(item.type);
-						added = true;
-						break;
-					}
-				}
-
-				if (added)
-					continue;
-
-				foreach (string searchWord in searchWords) {
-					if (lowerName.Contains(searchWord)) {
-						allowedItems.Add(item.type);
-						added = true;
-						break;
-					}
-				}
+			foreach (int itemType in RecipeGroup.recipeGroups[RecipeGroupID.Wood].ValidItems) {
+				devWhiteList.Add(itemType);
 			}
 
-			foreach (int blackListItemType in BlackList) {
-				allowedItems.Remove(blackListItemType);
-			}
+			return devWhiteList;
 		}
-		public static SortedSet<int> BlackList {
-			get {
-				if (blackList == null)
-					GetBlackList();
-
-				return blackList;
-			}
-		}
-		private static SortedSet<int> blackList = null;
-		private static void GetBlackList() {
-			blackList = new() {
+		protected static SortedSet<string> DevModWhiteList() {
+			SortedSet<string> devModWhiteList = new() {
 
 			};
 
-			List<string> modItemBlacklist = new() {
+			return devModWhiteList;
+		}
+		protected static SortedSet<int> DevBlackList() {
+			SortedSet<int> devBlackList = new() {
+
+			};
+
+			return devBlackList;
+		}
+		protected static SortedSet<string> DevModBlackList() {
+			SortedSet<string> devModBlackList = new() {
 				"CalamityMod/ThrowingBrick"
 			};
 
-			for (int i = ItemID.Count; i < ItemLoader.ItemCount; i++) {
-				Item item = ContentSamples.ItemsByType[i];
-				if (modItemBlacklist.Contains(item.ModFullName()))
-					blackList.Add(item.type);
-			}
+			return devModBlackList;
 		}
-		private static IEnumerable<Item> GetItemsFromBox() {
-			IEnumerable<Item> items = StorageManager.GetItems(BagStorageID).Where(item => !item.NullOrAir() && item.stack > 0 && item.createTile > 0);
-			if (!items.Any())
-				return new Item[0];
+		protected static SortedSet<ItemGroup> ItemGroups() {
+			SortedSet<ItemGroup> itemGroups = new() {
+				ItemGroup.PlacableObjects
+			};
 
-			if (items.AnyFavoritedItem())
-				items = items.Where(item => item.favorited);
-
-			return items;
+			return itemGroups;
 		}
-		public static Item ChooseItemFromBox() {
-			IEnumerable<Item> items = GetItemsFromBox();
-			if (!items.Any())
-				return null;
+		protected static SortedSet<string> EndWords() {
+			SortedSet<string> endWords = new() {
+				
+			};
 
-			return items.First();
+			return endWords;
+		}
+		protected static SortedSet<string> SearchWords() {
+			SortedSet<string> searchWords = new() {
+
+			};
+
+			return searchWords;
 		}
 
 		#region AndroModItem attributes that you don't need.
+
 		public virtual SellCondition SellCondition => SellCondition.Never;
 		public virtual float SellPriceModifier => 1f;
 		public override List<WikiTypeID> WikiItemTypes => new() { WikiTypeID.Storage };

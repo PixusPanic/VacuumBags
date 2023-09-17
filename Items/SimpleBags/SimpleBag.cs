@@ -12,7 +12,8 @@ using System;
 
 namespace VacuumBags.Items
 {
-	public abstract class SimpleBag : VBModItem, ISoldByWitch {
+	[Autoload(false)]
+	public abstract class SimpleBag : BagModItem, ISoldByWitch {
 
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public abstract int MyTileType { get; }
@@ -26,6 +27,7 @@ namespace VacuumBags.Items
 			Item.useTime = 10;
 			Item.useAnimation = 15;
 			Item.useTurn = true;
+			Item.autoReuse = true;
 			Item.maxStack = 1;
 			Item.value = 100000;
 			Item.rare = ItemRarityID.Blue;

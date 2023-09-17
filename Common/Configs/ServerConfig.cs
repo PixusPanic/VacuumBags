@@ -7,6 +7,7 @@ using System.Runtime.Serialization;
 using Terraria.ID;
 using androLib.Common.Globals;
 using androLib.Common.Utility;
+using VacuumBags.Items;
 
 namespace VacuumBags.Common.Configs
 {
@@ -22,6 +23,29 @@ namespace VacuumBags.Common.Configs
 		[ReloadRequired]
 		[DefaultValue(false)]
 		public bool HarderBagRecipes;
+
+		[JsonIgnore]
+		public const string BagEffectOptionsKey = "BagEffectOptions";
+		[JsonIgnore]
+		public const int BannerBagNumberOfBannersInInventoryDefault = 3;
+		[Header($"$Mods.VacuumBags.Config.{BagEffectOptionsKey}")]
+		[DefaultValue(BannerBagNumberOfBannersInInventoryDefault)]
+		[Range(BagModItem.FirstXItemsChooseAllItems, BagsClientConfig.BagsMaxStorageSize)]
+		public int BannerBagNumberOfBannersInInventory;
+
+		[DefaultValue(BagModItem.FirstXItemsChooseAllItems)]
+		[Range(BagModItem.FirstXItemsChooseAllItems, BagsClientConfig.BagsMaxStorageSize)]
+		public int BannerBagNumberOfBannersWhenPlaced;
+
+		[JsonIgnore]
+		public const int PortableStationNumberOfStationsInInventoryDefault = 1;
+		[DefaultValue(PortableStationNumberOfStationsInInventoryDefault)]
+		[Range(BagModItem.FirstXItemsChooseAllItems, BagsClientConfig.BagsMaxStorageSize)]
+		public int PortableStationNumberOfStationsInInventory;
+
+		[DefaultValue(BagModItem.FirstXItemsChooseAllItems)]
+		[Range(BagModItem.FirstXItemsChooseAllItems, BagsClientConfig.BagsMaxStorageSize)]
+		public int PortableStationNumberOfStationsWhenPlaced;
 	}
 
 	public class BagsClientConfig : ModConfig {
@@ -32,8 +56,11 @@ namespace VacuumBags.Common.Configs
 		public const string BagStorageOptionsKey = "BagStorageOptions";
 		[Header($"$Mods.VacuumBags.Config.{BagStorageOptionsKey}")]
 
+		[JsonIgnore]
+		public const int BagsMaxStorageSize = 10000;
+
 		[ReloadRequired]
-		[Range(1, 10000)]
+		[Range(1, BagsMaxStorageSize)]
 		[DefaultValue(40)]
 		public int SimpleBagStorageSize;
 

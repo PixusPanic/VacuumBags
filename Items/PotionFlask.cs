@@ -12,12 +12,12 @@ using static Terraria.ID.ContentSamples.CreativeHelper;
 using System;
 using System.Reflection;
 using Terraria.Audio;
-using Terraria.ModLoader.IO;
-using static Terraria.ModLoader.PlayerDrawLayer;
 
 namespace VacuumBags.Items
 {
-	public  class PotionFlask : VBModItem, ISoldByWitch {
+	[Autoload(false)]
+	public  class PotionFlask : BagModItem, ISoldByWitch, INeedsSetUpAllowedList
+	{
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {
             Item.maxStack = 1;
@@ -72,127 +72,6 @@ namespace VacuumBags.Items
 			);
 		}
 		public static bool ItemAllowedToBeStored(Item item) => AllowedItems.Contains(item.type);
-
-		public static SortedSet<int> AllowedItems {
-			get {
-				if (allowedItems == null)
-					GetAllowedItems();
-
-				return allowedItems;
-			}
-		}
-		private static SortedSet<int> allowedItems = null;
-
-		private static void GetAllowedItems() {
-			allowedItems = new() {
-				ItemID.RecallPotion,
-				ItemID.PotionOfReturn,
-				ItemID.LesserHealingPotion,
-				ItemID.HealingPotion,
-				ItemID.GreaterHealingPotion,
-				ItemID.LesserRestorationPotion,
-				ItemID.RestorationPotion,
-				ItemID.LesserManaPotion,
-				ItemID.ManaPotion,
-				ItemID.GreaterManaPotion,
-				ItemID.SuperManaPotion,
-				ItemID.WormholePotion,
-				ItemID.SuperHealingPotion,
-
-				ItemID.ObsidianSkinPotion,
-				ItemID.RegenerationPotion,
-				ItemID.SwiftnessPotion,
-				ItemID.GillsPotion,
-				ItemID.IronskinPotion,
-				ItemID.ManaRegenerationPotion,
-				ItemID.MagicPowerPotion,
-				ItemID.FeatherfallPotion,
-				ItemID.SpelunkerPotion,
-				ItemID.InvisibilityPotion,
-				ItemID.ShinePotion,
-				ItemID.NightOwlPotion,
-				ItemID.BattlePotion,
-				ItemID.ThornsPotion,
-				ItemID.WaterWalkingPotion,
-				ItemID.ArcheryPotion,
-				ItemID.HunterPotion,
-				ItemID.GravitationPotion,
-				ItemID.RedPotion,
-				ItemID.MiningPotion,
-				ItemID.HeartreachPotion,
-				ItemID.CalmingPotion,
-				ItemID.BuilderPotion,
-				ItemID.TitanPotion,
-				ItemID.FlipperPotion,
-				ItemID.SummoningPotion,
-				ItemID.TrapsightPotion,
-				ItemID.AmmoReservationPotion,
-				ItemID.LifeforcePotion,
-				ItemID.EndurancePotion,
-				ItemID.RagePotion,
-				ItemID.InfernoPotion,
-				ItemID.WrathPotion,
-				ItemID.TeleportationPotion,
-				ItemID.LovePotion,
-				ItemID.StinkPotion,
-				ItemID.FishingPotion,
-				ItemID.SonarPotion,
-				ItemID.CratePotion,
-				ItemID.WarmthPotion,
-				ItemID.GenderChangePotion,
-				ItemID.LuckPotionLesser,
-				ItemID.LuckPotion,
-				ItemID.LuckPotionGreater,
-				ItemID.BiomeSightPotion,
-			};
-
-			SortedSet<string> endWords = new() {
-				"potion"
-			};
-
-			SortedSet<string> searchWords = new() {
-				
-			};
-
-			for (int i = 0; i < ItemLoader.ItemCount; i++) {
-				Item item = ContentSamples.ItemsByType[i];
-				if (item.NullOrAir())
-					continue;
-
-				string lowerName = item.GetItemInternalName().ToLower();
-				bool added = false;
-				foreach (string endWord in endWords) {
-					if (lowerName.EndsWith(endWord)) {
-						allowedItems.Add(item.type);
-						added = true;
-						break;
-					}
-				}
-
-				if (added)
-					continue;
-
-				foreach (string searchWord in searchWords) {
-					if (lowerName.Contains(searchWord)) {
-						allowedItems.Add(item.type);
-						added = true;
-						break;
-					}
-				}
-
-				if (ItemID.Sets.IsFood[item.type]) {
-					allowedItems.Add(item.type);
-					continue;
-				}
-
-				ItemGroupAndOrderInGroup group = new ItemGroupAndOrderInGroup(item);
-				if (group.Group == ItemGroup.BuffPotion || group.Group == ItemGroup.LifePotions || group.Group == ItemGroup.ManaPotions || group.Group == ItemGroup.Flask || group.Group == ItemGroup.Food) {
-					allowedItems.Add(item.type);
-					continue;
-				}
-			}
-		}
-
 		public static Item OnQuickBuff_PickBestFoodItem(On_Player.orig_QuickBuff_PickBestFoodItem orig, Player self) {
 			Item item = orig(self);
 
@@ -211,7 +90,7 @@ namespace VacuumBags.Items
 					}
 				}
 			}
-			
+
 			if (highestBuffNum >= 4)
 				return item;
 
@@ -221,11 +100,10 @@ namespace VacuumBags.Items
 
 			return item;
 		}
-
 		private static Item PickBestFoodItemFromFlask(int nextHighestBuffNum, Item foundFoodItem, Player player) {
 			if (player.whoAmI != Main.myPlayer)
 				return null;
-			
+
 			IEnumerable<Item> foodItems = StorageManager.GetItems(BagStorageID).Where(item => QuickBuff_FindFoodPriority(item.buffType) > 0);
 			bool anyFavoritedFood = foodItems.AnyFavoritedItem();
 			foreach (Item foodItem in (anyFavoritedFood ? foodItems.Where(item => item.favorited) : foodItems)) {
@@ -246,20 +124,18 @@ namespace VacuumBags.Items
 
 			return foundFoodItem;
 		}
-
 		public static int QuickBuff_FindFoodPriority(int buffType) {//Copied from Player.cs QuickBuff_FindFoodPriority()
 			switch (buffType) {
-				case 26:
+				case BuffID.WellFed:
 					return 1;
-				case 206:
+				case BuffID.WellFed2:
 					return 2;
-				case 207:
+				case BuffID.WellFed3:
 					return 3;
 				default:
 					return 0;
 			}
 		}
-
 		public static void OnQuickBuff(On_Player.orig_QuickBuff orig, Player self) {//Copied/edited from Player.cs QuickBuff()
 			orig(self);
 
@@ -278,11 +154,11 @@ namespace VacuumBags.Items
 
 			MethodInfo itemCheck_CheckCanUse = typeof(Player).GetMethod("ItemCheck_CheckCanUse", BindingFlags.NonPublic | BindingFlags.Instance);
 			IEnumerable<Item> nonFoodBuffItems = StorageManager.GetItems(BagStorageID).Where(
-				item => !item.NullOrAir() && 
+				item => !item.NullOrAir() &&
 				item.favorited &&
-				item.stack > 0 && 
-				item.buffType > 0 && 
-				QuickBuff_FindFoodPriority(item.buffType) < 1 && 
+				item.stack > 0 &&
+				item.buffType > 0 &&
+				QuickBuff_FindFoodPriority(item.buffType) < 1 &&
 				!item.CountsAsClass(DamageClass.Summon) &&
 				(bool)itemCheck_CheckCanUse.Invoke(self, new object[] { item })
 			);
@@ -345,7 +221,6 @@ namespace VacuumBags.Items
 				Recipe.FindRecipes();
 			}
 		}
-
 		public static Item OnQuickHeal_GetItemToUse(On_Player.orig_QuickHeal_GetItemToUse orig, Player self) {
 			Item foundHealItem = orig(self);
 
@@ -356,7 +231,7 @@ namespace VacuumBags.Items
 			if (!self.HasItem(potionFlaskID))
 				return foundHealItem;
 
-			IEnumerable<Item> healItems = StorageManager.GetItems(BagStorageID).Where(item => 
+			IEnumerable<Item> healItems = StorageManager.GetItems(BagStorageID).Where(item =>
 				!item.NullOrAir() &&
 				item.stack > 0 &&
 				item.potion &&
@@ -394,7 +269,6 @@ namespace VacuumBags.Items
 
 			return foundHealItem;
 		}
-
 		public static Item OnQuickMana_GetItemToUse(On_Player.orig_QuickMana_GetItemToUse orig, Player self) {
 			Item foundManaItem = orig(self);
 
@@ -438,6 +312,133 @@ namespace VacuumBags.Items
 			//}
 
 			//return foundManaItem;
+		}
+
+		public static SortedSet<int> AllowedItems => AllowedItemsManager.AllowedItems;
+		public static AllowedItemsManager AllowedItemsManager = new(DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
+		public AllowedItemsManager GetAllowedItemsManager => AllowedItemsManager;
+		protected static bool? DevCheck(ItemSetInfo info, SortedSet<ItemGroup> itemGroups, SortedSet<string> endWords, SortedSet<string> searchWords) {
+			if (info.Equipment)
+				return false;
+
+			if (info.Food)
+				return true;
+
+			if (info.Potion)
+				return true;
+
+			return false;
+		}
+		protected static SortedSet<int> DevWhiteList() {
+			SortedSet<int> devWhiteList = new() {
+				ItemID.RecallPotion,
+				ItemID.PotionOfReturn,
+				ItemID.LesserHealingPotion,
+				ItemID.HealingPotion,
+				ItemID.GreaterHealingPotion,
+				ItemID.LesserRestorationPotion,
+				ItemID.RestorationPotion,
+				ItemID.LesserManaPotion,
+				ItemID.ManaPotion,
+				ItemID.GreaterManaPotion,
+				ItemID.SuperManaPotion,
+				ItemID.WormholePotion,
+				ItemID.SuperHealingPotion,
+				ItemID.ObsidianSkinPotion,
+				ItemID.RegenerationPotion,
+				ItemID.SwiftnessPotion,
+				ItemID.GillsPotion,
+				ItemID.IronskinPotion,
+				ItemID.ManaRegenerationPotion,
+				ItemID.MagicPowerPotion,
+				ItemID.FeatherfallPotion,
+				ItemID.SpelunkerPotion,
+				ItemID.InvisibilityPotion,
+				ItemID.ShinePotion,
+				ItemID.NightOwlPotion,
+				ItemID.BattlePotion,
+				ItemID.ThornsPotion,
+				ItemID.WaterWalkingPotion,
+				ItemID.ArcheryPotion,
+				ItemID.HunterPotion,
+				ItemID.GravitationPotion,
+				ItemID.RedPotion,
+				ItemID.MiningPotion,
+				ItemID.HeartreachPotion,
+				ItemID.CalmingPotion,
+				ItemID.BuilderPotion,
+				ItemID.TitanPotion,
+				ItemID.FlipperPotion,
+				ItemID.SummoningPotion,
+				ItemID.TrapsightPotion,
+				ItemID.AmmoReservationPotion,
+				ItemID.LifeforcePotion,
+				ItemID.EndurancePotion,
+				ItemID.RagePotion,
+				ItemID.InfernoPotion,
+				ItemID.WrathPotion,
+				ItemID.TeleportationPotion,
+				ItemID.LovePotion,
+				ItemID.StinkPotion,
+				ItemID.FishingPotion,
+				ItemID.SonarPotion,
+				ItemID.CratePotion,
+				ItemID.WarmthPotion,
+				ItemID.GenderChangePotion,
+				ItemID.LuckPotionLesser,
+				ItemID.LuckPotion,
+				ItemID.LuckPotionGreater,
+				ItemID.BiomeSightPotion,
+			};
+
+			return devWhiteList;
+		}
+		protected static SortedSet<string> DevModWhiteList() {
+			SortedSet<string> devModWhiteList = new() {
+
+			};
+
+			return devModWhiteList;
+		}
+		protected static SortedSet<int> DevBlackList() {
+			SortedSet<int> devBlackList = new() {
+
+			};
+
+			return devBlackList;
+		}
+		protected static SortedSet<string> DevModBlackList() {
+			SortedSet<string> devModBlackList = new() {
+
+			};
+
+			return devModBlackList;
+		}
+		protected static SortedSet<ItemGroup> ItemGroups() {
+			SortedSet<ItemGroup> itemGroups = new() {
+				ItemGroup.BuffPotion,
+				ItemGroup.LifePotions,
+				ItemGroup.ManaPotions,
+				ItemGroup.Flask,
+				ItemGroup.Food
+			};
+			
+			return itemGroups;
+		}
+		protected static SortedSet<string> EndWords() {
+			SortedSet<string> endWords = new() {
+				"potion"
+			};
+
+			return endWords;
+		}
+
+		protected static SortedSet<string> SearchWords() {
+			SortedSet<string> searchWords = new() {
+
+			};
+
+			return searchWords;
 		}
 
 		#region AndroModItem attributes that you don't need.

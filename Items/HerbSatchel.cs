@@ -12,7 +12,9 @@ using static Terraria.ID.ContentSamples.CreativeHelper;
 
 namespace VacuumBags.Items
 {
-	public  class HerbSatchel : VBModItem, ISoldByWitch {
+	[Autoload(false)]
+	public  class HerbSatchel : BagModItem, ISoldByWitch, INeedsSetUpAllowedList
+	{
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {
             Item.maxStack = 1;
@@ -71,18 +73,20 @@ namespace VacuumBags.Items
 		}
 		public static bool ItemAllowedToBeStored(Item item) => AllowedItems.Contains(item.type);
 
-		public static SortedSet<int> AllowedItems {
-			get {
-				if (allowedItems == null)
-					GetAllowedItems();
+		public static SortedSet<int> AllowedItems => AllowedItemsManager.AllowedItems;
+		public static AllowedItemsManager AllowedItemsManager = new(DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
+		public AllowedItemsManager GetAllowedItemsManager => AllowedItemsManager;
+		protected static bool? DevCheck(ItemSetInfo info, SortedSet<ItemGroup> itemGroups, SortedSet<string> endWords, SortedSet<string> searchWords) {
+			if (info.Equipment)
+				return false;
 
-				return allowedItems;
-			}
+			if (info.GrassSeeds || info.FlowerPacket)
+				return true;
+
+			return null;
 		}
-		private static SortedSet<int> allowedItems = null;
-
-		private static void GetAllowedItems() {
-			allowedItems = new() {
+		protected static SortedSet<int> DevWhiteList() {
+			SortedSet<int> devWhiteList = new() {
 				ItemID.GrassSeeds,
 				ItemID.CorruptSeeds,
 				ItemID.CrimsonSeeds,
@@ -124,63 +128,64 @@ namespace VacuumBags.Items
 				ItemID.FlowerPacketViolet,
 				ItemID.FlowerPacketWhite,
 				ItemID.FlowerPacketTallGrass,
+				ItemID.BottledWater,
+				ItemID.JungleRose,
+				ItemID.Bottle,
+				ItemID.ClayPot,
+				ItemID.Goldfish,
+				ItemID.JungleSpores,
+				ItemID.Seaweed,
+				ItemID.MagicalPumpkinSeed,
+				ItemID.HerbBag,
 			};
 
+			return devWhiteList;
+		}
+		protected static SortedSet<string> DevModWhiteList() {
+			SortedSet<string> devModWhiteList = new() {
+
+			};
+
+			return devModWhiteList;
+		}
+		protected static SortedSet<int> DevBlackList() {
+			SortedSet<int> devBlackList = new() {
+
+			};
+
+			return devBlackList;
+		}
+		protected static SortedSet<string> DevModBlackList() {
+			SortedSet<string> devModBlackList = new() {
+
+			};
+
+			return devModBlackList;
+		}
+		protected static SortedSet<ItemGroup> ItemGroups() {
+			SortedSet<ItemGroup> itemGroups = new() {
+				ItemGroup.AlchemyPlants,
+				ItemGroup.AlchemySeeds,
+			};
+			
+			return itemGroups;
+		}
+		protected static SortedSet<string> EndWords() {
 			SortedSet<string> endWords = new() {
-				
+				"planterbox"
 			};
 
+			return endWords;
+		}
+
+		protected static SortedSet<string> SearchWords() {
 			SortedSet<string> searchWords = new() {
-				
+				"grassseeds",
+				"flowerpacket",
+				"potsuspended"
 			};
 
-			for (int i = 0; i < ItemLoader.ItemCount; i++) {
-				Item item = ContentSamples.ItemsByType[i];
-				if (item.NullOrAir())
-					continue;
-
-				string lowerName = item.GetItemInternalName().ToLower();
-				bool added = false;
-				foreach (string endWord in endWords) {
-					if (lowerName.EndsWith(endWord)) {
-						allowedItems.Add(item.type);
-						added = true;
-						break;
-					}
-				}
-
-				if (added)
-					continue;
-
-				foreach (string searchWord in searchWords) {
-					if (lowerName.Contains(searchWord)) {
-						allowedItems.Add(item.type);
-						added = true;
-						break;
-					}
-				}
-
-				if (ItemID.Sets.GrassSeeds[item.type]) {
-					allowedItems.Add(item.type);
-					continue;
-				}
-
-				if (ItemID.Sets.flowerPacketInfo[item.type] != null) {
-					allowedItems.Add(item.type);
-					continue;
-				}
-
-				if (ItemID.Sets.ExoticPlantsForDyeTrade[item.type]) {
-					allowedItems.Add(item.type);
-					continue;
-				}
-
-				ItemGroupAndOrderInGroup group = new ItemGroupAndOrderInGroup(item);
-				if (group.Group == ItemGroup.AlchemyPlants || group.Group == ItemGroup.AlchemySeeds || group.Group == ItemGroup.DyeMaterial) {
-					allowedItems.Add(item.type);
-					continue;
-				}
-			}
+			return searchWords;
 		}
 
 		#region AndroModItem attributes that you don't need.
