@@ -51,7 +51,6 @@ namespace VacuumBags
 			On_Player.QuickMana_GetItemToUse += PotionFlask.OnQuickMana_GetItemToUse;
 			On_SceneMetrics.ScanAndExportToMain += Items.BannerBag.OnScanAndExportToMain;
 			On_ItemSlot.RightClick_ItemArray_int_int += OnRightClick_ItemArray_int_int;
-			On_Player.AdjTiles += PortableStation.OnAdjTiles;
 
 			On_Player.ItemCheck_Inner += BagPlayer.OnItemCheck_Inner;
 			On_Main.DrawInterface_40_InteractItemIcon += BagPlayer.On_Main_DrawInterface_40_InteractItemIcon;
@@ -63,6 +62,7 @@ namespace VacuumBags
 			IL_Player.ItemCheck_UseWiringTools += MechanicsToolbelt.OnItemCheck_UseWiringTools;
 			IL_Player.ItemCheck_ApplyHoldStyle_Inner += AmmoBag.OnItemCheck_ApplyHoldStyle_Inner;
 			IL_Player.SmartSelect_PickToolForStrategy += AmmoBag.OnSmartSelect_PickToolForStrategy;
+			IL_Player.AdjTiles += PortableStation.OnAdjTiles;
 
 			VacuumBagsLocalizationData.RegisterSDataPackage();
 

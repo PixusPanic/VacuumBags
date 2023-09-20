@@ -12,6 +12,8 @@ using static Terraria.ID.ContentSamples.CreativeHelper;
 using System;
 using androLib.UI;
 using VacuumBags.Common.Configs;
+using MonoMod.Cil;
+using Mono.Cecil.Cil;
 
 namespace VacuumBags.Items
 {
@@ -124,10 +126,24 @@ namespace VacuumBags.Items
 			}
 		}
 		public static List<int> ActiveStationsFromPortableStation = new();
-		internal static void OnAdjTiles(On_Player.orig_AdjTiles orig, Player self) {
-			ActiveStationsFromPortableStation = new();
-			orig(self);
-			UpdateStationsFromHeldPortableStation(self);
+		internal static void OnAdjTiles(ILContext il) {
+			var c = new ILCursor(il);
+
+			c.EmitDelegate(() => { ActiveStationsFromPortableStation = new(); return; });
+
+			//IL_03bc: ldsfld bool Terraria.Main::playerInventory
+			//IL_03c1: brtrue.s IL_03c4
+
+			if (!c.TryGotoNext(MoveType.Before,
+				i => i.MatchLdsfld(typeof(Main), nameof(Main.playerInventory)),
+				i => i.MatchBrtrue(out _)
+			)) { throw new Exception("Failed to find instructions OnAdjTiles 2/2"); }
+
+			c.Emit(OpCodes.Ldarg_0);
+
+			c.EmitDelegate((Player player) => {
+				UpdateStationsFromHeldPortableStation(player);
+			});
 		}
 
 		public static SortedSet<int> AllowedItems => AllowedItemsManager.AllowedItems;
