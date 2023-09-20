@@ -175,6 +175,15 @@ namespace VacuumBags.Items
 				ItemID.TargetDummy,
 				ItemID.CatBast,
 				ItemID.GardenGnome,
+				ItemID.WarTable,
+				ItemID.StarinaBottle,
+				ItemID.PeaceCandle,
+				ItemID.WaterCandle,
+				ItemID.HoneyBucket,
+				ItemID.BottomlessHoneyBucket,
+				ItemID.Sunflower,
+				ItemID.SliceOfCake,
+				ItemID.SliceOfCake
 			};
 
 			return devWhiteList;

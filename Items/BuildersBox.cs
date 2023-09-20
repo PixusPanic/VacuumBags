@@ -279,7 +279,9 @@ namespace VacuumBags.Items
 		}
 		protected static SortedSet<int> DevBlackList() {
 			SortedSet<int> devBlackList = new() {
-
+				ItemID.HeartLantern,
+				ItemID.PeaceCandle,
+				ItemID.WaterCandle
 			};
 
 			return devBlackList;

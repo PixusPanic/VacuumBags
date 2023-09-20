@@ -12,6 +12,7 @@ using static Terraria.ID.ContentSamples.CreativeHelper;
 using System;
 using System.Reflection;
 using Terraria.Audio;
+using System.Diagnostics.CodeAnalysis;
 
 namespace VacuumBags.Items
 {
@@ -325,6 +326,9 @@ namespace VacuumBags.Items
 				return true;
 
 			if (info.Potion)
+				return true;
+
+			if (info.Consumable && info.HasBuff)
 				return true;
 
 			return false;

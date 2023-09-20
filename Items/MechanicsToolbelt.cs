@@ -202,7 +202,8 @@ namespace VacuumBags.Items
 		}
 		protected static SortedSet<int> DevBlackList() {
 			SortedSet<int> devBlackList = new() {
-
+				ItemID.HoneyBucket,
+				ItemID.BottomlessHoneyBucket,
 			};
 
 			return devBlackList;

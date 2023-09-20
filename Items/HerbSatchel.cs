@@ -111,7 +111,6 @@ namespace VacuumBags.Items
 				ItemID.ShiverthornPlanterBox,
 				ItemID.FireBlossomPlanterBox,
 				ItemID.Acorn,
-				ItemID.Sunflower,
 				ItemID.VileMushroom,
 				ItemID.Mushroom,
 				ItemID.GlowingMushroom,
@@ -150,7 +149,7 @@ namespace VacuumBags.Items
 		}
 		protected static SortedSet<int> DevBlackList() {
 			SortedSet<int> devBlackList = new() {
-
+				ItemID.Sunflower
 			};
 
 			return devBlackList;

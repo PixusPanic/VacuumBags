@@ -66,37 +66,23 @@ namespace VacuumBags.Items
 		}
 		public override void AddRecipes() {
 			if (AndroMod.starsAboveEnabled) {
-				if (AndroMod.starsAboveMod.TryFind("EssenceOfTheAegis", out ModItem essenceOfTheAegis)
-					&& AndroMod.starsAboveMod.TryFind("EssenceOfStyle", out ModItem essenceOfStyle)
-					) {
-					if (!VacuumBags.serverConfig.HarderBagRecipes) {
-						CreateRecipe()
-						.AddTile(TileID.WorkBenches)
-						.AddIngredient(essenceOfTheAegis.Type, 1)
-						.AddIngredient(essenceOfStyle.Type, 1)
-						.AddIngredient(ItemID.Glass, 10)
-						.Register();
-					}
-					else {
-						if (AndroMod.starsAboveMod.TryFind("EssenceOfFingers", out ModItem essenceOfFingers)
-							&& AndroMod.starsAboveMod.TryFind("EssenceOfBitterfrost", out ModItem essenceOfBitterfrost)
-							&& AndroMod.starsAboveMod.TryFind("EssenceOfAsh", out ModItem essenceOfAsh)
-							&& AndroMod.starsAboveMod.TryFind("EssenceOfOuterGods", out ModItem essenceOfOuterGods)
-							&& AndroMod.starsAboveMod.TryFind("EssenceOfTheAnomaly", out ModItem essenceOfTheAnomaly)
-							) {
-							CreateRecipe()
-							.AddTile(TileID.WorkBenches)
-							.AddIngredient(essenceOfTheAegis.Type, 1)
-							.AddIngredient(essenceOfStyle.Type, 1)
-							.AddIngredient(essenceOfFingers.Type, 1)
-							.AddIngredient(essenceOfBitterfrost.Type, 1)
-							.AddIngredient(essenceOfAsh.Type, 1)
-							.AddIngredient(essenceOfOuterGods.Type, 1)
-							.AddIngredient(essenceOfTheAnomaly.Type, 1)
-							.AddIngredient(ItemID.Glass, 40)
-							.Register();
-						}
-					}
+				if (!VacuumBags.serverConfig.HarderBagRecipes) {
+					CreateRecipe()
+					.AddTile(TileID.WorkBenches)
+					.AddRecipeGroup($"{AndroMod.ModName}:{AndroModSystem.StarsAboveAnyKingSlimeEssence}", 1)
+					.AddIngredient(ItemID.Glass, 10)
+					.Register();
+				}
+				else {
+					CreateRecipe()
+					.AddTile(TileID.WorkBenches)
+					.AddRecipeGroup($"{AndroMod.ModName}:{AndroModSystem.StarsAboveAnyKingSlimeEssence}", 1)
+					.AddRecipeGroup($"{AndroMod.ModName}:{AndroModSystem.StarsAboveAnyEyeOfCthulhuEssence}", 1)
+					.AddRecipeGroup($"{AndroMod.ModName}:{AndroModSystem.StarsAboveAnyEaterOfWorldsOrBrainOfCthulhuEssence}", 1)
+					.AddRecipeGroup($"{AndroMod.ModName}:{AndroModSystem.StarsAboveAnyQueenBeeEssence}", 1)
+					.AddRecipeGroup($"{AndroMod.ModName}:{AndroModSystem.StarsAboveAnySkeletronEssence}", 1)
+					.AddIngredient(ItemID.Glass, 40)
+					.Register();
 				}
 			}
 		}
