@@ -86,7 +86,7 @@ namespace VacuumBags.Items
 		public static IEnumerable<Item> GetStations(Player player, int firstXBanners) {
 			return GetFirstXFromBag(
 				BagStorageID,
-				(Item item) => item.createTile > -1 && item.createTile < player.adjTile.Length,
+				(Item item) => item.IsRequiredTile() && item.createTile < player.adjTile.Length,
 				player, firstXBanners);
 		}
 		public static void ApplyFirstXStationTiles(Player player, int firstXStationTiles, bool fromTileNearbyEffects = false) {

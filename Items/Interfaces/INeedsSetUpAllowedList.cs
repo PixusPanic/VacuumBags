@@ -47,32 +47,6 @@ namespace VacuumBags.Items
 		private SortedSet<ItemGroup> itemGroups = null;
 		private SortedSet<string> endWords = null;
 		private SortedSet<string> searchWords = null;
-
-		public static SortedSet<int> RequiredTiles {
-			get {
-				if (requiredTiles == null) {
-					requiredTiles = new();
-
-					for (int i = 0; i < Main.recipe.Length; i++) {
-						Recipe r = Main.recipe[i];
-
-						if (r.createItem.NullOrAir())
-							continue;
-
-						foreach (int tile in r.requiredTile) {
-							if (tile < TileID.Dirt)
-								continue;
-
-							requiredTiles.Add(tile);
-						}
-					}
-				}
-
-				return requiredTiles;
-			}
-		}
-		private static SortedSet<int> requiredTiles = null;
-
 		public AllowedItemsManager(
 			Func<ItemSetInfo, SortedSet<ItemGroup>, SortedSet<string>, SortedSet<string>, bool?> DevCheck,
 			Func<SortedSet<int>> DevWhiteList = null,
@@ -197,7 +171,6 @@ namespace VacuumBags.Items
 			itemGroups = null;
 			endWords = null;
 			searchWords = null;
-			requiredTiles = null;
 		}
 		public void AddPlayerWhiteList(Item item) {
 			AllowedItems.Add(item.type);
@@ -375,7 +348,7 @@ namespace VacuumBags.Items
 		public bool FlowerPacket => ItemID.Sets.flowerPacketInfo[Type] != null;
 		public bool Extractable => ItemID.Sets.SortingPriorityExtractibles[Type] != -1;
 		public bool DyeMaterial => ItemID.Sets.ExoticPlantsForDyeTrade[Type] || CheckItemGroup(ItemGroup.DyeMaterial);
-		public bool RequiredTile => AllowedItemsManager.RequiredTiles.Contains(Item.createTile);
+		public bool RequiredTile => Item.IsRequiredTile();
 		public bool Food => ItemID.Sets.IsFood[Type];
 		public bool Rope => Item.IsRope();
 		public bool Torch => Item.IsTorch();
