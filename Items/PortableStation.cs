@@ -84,7 +84,7 @@ namespace VacuumBags.Items
 				if (item.NullOrAir())
 					continue;
 
-				if (item.IsRequiredTile() && item.createTile > 0 && item.createTile < player.adjTile.Length && player.adjTile[item.createTile]) {
+				if (item.IsRequiredTile() && item.createTile > -1 && item.createTile < player.adjTile.Length && player.adjTile[item.createTile]) {
 					int context = ActiveStationsFromPortableStation.Contains(item.createTile) ? ItemSlotContextID.YellowSelected : ItemSlotContextID.Purple;
 					bagUI.AddSelectedItemSlot(i, context);
 				}
@@ -93,6 +93,9 @@ namespace VacuumBags.Items
 					int context = ActiveBuffsFromTileNearbyEffects.ContainsKey(item.type) ? ItemSlotContextID.BrightGreenSelected : ItemSlotContextID.Purple;
 					bagUI.AddSelectedItemSlot(i, context);
 				}
+
+				if (item.IsActiveBuffTileAndHasBuff(player))
+					bagUI.AddSelectedItemSlot(i, ItemSlotContextID.BrightGreenSelected);
 			}
 		}
 
@@ -196,6 +199,8 @@ namespace VacuumBags.Items
 		public static bool UpdateFromPlacedTile = false;
 		internal static void PreScanAndExportToMain() {
 			ActiveBuffsFromTileNearbyEffects.Clear();
+			if (Main.LocalPlayer.TryGetModPlayer(out BagPlayer bagPlayer))
+				bagPlayer.NearPortableStation = false;
 		}
 		internal static void PostScanAndExportToMain(ref SceneMetrics sceneMetrics) {
 			if (UpdateFromPlacedTile) {
@@ -215,7 +220,27 @@ namespace VacuumBags.Items
 
 		#region Active Buff Tiles
 
+		public static void OnRightClickTile() {
+			if (!VacuumBags.serverConfig.PortableStationsActivateActiveBuffsWhenOpened)
+				return;
 
+			Player player = Main.LocalPlayer;
+			IEnumerable<Item> activeBuffStationItems = GetAllFromBag(
+				BagStorageID,
+				ItemSets.IsActiveBuffTile,
+				player,
+				ItemSlotContextID.BrightGreenSelected
+			);
+
+			foreach (Item item in activeBuffStationItems) {
+				if (item.IsActiveBuffTile(out Action<Player> buff)) {
+					if (!VacuumBags.clientConfig.SilencePortableStationActiveBuffs && !item.HasActiveTileBuff(player))
+						item.PlayActiveBuffTileSound(player);
+
+					buff(player);
+				}
+			}
+		}
 
 		#endregion
 
@@ -338,11 +363,15 @@ namespace VacuumBags.Items
 			$"Automatically stores crafting stations and buff stations.\n" +
 			$"When in your inventory, the contents of the station are available for crafting.\n" +
 			$"Right click to open the station.\n" +
-			$"When in your inventory, the Portable Station provinces up to {BagsServerConfig.BannerBagNumberOfBannersInInventoryDefault} station for crafting by default when in your inventory.\n" +
+			$"When in your inventory, the Portable Station provides up to {BagsServerConfig.PortableStationNumberOfCraftingStationsInInventoryDefault} station for crafting by default.\n" +
 			$"When placed, it provides all of your stations for crafting by default, but in the normal tile range.  Each Portable Station shares it's inventory.\n" +
 			$"The background of stations is yellow when they are being provided for crafting by the Portable Station.\n" +
 			$"The background is purple if there is already that type of station nearby, however it will not automatically skip stations you are near when selecting\n" +
-			$"stations from the Portable Station because more is not necessarily better with crafting recipes. you already have the banner buff from another source.";
+			$"stations from the Portable Station because more is not necessarily better with crafting recipes.\n\n" +
+			$"When in your inventory, the Portable station provides up to {BagsServerConfig.PortableStationNumberOfPassiveBuffStationsInInventoryDefault} buff station buffs to you by default.\n" +
+			$"When placed, it provides all of your passive buff station buffs by default, but in the normal buff range.\n" +
+			$"Items that are providing their buff will be bright green.  Buffs that you already have from nearby tiles will be skipped and have a purple background.\n\n" +
+			$"Opening the table while it is placed will make you interact with all of the activate buff stations, causing you to gain their buffs.";
 		public override string Artist => "@kingjoshington";
 		public override string Designer => "andro951";
 

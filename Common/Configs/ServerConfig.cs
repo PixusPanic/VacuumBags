@@ -66,7 +66,7 @@ namespace VacuumBags.Common.Configs
 		public bool PortableStationCanGiveHoneyBuff;
 
 		[DefaultValue(true)]
-		public bool POrtableStationMustBeTouchedToGetHoneyBuff;
+		public bool PortableStationMustBeTouchedToGetHoneyBuff;
 	}
 
 	public class BagsClientConfig : ModConfig {
@@ -99,6 +99,9 @@ namespace VacuumBags.Common.Configs
 
 		[DefaultValue(false)]
 		public bool PortableStationPassiveBuffsOnlyActiveIfFavorited;
+
+		[DefaultValue(false)]
+		public bool SilencePortableStationActiveBuffs;
 
 		//Logging
 		[JsonIgnore]

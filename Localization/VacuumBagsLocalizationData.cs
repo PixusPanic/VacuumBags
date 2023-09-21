@@ -69,6 +69,10 @@ namespace VacuumBags.Localization
 									{ L_ID3.Label.ToString(), nameof(clientConfig.PortableStationPassiveBuffsOnlyActiveIfFavorited).AddSpaces() },
 									{ L_ID3.Tooltip.ToString(), "If selected, only favorited buff stations will provide their buffs.\n" }
 								}) },
+								{ nameof(clientConfig.SilencePortableStationActiveBuffs), new(dict: new() {
+									{ L_ID3.Label.ToString(), nameof(clientConfig.SilencePortableStationActiveBuffs).AddSpaces() },
+									{ L_ID3.Tooltip.ToString(), "If selected, the Portable Station will not play any sounds when it provides active buffs on opening the station." }
+								}) },
 							}) },
 							{ BagEffectOptionsKey, new(children: new() {
 								{ nameof(serverConfig.BannerBagNumberOfBannersInInventory), new(dict: new() {
@@ -117,8 +121,8 @@ namespace VacuumBags.Localization
 									{ L_ID3.Label.ToString(), nameof(serverConfig.PortableStationCanGiveHoneyBuff).AddSpaces() },
 									{ L_ID3.Tooltip.ToString(), "If selected, the Honey buff is allowed to be given by the Portable Station." }
 								}) },
-								{ nameof(serverConfig.POrtableStationMustBeTouchedToGetHoneyBuff), new(dict: new() {
-									{ L_ID3.Label.ToString(), nameof(serverConfig.POrtableStationMustBeTouchedToGetHoneyBuff).AddSpaces() },
+								{ nameof(serverConfig.PortableStationMustBeTouchedToGetHoneyBuff), new(dict: new() {
+									{ L_ID3.Label.ToString(), nameof(serverConfig.PortableStationMustBeTouchedToGetHoneyBuff).AddSpaces() },
 									{ L_ID3.Tooltip.ToString(), "If selected, the Honey buff will be given if the Portable Station is touched if there is a bucket of honey in the station.\n" +
 										"If not selected, the Honey buff will be given in an area of effect around the Portable Station.\n" +
 										"If the Unlimited honey bucket is in the station, the area of effect will be active regardless of this option." }

@@ -13,7 +13,7 @@ namespace VacuumBags.Common.Globals
 {
 	public class GlobalBagTile : GlobalTile
 	{
-		private static int BannerBagType {
+		public static int BannerBagType {
 			get {
 				if (bannerBagType == -1)
 					bannerBagType = ModContent.TileType<Tiles.BannerBag>();
@@ -22,7 +22,7 @@ namespace VacuumBags.Common.Globals
 			}
 		}
 		private static int bannerBagType = -1;
-		private static int PortableStationType {
+		public static int PortableStationType {
 			get {
 				if (portableStationType == -1)
 					portableStationType = ModContent.TileType<Tiles.PortableStation>();
@@ -36,6 +36,9 @@ namespace VacuumBags.Common.Globals
 				Items.BannerBag.UpdateFromPlacedTile = true;
 			}
 			else if (type == PortableStationType) {
+				if (Main.LocalPlayer.TryGetModPlayer(out BagPlayer bagPlayer))
+					bagPlayer.NearPortableStation = true;
+
 				Items.PortableStation.UpdateFromPlacedTile = true;
 			}
 

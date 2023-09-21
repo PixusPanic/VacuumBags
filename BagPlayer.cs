@@ -1,8 +1,10 @@
 ﻿using androLib;
 using androLib.Common.Utility;
+using androLib.UI;
 using Microsoft.Xna.Framework;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
+using Steamworks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.Graphics;
@@ -17,11 +20,44 @@ using Terraria.Graphics.Renderers;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.UI;
+using VacuumBags.Common.Globals;
 using VacuumBags.Items;
 
 namespace VacuumBags
 {
 	public class BagPlayer : ModPlayer {
+
+		#region General Overrides
+
+		public override void PostUpdateMiscEffects() {
+			BannerBag.PostUpdateMiscEffects(Player);
+		}
+		public override void ResetEffects() {
+			bagPlaceItem = null;
+			bagItemChecked = false;
+			bagSmartSelectItem = null;
+			bagSmartSelectItemChecked = false;
+			bagInventoryIndex = Storage.RequiredItemNotFound;
+			TouchingStation = false;
+		}
+		public override void PreUpdate() {
+			LastTouchingStation = TouchingStation;
+			TouchingStation = false;
+		}
+		public override void PostUpdateBuffs() {
+			if (Player.honeyWet)
+				honeyWetResetTime = Main.GameUpdateCount + HoneyBuffTime;
+
+			UpdateHoneyBuff();
+		}
+		public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource) {
+			honeyWetResetTime = 0;
+		}
+
+		#endregion
+
+		#region Bag/Item Swap
+
 		private static bool bagItemChecked = false;
 		private static bool bagSmartSelectItemChecked = false;
 		private static int lastToolStrategyID(Player player) => player != null ? (int)(typeof(Player).GetField("_lastSmartCursorToolStrategy", BindingFlags.NonPublic | BindingFlags.Instance)?.GetValue(player) ?? -1) : -1;
@@ -75,17 +111,6 @@ namespace VacuumBags
 
 			return null;
 		}
-		public override void PostUpdateMiscEffects() {
-			BannerBag.PostUpdateMiscEffects(Player);
-		}
-		public override void ResetEffects() {
-			bagPlaceItem = null;
-			bagItemChecked = false;
-			bagSmartSelectItem = null;
-			bagSmartSelectItemChecked = false;
-			bagInventoryIndex = Storage.RequiredItemNotFound;
-		}
-
 		internal static void OnItemCheck_Inner(On_Player.orig_ItemCheck_Inner orig, Player self) {
 			Player player = self;
 			DoBagItemSwap(player, () => orig(self), player.selectedItem == player.inventory.Length - 1);
@@ -152,5 +177,139 @@ namespace VacuumBags
 			if (swapMouseItem && Main.LocalPlayer.itemAnimation == 0)
 				Main.mouseItem = beingReplaced.Clone();
 		}
+
+		#endregion
+
+		#region Honey Buff
+
+		public const int HoneyBuffTime = 1800;
+		public const int AOEHoneyBuffTime = 2;
+		public const int TicksPerSecond = 60;
+
+		public bool TouchingStation = false;
+		public bool LastTouchingStation = false;
+		public bool NearPortableStation = false;
+		private uint honeyWetResetTime = 0;
+		private int lastHoneyBucketLocation = -1;
+		private uint nextFullCheckTime = 0;
+		private void UpdateNextHoneyFullCheckTime() {
+			nextFullCheckTime = Main.GameUpdateCount + TicksPerSecond;
+		}
+		private void UpdatePlayerPortableStorageOverlap() {
+			Player player = Player;
+			Point p = new Point(0, 2);
+			Vector2 vector = p.ToVector2();
+			List<Point> tilesIn2 = Collision.GetTilesIn(player.TopLeft, player.BottomRight + vector);
+			//Rectangle hitbox = new(player.Hitbox.X, player.Hitbox.Y, player.Hitbox.Width, player.Hitbox.Height + 2);
+			for (int j = 0; j < tilesIn2.Count; j++) {
+				Point point2 = tilesIn2[j];
+				Tile tile2 = Main.tile[point2.X, point2.Y];
+				if (tile2.HasTile && tile2.TileType == GlobalBagTile.PortableStationType) {
+					if (!LastTouchingStation)
+						SoundEngine.PlaySound(SoundID.SplashWeak);
+
+					TouchingStation = true;
+					break;
+				}
+			}
+		}
+		public void UpdateHoneyBuff() {
+			UpdatePlayerPortableStorageOverlap();
+			int honeyBuffIndex = Player.FindBuffIndex(BuffID.Honey);
+			bool hadBuff = honeyBuffIndex != -1;
+			bool? fromStation = HoneyCheck();
+			if (!hadBuff) {
+				honeyWetResetTime = 0;
+				honeyBuffIndex = Player.FindBuffIndex(BuffID.Honey);
+			}
+
+			bool hasHoney = honeyBuffIndex != -1;
+			if (!hasHoney || lastHoneyBucketLocation < 0)
+				return;
+
+			int context = fromStation == true || honeyWetResetTime < Main.GameUpdateCount || fromStation == null && Player.buffTime[honeyBuffIndex] <= AOEHoneyBuffTime ? ItemSlotContextID.BrightGreenSelected : ItemSlotContextID.Purple;
+			StorageManager.BagUIs[PortableStation.BagStorageID].AddSelectedItemSlot(lastHoneyBucketLocation, context);
+		}
+		private bool? HoneyCheck() {
+			if (!VacuumBags.serverConfig.PortableStationCanGiveHoneyBuff)
+				return false;
+
+			if (honeyWetResetTime > Main.GameUpdateCount + HoneyBuffTime && !TouchingStation)
+				return false;
+
+			if (!Player.TryGetModPlayer(out StoragePlayer storagePlayer))
+				return false;
+
+			bool doOnTouchBuff = false;
+			bool doAOEBuff = false;
+			bool bucketsActSame = !VacuumBags.serverConfig.PortableStationMustBeTouchedToGetHoneyBuff;
+			Item[] inv = storagePlayer.Storages[PortableStation.BagStorageID].Items;
+			bool doFullCheck = nextFullCheckTime <= Main.GameUpdateCount;
+			if (!doFullCheck) {
+				if (lastHoneyBucketLocation > -1) {
+					Item item = inv[lastHoneyBucketLocation];
+					if (item.type == ItemID.HoneyBucket) {
+						doOnTouchBuff = true;
+						if (bucketsActSame)
+							doAOEBuff = true;
+					}
+					else if (item.type == ItemID.BottomlessHoneyBucket) {
+						doOnTouchBuff = true;
+						doAOEBuff = true;
+					}
+					else {
+						doFullCheck = true;
+					}
+
+					if (doAOEBuff)
+						UpdateNextHoneyFullCheckTime();
+				}
+			}
+
+			if (doFullCheck) {
+				//Full check
+				lastHoneyBucketLocation = -1;
+				for (int i = 0; i < inv.Length; i++) {
+					Item item = inv[i];
+					if (item.type == ItemID.HoneyBucket && lastHoneyBucketLocation == -1) {
+						lastHoneyBucketLocation = i;
+						doOnTouchBuff = true;
+						if (bucketsActSame) {
+							doAOEBuff = true;
+							break;
+						}
+					}
+					else if (item.type == ItemID.BottomlessHoneyBucket) {
+						doOnTouchBuff = true;
+						doAOEBuff = true;
+						lastHoneyBucketLocation = i;
+						break;
+					}
+				}
+
+				UpdateNextHoneyFullCheckTime();
+			}
+
+			if (!doOnTouchBuff)
+				return false;
+
+			if (TouchingStation) {
+				Player.AddBuff(BuffID.Honey, HoneyBuffTime);
+				honeyWetResetTime = 0;
+				return true;
+			}
+
+			if (!doAOEBuff)
+				return false;
+
+			if (NearPortableStation) {
+				Player.AddBuff(BuffID.Honey, AOEHoneyBuffTime);
+				return null;
+			}
+
+			return false;
+		}
+
+		#endregion
 	}
 }

@@ -45,6 +45,11 @@ namespace VacuumBags.Tiles
 			AdjTiles = AdjTiles.Append(TileID.WorkBenches).ToArray();
 			TileObjectData.addTile(Type);
 		}
+		public override bool RightClick(int i, int j) {
+			Items.PortableStation.OnRightClickTile();
+
+			return true;
+		}
 	}
 
 	public class PortableStationGlobal : GlobalTile
