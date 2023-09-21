@@ -4,6 +4,7 @@ using androLib.Items;
 using androLib.UI;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace VacuumBags.Items
 	public abstract class BagModItem : AndroModItem
 	{
 		protected override Action<ModItem, string, string> AddLocalizationTooltipFunc => VacuumBagsLocalizationDataStaticMethods.AddLocalizationTooltip;
-		private static IEnumerable<KeyValuePair<int, Item>> GetFirstXFromBag(int storageID, Func<Item, bool> itemCondition, Player player, int firstXItems) {
+		private static IEnumerable<KeyValuePair<int, Item>> GetFirstItemTypePairsXFromBag(int storageID, Func<Item, bool> itemCondition, Player player, int firstXItems, Func<Item, bool> doesntCountTowardsTotal = null) {
 			if (Main.netMode == NetmodeID.MultiplayerClient && player.whoAmI != Main.myPlayer)
 				return null;
 
@@ -30,21 +31,37 @@ namespace VacuumBags.Items
 			if (firstXItems == FirstXItemsChooseAllItems || itemsCount <= firstXItems)
 				return indexItemsPairs;
 
-			if (!indexItemsPairs.AnyFavoritedItem())
-				return indexItemsPairs.Take(firstXItems);
+			//returnFunc is to minimize the effect of doesntCountTowardsTotal when it is null which is most calls.
+			//This call makes it do nothing when doesntCountTowardsTotal is null.
+			Func<IEnumerable<KeyValuePair<int, Item>>, IEnumerable<KeyValuePair<int, Item>>> returnFunc = (iIP) => iIP;
+			if (doesntCountTowardsTotal != null) {
+				IEnumerable<KeyValuePair<int, Item>> itemsThatDontCount = indexItemsPairs.Where(p => doesntCountTowardsTotal(p.Value));
+				if (itemsThatDontCount.Any()) {
+					returnFunc = (iIP) => iIP.Concat(itemsThatDontCount);
+
+					indexItemsPairs = indexItemsPairs.Where(p => !doesntCountTowardsTotal(p.Value));
+					itemsCount = indexItemsPairs.Count();
+
+					if (itemsCount <= firstXItems)
+						return returnFunc(indexItemsPairs);
+				}
+			}
+			
+			if (!indexItemsPairs.AnyFavoritedItem(doesntCountTowardsTotal))
+				return returnFunc(indexItemsPairs.Take(firstXItems));
 
 			IEnumerable<KeyValuePair<int, Item>> favoritedIndexItemsPairs = indexItemsPairs.Where(p => p.Value.favorited);
 			int favoritedItemsCount = favoritedIndexItemsPairs.Count();
 			if (favoritedItemsCount >= firstXItems) {
 				if (favoritedItemsCount == firstXItems) {
-					return favoritedIndexItemsPairs;
+					return returnFunc(favoritedIndexItemsPairs);
 				}
 				else {
-					return favoritedIndexItemsPairs.Take(firstXItems);
+					return returnFunc(favoritedIndexItemsPairs.Take(firstXItems));
 				}
 			}
 
-			return favoritedIndexItemsPairs.Concat(indexItemsPairs.Where(p => !p.Value.favorited).Take(firstXItems - favoritedItemsCount));
+			return returnFunc(favoritedIndexItemsPairs.Concat(indexItemsPairs.Where(p => !p.Value.favorited).Take(firstXItems - favoritedItemsCount)));
 		}
 		public const int FirstXItemsChooseAllItems = -1;
 		private static IEnumerable<Item> SelectAndGetItems(IEnumerable<KeyValuePair<int, Item>> indexItemsPairs, int storageID, int context, bool selectItems = true) {
@@ -56,15 +73,15 @@ namespace VacuumBags.Items
 
 			return indexItemsPairs.Select(p => p.Value);
 		}
-		public static IEnumerable<Item> GetFirstXFromBag(int storageID, Func<Item, bool> itemCondition, Player player, int firstXItems, int context = ItemSlotContextID.YellowSelected, bool selectItems = true) {
-			IEnumerable<KeyValuePair<int, Item>> indexItemsPairs = GetFirstXFromBag(storageID, itemCondition, player, firstXItems);
+		public static IEnumerable<Item> GetFirstXFromBag(int storageID, Func<Item, bool> itemCondition, Player player, int firstXItems, Func<Item, bool> doesntCountTowardsTotal = null, int context = ItemSlotContextID.YellowSelected, bool selectItems = true) {
+			IEnumerable<KeyValuePair<int, Item>> indexItemsPairs = GetFirstItemTypePairsXFromBag(storageID, itemCondition, player, firstXItems, doesntCountTowardsTotal);
 			if (indexItemsPairs == null)
-				return new Item[0];
+				return new List<Item>();
 
 			return SelectAndGetItems(indexItemsPairs, storageID, context, selectItems);
 		}
-		private static IEnumerable<KeyValuePair<int, Item>> GetFirstFromBag(int storageID, Func<Item, bool> itemCondition, Player player) {
-			return GetFirstXFromBag(storageID, itemCondition, player, 1);
+		public static IEnumerable<KeyValuePair<int, Item>> GetFirstFromBag(int storageID, Func<Item, bool> itemCondition, Player player) {
+			return GetFirstItemTypePairsXFromBag(storageID, itemCondition, player, 1);
 		}
 		public static Item ChooseFromBag(int storageID, Func<Item, bool> itemCondition, Player player, int context = ItemSlotContextID.YellowSelected, bool selectItems = true) {
 			IEnumerable<KeyValuePair<int, Item>> indexItemsPairs = GetFirstFromBag(storageID, itemCondition, player);
@@ -74,7 +91,7 @@ namespace VacuumBags.Items
 			return SelectAndGetItems(indexItemsPairs, storageID, context, selectItems).First();
 		}
 		public static IEnumerable<Item> GetAllFromBag(int storageID, Func<Item, bool> itemCondition, Player player, int context = ItemSlotContextID.YellowSelected, bool selectItems = true) {
-			return GetFirstXFromBag(storageID, itemCondition, player, FirstXItemsChooseAllItems, context, selectItems);
+			return GetFirstXFromBag(storageID, itemCondition, player, FirstXItemsChooseAllItems, null, context, selectItems);
 		}
 		public static Item ChooseFromBagOnlyIfFirstInInventory(Item item, Player player, int storageID, Func<Item, bool> itemCondition, int context = ItemSlotContextID.YellowSelected, bool selectItems = true) {
 			if (!player.TryGetModPlayer(out StoragePlayer storagePlayer))
@@ -120,12 +137,18 @@ namespace VacuumBags.Items
 			SetupAllAllowedItemManagers();
 		}
 
+		public static readonly bool PrintDevOnlyAllowedItemListInfo = Debugger.IsAttached && VacuumBags.clientConfig.LogAllPlayerWhiteAndBlackLists;
 		private static void SetupAllAllowedItemManagers() {
 			List<AllowedItemsManager> allowedItemManagers = StorageManager.AllBagTypes.Select(t => ContentSamples.ItemsByType[t].ModItem).OfType<INeedsSetUpAllowedList>().Select(b => b.GetAllowedItemsManager).ToList();
+			SortedDictionary<int, SortedSet<int>> enchantedItemsAllowedInBags = new();
 			foreach (AllowedItemsManager allowedItemsManager in allowedItemManagers) {
 				allowedItemsManager.Load();
 				allowedItemsManager.PostLoadSetup();
+				if (PrintDevOnlyAllowedItemListInfo)
+					enchantedItemsAllowedInBags.Add(allowedItemsManager.OwningBagItemType, new());
 			}
+
+			List<int> itemsNotAdded = new List<int>();
 
 			for (int i = 0; i < ItemLoader.ItemCount; i++) {
 				ItemSetInfo info = new(i);
@@ -137,9 +160,24 @@ namespace VacuumBags.Items
 
 				bool forWhitelistOnlyCheck = false;
 				foreach (AllowedItemsManager allowedItemsManager in allowedItemManagers) {
-					if (allowedItemsManager.TryAddToAllowedItems(info, forWhitelistOnlyCheck))
+					if (allowedItemsManager.TryAddToAllowedItems(info, forWhitelistOnlyCheck)) {
 						forWhitelistOnlyCheck = true;
+						if (PrintDevOnlyAllowedItemListInfo && ContentSamples.ItemsByType[i].IsEnchantable())
+							enchantedItemsAllowedInBags[allowedItemsManager.OwningBagItemType].Add(info.Type);
+					}
 				}
+
+				if (!forWhitelistOnlyCheck)
+					itemsNotAdded.Add(info.Type);
+			}
+
+			if (PrintDevOnlyAllowedItemListInfo) {
+				IEnumerable<Item> itemsNotSelected = itemsNotAdded.Select(t => ContentSamples.ItemsByType[t]);
+				//itemsNotSelected.Select(i => i.S()).S("All Items that don't fit in bags:").LogSimple();
+				itemsNotSelected.Where(i => !i.IsEnchantable()).Select(i => i.S()).S("All Non-Enchantable Items that don't fit in bags:").LogSimple();
+				SortedSet<int> sortedItemsNotSelected = new (itemsNotAdded);
+				IEnumerable<Item> allOtherItems = ContentSamples.ItemsByType.Select(p => p.Value).Where(i => !sortedItemsNotSelected.Contains(i.type));
+				enchantedItemsAllowedInBags.Select(p => p.Value.Select(i => ContentSamples.ItemsByType[i].S()).S(ContentSamples.ItemsByType[p.Key].Name)).S("All Enchantable Items that fit in bags:").LogSimple();
 			}
 
 			foreach (AllowedItemsManager allowedItemsManager in allowedItemManagers) {

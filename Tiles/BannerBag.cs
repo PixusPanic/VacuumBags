@@ -35,20 +35,4 @@ namespace VacuumBags.Tiles
 			TileObjectData.addTile(Type);
 		}
 	}
-
-	public class BannerBagGlobal : GlobalTile {
-		private int BannerBagType {
-			get {
-				if (bannerBagType == -1)
-					bannerBagType = ModContent.TileType<BannerBag>();
-
-				return bannerBagType;
-			}
-		}
-		int bannerBagType = -1;
-		public override void NearbyEffects(int i, int j, int type, bool closer) {
-			if (type == BannerBagType)
-				Items.BannerBag.ApplyFirstXBanners(Main.LocalPlayer, VacuumBags.serverConfig.BannerBagNumberOfBannersWhenPlaced, true);
-		}
-	}
 }

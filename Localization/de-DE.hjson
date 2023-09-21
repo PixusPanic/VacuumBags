@@ -79,6 +79,8 @@ Mods: {
 					Tooltip: Dadurch sind für die Taschenrezepte mehr Gegenstände erforderlich und einige sind schwieriger zu bekommen.
 				}
 			}
+
+			// Logging: Log All Player White And Black Lists Header
 		}
 
 		Items: {
@@ -554,6 +556,21 @@ Mods: {
 					// Label: All Ammo Items Go Into Ammo Bag
 					// Tooltip: ""
 				}
+
+				LogAllPlayerWhiteAndBlackLists: {
+					// Label: Log All Player White And Black Lists
+					// Tooltip: ""
+				}
+
+				AllOtherCreateTileItemsIntoBuildersBox: {
+					// Label: All Other Create Tile Items Into Builders Box
+					// Tooltip: ""
+				}
+
+				PortableStationPassiveBuffsOnlyActiveIfFavorited: {
+					// Label: Portable Station Passive Buffs Only Active If Favorited
+					// Tooltip: ""
+				}
 			}
 
 			BagsServerConfig: {
@@ -581,6 +598,36 @@ Mods: {
 
 				PortableStationNumberOfStationsWhenPlaced: {
 					// Label: Portable Station Number Of Stations When Placed
+					// Tooltip: ""
+				}
+
+				PortableStationPassiveBuffsOnlyActiveIfFavorited: {
+					// Label: Portable Station Passive Buffs Only Active If Favorited
+					// Tooltip: ""
+				}
+
+				PortableStationNumberOfPassiveBuffStationsInInventory: {
+					// Label: Portable Station Number Of Passive Buff Stations In Inventory
+					// Tooltip: ""
+				}
+
+				PortableStationNumberOfPassiveBuffStationsWhenPlaced: {
+					// Label: Portable Station Number Of Passive Buff Stations When Placed
+					// Tooltip: ""
+				}
+
+				PortableStationsActivateActiveBuffsWhenOpened: {
+					// Label: Portable Stations Activate Active Buffs When Opened
+					// Tooltip: ""
+				}
+
+				PortableStationCanGiveHoneyBuff: {
+					// Label: Portable Station Can Give Honey Buff
+					// Tooltip: ""
+				}
+
+				POrtableStationMustBeTouchedToGetHoneyBuff: {
+					// Label: P Ortable Station Must Be Touched To Get Honey Buff
 					// Tooltip: ""
 				}
 			}

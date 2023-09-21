@@ -17,6 +17,9 @@ namespace VacuumBags.Items
 	}
 
 	public class AllowedItemsManager {
+		public int OwningBagItemType => getOwningBagItemType();
+		public Func<int> getOwningBagItemType;
+
 		public SortedSet<int> AllowedItems = null;
 
 		private Func<ItemSetInfo, SortedSet<ItemGroup>, SortedSet<string>, SortedSet<string>, bool?> devCheck = null;
@@ -43,11 +46,16 @@ namespace VacuumBags.Items
 		private SortedSet<string> playerModWhiteListCopy = null;
 		private SortedSet<int> playerBlackListCopy = null;
 		private SortedSet<string> playerModBlackListCopy = null;
+		private SortedSet<int> playerWhiteListForLog = null;
+		private SortedSet<string> playerModWhiteListForLog = null;
+		private SortedSet<int> playerBlackListForLog = null;
+		private SortedSet<string> playerModBlackListForLog = null;
 
 		private SortedSet<ItemGroup> itemGroups = null;
 		private SortedSet<string> endWords = null;
 		private SortedSet<string> searchWords = null;
 		public AllowedItemsManager(
+			Func<int> GetBagItemType,
 			Func<ItemSetInfo, SortedSet<ItemGroup>, SortedSet<string>, SortedSet<string>, bool?> DevCheck,
 			Func<SortedSet<int>> DevWhiteList = null,
 			Func<SortedSet<string>> DevModWhiteList = null,
@@ -57,6 +65,8 @@ namespace VacuumBags.Items
 			Func<SortedSet<string>> DevEndWords = null,
 			Func<SortedSet<string>> DevSearchWords = null
 			) {
+
+			getOwningBagItemType = GetBagItemType;
 
 			AllowedItems = new();
 
@@ -74,6 +84,13 @@ namespace VacuumBags.Items
 			playerModWhiteList = new();
 			playerBlackList = new();
 			playerModBlackList = new();
+
+			if (VacuumBags.clientConfig.LogAllPlayerWhiteAndBlackLists) {
+				playerWhiteListForLog = new();
+				playerModWhiteListForLog = new();
+				playerBlackListForLog = new();
+				playerModBlackListForLog = new();
+			}
 		}
 		public void Save() {
 
@@ -91,20 +108,15 @@ namespace VacuumBags.Items
 			playerBlackListCopy = new(playerBlackList);
 			playerModBlackListCopy = new(playerModBlackList);
 		}
+		public static readonly bool PrintFullBagWhitelists = true;
 		public bool TryAddToAllowedItems(ItemSetInfo info, bool whitelistCheckOnly) {
 			bool vanillaItem = info.Type < ItemID.Count;
 			bool playerBlackListed = vanillaItem ? playerBlackListCopy.Remove(info.Type) : info.CheckModFullName(ref playerModBlackListCopy);
 			bool playerWhiteListed = vanillaItem ? playerWhiteListCopy.Remove(info.Type) : info.CheckModFullName(ref playerModWhiteListCopy);
 			bool? result = null;
 
-			if (vanillaItem) {
-				if (devWhiteList.Remove(info.Type))
-					result = true;
-			}
-			else {
-				if (info.CheckModFullName(ref devModWhiteList))
-					result = true;
-			}
+			if (devWhiteList.Remove(info.Type) || !vanillaItem && info.CheckModFullName(ref devModWhiteList))
+				result = true;
 
 			if (result == null && whitelistCheckOnly)
 				result = false;
@@ -135,24 +147,45 @@ namespace VacuumBags.Items
 			bool devWhitelisted = result == true;
 			bool shouldAddItem = devWhitelisted && !playerBlackListed || playerWhiteListed;
 			if (shouldAddItem) {
-				if (devWhitelisted && playerWhiteListed) {
-					if (vanillaItem) {
-						playerWhiteList.Remove(info.Type);
+				if (playerWhiteListed) {
+					if (devWhitelisted) {
+						if (vanillaItem) {
+							playerWhiteList.Remove(info.Type);
+						}
+						else {
+							playerModWhiteList.Remove(info.ModFullName);
+						}
 					}
-					else {
-						playerModWhiteList.Remove(info.ModFullName);
+					else if (VacuumBags.clientConfig.LogAllPlayerWhiteAndBlackLists) {
+						if (vanillaItem) {
+							playerWhiteListForLog.Add(info.Type);
+						}
+						else {
+							playerModWhiteListForLog.Add(info.ModFullName);
+						}
 					}
+					
 				}
 
 				AllowedItems.Add(info.Type);
 			}
 			else {
-				if (!devWhitelisted && playerBlackListed) {
-					if (vanillaItem) {
-						playerBlackList.Remove(info.Type);
+				if (playerBlackListed) {
+					if (!devWhitelisted) {
+						if (vanillaItem) {
+							playerBlackList.Remove(info.Type);
+						}
+						else {
+							playerModBlackList.Remove(info.ModFullName);
+						}
 					}
 					else {
-						playerModBlackList.Remove(info.ModFullName);
+						if (vanillaItem) {
+							playerBlackListForLog.Add(info.Type);
+						}
+						else {
+							playerModBlackListForLog.Add(info.ModFullName);
+						}
 					}
 				}
 			}
@@ -160,6 +193,21 @@ namespace VacuumBags.Items
 			return devWhitelisted;
 		}
 		public void ClearSetupLists() {
+			if (VacuumBags.clientConfig.LogAllPlayerWhiteAndBlackLists) {
+				string bagName = ContentSamples.ItemsByType[OwningBagItemType].ModItem?.Name;
+				if (playerWhiteListForLog.Count() > 0)
+					playerWhiteListForLog.Select(t => t.GetItemIDOrName()).S($"Player Whitelist ({bagName})");
+
+				if (playerModWhiteListForLog.Count() > 0)
+					playerModWhiteListForLog.S($"Player Mod Whitelist ({bagName})");
+
+				if (playerBlackListForLog.Count() > 0)
+					playerBlackListForLog.Select(t => t.GetItemIDOrName()).S($"Player Blacklist ({bagName})");
+
+				if (playerModBlackListForLog.Count() > 0)
+					playerModBlackListForLog.S($"Player Mod Blacklist ({bagName})");
+			}
+
 			devCheck = null;
 			devModWhiteList = null;
 			devBlackList = null;
@@ -171,6 +219,12 @@ namespace VacuumBags.Items
 			itemGroups = null;
 			endWords = null;
 			searchWords = null;
+			if (VacuumBags.clientConfig.LogAllPlayerWhiteAndBlackLists) {
+				playerWhiteListForLog = null;
+				playerModWhiteListForLog = null;
+				playerBlackListForLog = null;
+				playerModBlackListForLog = null;
+			}
 		}
 		public void AddPlayerWhiteList(Item item) {
 			AllowedItems.Add(item.type);

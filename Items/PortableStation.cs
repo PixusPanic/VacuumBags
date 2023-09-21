@@ -71,10 +71,32 @@ namespace VacuumBags.Items
 				() => ModContent.ItemType<PortableStation>(),//Get ModItem type
 				80,//UI Left
 				675,//UI Top
-				() => UpdateAllSelectedFromBag()
+				() => UpdateAllSelectedFromBag(Main.SceneMetrics)
 			);
 		}
 		public static bool ItemAllowedToBeStored(Item item) => AllowedItems.Contains(item.type);
+		public static void UpdateAllSelectedFromBag(SceneMetrics sceneMetrics) {
+			Player player = Main.LocalPlayer;
+			Item[] items = StorageManager.GetItems(BagStorageID);
+			BagUI bagUI = StorageManager.BagUIs[BagStorageID];
+			for (int i = 0; i < items.Length; i++) {
+				Item item = items[i];
+				if (item.NullOrAir())
+					continue;
+
+				if (item.IsRequiredTile() && item.createTile > 0 && item.createTile < player.adjTile.Length && player.adjTile[item.createTile]) {
+					int context = ActiveStationsFromPortableStation.Contains(item.createTile) ? ItemSlotContextID.YellowSelected : ItemSlotContextID.Purple;
+					bagUI.AddSelectedItemSlot(i, context);
+				}
+
+				if (item.PassiveBuffTileIsActive(sceneMetrics)) {
+					int context = ActiveBuffsFromTileNearbyEffects.ContainsKey(item.type) ? ItemSlotContextID.BrightGreenSelected : ItemSlotContextID.Purple;
+					bagUI.AddSelectedItemSlot(i, context);
+				}
+			}
+		}
+
+		#region Crafting Stations
 
 		private static void UpdateStationsFromHeldPortableStation(Player player) {
 			if (ActiveStationsFromPortableStation.Any())
@@ -103,27 +125,6 @@ namespace VacuumBags.Items
 					Recipe.FindRecipes(true);
 				}
 			}
-
-			UpdateAllSelectedFromBag();
-		}
-		public static void UpdateAllSelectedFromBag() {
-			Player player = Main.LocalPlayer;
-			Item[] items = StorageManager.GetItems(BagStorageID);
-			BagUI bagUI = StorageManager.BagUIs[BagStorageID];
-			for (int i = 0; i < items.Length; i++) {
-				Item item = items[i];
-				if (item.NullOrAir())
-					continue;
-
-				int station = item.createTile;
-				if (station < 0 || station >= player.adjTile.Length)
-					continue;
-
-				if (player.adjTile[station]) {
-					int context = ActiveStationsFromPortableStation.Contains(station) ? ItemSlotContextID.YellowSelected : ItemSlotContextID.Purple;
-					bagUI.AddSelectedItemSlot(i, context);
-				}
-			}
 		}
 		public static List<int> ActiveStationsFromPortableStation = new();
 		internal static void OnAdjTiles(ILContext il) {
@@ -146,8 +147,80 @@ namespace VacuumBags.Items
 			});
 		}
 
+		#endregion
+
+		#region Passive Buff Tiles
+
+		public static void UpdatePassiveBuffsFromHeldBag(ref SceneMetrics sceneMetrics, Player player) {
+			if (ActiveBuffsFromTileNearbyEffects.Any())
+				return;
+
+			if (StorageManager.HasRequiredItemToUseStorageFromBagType(player, ModContent.ItemType<PortableStation>(), out _))
+				ApplyFirstXPassiveBuffs(ref sceneMetrics, player, VacuumBags.serverConfig.PortableStationNumberOfPassiveBuffStationsInInventory);
+		}
+		public static IEnumerable<Item> GetPassiveBuffsStations(SceneMetrics sceneMetrics, Player player, int firstXBuffs) {
+			return GetFirstXFromBag(
+				BagStorageID,
+				(Item item) => {
+					if (!item.IsPassiveBuffTile())
+						return false;
+
+					if (item.IsPassiveBuffCandle() && !item.favorited)
+						return false;
+
+					if (VacuumBags.clientConfig.PortableStationPassiveBuffsOnlyActiveIfFavorited && !item.favorited)
+						return false;
+
+					bool alreadyActive = item.PassiveBuffTileIsActive(sceneMetrics);
+					bool fromLast = ActiveBuffsFromTileNearbyEffects.ContainsKey(item.type);
+					bool result = !alreadyActive || fromLast;
+					return result;
+				},
+				player,
+				firstXBuffs,
+				(Item item) => item.IsPassiveBuffCandle(),
+				context: ItemSlotContextID.BrightGreenSelected
+			);
+		}
+		public static void ApplyFirstXPassiveBuffs(ref SceneMetrics sceneMetrics, Player player, int firstXPassiveBuffs) {
+			if (firstXPassiveBuffs == 0)
+				return;
+			
+			IEnumerable<KeyValuePair<int, Action<SceneMetrics>>> passiveBuffs = GetPassiveBuffsStations(sceneMetrics, player, firstXPassiveBuffs).Where(item => item.IsPassiveBuffTile())
+				.Select(item => new KeyValuePair<int, Action<SceneMetrics>>(item.type, ItemSets.PassiveBuffTileEffects[item.type]));
+			foreach (KeyValuePair<int, Action<SceneMetrics>> pair in passiveBuffs) {
+				ActiveBuffsFromTileNearbyEffects.TryAdd(pair.Key, pair.Value);
+			}
+		}
+		public static SortedDictionary<int, Action<SceneMetrics>> ActiveBuffsFromTileNearbyEffects = new ();
+		public static bool UpdateFromPlacedTile = false;
+		internal static void PreScanAndExportToMain() {
+			ActiveBuffsFromTileNearbyEffects.Clear();
+		}
+		internal static void PostScanAndExportToMain(ref SceneMetrics sceneMetrics) {
+			if (UpdateFromPlacedTile) {
+				ApplyFirstXPassiveBuffs(ref sceneMetrics, Main.LocalPlayer, VacuumBags.serverConfig.PortableStationNumberOfPassiveBuffStationsWhenPlaced);
+				UpdateFromPlacedTile = false;
+			}
+			else {
+				UpdatePassiveBuffsFromHeldBag(ref sceneMetrics, Main.LocalPlayer);
+			}
+
+			foreach (Action<SceneMetrics> passiveBuff in ActiveBuffsFromTileNearbyEffects.Select(p => p.Value)) {
+				passiveBuff(sceneMetrics);
+			}
+		}
+
+		#endregion
+
+		#region Active Buff Tiles
+
+
+
+		#endregion
+
 		public static SortedSet<int> AllowedItems => AllowedItemsManager.AllowedItems;
-		public static AllowedItemsManager AllowedItemsManager = new(DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
+		public static AllowedItemsManager AllowedItemsManager = new(ModContent.ItemType<PortableStation>, DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
 		public AllowedItemsManager GetAllowedItemsManager => AllowedItemsManager;
 		protected static bool? DevCheck(ItemSetInfo info, SortedSet<ItemGroup> itemGroups, SortedSet<string> endWords, SortedSet<string> searchWords) {
 			if (info.Equipment)
@@ -195,6 +268,7 @@ namespace VacuumBags.Items
 				ItemID.StarinaBottle,
 				ItemID.PeaceCandle,
 				ItemID.WaterCandle,
+				ItemID.ShadowCandle,
 				ItemID.HoneyBucket,
 				ItemID.BottomlessHoneyBucket,
 				ItemID.Sunflower,

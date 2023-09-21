@@ -24,11 +24,13 @@ namespace VacuumBags.Common.Configs
 		[DefaultValue(false)]
 		public bool HarderBagRecipes;
 
+		//Bag Effects
 		[JsonIgnore]
 		public const string BagEffectOptionsKey = "BagEffectOptions";
 		[JsonIgnore]
 		public const int BannerBagNumberOfBannersInInventoryDefault = 3;
 		[Header($"$Mods.VacuumBags.Config.{BagEffectOptionsKey}")]
+
 		[DefaultValue(BannerBagNumberOfBannersInInventoryDefault)]
 		[Range(BagModItem.FirstXItemsChooseAllItems, BagsClientConfig.BagsMaxStorageSize)]
 		public int BannerBagNumberOfBannersInInventory;
@@ -38,14 +40,33 @@ namespace VacuumBags.Common.Configs
 		public int BannerBagNumberOfBannersWhenPlaced;
 
 		[JsonIgnore]
-		public const int PortableStationNumberOfStationsInInventoryDefault = 1;
-		[DefaultValue(PortableStationNumberOfStationsInInventoryDefault)]
+		public const int PortableStationNumberOfCraftingStationsInInventoryDefault = 1;
+		[DefaultValue(PortableStationNumberOfCraftingStationsInInventoryDefault)]
 		[Range(BagModItem.FirstXItemsChooseAllItems, BagsClientConfig.BagsMaxStorageSize)]
 		public int PortableStationNumberOfStationsInInventory;
 
 		[DefaultValue(BagModItem.FirstXItemsChooseAllItems)]
 		[Range(BagModItem.FirstXItemsChooseAllItems, BagsClientConfig.BagsMaxStorageSize)]
 		public int PortableStationNumberOfStationsWhenPlaced;
+
+		[JsonIgnore]
+		public const int PortableStationNumberOfPassiveBuffStationsInInventoryDefault = 1;
+		[DefaultValue(PortableStationNumberOfPassiveBuffStationsInInventoryDefault)]
+		[Range(BagModItem.FirstXItemsChooseAllItems, BagsClientConfig.BagsMaxStorageSize)]
+		public int PortableStationNumberOfPassiveBuffStationsInInventory;
+
+		[DefaultValue(BagModItem.FirstXItemsChooseAllItems)]
+		[Range(BagModItem.FirstXItemsChooseAllItems, BagsClientConfig.BagsMaxStorageSize)]
+		public int PortableStationNumberOfPassiveBuffStationsWhenPlaced;
+
+		[DefaultValue(true)]
+		public bool PortableStationsActivateActiveBuffsWhenOpened;
+
+		[DefaultValue(true)]
+		public bool PortableStationCanGiveHoneyBuff;
+
+		[DefaultValue(true)]
+		public bool POrtableStationMustBeTouchedToGetHoneyBuff;
 	}
 
 	public class BagsClientConfig : ModConfig {
@@ -71,5 +92,21 @@ namespace VacuumBags.Common.Configs
 		[ReloadRequired]
 		[DefaultValue(true)]
 		public bool AllAmmoItemsGoIntoAmmoBag;
+
+		[ReloadRequired]
+		[DefaultValue(true)]
+		public bool AllOtherCreateTileItemsIntoBuildersBox;
+
+		[DefaultValue(false)]
+		public bool PortableStationPassiveBuffsOnlyActiveIfFavorited;
+
+		//Logging
+		[JsonIgnore]
+		public const string LoggingHeaderKey = "Logging";
+		[Header($"$Mods.VacuumBags.Config.{LoggingHeaderKey}")]
+
+		[DefaultValue(false)]
+		[ReloadRequired]
+		public bool LogAllPlayerWhiteAndBlackLists;
 	}
 }

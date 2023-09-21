@@ -13,6 +13,7 @@ using System.Numerics;
 using MonoMod.Cil;
 using System;
 using Mono.Cecil.Cil;
+using androLib.UI;
 
 namespace VacuumBags.Items
 {
@@ -78,7 +79,53 @@ namespace VacuumBags.Items
 			);
 		}
 		public static bool ItemAllowedToBeStored(Item item) => AllowedItems.Contains(item.type);
-		public static Item ChoosePlacableItemFromBelt(Player player) => ChooseFromBag(BagStorageID, item => item.createTile > -1, player);
+		public static Item ChoosePlacableItemFromBelt(Player player) => ChooseFromBag(BagStorageID, item => item.createTile > -1 || item.IsBucket(), player);
+
+		internal static void On_Player_PutItemInInventoryFromItemUsage(On_Player.orig_PutItemInInventoryFromItemUsage orig, Player self, int type, int theSelectedItem) {
+			if (!TryPutItemInBagFromItemUsage(self, type, theSelectedItem))
+				orig(self, type, theSelectedItem);
+		}
+		public static bool TryPutItemInBagFromItemUsage(Player player, int type, int theSelectedItem = -1) {
+			Item contentSampleItem = type.CSI();
+			if (!contentSampleItem.IsBucket())
+				return false;
+
+			if (!ItemAllowedToBeStored(contentSampleItem))
+				return false;
+
+			BagUI bagUI = StorageManager.BagUIs[BagStorageID];
+			if (!bagUI.CanVacuumItem(contentSampleItem, player, true))
+				return false;
+
+			Item[] inv = bagUI.Storage.Items;
+			for (int i = 0; i < inv.Length; i++) {
+				Item item = inv[i];
+				if (!item.NullOrAir() && item.stack > 0 && item.type == type && item.stack < item.maxStack) {
+					item.stack++;
+					return true;
+				}
+			}
+
+			Item[] inventory = player.inventory;
+			if (theSelectedItem >= 0 && (inventory[theSelectedItem].type == 0 || inventory[theSelectedItem].stack <= 0)) {
+				inventory[theSelectedItem].SetDefaults(type);
+				return true;
+			}
+
+			IEnumerable<KeyValuePair<int, Item>> indexItemsPairs = GetFirstFromBag(BagStorageID, ItemSets.IsBucket, player);
+			int slotAfterBag = indexItemsPairs.Any() ? indexItemsPairs.First().Key + 1 : -1;
+
+			int start = slotAfterBag >= 0 && slotAfterBag < inv.Length ? slotAfterBag : 0;
+			for (int i = start; i < inv.Length; i++) {
+				Item item = inv[i];
+				if (item.NullOrAir()) {
+					item.SetDefaults(type);
+					return true;
+				}
+			}
+
+			return false;
+		}
 		public static Item ChooseWireFromBelt(Player player) => ChooseFromBag(BagStorageID, item => item.type == ItemID.Wire, player);
 		internal static void OnItemCheck_UseWiringTools(ILContext il) {
 			//IL_01e3: ldloc.2
@@ -135,7 +182,7 @@ namespace VacuumBags.Items
 		};
 
 		public static SortedSet<int> AllowedItems => AllowedItemsManager.AllowedItems;
-		public static AllowedItemsManager AllowedItemsManager = new(DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
+		public static AllowedItemsManager AllowedItemsManager = new(ModContent.ItemType<MechanicsToolbelt>, DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
 		public AllowedItemsManager GetAllowedItemsManager => AllowedItemsManager;
 		protected static bool? DevCheck(ItemSetInfo info, SortedSet<ItemGroup> itemGroups, SortedSet<string> endWords, SortedSet<string> searchWords) {
 			if (info.Weapon || info.Armor)
@@ -189,6 +236,8 @@ namespace VacuumBags.Items
 				devWhiteList.Add(itemType);
 			}
 
+			devWhiteList.UnionWith(ItemSets.Buckets);
+
 			devWhiteList.UnionWith(WirePlacingTools);
 
 			return devWhiteList;
@@ -233,7 +282,6 @@ namespace VacuumBags.Items
 		protected static SortedSet<string> SearchWords() {
 			SortedSet<string> searchWords = new() {
 				"statue",
-				"bucket",
 				"pressureplate",
 				"trap",
 				"boulder",

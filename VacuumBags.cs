@@ -9,6 +9,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Intrinsics.X86;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent;
@@ -17,6 +18,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.UI;
 using VacuumBags.Common.Configs;
+using VacuumBags.Common.Globals;
 using VacuumBags.Items;
 using VacuumBags.Localization;
 
@@ -49,13 +51,13 @@ namespace VacuumBags
 			On_Player.QuickBuff += PotionFlask.OnQuickBuff;
 			On_Player.QuickHeal_GetItemToUse += PotionFlask.OnQuickHeal_GetItemToUse;
 			On_Player.QuickMana_GetItemToUse += PotionFlask.OnQuickMana_GetItemToUse;
-			On_SceneMetrics.ScanAndExportToMain += Items.BannerBag.OnScanAndExportToMain;
 			On_ItemSlot.RightClick_ItemArray_int_int += OnRightClick_ItemArray_int_int;
 
 			On_Player.ItemCheck_Inner += BagPlayer.OnItemCheck_Inner;
 			On_Main.DrawInterface_40_InteractItemIcon += BagPlayer.On_Main_DrawInterface_40_InteractItemIcon;
 			On_PlayerDrawLayers.DrawPlayer_27_HeldItem += BagPlayer.On_PlayerDrawLayers_DrawPlayer_27_HeldItem;
 			On_SmartCursorHelper.SmartCursorLookup += BagPlayer.On_SmartCursorHelper_SmartCursorLookup;
+			On_Player.PutItemInInventoryFromItemUsage += MechanicsToolbelt.On_Player_PutItemInInventoryFromItemUsage;
 
 			IL_ItemSlot.Draw_SpriteBatch_ItemArray_int_int_Vector2_Color += OnDrawItemSlot;
 			IL_Player.ItemCheck_CheckCanUse += PaintBucket.OnItemCheck_CheckCanUse;
@@ -63,6 +65,7 @@ namespace VacuumBags
 			IL_Player.ItemCheck_ApplyHoldStyle_Inner += AmmoBag.OnItemCheck_ApplyHoldStyle_Inner;
 			IL_Player.SmartSelect_PickToolForStrategy += AmmoBag.OnSmartSelect_PickToolForStrategy;
 			IL_Player.AdjTiles += PortableStation.OnAdjTiles;
+			IL_SceneMetrics.ScanAndExportToMain += IL_SceneMetrics_ScanAndExportToMain;
 
 			VacuumBagsLocalizationData.RegisterSDataPackage();
 
@@ -109,11 +112,6 @@ namespace VacuumBags
 			BagWhite.RegisterWithAndroLib(this);
 			BagYellow.RegisterWithAndroLib(this);
 
-			CalamitousCauldron.RegisterWithAndroLib(this);
-			LokisTesseract.RegisterWithAndroLib(this);
-			EssenceOfGathering.RegisterWithAndroLib(this);
-			FargosMementos.RegisterWithAndroLib(this);
-
 			BannerBag.RegisterWithAndroLib(this);
 			FishingBelt.RegisterWithAndroLib(this);
 			PortableStation.RegisterWithAndroLib(this);
@@ -127,6 +125,11 @@ namespace VacuumBags
 			BuildersBox.RegisterWithAndroLib(this);
 			WallEr.RegisterWithAndroLib(this);
 			SlayersSack.RegisterWithAndroLib(this);
+
+			CalamitousCauldron.RegisterWithAndroLib(this);
+			LokisTesseract.RegisterWithAndroLib(this);
+			EssenceOfGathering.RegisterWithAndroLib(this);
+			FargosMementos.RegisterWithAndroLib(this);
 
 			PackBlack.RegisterWithAndroLibItemTypeOnly();
 			PackBlue.RegisterWithAndroLibItemTypeOnly();
@@ -168,21 +171,21 @@ namespace VacuumBags
 		}
 		internal static void OnDrawItemSlot(ILContext il) {
 			var c = new ILCursor(il);
-			/*
-	// if (item.useAmmo > 0)
-	IL_0cc8: ldloc.1
-	IL_0cc9: ldfld int32 Terraria.Item::useAmmo
-	IL_0cce: ldc.i4.0
-	IL_0ccf: ble.s IL_0d13
 
-	// _ = item.useAmmo;
-	IL_0cd1: ldloc.1
-	IL_0cd2: ldfld int32 Terraria.Item::useAmmo
-	IL_0cd7: pop
-	// num11 = 0;
-	IL_0cd8: ldc.i4.0
-	IL_0cd9: stloc.s 29
-			 */
+			//// if (item.useAmmo > 0)
+			//IL_0cc8: ldloc.1
+			//IL_0cc9: ldfld int32 Terraria.Item::useAmmo
+			//IL_0cce: ldc.i4.0
+			//IL_0ccf: ble.s IL_0d13
+
+			//// _ = item.useAmmo;
+			//IL_0cd1: ldloc.1
+			//IL_0cd2: ldfld int32 Terraria.Item::useAmmo
+			//IL_0cd7: pop
+			//// num11 = 0;
+			//IL_0cd8: ldc.i4.0
+			//IL_0cd9: stloc.s 29
+
 			//Note to self.  All instructions have to be perfectly in order if using TryGotoNext.  Use multiple calls of TryGotoNext if you need to skip instructions.
 			if (!c.TryGotoNext(MoveType.After,
 				i => i.MatchLdloc(1),
@@ -310,6 +313,70 @@ namespace VacuumBags
 				}
 
 				return wireCount;
+			});
+		}
+		private void IL_SceneMetrics_ScanAndExportToMain(ILContext il) {
+			var c = new ILCursor(il);
+
+			//IL_0035: ldarga.s settings
+			//IL_0037: ldflda valuetype[System.Runtime]System.Nullable`1 < valuetype[FNA]Microsoft.Xna.Framework.Vector2 > Terraria.SceneMetricsScanSettings::BiomeScanCenterPositionInWorld
+			//IL_003c: call instance !0 valuetype[System.Runtime]System.Nullable`1 < valuetype[FNA]Microsoft.Xna.Framework.Vector2 >::get_Value()
+			//IL_0041: call valuetype[FNA]Microsoft.Xna.Framework.Point Terraria.Utils::ToTileCoordinates(valuetype[FNA]Microsoft.Xna.Framework.Vector2)
+			//IL_0046: stloc.3
+
+			if (!c.TryGotoNext(MoveType.Before,
+				i => i.MatchLdarga(1),
+				i => i.MatchLdflda<SceneMetricsScanSettings>("BiomeScanCenterPositionInWorld"),
+				i => i.MatchCall(out _),
+				i => i.MatchCall(out _),
+				i => i.MatchStloc(3)
+			)) { throw new Exception("Failed to find instructions IL_SceneMetrics_ScanAndExportToMain 1/4"); }
+
+			c.EmitDelegate(() => {
+				BannerBag.PreScanAndExportToMain();
+				PortableStation.PreScanAndExportToMain();
+			});
+
+			//IL_0322: ldloc.s 5
+			//IL_0324: ldloc.s 6
+			//IL_0326: ldloca.s 7
+			//IL_0328: call instance uint16 & Terraria.Tile::get_type()
+			//IL_032d: ldind.u2
+			//IL_032e: ldc.i4.0
+			//IL_032f: call void Terraria.ModLoader.TileLoader::NearbyEffects(int32, int32, int32, bool)
+
+			if (!c.TryGotoNext(MoveType.Before,
+			i => i.MatchLdloc(5),
+				i => i.MatchLdloc(6),
+				i => i.MatchLdloca(7),
+				i => i.MatchCall(out _),
+				i => i.MatchLdindU2(),
+				i => i.MatchLdcI4(0)
+			)) { throw new Exception("Failed to find instructions IL_SceneMetrics_ScanAndExportToMain 2/4"); }
+
+			if (!c.TryGotoNext(MoveType.Before,
+				i => i.MatchLdcI4(0)
+			)) { throw new Exception("Failed to find instructions IL_SceneMetrics_ScanAndExportToMain 3/4"); }
+
+			//c.EmitDelegate((int type) => { return type; });
+
+			c.Emit(OpCodes.Ldarga, 0);
+
+			c.EmitDelegate(GlobalBagTile.NearbyEffects);
+
+			//IL_0677: ldarg.0
+			//IL_0678: call instance void Terraria.SceneMetrics::ExportTileCountsToMain()
+
+			if (!c.TryGotoNext(MoveType.Before,
+				i => i.MatchLdarg(0),
+				i => i.MatchCall<SceneMetrics>("ExportTileCountsToMain")
+			)) { throw new Exception("Failed to find instructions IL_SceneMetrics_ScanAndExportToMain 4/4"); }
+
+			c.Emit(OpCodes.Ldarga, 0);
+
+			c.EmitDelegate((ref SceneMetrics sceneMetrics) => {
+				BannerBag.PostScanAndExportToMain(ref sceneMetrics);
+				PortableStation.PostScanAndExportToMain(ref sceneMetrics);
 			});
 		}
 	}

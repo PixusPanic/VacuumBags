@@ -91,7 +91,7 @@ namespace VacuumBags.Items
 		public static bool ItemAllowedToBeStored(Item item) => AllowedItems.Contains(item.type);
 
 		public static SortedSet<int> AllowedItems => AllowedItemsManager.AllowedItems;
-		public static AllowedItemsManager AllowedItemsManager = new(DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
+		public static AllowedItemsManager AllowedItemsManager = new(ModContent.ItemType<FishingBelt>, DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
 		public AllowedItemsManager GetAllowedItemsManager => AllowedItemsManager;
 		protected static bool? DevCheck(ItemSetInfo info, SortedSet<ItemGroup> itemGroups, SortedSet<string> endWords, SortedSet<string> searchWords) {
 			if (ItemID.Sets.CanFishInLava[info.Type]
@@ -152,6 +152,42 @@ namespace VacuumBags.Items
 				ItemID.PinkPearl,
 				ItemID.SharkBait,
 				ItemID.ChumBucket,
+				ItemID.LavaFishingHook,
+				ItemID.LavaproofTackleBag,
+				ItemID.ArmoredCavefish,
+				ItemID.AtlanticCod,
+				ItemID.Bass,
+				ItemID.BlueJellyfish,
+				ItemID.ChaosFish,
+				ItemID.CrimsonTigerfish,
+				ItemID.Damselfish,
+				ItemID.DoubleCod,
+				ItemID.Ebonkoi,
+				ItemID.FlarefinKoi,
+				ItemID.Flounder,
+				ItemID.FrostMinnow,
+				ItemID.GoldenCarp,
+				ItemID.GreenJellyfish,
+				ItemID.Hemopiranha,
+				ItemID.Honeyfin,
+				ItemID.NeonTetra,
+				ItemID.Obsidifish,
+				ItemID.PinkJellyfish,
+				ItemID.PrincessFish,
+				ItemID.Prismite,
+				ItemID.RedSnapper,
+				ItemID.RockLobster,
+				ItemID.Salmon,
+				ItemID.Shrimp,
+				ItemID.SpecularFish,
+				ItemID.Trout,
+				ItemID.Tuna,
+				ItemID.VariegatedLardfish,
+				ItemID.ZephyrFish,
+				ItemID.DemonConch,
+				ItemID.MagicConch,
+				ItemID.Sextant,
+				ItemID.CombatBook
 			};
 
 			foreach (int bugType in RecipeGroup.recipeGroups[RecipeGroupID.Bugs].ValidItems) {
@@ -178,6 +214,8 @@ namespace VacuumBags.Items
 				devWhiteList.Add(itemType);
 			}
 
+			devWhiteList.UnionWith(Main.anglerQuestItemNetIDs);
+
 			return devWhiteList;
 		}
 		protected static SortedSet<string> DevModWhiteList() {
@@ -189,7 +227,7 @@ namespace VacuumBags.Items
 		}
 		protected static SortedSet<int> DevBlackList() {
 			SortedSet<int> devBlackList = new() {
-
+				ItemID.FishingPotion
 			};
 
 			return devBlackList;
@@ -206,6 +244,7 @@ namespace VacuumBags.Items
 				ItemGroup.Fish,
 				ItemGroup.FishingBait,
 				ItemGroup.FishingRods,
+				ItemGroup.FishingQuestFish
 			};
 
 			return itemGroups;
@@ -220,7 +259,7 @@ namespace VacuumBags.Items
 
 		protected static SortedSet<string> SearchWords() {
 			SortedSet<string> searchWords = new() {
-
+				"fishingbobber"
 			};
 
 			return searchWords;

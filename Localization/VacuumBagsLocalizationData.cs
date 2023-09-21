@@ -60,6 +60,15 @@ namespace VacuumBags.Localization
 										"If true, all items that are used as ammo for anything will go into the bag.\n" +
 										"If false, only the selected ammo items whitelist will be allowed which excludes a few items like stars." }
 								}) },
+								{ nameof(clientConfig.AllOtherCreateTileItemsIntoBuildersBox), new(dict: new() {
+									{ L_ID3.Label.ToString(), nameof(clientConfig.AllOtherCreateTileItemsIntoBuildersBox).AddSpaces() },
+									{ L_ID3.Tooltip.ToString(), "When on, every item that creates a tile when used will be added to the Builder's Box whitelist if it does not already go into another bag's whitelist.\n" +
+										"This is supposed to catch most furniture, but may end up pulling in other items that aren't intended." }
+								}) },
+								{ nameof(clientConfig.PortableStationPassiveBuffsOnlyActiveIfFavorited), new(dict: new() {
+									{ L_ID3.Label.ToString(), nameof(clientConfig.PortableStationPassiveBuffsOnlyActiveIfFavorited).AddSpaces() },
+									{ L_ID3.Tooltip.ToString(), "If selected, only favorited buff stations will provide their buffs.\n" }
+								}) },
 							}) },
 							{ BagEffectOptionsKey, new(children: new() {
 								{ nameof(serverConfig.BannerBagNumberOfBannersInInventory), new(dict: new() {
@@ -86,15 +95,53 @@ namespace VacuumBags.Localization
 										"Favoriting a station or stations gives them priority over non-favorited ones.\n" +
 										$"Set to {BannerBag.FirstXItemsChooseAllItems} for all stations in the Portable Station to be available for crafting." }
 								}) },
+								{ nameof(serverConfig.PortableStationNumberOfPassiveBuffStationsInInventory), new(dict: new() {
+									{ L_ID3.Label.ToString(), nameof(serverConfig.PortableStationNumberOfPassiveBuffStationsInInventory).AddSpaces() },
+									{ L_ID3.Tooltip.ToString(), "When the Portable Station is in your inventory, the passive buffs from the first X number of stations will be active.\n" +
+										"Favoriting a station or stations gives them priority over non-favorited ones.\n" +
+										$"Set to {BannerBag.FirstXItemsChooseAllItems} for all stations in the Portable Station to give their passive buffs.\n" +
+										$"Peace Candles, Water candles and Shadow candles will not ever be active unless favorited and do not count towards the buff limit." }
+								}) },
+								{ nameof(serverConfig.PortableStationNumberOfPassiveBuffStationsWhenPlaced), new(dict: new() {
+									{ L_ID3.Label.ToString(), nameof(serverConfig.PortableStationNumberOfPassiveBuffStationsWhenPlaced).AddSpaces() },
+									{ L_ID3.Tooltip.ToString(), "When the Portable Station is placed in the world, the passive buffs from the first X number of stations will be active.\n" +
+										"Favoriting a station or stations gives them priority over non-favorited ones.\n" +
+										$"Set to {BannerBag.FirstXItemsChooseAllItems} for all stations in the Portable Station to give their passive buffs.\n" +
+										$"Peace Candles, Water candles and Shadow candles will not ever be active unless favorited and do not count towards the buff limit." }
+								}) },
+								{ nameof(serverConfig.PortableStationsActivateActiveBuffsWhenOpened), new(dict: new() {
+									{ L_ID3.Label.ToString(), nameof(serverConfig.PortableStationsActivateActiveBuffsWhenOpened).AddSpaces() },
+									{ L_ID3.Tooltip.ToString(), "If selected, the buffs from stations that provide buffs when interacted with will give their buffs." }
+								}) },
+								{ nameof(serverConfig.PortableStationCanGiveHoneyBuff), new(dict: new() {
+									{ L_ID3.Label.ToString(), nameof(serverConfig.PortableStationCanGiveHoneyBuff).AddSpaces() },
+									{ L_ID3.Tooltip.ToString(), "If selected, the Honey buff is allowed to be given by the Portable Station." }
+								}) },
+								{ nameof(serverConfig.POrtableStationMustBeTouchedToGetHoneyBuff), new(dict: new() {
+									{ L_ID3.Label.ToString(), nameof(serverConfig.POrtableStationMustBeTouchedToGetHoneyBuff).AddSpaces() },
+									{ L_ID3.Tooltip.ToString(), "If selected, the Honey buff will be given if the Portable Station is touched if there is a bucket of honey in the station.\n" +
+										"If not selected, the Honey buff will be given in an area of effect around the Portable Station.\n" +
+										"If the Unlimited honey bucket is in the station, the area of effect will be active regardless of this option." }
+								}) },
+								//{ nameof(serverConfig.), new(dict: new() {
+								//}) },
 							}) },
-							}, dict: new() {
-								{ CraftingHeaderKey, CraftingHeaderKey.AddSpaces() },
-								{ BagStorageOptionsKey, BagStorageOptionsKey.AddSpaces() },
-								{ BagEffectOptionsKey, BagEffectOptionsKey.AddSpaces() },
-								/*,
-								{ "", "" },
-								{ "", "" },
-								*/
+							{ LoggingHeaderKey, new(children: new() {
+								{ nameof(clientConfig.LogAllPlayerWhiteAndBlackLists), new(dict: new() {
+									{ L_ID3.Label.ToString(), nameof(clientConfig.LogAllPlayerWhiteAndBlackLists).AddSpaces() },
+									{ L_ID3.Tooltip.ToString(), "If true, all player white lists and black lists will be logged to the client.log.\n" +
+										"If you make changes to the white/black lists that you think should be standard changes for everyone, please print them and send me your client.log. -andro951" }
+								}) },
+							}) },
+						}, dict: new() {
+							{ CraftingHeaderKey, CraftingHeaderKey.AddSpaces() },
+							{ BagStorageOptionsKey, BagStorageOptionsKey.AddSpaces() },
+							{ BagEffectOptionsKey, BagEffectOptionsKey.AddSpaces() },
+							{ LoggingHeaderKey, LoggingHeaderKey.AddSpaces() },
+							/*,
+							{ "", "" },
+							{ "", "" },
+							*/
 						}) }
 					};
 

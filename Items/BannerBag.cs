@@ -77,12 +77,12 @@ namespace VacuumBags.Items
 		}
 		public static bool ItemAllowedToBeStored(Item item) => AllowedItems.Contains(item.type);
 
-		public static void UpdateBannersFromHeldBag(Player player) {
+		public static void UpdateBannersFromHeldBag(ref SceneMetrics sceneMetrics, Player player) {
 			if (ActiveBannersFromTileNearbyEffects.Any())
 				return;
 
 			if (StorageManager.HasRequiredItemToUseStorageFromBagType(player, ModContent.ItemType<BannerBag>(), out _))
-				ApplyFirstXBanners(player, VacuumBags.serverConfig.BannerBagNumberOfBannersInInventory);
+				ApplyFirstXBanners(ref sceneMetrics, player, VacuumBags.serverConfig.BannerBagNumberOfBannersInInventory);
 		}
 		public static IEnumerable<Item> GetBanners(Player player, int firstXBanners) {
 			return GetFirstXFromBag(
@@ -95,7 +95,7 @@ namespace VacuumBags.Items
 				},
 				player, firstXBanners);
 		}
-		public static void ApplyFirstXBanners(Player player, int firstXBanners, bool fromTileNearbyEffects = false) {
+		public static void ApplyFirstXBanners(ref SceneMetrics sceneMetrics, Player player, int firstXBanners, bool fromTileNearbyEffects = false) {
 			if (firstXBanners == 0)
 				return;
 			
@@ -104,10 +104,9 @@ namespace VacuumBags.Items
 				ActiveBannersFromTileNearbyEffects = banners.ToList();
 
 			foreach (int banner in banners) {
-				Main.SceneMetrics.NPCBannerBuff[banner] = true;
+				sceneMetrics.NPCBannerBuff[banner] = true;
+				sceneMetrics.hasBanner = true;
 			}
-
-			UpdateAllSelectedFromBag();
 		}
 		private static void UpdateAllSelectedFromBag() {
 			Item[] items = StorageManager.GetItems(BagStorageID);
@@ -128,15 +127,22 @@ namespace VacuumBags.Items
 				player.AddBuff(BuffID.MonsterBanner, -1);
 		}
 		public static List<int> ActiveBannersFromTileNearbyEffects = new();
-		public static bool AnyBannerNotActive => ActiveBannersFromTileNearbyEffects.Count() < 1;
-		internal static void OnScanAndExportToMain(On_SceneMetrics.orig_ScanAndExportToMain orig, SceneMetrics self, SceneMetricsScanSettings settings) {
+		public static bool UpdateFromPlacedTile = false;
+		internal static void PreScanAndExportToMain() {
 			ActiveBannersFromTileNearbyEffects = new();
-			orig(self, settings);
-			UpdateBannersFromHeldBag(Main.LocalPlayer);
+		}
+		internal static void PostScanAndExportToMain(ref SceneMetrics sceneMetrics) {
+			if (UpdateFromPlacedTile) {
+				ApplyFirstXBanners(ref sceneMetrics, Main.LocalPlayer, VacuumBags.serverConfig.BannerBagNumberOfBannersWhenPlaced, true);
+				UpdateFromPlacedTile = false;
+			}
+			else {
+				UpdateBannersFromHeldBag(ref sceneMetrics, Main.LocalPlayer);
+			}
 		}
 
 		public static SortedSet<int> AllowedItems => AllowedItemsManager.AllowedItems;
-		public static AllowedItemsManager AllowedItemsManager = new(DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
+		public static AllowedItemsManager AllowedItemsManager = new(ModContent.ItemType<BannerBag>, DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
 		public AllowedItemsManager GetAllowedItemsManager => AllowedItemsManager;
 		protected static bool? DevCheck(ItemSetInfo info, SortedSet<ItemGroup> itemGroups, SortedSet<string> endWords, SortedSet<string> searchWords) {
 			return null;
