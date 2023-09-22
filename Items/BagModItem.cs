@@ -23,45 +23,105 @@ namespace VacuumBags.Items
 			if (Main.netMode == NetmodeID.MultiplayerClient && player.whoAmI != Main.myPlayer)
 				return null;
 
-			IEnumerable<KeyValuePair<int, Item>> indexItemsPairs = StorageManager.GetItems(storageID).Select((Item item, int index) => new KeyValuePair<int, Item>(index, item)).Where(p => !p.Value.NullOrAir() && p.Value.stack > 0 && itemCondition(p.Value));
+			Item[] inv = StorageManager.GetItems(storageID);
+
+			//First Pass through
+			List<KeyValuePair<int, Item>> indexItemsPairs = new();
+			SortedSet<int> sortedItemTypes = new();
+			List<int> itemTypes = new();
+			for (int i = 0; i < inv.Length; i++) {
+				Item item = inv[i];
+				if (item.NullOrAir() || item.stack < 1)
+					continue;
+
+				if (!itemCondition(item))
+					continue;
+
+				if (!sortedItemTypes.Contains(item.type)) {
+					sortedItemTypes.Add(item.type);
+					itemTypes.Add(item.type);
+				}
+
+				indexItemsPairs.Add(new KeyValuePair<int, Item>(i, item));
+			}
+
 			if (!indexItemsPairs.Any())
 				return null;
 
-			int itemsCount = indexItemsPairs.Count();
+			int itemsCount = sortedItemTypes.Count;
 			if (firstXItems == FirstXItemsChooseAllItems || itemsCount <= firstXItems)
 				return indexItemsPairs;
 
 			//returnFunc is to minimize the effect of doesntCountTowardsTotal when it is null which is most calls.
 			//This call makes it do nothing when doesntCountTowardsTotal is null.
-			Func<IEnumerable<KeyValuePair<int, Item>>, IEnumerable<KeyValuePair<int, Item>>> returnFunc = (iIP) => iIP;
+			Func<IEnumerable<KeyValuePair<int, Item>>, SortedSet<int>, IEnumerable<KeyValuePair<int, Item>>> returnFunc = (iIP, chosen) => iIP.Where(p => chosen.Contains(p.Value.type));
 			if (doesntCountTowardsTotal != null) {
-				IEnumerable<KeyValuePair<int, Item>> itemsThatDontCount = indexItemsPairs.Where(p => doesntCountTowardsTotal(p.Value));
-				if (itemsThatDontCount.Any()) {
-					returnFunc = (iIP) => iIP.Concat(itemsThatDontCount);
+				List<KeyValuePair<int, Item>> pairsThatDontCount = new();
+				SortedSet<int> typesThatDontCount = new();
+				List<int> indexesToRemove = new();
 
-					indexItemsPairs = indexItemsPairs.Where(p => !doesntCountTowardsTotal(p.Value));
-					itemsCount = indexItemsPairs.Count();
+				for (int i = 0; i < indexItemsPairs.Count; i++) {
+					Item item = indexItemsPairs[i].Value;
+					if (doesntCountTowardsTotal(item)) {
+						typesThatDontCount.Add(item.type);
+						itemTypes.Remove(item.type);
+						sortedItemTypes.Remove(item.type);
+						indexesToRemove.Add(i);
+						pairsThatDontCount.Add(indexItemsPairs[i]);
+					}
+				}
 
+				for (int i = indexesToRemove.Count - 1; i >= 0; i--) {
+					indexItemsPairs.RemoveAt(indexesToRemove[i]);
+				}
+
+				if (typesThatDontCount.Count > 0) {
+					returnFunc = (iIP, chosen) => {
+						chosen.UnionWith(typesThatDontCount);
+						return iIP.Concat(pairsThatDontCount).Where(p => chosen.Contains(p.Value.type));
+					};
+
+					itemsCount = itemTypes.Count;
 					if (itemsCount <= firstXItems)
-						return returnFunc(indexItemsPairs);
+						return returnFunc(indexItemsPairs, sortedItemTypes);
 				}
 			}
-			
-			if (!indexItemsPairs.AnyFavoritedItem(doesntCountTowardsTotal))
-				return returnFunc(indexItemsPairs.Take(firstXItems));
 
-			IEnumerable<KeyValuePair<int, Item>> favoritedIndexItemsPairs = indexItemsPairs.Where(p => p.Value.favorited);
-			int favoritedItemsCount = favoritedIndexItemsPairs.Count();
+			//Favorited Items
+			SortedSet<int> sortedFavoritedTypes = new();
+			List<int> favoritedTypes = new();
+			for (int i = 0; i < indexItemsPairs.Count; i++) {
+				Item item = indexItemsPairs[i].Value;
+				if (item.favorited) {
+					if (!sortedFavoritedTypes.Contains(item.type)) {
+						sortedFavoritedTypes.Add(item.type);
+						favoritedTypes.Add(item.type);
+					}
+				}
+			}
+
+			if (sortedFavoritedTypes.Count < 1) {
+				SortedSet<int> chosenTypes = new(itemTypes.Take(firstXItems));
+				return returnFunc(indexItemsPairs, chosenTypes);
+			}
+
+			int favoritedItemsCount = sortedFavoritedTypes.Count;
 			if (favoritedItemsCount >= firstXItems) {
 				if (favoritedItemsCount == firstXItems) {
-					return returnFunc(favoritedIndexItemsPairs);
+					return returnFunc(indexItemsPairs, sortedFavoritedTypes);
 				}
 				else {
-					return returnFunc(favoritedIndexItemsPairs.Take(firstXItems));
+					SortedSet<int> chosenTypes = new(favoritedTypes.Take(firstXItems));
+					return returnFunc(indexItemsPairs, chosenTypes);
 				}
 			}
 
-			return returnFunc(favoritedIndexItemsPairs.Concat(indexItemsPairs.Where(p => !p.Value.favorited).Take(firstXItems - favoritedItemsCount)));
+			foreach (int favoritedItemType in sortedFavoritedTypes) {
+				itemTypes.Remove(favoritedItemType);
+			}
+
+			SortedSet<int> chosenTypes2 = new(sortedFavoritedTypes.Concat(itemTypes.Take(firstXItems - sortedFavoritedTypes.Count)));
+			return returnFunc(indexItemsPairs, chosenTypes2);
 		}
 		public const int FirstXItemsChooseAllItems = -1;
 		private static IEnumerable<Item> SelectAndGetItems(IEnumerable<KeyValuePair<int, Item>> indexItemsPairs, int storageID, int context, bool selectItems = true) {
