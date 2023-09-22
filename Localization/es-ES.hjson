@@ -1,49 +1,12 @@
 #
 Mods: {
 	VacuumBags: {
-		Config: {
-			BagEffectOptions: {
-				BannerBagNumberOfBannersInInventory: {
-					Label: Bolsa de pancartas Número de pancartas en el inventario
-					Tooltip:
-						'''
-						Cuando la bolsa de pancartas esté en su inventario, el primer número X de pancartas aplicará sus ventajas.
-						Favorecer uno o varios banners les da prioridad sobre los que no son favoritos.
-						Establezca en -1 para que todos los carteles en la bolsa otorguen sus beneficios.
-						'''
-				}
+		Configs: {
+			BagsClientConfig: {
+				BagStorageOptions: Opciones de almacenamiento de bolsas
+				DisplayName: Configuración del cliente
+				Logging: Inicio sesión
 
-				BannerBagNumberOfBannersWhenPlaced: {
-					Label: Bolsa de pancartas Número de pancartas cuando se colocan
-					Tooltip:
-						'''
-						Cuando la bolsa de pancartas se coloca en el mundo, el primer número X de pancartas aplicará sus ventajas.
-						Favorecer uno o varios carteles les da prioridad sobre los que no son favoritos. Establezca -1 para que todos los carteles de la bolsa otorguen sus beneficios.
-						'''
-				}
-
-				PortableStationNumberOfStationsInInventory: {
-					Label: Estación portátil Número de estaciones en el inventario
-					Tooltip:
-						'''
-						Cuando la estación portátil esté en su inventario, el primer número X de estaciones estará disponible para su elaboración.
-						Favorecer una estación o estaciones les da prioridad sobre las no favoritas.
-						Establézcalo en -1 para que todas las estaciones de la estación portátil estén disponibles para la elaboración.
-						'''
-				}
-
-				PortableStationNumberOfStationsWhenPlaced: {
-					Label: Estación portátil Número de estaciones cuando se colocan
-					Tooltip:
-						'''
-						Cuando la estación portátil se coloque en el mundo, el primer número X de estaciones estará disponible para su elaboración.
-						Favorecer una estación o estaciones les da prioridad sobre las no favoritas.
-						Establézcalo en -1 para que todas las estaciones de la estación portátil estén disponibles para la elaboración.
-						'''
-				}
-			}
-
-			BagStorageOptions: {
 				AllAmmoItemsGoIntoAmmoBag: {
 					Label: Todos los artículos de munición van en la bolsa de munición
 					Tooltip:
@@ -51,6 +14,38 @@ Mods: {
 						Si es cierto, todos los elementos que se utilicen como munición para cualquier cosa irán a la bolsa.
 						Si es falso, solo se permitirá la lista blanca de elementos de munición seleccionados, lo que excluye algunos elementos como las estrellas.
 						'''
+				}
+
+				AllOtherCreateTileItemsIntoBuildersBox: {
+					Label: Todos los demás crean elementos de mosaico en el cuadro de constructores
+					Tooltip:
+						'''
+						Cuando está activado, cada elemento que crea un mosaico cuando se usa se agregará a la lista blanca de Builder's Box si aún no está en la lista blanca de otra bolsa.
+						Se supone que esto atrapa la mayoría de los muebles, pero puede terminar arrastrando otros elementos que no están previstos.
+						'''
+				}
+
+				LogAllPlayerWhiteAndBlackLists: {
+					Label: Registrar todas las listas blancas y negras de jugadores
+					Tooltip:
+						'''
+						Si es verdadero, todas las listas blancas y negras de jugadores se registrarán en client.log.
+						Si realiza cambios en las listas blanca/negra que cree que deberían ser cambios estándar para todos, imprímalos y envíeme su client.log. -andro951
+						'''
+				}
+
+				PortableStationPassiveBuffsOnlyActiveIfFavorited: {
+					Label: Mejoras pasivas de estaciones portátiles solo activas si son favoritas
+					Tooltip:
+						'''
+						Si se seleccionan, solo las estaciones de beneficios favoritas proporcionarán sus beneficios.
+
+						'''
+				}
+
+				SilencePortableStationActiveBuffs: {
+					Label: Mejoras activas de la estación portátil Silence
+					Tooltip: Si se selecciona, la estación portátil no reproducirá ningún sonido cuando proporcione mejoras activas al abrir la estación.
 				}
 
 				SimpleBagStorageSize: {
@@ -73,14 +68,97 @@ Mods: {
 				}
 			}
 
-			Crafting: {
+			BagsServerConfig: {
+				BagEffectOptions: Opciones de efecto de bolsa
+				Crafting: Elaboración
+				DisplayName: Configuración del servidor
+
+				BannerBagNumberOfBannersInInventory: {
+					Label: Bolsa de pancartas Número de pancartas en el inventario
+					Tooltip:
+						'''
+						Cuando la bolsa de pancartas esté en su inventario, el primer número X de pancartas aplicará sus ventajas.
+						Favorecer uno o varios banners les da prioridad sobre los que no son favoritos.
+						Establezca en -1 para que todos los carteles en la bolsa otorguen sus beneficios.
+						'''
+				}
+
+				BannerBagNumberOfBannersWhenPlaced: {
+					Label: Bolsa de pancartas Número de pancartas cuando se colocan
+					Tooltip:
+						'''
+						Cuando la bolsa de pancartas se coloca en el mundo, el primer número X de pancartas aplicará sus ventajas.
+						Favorecer uno o varios carteles les da prioridad sobre los que no son favoritos. Establezca -1 para que todos los carteles de la bolsa otorguen sus beneficios.
+						'''
+				}
+
 				HarderBagRecipes: {
 					Label: Recetas de bolsas más duras
 					Tooltip: Hace que las recetas de la bolsa requieran más elementos y algunas sean más difíciles de conseguir.
 				}
-			}
 
-			// Logging: Log All Player White And Black Lists Header
+				PortableStationCanGiveHoneyBuff: {
+					Label: La estación portátil puede dar un efecto miel
+					Tooltip: Si se selecciona, la estación portátil puede otorgar el beneficio de miel.
+				}
+
+				PortableStationMustBeTouchedToGetHoneyBuff: {
+					Label: Se debe tocar la estación portátil para obtener Honey Buff
+					Tooltip:
+						'''
+						Si se selecciona, se otorgará el beneficio de miel si se toca la estación portátil si hay un cubo de miel en la estación.
+						Si no se selecciona, el beneficio de Miel se otorgará en un área de efecto alrededor de la estación portátil.
+						Si el cubo de miel ilimitado está en la estación, el área de efecto estará activa independientemente de esta opción.
+						'''
+				}
+
+				PortableStationNumberOfPassiveBuffStationsInInventory: {
+					Label: Estación portátil Número de estaciones de pulido pasivo en el inventario
+					Tooltip:
+						'''
+						Cuando la estación portátil esté en su inventario, las ventajas pasivas del primer número X de estaciones estarán activas.
+						Favorecer una estación o estaciones les da prioridad sobre las no favoritas.
+						Establezca en -1 para que todas las estaciones en la estación portátil brinden sus beneficios pasivos.
+						Las velas de paz, las velas de agua y las velas de sombra nunca estarán activas a menos que sean favoritas y no cuentan para el límite de beneficios.
+						'''
+				}
+
+				PortableStationNumberOfPassiveBuffStationsWhenPlaced: {
+					Label: Estación portátil Número de estaciones de pulido pasivas cuando se colocan
+					Tooltip:
+						'''
+						Cuando la estación portátil se coloque en el mundo, las ventajas pasivas del primer número X de estaciones estarán activas.
+						Favorecer una estación o estaciones les da prioridad sobre las no favoritas.
+						Establezca en -1 para que todas las estaciones en la estación portátil brinden sus beneficios pasivos.
+						Las velas de paz, las velas de agua y las velas de sombra nunca estarán activas a menos que sean favoritas y no cuentan para el límite de beneficios.
+						'''
+				}
+
+				PortableStationNumberOfStationsInInventory: {
+					Label: Estación portátil Número de estaciones en el inventario
+					Tooltip:
+						'''
+						Cuando la estación portátil esté en su inventario, el primer número X de estaciones estará disponible para su elaboración.
+						Favorecer una estación o estaciones les da prioridad sobre las no favoritas.
+						Establézcalo en -1 para que todas las estaciones de la estación portátil estén disponibles para la elaboración.
+						'''
+				}
+
+				PortableStationNumberOfStationsWhenPlaced: {
+					Label: Estación portátil Número de estaciones cuando se colocan
+					Tooltip:
+						'''
+						Cuando la estación portátil se coloque en el mundo, el primer número X de estaciones estará disponible para su elaboración.
+						Favorecer una estación o estaciones les da prioridad sobre las no favoritas.
+						Establézcalo en -1 para que todas las estaciones de la estación portátil estén disponibles para la elaboración.
+						'''
+				}
+
+				PortableStationsActivateActiveBuffsWhenOpened: {
+					Label: Las estaciones portátiles activan las mejoras activas cuando se abren
+					Tooltip: Si se selecciona, los beneficios de las estaciones que brindan beneficios cuando se interactúa con ellos darán sus beneficios.
+				}
+			}
 		}
 
 		Items: {
@@ -460,11 +538,17 @@ Mods: {
 					Almacena automáticamente estaciones de elaboración y estaciones de mejora.
 					Cuando esté en su inventario, el contenido de la estación estará disponible para su elaboración.
 					Haga clic derecho para abrir la estación.
-					Cuando está en su inventario, la estación portátil proporciona hasta 3 estaciones para crear de forma predeterminada cuando está en su inventario.
+					Cuando está en su inventario, la estación portátil proporciona hasta 1 estación para crear de forma predeterminada.
 					Cuando se coloca, proporciona todas las estaciones para la elaboración de forma predeterminada, pero en el rango de mosaicos normal. Cada Estación Portátil comparte su inventario.
 					El fondo de las estaciones es amarillo cuando la estación portátil las proporciona para su elaboración.
 					El fondo es morado si ya hay ese tipo de estación cerca, sin embargo, no omitirá automáticamente las estaciones cercanas al seleccionarlas.
-					estaciones de la estación portátil porque más no es necesariamente mejor al elaborar recetas. ya tienes el beneficio del banner de otra fuente.
+					estaciones de la estación portátil porque más no es necesariamente mejor al elaborar recetas.
+
+					Cuando está en su inventario, la estación portátil le proporciona hasta 1 mejora de estación de forma predeterminada.
+					Cuando se coloca, proporciona todas las ventajas de tu estación de mejora pasiva de forma predeterminada, pero en el rango de mejora normal.
+					Los elementos que proporcionan su beneficio serán de color verde brillante. Las mejoras que ya tengas de los mosaicos cercanos se omitirán y tendrán un fondo violeta.
+
+					Abrir la mesa mientras está colocada te hará interactuar con todas las estaciones de mejora activadas, lo que te permitirá obtener sus ventajas.
 					'''
 			}
 
@@ -506,131 +590,36 @@ Mods: {
 			}
 
 			OreBag: {
-				// Tooltip: ""
 				// DisplayName: Ore Bag
+				// Tooltip: ""
 			}
 		}
 
 		Tiles: {
-			// BagBlack.MapEntry: Bag Black
-			// BagBlue.MapEntry: Bag Blue
-			// BagBrown.MapEntry: Bag Brown
-			// BagGray.MapEntry: Bag Gray
-			// BagGreen.MapEntry: Bag Green
-			// BagOrange.MapEntry: Bag Orange
-			// BagPink.MapEntry: Bag Pink
-			// BagPurple.MapEntry: Bag Purple
-			// BagRed.MapEntry: Bag Red
-			// BagWhite.MapEntry: Bag White
-			// BagYellow.MapEntry: Bag Yellow
-			// BannerBag.MapEntry: Banner Bag
-			// PackBlack.MapEntry: Pack Black
-			// PackBlue.MapEntry: Pack Blue
-			// PackBrown.MapEntry: Pack Brown
-			// PackGray.MapEntry: Pack Gray
-			// PackGreen.MapEntry: Pack Green
-			// PackOrange.MapEntry: Pack Orange
-			// PackPink.MapEntry: Pack Pink
-			// PackPurple.MapEntry: Pack Purple
-			// PackRed.MapEntry: Pack Red
-			// PackWhite.MapEntry: Pack White
-			// PackYellow.MapEntry: Pack Yellow
 			// PortableStation.MapEntry: Portable Station
-		}
-
-		Configs: {
-			BagsClientConfig: {
-				// DisplayName: Bags Client Config
-
-				SimpleBagStorageSize: {
-					// Label: Simple Bag Storage Size
-					// Tooltip: ""
-				}
-
-				SimpleBagsVacuumAllItems: {
-					// Label: Simple Bags Vacuum All Items
-					// Tooltip: ""
-				}
-
-				AllAmmoItemsGoIntoAmmoBag: {
-					// Label: All Ammo Items Go Into Ammo Bag
-					// Tooltip: ""
-				}
-
-				LogAllPlayerWhiteAndBlackLists: {
-					// Label: Log All Player White And Black Lists
-					// Tooltip: ""
-				}
-
-				AllOtherCreateTileItemsIntoBuildersBox: {
-					// Label: All Other Create Tile Items Into Builders Box
-					// Tooltip: ""
-				}
-
-				PortableStationPassiveBuffsOnlyActiveIfFavorited: {
-					// Label: Portable Station Passive Buffs Only Active If Favorited
-					// Tooltip: ""
-				}
-			}
-
-			BagsServerConfig: {
-				// DisplayName: Bags Server Config
-
-				HarderBagRecipes: {
-					// Label: Harder Bag Recipes
-					// Tooltip: ""
-				}
-
-				BannerBagNumberOfBannersInInventory: {
-					// Label: Banner Bag Number Of Banners In Inventory
-					// Tooltip: ""
-				}
-
-				BannerBagNumberOfBannersWhenPlaced: {
-					// Label: Banner Bag Number Of Banners When Placed
-					// Tooltip: ""
-				}
-
-				PortableStationNumberOfStationsInInventory: {
-					// Label: Portable Station Number Of Stations In Inventory
-					// Tooltip: ""
-				}
-
-				PortableStationNumberOfStationsWhenPlaced: {
-					// Label: Portable Station Number Of Stations When Placed
-					// Tooltip: ""
-				}
-
-				PortableStationPassiveBuffsOnlyActiveIfFavorited: {
-					// Label: Portable Station Passive Buffs Only Active If Favorited
-					// Tooltip: ""
-				}
-
-				PortableStationNumberOfPassiveBuffStationsInInventory: {
-					// Label: Portable Station Number Of Passive Buff Stations In Inventory
-					// Tooltip: ""
-				}
-
-				PortableStationNumberOfPassiveBuffStationsWhenPlaced: {
-					// Label: Portable Station Number Of Passive Buff Stations When Placed
-					// Tooltip: ""
-				}
-
-				PortableStationsActivateActiveBuffsWhenOpened: {
-					// Label: Portable Stations Activate Active Buffs When Opened
-					// Tooltip: ""
-				}
-
-				PortableStationCanGiveHoneyBuff: {
-					// Label: Portable Station Can Give Honey Buff
-					// Tooltip: ""
-				}
-
-				POrtableStationMustBeTouchedToGetHoneyBuff: {
-					// Label: P Ortable Station Must Be Touched To Get Honey Buff
-					// Tooltip: ""
-				}
-			}
+			// PackYellow.MapEntry: Pack Yellow
+			// PackWhite.MapEntry: Pack White
+			// PackRed.MapEntry: Pack Red
+			// PackPurple.MapEntry: Pack Purple
+			// PackPink.MapEntry: Pack Pink
+			// PackOrange.MapEntry: Pack Orange
+			// PackGreen.MapEntry: Pack Green
+			// PackGray.MapEntry: Pack Gray
+			// PackBrown.MapEntry: Pack Brown
+			// PackBlue.MapEntry: Pack Blue
+			// PackBlack.MapEntry: Pack Black
+			// BannerBag.MapEntry: Banner Bag
+			// BagYellow.MapEntry: Bag Yellow
+			// BagWhite.MapEntry: Bag White
+			// BagRed.MapEntry: Bag Red
+			// BagPurple.MapEntry: Bag Purple
+			// BagPink.MapEntry: Bag Pink
+			// BagOrange.MapEntry: Bag Orange
+			// BagGreen.MapEntry: Bag Green
+			// BagGray.MapEntry: Bag Gray
+			// BagBrown.MapEntry: Bag Brown
+			// BagBlue.MapEntry: Bag Blue
+			// BagBlack.MapEntry: Bag Black
 		}
 	}
 }

@@ -1,49 +1,12 @@
 #
 Mods: {
 	VacuumBags: {
-		Config: {
-			BagEffectOptions: {
-				BannerBagNumberOfBannersInInventory: {
-					Label: Torba z banerem Liczba banerów w ekwipunku
-					Tooltip:
-						'''
-						Kiedy torba ze sztandarami znajdzie się w twoim ekwipunku, pierwsze X sztandarów zastosuje swoje wzmocnienia.
-						Faworyzowanie banera lub banerów daje im pierwszeństwo przed nieulubionymi.
-						Ustaw na -1 dla wszystkich sztandarów w torbie, aby zapewnić wzmocnienia.
-						'''
-				}
+		Configs: {
+			BagsClientConfig: {
+				BagStorageOptions: Opcje przechowywania toreb
+				DisplayName: Konfiguracja klienta
+				Logging: Logowanie
 
-				BannerBagNumberOfBannersWhenPlaced: {
-					Label: Torba z banerem Liczba banerów po umieszczeniu
-					Tooltip:
-						'''
-						Kiedy torba ze sztandarami zostanie umieszczona na świecie, pierwsze X sztandarów zastosuje swoje wzmocnienia.
-						Faworyzowanie banera lub banerów daje im pierwszeństwo przed nieulubionymi. Ustaw na -1 dla wszystkich banerów w worku, aby zapewnić premie.
-						'''
-				}
-
-				PortableStationNumberOfStationsInInventory: {
-					Label: Stacja przenośna Liczba stacji w magazynie
-					Tooltip:
-						'''
-						Gdy stacja przenośna znajdzie się w twoim ekwipunku, pierwsze X stacji będzie dostępnych do wytworzenia.
-						Dodanie stacji do ulubionych daje im pierwszeństwo przed stacjami, które nie zostały dodane do ulubionych.
-						Ustaw na -1, aby wszystkie stacje w Stacji Przenośnej były dostępne do wytwarzania.
-						'''
-				}
-
-				PortableStationNumberOfStationsWhenPlaced: {
-					Label: Stacja przenośna Liczba stacji po umieszczeniu
-					Tooltip:
-						'''
-						Kiedy stacja przenośna zostanie umieszczona na świecie, pierwsze X stacji będzie dostępnych do wytworzenia.
-						Dodanie stacji do ulubionych daje im pierwszeństwo przed stacjami, które nie zostały dodane do ulubionych.
-						Ustaw na -1, aby wszystkie stacje w Stacji Przenośnej były dostępne do wytwarzania.
-						'''
-				}
-			}
-
-			BagStorageOptions: {
 				AllAmmoItemsGoIntoAmmoBag: {
 					Label: Wszystkie elementy amunicji trafiają do torby z amunicją
 					Tooltip:
@@ -51,6 +14,38 @@ Mods: {
 						Jeśli to prawda, wszystkie przedmioty użyte jako amunicja do czegokolwiek trafią do torby.
 						Jeśli fałsz, dozwolona będzie tylko biała lista wybranych elementów amunicji, co wyklucza kilka elementów, takich jak gwiazdki.
 						'''
+				}
+
+				AllOtherCreateTileItemsIntoBuildersBox: {
+					Label: Wszystkie inne elementy Twórz płytki w pudełku konstruktora
+					Tooltip:
+						'''
+						Gdy ta opcja jest włączona, każdy przedmiot, który po użyciu tworzy płytkę, zostanie dodany do białej listy Pudełka Budowniczego, jeśli nie znajduje się już na białej liście innej torby.
+						Powinno to złapać większość mebli, ale może zakończyć się wciągnięciem innych przedmiotów, które nie są przeznaczone.
+						'''
+				}
+
+				LogAllPlayerWhiteAndBlackLists: {
+					Label: Zaloguj wszystkich białych i czarnych list graczy
+					Tooltip:
+						'''
+						Jeśli ma wartość true, wszystkie białe i czarne listy graczy będą rejestrowane w pliku client.log.
+						Jeśli dokonasz zmian na białych/czarnych listach, które Twoim zdaniem powinny być standardowymi zmianami dla wszystkich, wydrukuj je i wyślij mi swój plik Client.log. -andro951
+						'''
+				}
+
+				PortableStationPassiveBuffsOnlyActiveIfFavorited: {
+					Label: Pasywne wzmocnienia stacji przenośnej są aktywne tylko wtedy, gdy są ulubione
+					Tooltip:
+						'''
+						Jeśli ta opcja jest wybrana, tylko ulubione stacje wzmocnień będą zapewniać swoje wzmocnienia.
+
+						'''
+				}
+
+				SilencePortableStationActiveBuffs: {
+					Label: Aktywne wzmocnienia wyciszenia stacji przenośnej
+					Tooltip: Jeśli ta opcja zostanie wybrana, stacja przenośna nie będzie odtwarzać żadnych dźwięków, gdy po otwarciu stacji zapewni aktywne wzmocnienia.
 				}
 
 				SimpleBagStorageSize: {
@@ -73,14 +68,97 @@ Mods: {
 				}
 			}
 
-			Crafting: {
+			BagsServerConfig: {
+				BagEffectOptions: Opcje efektu torby
+				Crafting: Rzemiosło
+				DisplayName: Konfiguracja serwera
+
+				BannerBagNumberOfBannersInInventory: {
+					Label: Torba z banerem Liczba banerów w ekwipunku
+					Tooltip:
+						'''
+						Kiedy torba ze sztandarami znajdzie się w twoim ekwipunku, pierwsze X sztandarów zastosuje swoje wzmocnienia.
+						Faworyzowanie banera lub banerów daje im pierwszeństwo przed nieulubionymi.
+						Ustaw na -1 dla wszystkich sztandarów w torbie, aby zapewnić wzmocnienia.
+						'''
+				}
+
+				BannerBagNumberOfBannersWhenPlaced: {
+					Label: Torba z banerem Liczba banerów po umieszczeniu
+					Tooltip:
+						'''
+						Kiedy torba ze sztandarami zostanie umieszczona na świecie, pierwsze X sztandarów zastosuje swoje wzmocnienia.
+						Faworyzowanie banera lub banerów daje im pierwszeństwo przed nieulubionymi. Ustaw na -1 dla wszystkich banerów w worku, aby zapewnić premie.
+						'''
+				}
+
 				HarderBagRecipes: {
 					Label: Przepisy na trudniejsze torby
 					Tooltip: Sprawia, że przepisy na torby wymagają większej liczby elementów, a niektóre są trudniejsze do zdobycia.
 				}
-			}
 
-			// Logging: Log All Player White And Black Lists Header
+				PortableStationCanGiveHoneyBuff: {
+					Label: Przenośna stacja może dać miód
+					Tooltip: Jeśli zostanie wybrana, premia Miód może być nadawana przez stację przenośną.
+				}
+
+				PortableStationMustBeTouchedToGetHoneyBuff: {
+					Label: Aby uzyskać Honey Buff, należy dotknąć stacji przenośnej
+					Tooltip:
+						'''
+						Jeśli ta opcja zostanie wybrana, premia Miód zostanie przyznana po dotknięciu stacji przenośnej, jeśli na stacji znajduje się wiadro miodu.
+						Jeśli nie zostanie wybrane, wzmocnienie Miodowe zostanie przyznane w obszarze działania wokół Stacji Przenośnej.
+						Jeśli w stacji znajduje się wiadro miodu Unlimited, obszar działania będzie aktywny niezależnie od tej opcji.
+						'''
+				}
+
+				PortableStationNumberOfPassiveBuffStationsInInventory: {
+					Label: Stacja przenośna Liczba pasywnych stacji wzmacniających w ekwipunku
+					Tooltip:
+						'''
+						Gdy Stacja Przenośna będzie w Twoim ekwipunku, aktywne będą pasywne wzmocnienia z pierwszej X liczby stacji.
+						Dodanie stacji do ulubionych daje im pierwszeństwo przed stacjami, które nie zostały dodane do ulubionych.
+						Ustaw na -1 dla wszystkich stacji w Stacji Przenośnej, aby zapewnić ich pasywne wzmocnienia.
+						Świece Pokoju, Świece Wodne i Świece Cienia nie będą nigdy aktywne, chyba że zostaną dodane do ulubionych i nie wliczają się do limitu wzmocnienia.
+						'''
+				}
+
+				PortableStationNumberOfPassiveBuffStationsWhenPlaced: {
+					Label: Stacja przenośna Liczba pasywnych stacji wzmacniających po umieszczeniu
+					Tooltip:
+						'''
+						Kiedy Stacja Przenośna zostanie umieszczona na świecie, aktywne będą pasywne wzmocnienia z pierwszej X liczby stacji.
+						Dodanie stacji do ulubionych daje im pierwszeństwo przed stacjami, które nie zostały dodane do ulubionych.
+						Ustaw na -1 dla wszystkich stacji w Stacji Przenośnej, aby zapewnić ich pasywne wzmocnienia.
+						Świece Pokoju, Świece Wodne i Świece Cienia nie będą nigdy aktywne, chyba że zostaną dodane do ulubionych i nie wliczają się do limitu wzmocnienia.
+						'''
+				}
+
+				PortableStationNumberOfStationsInInventory: {
+					Label: Stacja przenośna Liczba stacji w magazynie
+					Tooltip:
+						'''
+						Gdy stacja przenośna znajdzie się w twoim ekwipunku, pierwsze X stacji będzie dostępnych do wytworzenia.
+						Dodanie stacji do ulubionych daje im pierwszeństwo przed stacjami, które nie zostały dodane do ulubionych.
+						Ustaw na -1, aby wszystkie stacje w Stacji Przenośnej były dostępne do wytwarzania.
+						'''
+				}
+
+				PortableStationNumberOfStationsWhenPlaced: {
+					Label: Stacja przenośna Liczba stacji po umieszczeniu
+					Tooltip:
+						'''
+						Kiedy stacja przenośna zostanie umieszczona na świecie, pierwsze X stacji będzie dostępnych do wytworzenia.
+						Dodanie stacji do ulubionych daje im pierwszeństwo przed stacjami, które nie zostały dodane do ulubionych.
+						Ustaw na -1, aby wszystkie stacje w Stacji Przenośnej były dostępne do wytwarzania.
+						'''
+				}
+
+				PortableStationsActivateActiveBuffsWhenOpened: {
+					Label: Stacje przenośne aktywują aktywne premie po otwarciu
+					Tooltip: Jeśli ta opcja jest wybrana, wzmocnienia ze stacji, które zapewniają wzmocnienia podczas interakcji, dadzą swoje wzmocnienia.
+				}
+			}
 		}
 
 		Items: {
@@ -460,11 +538,17 @@ Mods: {
 					Automatycznie przechowuje stacje rzemieślnicze i stacje wzmacniające.
 					Gdy zawartość stacji znajduje się w twoim ekwipunku, możesz ją wytworzyć.
 					Kliknij prawym przyciskiem myszy, aby otworzyć stację.
-					Stacja przenośna, znajdująca się w twoim ekwipunku, domyślnie przydziela do 3 stanowisk do wytwarzania, gdy znajduje się w twoim ekwipunku.
+					Stacja przenośna, znajdująca się w twoim ekwipunku, domyślnie zapewnia maksymalnie 1 stację do wytwarzania.
 					Po umieszczeniu domyślnie udostępnia wszystkie twoje stanowiska do wytwarzania, ale w normalnym zasięgu płytek. Każda stacja przenośna udostępnia swoje zasoby.
 					Tło stacji jest żółte, gdy są one udostępniane do tworzenia przez Stację Przenośną.
 					Tło jest fioletowe, jeśli w pobliżu znajduje się już stacja tego typu, jednak podczas wybierania stacje, w pobliżu których się znajdujesz, nie zostaną automatycznie pominięte
-					stacje ze Stacji Przenośnej, ponieważ więcej niekoniecznie znaczy lepiej w przypadku przepisów rzemieślniczych. masz już wzmocnienie sztandaru z innego źródła.
+					stacje ze Stacji Przenośnej, ponieważ więcej niekoniecznie znaczy lepiej w przypadku przepisów rzemieślniczych.
+
+					Stacja przenośna, znajdująca się w twoim ekwipunku, domyślnie zapewnia ci maksymalnie 1 wzmocnienie stacji.
+					Po umieszczeniu domyślnie zapewnia wszystkie twoje pasywne wzmocnienia stacji wzmocnień, ale w normalnym zakresie wzmocnień.
+					Przedmioty zapewniające wzmocnienie będą jasnozielone. Wzmocnienia, które już posiadasz z pobliskich pól, zostaną pominięte i będą miały fioletowe tło.
+
+					Otwarcie stołu podczas jego ustawiania spowoduje interakcję ze wszystkimi aktywowanymi stacjami wzmocnień, dzięki czemu zyskasz ich wzmocnienia.
 					'''
 			}
 
@@ -506,131 +590,36 @@ Mods: {
 			}
 
 			OreBag: {
-				// Tooltip: ""
 				// DisplayName: Ore Bag
+				// Tooltip: ""
 			}
 		}
 
 		Tiles: {
-			// BagBlack.MapEntry: Bag Black
-			// BagBlue.MapEntry: Bag Blue
-			// BagBrown.MapEntry: Bag Brown
-			// BagGray.MapEntry: Bag Gray
-			// BagGreen.MapEntry: Bag Green
-			// BagOrange.MapEntry: Bag Orange
-			// BagPink.MapEntry: Bag Pink
-			// BagPurple.MapEntry: Bag Purple
-			// BagRed.MapEntry: Bag Red
-			// BagWhite.MapEntry: Bag White
-			// BagYellow.MapEntry: Bag Yellow
-			// BannerBag.MapEntry: Banner Bag
-			// PackBlack.MapEntry: Pack Black
-			// PackBlue.MapEntry: Pack Blue
-			// PackBrown.MapEntry: Pack Brown
-			// PackGray.MapEntry: Pack Gray
-			// PackGreen.MapEntry: Pack Green
-			// PackOrange.MapEntry: Pack Orange
-			// PackPink.MapEntry: Pack Pink
-			// PackPurple.MapEntry: Pack Purple
-			// PackRed.MapEntry: Pack Red
-			// PackWhite.MapEntry: Pack White
-			// PackYellow.MapEntry: Pack Yellow
 			// PortableStation.MapEntry: Portable Station
-		}
-
-		Configs: {
-			BagsClientConfig: {
-				// DisplayName: Bags Client Config
-
-				SimpleBagStorageSize: {
-					// Label: Simple Bag Storage Size
-					// Tooltip: ""
-				}
-
-				SimpleBagsVacuumAllItems: {
-					// Label: Simple Bags Vacuum All Items
-					// Tooltip: ""
-				}
-
-				AllAmmoItemsGoIntoAmmoBag: {
-					// Label: All Ammo Items Go Into Ammo Bag
-					// Tooltip: ""
-				}
-
-				LogAllPlayerWhiteAndBlackLists: {
-					// Label: Log All Player White And Black Lists
-					// Tooltip: ""
-				}
-
-				AllOtherCreateTileItemsIntoBuildersBox: {
-					// Label: All Other Create Tile Items Into Builders Box
-					// Tooltip: ""
-				}
-
-				PortableStationPassiveBuffsOnlyActiveIfFavorited: {
-					// Label: Portable Station Passive Buffs Only Active If Favorited
-					// Tooltip: ""
-				}
-			}
-
-			BagsServerConfig: {
-				// DisplayName: Bags Server Config
-
-				HarderBagRecipes: {
-					// Label: Harder Bag Recipes
-					// Tooltip: ""
-				}
-
-				BannerBagNumberOfBannersInInventory: {
-					// Label: Banner Bag Number Of Banners In Inventory
-					// Tooltip: ""
-				}
-
-				BannerBagNumberOfBannersWhenPlaced: {
-					// Label: Banner Bag Number Of Banners When Placed
-					// Tooltip: ""
-				}
-
-				PortableStationNumberOfStationsInInventory: {
-					// Label: Portable Station Number Of Stations In Inventory
-					// Tooltip: ""
-				}
-
-				PortableStationNumberOfStationsWhenPlaced: {
-					// Label: Portable Station Number Of Stations When Placed
-					// Tooltip: ""
-				}
-
-				PortableStationPassiveBuffsOnlyActiveIfFavorited: {
-					// Label: Portable Station Passive Buffs Only Active If Favorited
-					// Tooltip: ""
-				}
-
-				PortableStationNumberOfPassiveBuffStationsInInventory: {
-					// Label: Portable Station Number Of Passive Buff Stations In Inventory
-					// Tooltip: ""
-				}
-
-				PortableStationNumberOfPassiveBuffStationsWhenPlaced: {
-					// Label: Portable Station Number Of Passive Buff Stations When Placed
-					// Tooltip: ""
-				}
-
-				PortableStationsActivateActiveBuffsWhenOpened: {
-					// Label: Portable Stations Activate Active Buffs When Opened
-					// Tooltip: ""
-				}
-
-				PortableStationCanGiveHoneyBuff: {
-					// Label: Portable Station Can Give Honey Buff
-					// Tooltip: ""
-				}
-
-				POrtableStationMustBeTouchedToGetHoneyBuff: {
-					// Label: P Ortable Station Must Be Touched To Get Honey Buff
-					// Tooltip: ""
-				}
-			}
+			// PackYellow.MapEntry: Pack Yellow
+			// PackWhite.MapEntry: Pack White
+			// PackRed.MapEntry: Pack Red
+			// PackPurple.MapEntry: Pack Purple
+			// PackPink.MapEntry: Pack Pink
+			// PackOrange.MapEntry: Pack Orange
+			// PackGreen.MapEntry: Pack Green
+			// PackGray.MapEntry: Pack Gray
+			// PackBrown.MapEntry: Pack Brown
+			// PackBlue.MapEntry: Pack Blue
+			// PackBlack.MapEntry: Pack Black
+			// BannerBag.MapEntry: Banner Bag
+			// BagYellow.MapEntry: Bag Yellow
+			// BagWhite.MapEntry: Bag White
+			// BagRed.MapEntry: Bag Red
+			// BagPurple.MapEntry: Bag Purple
+			// BagPink.MapEntry: Bag Pink
+			// BagOrange.MapEntry: Bag Orange
+			// BagGreen.MapEntry: Bag Green
+			// BagGray.MapEntry: Bag Gray
+			// BagBrown.MapEntry: Bag Brown
+			// BagBlue.MapEntry: Bag Blue
+			// BagBlack.MapEntry: Bag Black
 		}
 	}
 }

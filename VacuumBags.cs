@@ -26,7 +26,7 @@ namespace VacuumBags
 {
 	public class VacuumBags : Mod
 	{
-		public static string ModName = ModContent.GetInstance<VacuumBags>().Name;
+		public const string ModName = "VacuumBags";
 		public static BagsServerConfig serverConfig = ModContent.GetInstance<BagsServerConfig>();
 		public static BagsClientConfig clientConfig = ModContent.GetInstance<BagsClientConfig>();
 		public static Mod GadgetGalore;

@@ -13,12 +13,13 @@ namespace VacuumBags.Common.Configs
 {
 	public class BagsServerConfig : ModConfig
 	{
+		public const string ServerConfigName = "BagsServerConfig";
 		public override ConfigScope Mode => ConfigScope.ServerSide;
 
 		//Crafting
 		[JsonIgnore]
 		public const string CraftingHeaderKey = "Crafting";
-		[Header($"$Mods.VacuumBags.Config.{CraftingHeaderKey}")]
+		[Header($"$Mods.{VacuumBags.ModName}.{L_ID_Tags.Configs}.{ServerConfigName}.{CraftingHeaderKey}")]
 
 		[ReloadRequired]
 		[DefaultValue(false)]
@@ -29,7 +30,7 @@ namespace VacuumBags.Common.Configs
 		public const string BagEffectOptionsKey = "BagEffectOptions";
 		[JsonIgnore]
 		public const int BannerBagNumberOfBannersInInventoryDefault = 3;
-		[Header($"$Mods.VacuumBags.Config.{BagEffectOptionsKey}")]
+		[Header($"$Mods.{VacuumBags.ModName}.{L_ID_Tags.Configs}.{ServerConfigName}.{BagEffectOptionsKey}")]
 
 		[DefaultValue(BannerBagNumberOfBannersInInventoryDefault)]
 		[Range(BagModItem.FirstXItemsChooseAllItems, BagsClientConfig.BagsMaxStorageSize)]
@@ -70,12 +71,13 @@ namespace VacuumBags.Common.Configs
 	}
 
 	public class BagsClientConfig : ModConfig {
+		public const string ClientConfigName = "BagsClientConfig";
 		public override ConfigScope Mode => ConfigScope.ClientSide;
 
 		//Storage Options
 		[JsonIgnore]
 		public const string BagStorageOptionsKey = "BagStorageOptions";
-		[Header($"$Mods.VacuumBags.Config.{BagStorageOptionsKey}")]
+		[Header($"$Mods.{VacuumBags.ModName}.{L_ID_Tags.Configs}.{ClientConfigName}.{BagStorageOptionsKey}")]
 
 		[JsonIgnore]
 		public const int BagsMaxStorageSize = 10000;
@@ -106,7 +108,7 @@ namespace VacuumBags.Common.Configs
 		//Logging
 		[JsonIgnore]
 		public const string LoggingHeaderKey = "Logging";
-		[Header($"$Mods.VacuumBags.Config.{LoggingHeaderKey}")]
+		[Header($"$Mods.{VacuumBags.ModName}.{L_ID_Tags.Configs}.{ClientConfigName}.{LoggingHeaderKey}")]
 
 		[DefaultValue(false)]
 		[ReloadRequired]

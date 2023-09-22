@@ -1,49 +1,12 @@
 #
 Mods: {
 	VacuumBags: {
-		Config: {
-			BagEffectOptions: {
-				BannerBagNumberOfBannersInInventory: {
-					Label: Баннерная сумка Количество баннеров в инвентаре
-					Tooltip:
-						'''
-						Когда сумка с баннером находится в вашем инвентаре, первые X баннеров применят свои положительные эффекты.
-						Добавление баннера или баннеров в избранное дает им приоритет над неизбранными.
-						Установите значение -1 для всех баннеров в сумке, чтобы дать положительные эффекты.
-						'''
-				}
+		Configs: {
+			BagsClientConfig: {
+				BagStorageOptions: Варианты хранения сумок
+				DisplayName: Конфигурация клиента
+				Logging: Ведение журнала
 
-				BannerBagNumberOfBannersWhenPlaced: {
-					Label: Баннерный мешок Количество баннеров при размещении
-					Tooltip:
-						'''
-						Когда сумка с баннером размещается в мире, первые X баннеров применят свои положительные эффекты.
-						Добавление баннера или баннеров в избранное дает им приоритет над неизбранными. Установите значение -1 для всех баннеров в сумке, чтобы дать положительные эффекты.
-						'''
-				}
-
-				PortableStationNumberOfStationsInInventory: {
-					Label: Портативная станция Количество станций в инвентаре
-					Tooltip:
-						'''
-						Когда Портативная станция окажется в вашем инвентаре, первые X станций будут доступны для изготовления.
-						Добавление в избранное станции или станций дает им приоритет над не избранными.
-						Установите значение -1, чтобы все станции Портативной станции были доступны для крафта.
-						'''
-				}
-
-				PortableStationNumberOfStationsWhenPlaced: {
-					Label: Портативная станция Количество станций при размещении
-					Tooltip:
-						'''
-						Когда Портативная станция будет размещена в мире, первые X станций будут доступны для создания.
-						Добавление в избранное станции или станций дает им приоритет над не избранными.
-						Установите значение -1, чтобы все станции Портативной станции были доступны для крафта.
-						'''
-				}
-			}
-
-			BagStorageOptions: {
 				AllAmmoItemsGoIntoAmmoBag: {
 					Label: Все боеприпасы помещаются в сумку для боеприпасов.
 					Tooltip:
@@ -51,6 +14,38 @@ Mods: {
 						Если это правда, все предметы, которые используются в качестве боеприпасов для чего-либо, попадут в сумку.
 						Если установлено значение false, будут разрешены только выбранные элементы белого списка боеприпасов, исключая некоторые элементы, такие как звезды.
 						'''
+				}
+
+				AllOtherCreateTileItemsIntoBuildersBox: {
+					Label: Все остальные элементы создания плитки в поле Builders
+					Tooltip:
+						'''
+						Если эта опция включена, каждый предмет, который при использовании создает плитку, будет добавлен в белый список «Ящика строителя», если он еще не вошел в белый список другой сумки.
+						Предполагается, что он захватит большую часть мебели, но может в конечном итоге затянуть другие предметы, которые не предназначены.
+						'''
+				}
+
+				LogAllPlayerWhiteAndBlackLists: {
+					Label: Записывать все белые и черные списки игроков
+					Tooltip:
+						'''
+						Если установлено значение true, все белые и черные списки игроков будут записываться в файл client.log.
+						Если вы вносите изменения в белые/черные списки, которые, по вашему мнению, должны быть стандартными для всех, распечатайте их и пришлите мне свой файл client.log. -andro951
+						'''
+				}
+
+				PortableStationPassiveBuffsOnlyActiveIfFavorited: {
+					Label: Пассивные усиления портативной станции активны, только если они добавлены в избранное
+					Tooltip:
+						'''
+						Если этот флажок установлен, только избранные станции усиления будут предоставлять свои усиления.
+
+						'''
+				}
+
+				SilencePortableStationActiveBuffs: {
+					Label: Активные усиления портативной станции Silence
+					Tooltip: Если этот параметр выбран, портативная станция не будет воспроизводить никаких звуков, когда она дает активные усиления при открытии станции.
 				}
 
 				SimpleBagStorageSize: {
@@ -73,14 +68,97 @@ Mods: {
 				}
 			}
 
-			Crafting: {
+			BagsServerConfig: {
+				BagEffectOptions: Варианты эффекта сумки
+				Crafting: Крафт
+				DisplayName: Конфигурация сервера
+
+				BannerBagNumberOfBannersInInventory: {
+					Label: Баннерная сумка Количество баннеров в инвентаре
+					Tooltip:
+						'''
+						Когда сумка с баннером находится в вашем инвентаре, первые X баннеров применят свои положительные эффекты.
+						Добавление баннера или баннеров в избранное дает им приоритет над неизбранными.
+						Установите значение -1 для всех баннеров в сумке, чтобы дать положительные эффекты.
+						'''
+				}
+
+				BannerBagNumberOfBannersWhenPlaced: {
+					Label: Баннерный мешок Количество баннеров при размещении
+					Tooltip:
+						'''
+						Когда сумка с баннером размещается в мире, первые X баннеров применят свои положительные эффекты.
+						Добавление баннера или баннеров в избранное дает им приоритет над неизбранными. Установите значение -1 для всех баннеров в сумке, чтобы дать положительные эффекты.
+						'''
+				}
+
 				HarderBagRecipes: {
 					Label: Рецепты для более жестких пакетов
 					Tooltip: Рецепты сумок требуют больше предметов, а некоторые из них сложнее достать.
 				}
-			}
 
-			// Logging: Log All Player White And Black Lists Header
+				PortableStationCanGiveHoneyBuff: {
+					Label: Портативная станция может дать медовый эффект
+					Tooltip: Если выбрано, положительный эффект Меда может быть предоставлен Портативной станцией.
+				}
+
+				PortableStationMustBeTouchedToGetHoneyBuff: {
+					Label: Чтобы получить медовый бафф, нужно прикоснуться к портативной станции
+					Tooltip:
+						'''
+						Если выбран этот параметр, положительный эффект меда будет дан, если прикоснуться к портативной станции, если на станции есть ведро с медом.
+						Если этот параметр не выбран, бафф «Мёд» будет действовать в зоне действия вокруг портативной станции.
+						Если на станции находится ведро с безлимитным медом, область действия будет активна независимо от этой опции.
+						'''
+				}
+
+				PortableStationNumberOfPassiveBuffStationsInInventory: {
+					Label: Портативная станция Количество пассивных усиливающих станций в инвентаре
+					Tooltip:
+						'''
+						Когда Портативная станция находится в вашем инвентаре, пассивные усиления с первых X станций будут активны.
+						Добавление в избранное станции или станций дает им приоритет над не избранными.
+						Установите значение -1 для всех станций Портативной станции, чтобы дать пассивные усиления.
+						Свечи мира, водяные свечи и свечи теней никогда не будут активны, если они не добавлены в избранное, и не учитываются при расчете лимита усиления.
+						'''
+				}
+
+				PortableStationNumberOfPassiveBuffStationsWhenPlaced: {
+					Label: Портативная станция Количество пассивных бафф-станций при установке
+					Tooltip:
+						'''
+						Когда Портативная станция размещается в мире, пассивные усиления от первых X станций будут активны.
+						Добавление в избранное станции или станций дает им приоритет над не избранными.
+						Установите значение -1 для всех станций Портативной станции, чтобы дать пассивные усиления.
+						Свечи мира, водяные свечи и свечи теней никогда не будут активны, если они не добавлены в избранное, и не учитываются при расчете лимита усиления.
+						'''
+				}
+
+				PortableStationNumberOfStationsInInventory: {
+					Label: Портативная станция Количество станций в инвентаре
+					Tooltip:
+						'''
+						Когда Портативная станция окажется в вашем инвентаре, первые X станций будут доступны для изготовления.
+						Добавление в избранное станции или станций дает им приоритет над не избранными.
+						Установите значение -1, чтобы все станции Портативной станции были доступны для крафта.
+						'''
+				}
+
+				PortableStationNumberOfStationsWhenPlaced: {
+					Label: Портативная станция Количество станций при размещении
+					Tooltip:
+						'''
+						Когда Портативная станция будет размещена в мире, первые X станций будут доступны для создания.
+						Добавление в избранное станции или станций дает им приоритет над не избранными.
+						Установите значение -1, чтобы все станции Портативной станции были доступны для крафта.
+						'''
+				}
+
+				PortableStationsActivateActiveBuffsWhenOpened: {
+					Label: Портативные станции активируют активные усиления при открытии
+					Tooltip: Если этот параметр выбран, положительные эффекты от станций, которые дают положительные эффекты при взаимодействии с ними, дадут свои положительные эффекты.
+				}
+			}
 		}
 
 		Items: {
@@ -460,11 +538,17 @@ Mods: {
 					Автоматически сохраняет станции крафта и усиления.
 					Находясь в вашем инвентаре, содержимое станции доступно для крафта.
 					Щелкните правой кнопкой мыши, чтобы открыть станцию.
-					Находясь в вашем инвентаре, Портативная станция по умолчанию предоставляет до 3 станций для крафта.
+					В вашем инвентаре Портативная станция по умолчанию предоставляет до 1 станции для крафта.
 					При размещении он по умолчанию предоставляет все ваши станции для крафта, но в обычном диапазоне плиток. Каждая портативная станция имеет общий инвентарь.
 					Фон станций имеет желтый цвет, когда они предоставляются для создания Портативной станцией.
 					Фон фиолетовый, если поблизости уже есть станция такого типа, однако при выборе станции, находящиеся рядом с вами, не будут автоматически пропускаться.
-					станции с Портативной станции, потому что больше не обязательно лучше с рецептами крафта. у вас уже есть усиление баннера из другого источника.
+					станции с Портативной станции, потому что больше не обязательно лучше с рецептами крафта.
+
+					Находясь в вашем инвентаре, Портативная станция по умолчанию предоставляет вам до 1 усиления станции.
+					При размещении он по умолчанию обеспечивает все ваши пассивные усиления, но в обычном диапазоне усилений.
+					Предметы, дающие положительный эффект, будут ярко-зелеными. Усиления, которые у вас уже есть от соседних плиток, будут пропущены и будут иметь фиолетовый фон.
+
+					Открытие стола, пока он установлен, заставит вас взаимодействовать со всеми активирующими станциями усиления, в результате чего вы получите их усиления.
 					'''
 			}
 
@@ -506,131 +590,36 @@ Mods: {
 			}
 
 			OreBag: {
-				// Tooltip: ""
 				// DisplayName: Ore Bag
+				// Tooltip: ""
 			}
 		}
 
 		Tiles: {
-			// BagBlack.MapEntry: Bag Black
-			// BagBlue.MapEntry: Bag Blue
-			// BagBrown.MapEntry: Bag Brown
-			// BagGray.MapEntry: Bag Gray
-			// BagGreen.MapEntry: Bag Green
-			// BagOrange.MapEntry: Bag Orange
-			// BagPink.MapEntry: Bag Pink
-			// BagPurple.MapEntry: Bag Purple
-			// BagRed.MapEntry: Bag Red
-			// BagWhite.MapEntry: Bag White
-			// BagYellow.MapEntry: Bag Yellow
-			// BannerBag.MapEntry: Banner Bag
-			// PackBlack.MapEntry: Pack Black
-			// PackBlue.MapEntry: Pack Blue
-			// PackBrown.MapEntry: Pack Brown
-			// PackGray.MapEntry: Pack Gray
-			// PackGreen.MapEntry: Pack Green
-			// PackOrange.MapEntry: Pack Orange
-			// PackPink.MapEntry: Pack Pink
-			// PackPurple.MapEntry: Pack Purple
-			// PackRed.MapEntry: Pack Red
-			// PackWhite.MapEntry: Pack White
-			// PackYellow.MapEntry: Pack Yellow
 			// PortableStation.MapEntry: Portable Station
-		}
-
-		Configs: {
-			BagsClientConfig: {
-				// DisplayName: Bags Client Config
-
-				SimpleBagStorageSize: {
-					// Label: Simple Bag Storage Size
-					// Tooltip: ""
-				}
-
-				SimpleBagsVacuumAllItems: {
-					// Label: Simple Bags Vacuum All Items
-					// Tooltip: ""
-				}
-
-				AllAmmoItemsGoIntoAmmoBag: {
-					// Label: All Ammo Items Go Into Ammo Bag
-					// Tooltip: ""
-				}
-
-				LogAllPlayerWhiteAndBlackLists: {
-					// Label: Log All Player White And Black Lists
-					// Tooltip: ""
-				}
-
-				AllOtherCreateTileItemsIntoBuildersBox: {
-					// Label: All Other Create Tile Items Into Builders Box
-					// Tooltip: ""
-				}
-
-				PortableStationPassiveBuffsOnlyActiveIfFavorited: {
-					// Label: Portable Station Passive Buffs Only Active If Favorited
-					// Tooltip: ""
-				}
-			}
-
-			BagsServerConfig: {
-				// DisplayName: Bags Server Config
-
-				HarderBagRecipes: {
-					// Label: Harder Bag Recipes
-					// Tooltip: ""
-				}
-
-				BannerBagNumberOfBannersInInventory: {
-					// Label: Banner Bag Number Of Banners In Inventory
-					// Tooltip: ""
-				}
-
-				BannerBagNumberOfBannersWhenPlaced: {
-					// Label: Banner Bag Number Of Banners When Placed
-					// Tooltip: ""
-				}
-
-				PortableStationNumberOfStationsInInventory: {
-					// Label: Portable Station Number Of Stations In Inventory
-					// Tooltip: ""
-				}
-
-				PortableStationNumberOfStationsWhenPlaced: {
-					// Label: Portable Station Number Of Stations When Placed
-					// Tooltip: ""
-				}
-
-				PortableStationPassiveBuffsOnlyActiveIfFavorited: {
-					// Label: Portable Station Passive Buffs Only Active If Favorited
-					// Tooltip: ""
-				}
-
-				PortableStationNumberOfPassiveBuffStationsInInventory: {
-					// Label: Portable Station Number Of Passive Buff Stations In Inventory
-					// Tooltip: ""
-				}
-
-				PortableStationNumberOfPassiveBuffStationsWhenPlaced: {
-					// Label: Portable Station Number Of Passive Buff Stations When Placed
-					// Tooltip: ""
-				}
-
-				PortableStationsActivateActiveBuffsWhenOpened: {
-					// Label: Portable Stations Activate Active Buffs When Opened
-					// Tooltip: ""
-				}
-
-				PortableStationCanGiveHoneyBuff: {
-					// Label: Portable Station Can Give Honey Buff
-					// Tooltip: ""
-				}
-
-				POrtableStationMustBeTouchedToGetHoneyBuff: {
-					// Label: P Ortable Station Must Be Touched To Get Honey Buff
-					// Tooltip: ""
-				}
-			}
+			// PackYellow.MapEntry: Pack Yellow
+			// PackWhite.MapEntry: Pack White
+			// PackRed.MapEntry: Pack Red
+			// PackPurple.MapEntry: Pack Purple
+			// PackPink.MapEntry: Pack Pink
+			// PackOrange.MapEntry: Pack Orange
+			// PackGreen.MapEntry: Pack Green
+			// PackGray.MapEntry: Pack Gray
+			// PackBrown.MapEntry: Pack Brown
+			// PackBlue.MapEntry: Pack Blue
+			// PackBlack.MapEntry: Pack Black
+			// BannerBag.MapEntry: Banner Bag
+			// BagYellow.MapEntry: Bag Yellow
+			// BagWhite.MapEntry: Bag White
+			// BagRed.MapEntry: Bag Red
+			// BagPurple.MapEntry: Bag Purple
+			// BagPink.MapEntry: Bag Pink
+			// BagOrange.MapEntry: Bag Orange
+			// BagGreen.MapEntry: Bag Green
+			// BagGray.MapEntry: Bag Gray
+			// BagBrown.MapEntry: Bag Brown
+			// BagBlue.MapEntry: Bag Blue
+			// BagBlack.MapEntry: Bag Black
 		}
 	}
 }

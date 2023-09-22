@@ -315,7 +315,7 @@ namespace VacuumBags.Items
 			}
 		}
 
-		public ItemGroup itemGroup;
+		public ItemGroup itemGroup = ItemGroup.Coin;
 
 		public bool CheckItemGroup(SortedSet<ItemGroup> itemGroups) => itemGroups.Contains(ItemGroup);
 		public bool CheckItemGroup(ItemGroup itemGroup) => ItemGroup == itemGroup;
@@ -328,7 +328,7 @@ namespace VacuumBags.Items
 				return weapon.Value;
 			}
 		}
-		private bool? weapon;
+		private bool? weapon = null;
 		public bool Accessory {
 			get {
 				if (accessory == null)
@@ -337,7 +337,7 @@ namespace VacuumBags.Items
 				return accessory.Value;
 			}
 		}
-		private bool? accessory;
+		private bool? accessory = null;
 		public bool Armor {
 			get {
 				if (armor == null)
@@ -346,7 +346,7 @@ namespace VacuumBags.Items
 				return armor.Value;
 			}
 		}
-		private bool? armor;
+		private bool? armor = null;
 		public bool Tool {
 			get {
 				if (tool == null)
@@ -355,7 +355,7 @@ namespace VacuumBags.Items
 				return tool.Value;
 			}
 		}
-		private bool? tool;
+		private bool? tool = null;
 
 		public bool FishingPole {
 			get {
@@ -365,7 +365,7 @@ namespace VacuumBags.Items
 				return fishingPole.Value;
 			}
 		}
-		private bool? fishingPole;
+		private bool? fishingPole = null;
 
 		public bool Equipment {
 			get {
@@ -375,7 +375,7 @@ namespace VacuumBags.Items
 				return equipment.Value;
 			}
 		}
-		private bool? equipment;
+		private bool? equipment = null;
 		public bool Banner => Type.IsBannerItem();
 		public bool CreateTile => Item.createTile > -1;
 		public bool CreateWall => Item.createWall > -1;

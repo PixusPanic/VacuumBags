@@ -1,49 +1,12 @@
 #
 Mods: {
 	VacuumBags: {
-		Config: {
-			BagEffectOptions: {
-				BannerBagNumberOfBannersInInventory: {
-					Label: Banner Bag Number Of Banners In Inventory
-					Tooltip:
-						'''
-						When the Banner bag is in your inventory, the first X number of banners will apply their buffs.
-						Favoriting a banner or banners gives them priority over non-favorited ones.
-						Set to -1 for all banners in the bag to give their buffs.
-						'''
-				}
+		Configs: {
+			BagsClientConfig: {
+				BagStorageOptions: Bag Storage Options
+				DisplayName: Client Config
+				Logging: Logging
 
-				BannerBagNumberOfBannersWhenPlaced: {
-					Label: Banner Bag Number Of Banners When Placed
-					Tooltip:
-						'''
-						When the Banner bag is placed in the world, the first X number of banners will apply their buffs.
-						Favoriting a banner or banners gives them priority over non-favorited ones.Set to -1 for all banners in the bag to give their buffs.
-						'''
-				}
-
-				PortableStationNumberOfStationsInInventory: {
-					Label: Portable Station Number Of Stations In Inventory
-					Tooltip:
-						'''
-						When the Portable Station is in your inventory, the first X number of stations will be available for crafting.
-						Favoriting a station or stations gives them priority over non-favorited ones.
-						Set to -1 for all stations in the Portable Station to be available for crafting.
-						'''
-				}
-
-				PortableStationNumberOfStationsWhenPlaced: {
-					Label: Portable Station Number Of Stations When Placed
-					Tooltip:
-						'''
-						When the Portable Station is placed in the world, the first X number of stations will be available for crafting.
-						Favoriting a station or stations gives them priority over non-favorited ones.
-						Set to -1 for all stations in the Portable Station to be available for crafting.
-						'''
-				}
-			}
-
-			BagStorageOptions: {
 				AllAmmoItemsGoIntoAmmoBag: {
 					Label: All Ammo Items Go Into Ammo Bag
 					Tooltip:
@@ -51,6 +14,38 @@ Mods: {
 						If true, all items that are used as ammo for anything will go into the bag.
 						If false, only the selected ammo items whitelist will be allowed which excludes a few items like stars.
 						'''
+				}
+
+				AllOtherCreateTileItemsIntoBuildersBox: {
+					Label: All Other Create Tile Items Into Builders Box
+					Tooltip:
+						'''
+						When on, every item that creates a tile when used will be added to the Builder's Box whitelist if it does not already go into another bag's whitelist.
+						This is supposed to catch most furniture, but may end up pulling in other items that aren't intended.
+						'''
+				}
+
+				LogAllPlayerWhiteAndBlackLists: {
+					Label: Log All Player White And Black Lists
+					Tooltip:
+						'''
+						If true, all player white lists and black lists will be logged to the client.log.
+						If you make changes to the white/black lists that you think should be standard changes for everyone, please print them and send me your client.log. -andro951
+						'''
+				}
+
+				PortableStationPassiveBuffsOnlyActiveIfFavorited: {
+					Label: Portable Station Passive Buffs Only Active If Favorited
+					Tooltip:
+						'''
+						If selected, only favorited buff stations will provide their buffs.
+
+						'''
+				}
+
+				SilencePortableStationActiveBuffs: {
+					Label: Silence Portable Station Active Buffs
+					Tooltip: If selected, the Portable Station will not play any sounds when it provides active buffs on opening the station.
 				}
 
 				SimpleBagStorageSize: {
@@ -73,14 +68,97 @@ Mods: {
 				}
 			}
 
-			Crafting: {
+			BagsServerConfig: {
+				BagEffectOptions: Bag Effect Options
+				Crafting: Crafting
+				DisplayName: Server Config
+
+				BannerBagNumberOfBannersInInventory: {
+					Label: Banner Bag Number Of Banners In Inventory
+					Tooltip:
+						'''
+						When the Banner bag is in your inventory, the first X number of banners will apply their buffs.
+						Favoriting a banner or banners gives them priority over non-favorited ones.
+						Set to -1 for all banners in the bag to give their buffs.
+						'''
+				}
+
+				BannerBagNumberOfBannersWhenPlaced: {
+					Label: Banner Bag Number Of Banners When Placed
+					Tooltip:
+						'''
+						When the Banner bag is placed in the world, the first X number of banners will apply their buffs.
+						Favoriting a banner or banners gives them priority over non-favorited ones.Set to -1 for all banners in the bag to give their buffs.
+						'''
+				}
+
 				HarderBagRecipes: {
 					Label: Harder Bag Recipes
 					Tooltip: Makes the bag recipes require more items and some are more difficult to get.
 				}
-			}
 
-			Logging: Log All Player White And Black Lists Header
+				PortableStationCanGiveHoneyBuff: {
+					Label: Portable Station Can Give Honey Buff
+					Tooltip: If selected, the Honey buff is allowed to be given by the Portable Station.
+				}
+
+				PortableStationMustBeTouchedToGetHoneyBuff: {
+					Label: Portable Station Must Be Touched To Get Honey Buff
+					Tooltip:
+						'''
+						If selected, the Honey buff will be given if the Portable Station is touched if there is a bucket of honey in the station.
+						If not selected, the Honey buff will be given in an area of effect around the Portable Station.
+						If the Unlimited honey bucket is in the station, the area of effect will be active regardless of this option.
+						'''
+				}
+
+				PortableStationNumberOfPassiveBuffStationsInInventory: {
+					Label: Portable Station Number Of Passive Buff Stations In Inventory
+					Tooltip:
+						'''
+						When the Portable Station is in your inventory, the passive buffs from the first X number of stations will be active.
+						Favoriting a station or stations gives them priority over non-favorited ones.
+						Set to -1 for all stations in the Portable Station to give their passive buffs.
+						Peace Candles, Water candles and Shadow candles will not ever be active unless favorited and do not count towards the buff limit.
+						'''
+				}
+
+				PortableStationNumberOfPassiveBuffStationsWhenPlaced: {
+					Label: Portable Station Number Of Passive Buff Stations When Placed
+					Tooltip:
+						'''
+						When the Portable Station is placed in the world, the passive buffs from the first X number of stations will be active.
+						Favoriting a station or stations gives them priority over non-favorited ones.
+						Set to -1 for all stations in the Portable Station to give their passive buffs.
+						Peace Candles, Water candles and Shadow candles will not ever be active unless favorited and do not count towards the buff limit.
+						'''
+				}
+
+				PortableStationNumberOfStationsInInventory: {
+					Label: Portable Station Number Of Stations In Inventory
+					Tooltip:
+						'''
+						When the Portable Station is in your inventory, the first X number of stations will be available for crafting.
+						Favoriting a station or stations gives them priority over non-favorited ones.
+						Set to -1 for all stations in the Portable Station to be available for crafting.
+						'''
+				}
+
+				PortableStationNumberOfStationsWhenPlaced: {
+					Label: Portable Station Number Of Stations When Placed
+					Tooltip:
+						'''
+						When the Portable Station is placed in the world, the first X number of stations will be available for crafting.
+						Favoriting a station or stations gives them priority over non-favorited ones.
+						Set to -1 for all stations in the Portable Station to be available for crafting.
+						'''
+				}
+
+				PortableStationsActivateActiveBuffsWhenOpened: {
+					Label: Portable Stations Activate Active Buffs When Opened
+					Tooltip: If selected, the buffs from stations that provide buffs when interacted with will give their buffs.
+				}
+			}
 		}
 
 		Items: {
@@ -460,11 +538,17 @@ Mods: {
 					Automatically stores crafting stations and buff stations.
 					When in your inventory, the contents of the station are available for crafting.
 					Right click to open the station.
-					When in your inventory, the Portable Station provinces up to 3 station for crafting by default when in your inventory.
+					When in your inventory, the Portable Station provides up to 1 station for crafting by default.
 					When placed, it provides all of your stations for crafting by default, but in the normal tile range.  Each Portable Station shares it's inventory.
 					The background of stations is yellow when they are being provided for crafting by the Portable Station.
 					The background is purple if there is already that type of station nearby, however it will not automatically skip stations you are near when selecting
-					stations from the Portable Station because more is not necessarily better with crafting recipes. you already have the banner buff from another source.
+					stations from the Portable Station because more is not necessarily better with crafting recipes.
+
+					When in your inventory, the Portable station provides up to 1 buff station buffs to you by default.
+					When placed, it provides all of your passive buff station buffs by default, but in the normal buff range.
+					Items that are providing their buff will be bright green.  Buffs that you already have from nearby tiles will be skipped and have a purple background.
+
+					Opening the table while it is placed will make you interact with all of the activate buff stations, causing you to gain their buffs.
 					'''
 			}
 
@@ -506,131 +590,36 @@ Mods: {
 			}
 
 			OreBag: {
-				Tooltip: ""
 				DisplayName: Ore Bag
+				Tooltip: ""
 			}
 		}
 
 		Tiles: {
-			BagBlack.MapEntry: Bag Black
-			BagBlue.MapEntry: Bag Blue
-			BagBrown.MapEntry: Bag Brown
-			BagGray.MapEntry: Bag Gray
-			BagGreen.MapEntry: Bag Green
-			BagOrange.MapEntry: Bag Orange
-			BagPink.MapEntry: Bag Pink
-			BagPurple.MapEntry: Bag Purple
-			BagRed.MapEntry: Bag Red
-			BagWhite.MapEntry: Bag White
-			BagYellow.MapEntry: Bag Yellow
-			BannerBag.MapEntry: Banner Bag
-			PackBlack.MapEntry: Pack Black
-			PackBlue.MapEntry: Pack Blue
-			PackBrown.MapEntry: Pack Brown
-			PackGray.MapEntry: Pack Gray
-			PackGreen.MapEntry: Pack Green
-			PackOrange.MapEntry: Pack Orange
-			PackPink.MapEntry: Pack Pink
-			PackPurple.MapEntry: Pack Purple
-			PackRed.MapEntry: Pack Red
-			PackWhite.MapEntry: Pack White
-			PackYellow.MapEntry: Pack Yellow
 			PortableStation.MapEntry: Portable Station
-		}
-
-		Configs: {
-			BagsClientConfig: {
-				DisplayName: Bags Client Config
-
-				SimpleBagStorageSize: {
-					Label: Simple Bag Storage Size
-					Tooltip: ""
-				}
-
-				SimpleBagsVacuumAllItems: {
-					Label: Simple Bags Vacuum All Items
-					Tooltip: ""
-				}
-
-				AllAmmoItemsGoIntoAmmoBag: {
-					Label: All Ammo Items Go Into Ammo Bag
-					Tooltip: ""
-				}
-
-				LogAllPlayerWhiteAndBlackLists: {
-					Label: Log All Player White And Black Lists
-					Tooltip: ""
-				}
-
-				AllOtherCreateTileItemsIntoBuildersBox: {
-					Label: All Other Create Tile Items Into Builders Box
-					Tooltip: ""
-				}
-
-				PortableStationPassiveBuffsOnlyActiveIfFavorited: {
-					Label: Portable Station Passive Buffs Only Active If Favorited
-					Tooltip: ""
-				}
-			}
-
-			BagsServerConfig: {
-				DisplayName: Bags Server Config
-
-				HarderBagRecipes: {
-					Label: Harder Bag Recipes
-					Tooltip: ""
-				}
-
-				BannerBagNumberOfBannersInInventory: {
-					Label: Banner Bag Number Of Banners In Inventory
-					Tooltip: ""
-				}
-
-				BannerBagNumberOfBannersWhenPlaced: {
-					Label: Banner Bag Number Of Banners When Placed
-					Tooltip: ""
-				}
-
-				PortableStationNumberOfStationsInInventory: {
-					Label: Portable Station Number Of Stations In Inventory
-					Tooltip: ""
-				}
-
-				PortableStationNumberOfStationsWhenPlaced: {
-					Label: Portable Station Number Of Stations When Placed
-					Tooltip: ""
-				}
-
-				PortableStationPassiveBuffsOnlyActiveIfFavorited: {
-					Label: Portable Station Passive Buffs Only Active If Favorited
-					Tooltip: ""
-				}
-
-				PortableStationNumberOfPassiveBuffStationsInInventory: {
-					Label: Portable Station Number Of Passive Buff Stations In Inventory
-					Tooltip: ""
-				}
-
-				PortableStationNumberOfPassiveBuffStationsWhenPlaced: {
-					Label: Portable Station Number Of Passive Buff Stations When Placed
-					Tooltip: ""
-				}
-
-				PortableStationsActivateActiveBuffsWhenOpened: {
-					Label: Portable Stations Activate Active Buffs When Opened
-					Tooltip: ""
-				}
-
-				PortableStationCanGiveHoneyBuff: {
-					Label: Portable Station Can Give Honey Buff
-					Tooltip: ""
-				}
-
-				POrtableStationMustBeTouchedToGetHoneyBuff: {
-					Label: P Ortable Station Must Be Touched To Get Honey Buff
-					Tooltip: ""
-				}
-			}
+			PackYellow.MapEntry: Pack Yellow
+			PackWhite.MapEntry: Pack White
+			PackRed.MapEntry: Pack Red
+			PackPurple.MapEntry: Pack Purple
+			PackPink.MapEntry: Pack Pink
+			PackOrange.MapEntry: Pack Orange
+			PackGreen.MapEntry: Pack Green
+			PackGray.MapEntry: Pack Gray
+			PackBrown.MapEntry: Pack Brown
+			PackBlue.MapEntry: Pack Blue
+			PackBlack.MapEntry: Pack Black
+			BannerBag.MapEntry: Banner Bag
+			BagYellow.MapEntry: Bag Yellow
+			BagWhite.MapEntry: Bag White
+			BagRed.MapEntry: Bag Red
+			BagPurple.MapEntry: Bag Purple
+			BagPink.MapEntry: Bag Pink
+			BagOrange.MapEntry: Bag Orange
+			BagGreen.MapEntry: Bag Green
+			BagGray.MapEntry: Bag Gray
+			BagBrown.MapEntry: Bag Brown
+			BagBlue.MapEntry: Bag Blue
+			BagBlack.MapEntry: Bag Black
 		}
 	}
 }

@@ -16,6 +16,7 @@ using static VacuumBags.Common.Configs.BagsServerConfig;
 using static VacuumBags.Common.Configs.BagsClientConfig;
 using static VacuumBags.VacuumBags;
 using VacuumBags.Items;
+using VacuumBags.Common.Configs;
 
 namespace VacuumBags.Localization
 {
@@ -33,48 +34,12 @@ namespace VacuumBags.Localization
 						{ L_ID1.Items.ToString(), new(children: new() {
 							//Intentionally empty.  Filled automatically
 						}) },
-						{ L_ID1.Config.ToString(), new(children: new() {
-							{ CraftingHeaderKey, new(children: new() {
+						{ L_ID1.Configs.ToString(), new(children: new() {
+							{ nameof(BagsServerConfig), new(children: new() {
 								{ nameof(serverConfig.HarderBagRecipes), new(dict: new() {
 									{ L_ID3.Label.ToString(), "Harder Bag Recipes" },
 									{ L_ID3.Tooltip.ToString(), "Makes the bag recipes require more items and some are more difficult to get." }
 								}) },
-							}) },
-							{ BagStorageOptionsKey, new(children: new() {
-								{ nameof(clientConfig.SimpleBagStorageSize), new(dict: new() {
-									{ L_ID3.Label.ToString(), "Simple Bag Storage Size" },
-									{ L_ID3.Tooltip.ToString(), 
-										"The number of slots in the simple bag storage.\n" +
-										"If this option is used while the player has more items in their bag, the bag size will be reduced to the number of items still in the bag.\n" +
-										"Setting this number very high could cause lag or possibly a crash from using too much memory if you don't have much RAM.  Use at your own risk." }
-								}) },
-								{ nameof(clientConfig.SimpleBagsVacuumAllItems), new(dict: new() {
-									{ L_ID3.Label.ToString(), "Simple Bags Vacuum All Items" },
-									{ L_ID3.Tooltip.ToString(), 
-										"If true, all items will be vacuumed into the simple bags.\n" +
-										"If false, only items that are the same type as an item in the bag will be vacuumed."  }
-								}) },
-								{ nameof(clientConfig.AllAmmoItemsGoIntoAmmoBag), new(dict: new() {
-									{ L_ID3.Label.ToString(), nameof(clientConfig.AllAmmoItemsGoIntoAmmoBag).AddSpaces() },
-									{ L_ID3.Tooltip.ToString(), 
-										"If true, all items that are used as ammo for anything will go into the bag.\n" +
-										"If false, only the selected ammo items whitelist will be allowed which excludes a few items like stars." }
-								}) },
-								{ nameof(clientConfig.AllOtherCreateTileItemsIntoBuildersBox), new(dict: new() {
-									{ L_ID3.Label.ToString(), nameof(clientConfig.AllOtherCreateTileItemsIntoBuildersBox).AddSpaces() },
-									{ L_ID3.Tooltip.ToString(), "When on, every item that creates a tile when used will be added to the Builder's Box whitelist if it does not already go into another bag's whitelist.\n" +
-										"This is supposed to catch most furniture, but may end up pulling in other items that aren't intended." }
-								}) },
-								{ nameof(clientConfig.PortableStationPassiveBuffsOnlyActiveIfFavorited), new(dict: new() {
-									{ L_ID3.Label.ToString(), nameof(clientConfig.PortableStationPassiveBuffsOnlyActiveIfFavorited).AddSpaces() },
-									{ L_ID3.Tooltip.ToString(), "If selected, only favorited buff stations will provide their buffs.\n" }
-								}) },
-								{ nameof(clientConfig.SilencePortableStationActiveBuffs), new(dict: new() {
-									{ L_ID3.Label.ToString(), nameof(clientConfig.SilencePortableStationActiveBuffs).AddSpaces() },
-									{ L_ID3.Tooltip.ToString(), "If selected, the Portable Station will not play any sounds when it provides active buffs on opening the station." }
-								}) },
-							}) },
-							{ BagEffectOptionsKey, new(children: new() {
 								{ nameof(serverConfig.BannerBagNumberOfBannersInInventory), new(dict: new() {
 									{ L_ID3.Label.ToString(), nameof(serverConfig.BannerBagNumberOfBannersInInventory).AddSpaces() },
 									{ L_ID3.Tooltip.ToString(), "When the Banner bag is in your inventory, the first X number of banners will apply their buffs.\n" +
@@ -127,25 +92,56 @@ namespace VacuumBags.Localization
 										"If not selected, the Honey buff will be given in an area of effect around the Portable Station.\n" +
 										"If the Unlimited honey bucket is in the station, the area of effect will be active regardless of this option." }
 								}) },
-								//{ nameof(serverConfig.), new(dict: new() {
-								//}) },
+							},
+							dict: new() {
+								{ L_ID2.DisplayName.ToString(), "Server Config" },
+								{ CraftingHeaderKey, CraftingHeaderKey.AddSpaces() },
+								{ BagEffectOptionsKey, BagEffectOptionsKey.AddSpaces() },
 							}) },
-							{ LoggingHeaderKey, new(children: new() {
+							{ nameof(BagsClientConfig), new(children: new() {
+								{ nameof(clientConfig.SimpleBagStorageSize), new(dict: new() {
+									{ L_ID3.Label.ToString(), "Simple Bag Storage Size" },
+									{ L_ID3.Tooltip.ToString(),
+										"The number of slots in the simple bag storage.\n" +
+										"If this option is used while the player has more items in their bag, the bag size will be reduced to the number of items still in the bag.\n" +
+										"Setting this number very high could cause lag or possibly a crash from using too much memory if you don't have much RAM.  Use at your own risk." }
+								}) },
+								{ nameof(clientConfig.SimpleBagsVacuumAllItems), new(dict: new() {
+									{ L_ID3.Label.ToString(), "Simple Bags Vacuum All Items" },
+									{ L_ID3.Tooltip.ToString(),
+										"If true, all items will be vacuumed into the simple bags.\n" +
+										"If false, only items that are the same type as an item in the bag will be vacuumed."  }
+								}) },
+								{ nameof(clientConfig.AllAmmoItemsGoIntoAmmoBag), new(dict: new() {
+									{ L_ID3.Label.ToString(), nameof(clientConfig.AllAmmoItemsGoIntoAmmoBag).AddSpaces() },
+									{ L_ID3.Tooltip.ToString(),
+										"If true, all items that are used as ammo for anything will go into the bag.\n" +
+										"If false, only the selected ammo items whitelist will be allowed which excludes a few items like stars." }
+								}) },
+								{ nameof(clientConfig.AllOtherCreateTileItemsIntoBuildersBox), new(dict: new() {
+									{ L_ID3.Label.ToString(), nameof(clientConfig.AllOtherCreateTileItemsIntoBuildersBox).AddSpaces() },
+									{ L_ID3.Tooltip.ToString(), "When on, every item that creates a tile when used will be added to the Builder's Box whitelist if it does not already go into another bag's whitelist.\n" +
+										"This is supposed to catch most furniture, but may end up pulling in other items that aren't intended." }
+								}) },
+								{ nameof(clientConfig.PortableStationPassiveBuffsOnlyActiveIfFavorited), new(dict: new() {
+									{ L_ID3.Label.ToString(), nameof(clientConfig.PortableStationPassiveBuffsOnlyActiveIfFavorited).AddSpaces() },
+									{ L_ID3.Tooltip.ToString(), "If selected, only favorited buff stations will provide their buffs.\n" }
+								}) },
+								{ nameof(clientConfig.SilencePortableStationActiveBuffs), new(dict: new() {
+									{ L_ID3.Label.ToString(), nameof(clientConfig.SilencePortableStationActiveBuffs).AddSpaces() },
+									{ L_ID3.Tooltip.ToString(), "If selected, the Portable Station will not play any sounds when it provides active buffs on opening the station." }
+								}) },
 								{ nameof(clientConfig.LogAllPlayerWhiteAndBlackLists), new(dict: new() {
 									{ L_ID3.Label.ToString(), nameof(clientConfig.LogAllPlayerWhiteAndBlackLists).AddSpaces() },
 									{ L_ID3.Tooltip.ToString(), "If true, all player white lists and black lists will be logged to the client.log.\n" +
 										"If you make changes to the white/black lists that you think should be standard changes for everyone, please print them and send me your client.log. -andro951" }
 								}) },
+							},
+							dict: new() {
+								{ L_ID2.DisplayName.ToString(), "Client Config" },
+								{ BagStorageOptionsKey, BagStorageOptionsKey.AddSpaces() },
+								{ LoggingHeaderKey, LoggingHeaderKey.AddSpaces() },
 							}) },
-						}, dict: new() {
-							{ CraftingHeaderKey, CraftingHeaderKey.AddSpaces() },
-							{ BagStorageOptionsKey, BagStorageOptionsKey.AddSpaces() },
-							{ BagEffectOptionsKey, BagEffectOptionsKey.AddSpaces() },
-							{ LoggingHeaderKey, LoggingHeaderKey.AddSpaces() },
-							/*,
-							{ "", "" },
-							{ "", "" },
-							*/
 						}) }
 					};
 

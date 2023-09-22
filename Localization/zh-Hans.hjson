@@ -1,8 +1,78 @@
 #
 Mods: {
 	VacuumBags: {
-		Config: {
-			BagEffectOptions: {
+		Configs: {
+			BagsClientConfig: {
+				BagStorageOptions: 行李存放选项
+				DisplayName: 客户端配置
+				Logging: 记录
+
+				AllAmmoItemsGoIntoAmmoBag: {
+					Label: 所有弹药物品都放入弹药袋中
+					Tooltip:
+						'''
+						如果为真，则所有用作弹药的物品都将放入包中。
+						如果为 false，则仅允许选定的弹药项目白名单，其中排除了一些项目，例如星星。
+						'''
+				}
+
+				AllOtherCreateTileItemsIntoBuildersBox: {
+					Label: 所有其他创建图块项目到构建器框中
+					Tooltip:
+						'''
+						启用后，如果每个使用时创建图块的物品尚未进入另一个包的白名单，则该物品将被添加到建筑箱白名单中。
+						这应该可以抓住大多数家具，但最终可能会拉入其他不想要的物品。
+						'''
+				}
+
+				LogAllPlayerWhiteAndBlackLists: {
+					Label: 记录所有玩家白名单和黑名单
+					Tooltip:
+						'''
+						如果为 true，所有玩家白名单和黑名单都将记录到 client.log 中。
+						如果您对白/黑名单进行了更改，并且您认为这些更改应该是每个人的标准更改，请打印它们并向我发送您的 client.log。 -andro951
+						'''
+				}
+
+				PortableStationPassiveBuffsOnlyActiveIfFavorited: {
+					Label: 便携式站被动增益仅在收藏时才激活
+					Tooltip:
+						'''
+						如果选择，则只有喜爱的增益站才会提供其增益。
+
+						'''
+				}
+
+				SilencePortableStationActiveBuffs: {
+					Label: 静音便携式电台活跃增益
+					Tooltip: 如果选择此选项，则便携式工作站在打开工作站时提供活动增益时将不会播放任何声音。
+				}
+
+				SimpleBagStorageSize: {
+					Label: 简易包收纳尺寸
+					Tooltip:
+						'''
+						简单包存储中的插槽数量。
+						如果在玩家的包中有更多物品时使用此选项，则包的大小将减少到包中仍包含的物品数量。
+						如果您没有太多 RAM，将此数字设置得太高可能会导致延迟，甚至可能因使用过多内存而崩溃。 使用风险自负。
+						'''
+				}
+
+				SimpleBagsVacuumAllItems: {
+					Label: Simple Bags 可吸尘所有物品
+					Tooltip:
+						'''
+						如果属实，所有物品都将被吸尘到简易袋中。
+						如果为 false，则只有与袋子中的物品类型相同的物品才会被吸尘。
+						'''
+				}
+			}
+
+			BagsServerConfig: {
+				BagEffectOptions: 袋子效果选项
+				Crafting: 制作
+				DisplayName: 服务器配置
+
 				BannerBagNumberOfBannersInInventory: {
 					Label: 横幅袋 库存横幅数量
 					Tooltip:
@@ -19,6 +89,48 @@ Mods: {
 						'''
 						当横幅包被放置在世界中时，前 X 个横幅将应用它们的增益。
 						收藏一个或多个横幅后，它们的优先级高于未收藏的横幅。将包中的所有横幅设置为 -1 以给予其增益。
+						'''
+				}
+
+				HarderBagRecipes: {
+					Label: 较硬的袋子食谱
+					Tooltip: 使得袋子配方需要更多的物品，并且有些更难获得。
+				}
+
+				PortableStationCanGiveHoneyBuff: {
+					Label: 便携式站可以提供蜂蜜增益
+					Tooltip: 如果选择，则允许便携式站提供蜂蜜增益。
+				}
+
+				PortableStationMustBeTouchedToGetHoneyBuff: {
+					Label: 必须触摸便携式站才能获得蜂蜜增益
+					Tooltip:
+						'''
+						如果选择，如果便携式站中有一桶蜂蜜，则触摸便携式站时将给予蜂蜜增益。
+						如果未选择，蜂蜜增益将在便携式站周围的效果区域内提供。
+						如果无限蜜桶位于空间站中，则无论此选项如何，效果区域都将处于活动状态。
+						'''
+				}
+
+				PortableStationNumberOfPassiveBuffStationsInInventory: {
+					Label: 便携式站库存中被动增益站数量
+					Tooltip:
+						'''
+						当便携式站位于您的库存中时，前 X 个站的被动增益将处于活动状态。
+						收藏一个或多个电台使其优先于未收藏的电台。
+						将便携式工作站中的所有工作站设置为 -1 以提供被动增益。
+						和平蜡烛、水蜡烛和暗影蜡烛除非被收藏，否则永远不会激活，并且不计入增益限制。
+						'''
+				}
+
+				PortableStationNumberOfPassiveBuffStationsWhenPlaced: {
+					Label: 便携式站放置时被动增益站的数量
+					Tooltip:
+						'''
+						当便携式站放置在世界中时，前 X 个站的被动增益将被激活。
+						收藏一个或多个电台使其优先于未收藏的电台。
+						将便携式工作站中的所有工作站设置为 -1 以提供被动增益。
+						和平蜡烛、水蜡烛和暗影蜡烛除非被收藏，否则永远不会激活，并且不计入增益限制。
 						'''
 				}
 
@@ -41,46 +153,12 @@ Mods: {
 						将便携式工作站中的所有工作站设置为 -1 即可用于制作。
 						'''
 				}
-			}
 
-			BagStorageOptions: {
-				AllAmmoItemsGoIntoAmmoBag: {
-					Label: 所有弹药物品都放入弹药袋中
-					Tooltip:
-						'''
-						如果为真，则所有用作弹药的物品都将放入包中。
-						如果为 错误的，则仅允许选定的弹药项目白名单，其中排除了一些项目，例如星星。
-						'''
-				}
-
-				SimpleBagStorageSize: {
-					Label: 简易包收纳尺寸
-					Tooltip:
-						'''
-						简单包存储中的插槽数量。
-						如果在玩家的包中有更多物品时使用此选项，则包的大小将减少到包中仍包含的物品数量。
-						如果您没有太多 RAM，将此数字设置得太高可能会导致延迟，甚至可能因使用过多内存而崩溃。 使用风险自负。
-						'''
-				}
-
-				SimpleBagsVacuumAllItems: {
-					Label: 简单的包包 可吸尘所有物品
-					Tooltip:
-						'''
-						如果属实，所有物品都将被吸尘到简易袋中。
-						如果为 错误的，则只有与袋子中的物品类型相同的物品才会被吸尘。
-						'''
+				PortableStationsActivateActiveBuffsWhenOpened: {
+					Label: 便携式工作站打开时会激活主动增益
+					Tooltip: 如果选择，来自提供 爱好者 的站的 爱好者 在互动时将给予他们的 爱好者。
 				}
 			}
-
-			Crafting: {
-				HarderBagRecipes: {
-					Label: 较硬的袋子食谱
-					Tooltip: 使得袋子配方需要更多的物品，并且有些更难获得。
-				}
-			}
-
-			// Logging: Log All Player White And Black Lists Header
 		}
 
 		Items: {
@@ -460,11 +538,17 @@ Mods: {
 					自动存储制作站和抛光站。
 					当您在库存中时，空间站的内容可用于制作。
 					右键单击打开电台。
-					在您的库存中时，便携式工作站默认最多可容纳 3 个工作站用于制作。
+					在您的库存中，便携式工作站默认提供最多 1 个用于制作的工作站。
 					放置后，它默认提供所有用于制作的工作站，但在正常的图块范围内。 每个便携式工作站共享其库存。
 					当便携式工作站提供用于制作时，工作站的背景为黄色。
 					如果附近已有该类型的电台，则背景为紫色，但选择时不会自动跳过您附近的电台
-					来自便携式工作站的工作站，因为制作配方越多并不一定越好。 你已经从其他来源获得了横幅增益。
+					来自便携式工作站的工作站，因为制作配方越多并不一定越好。
+
+					当您在库存中时，便携式站默认为您提供最多 1 个增益站增益。
+					放置后，它默认提供所有被动增益站增益，但在正常增益范围内。
+					提供增益效果的物品将呈亮绿色。 您已经从附近的图块获得的增益将被跳过并具有紫色背景。
+
+					在放置桌子时打开桌子将使您与所有激活的增益站互动，从而获得它们的增益。
 					'''
 			}
 
@@ -506,131 +590,36 @@ Mods: {
 			}
 
 			OreBag: {
-				// Tooltip: ""
 				// DisplayName: Ore Bag
+				// Tooltip: ""
 			}
 		}
 
 		Tiles: {
-			// BagBlack.MapEntry: Bag Black
-			// BagBlue.MapEntry: Bag Blue
-			// BagBrown.MapEntry: Bag Brown
-			// BagGray.MapEntry: Bag Gray
-			// BagGreen.MapEntry: Bag Green
-			// BagOrange.MapEntry: Bag Orange
-			// BagPink.MapEntry: Bag Pink
-			// BagPurple.MapEntry: Bag Purple
-			// BagRed.MapEntry: Bag Red
-			// BagWhite.MapEntry: Bag White
-			// BagYellow.MapEntry: Bag Yellow
-			// BannerBag.MapEntry: Banner Bag
-			// PackBlack.MapEntry: Pack Black
-			// PackBlue.MapEntry: Pack Blue
-			// PackBrown.MapEntry: Pack Brown
-			// PackGray.MapEntry: Pack Gray
-			// PackGreen.MapEntry: Pack Green
-			// PackOrange.MapEntry: Pack Orange
-			// PackPink.MapEntry: Pack Pink
-			// PackPurple.MapEntry: Pack Purple
-			// PackRed.MapEntry: Pack Red
-			// PackWhite.MapEntry: Pack White
-			// PackYellow.MapEntry: Pack Yellow
 			// PortableStation.MapEntry: Portable Station
-		}
-
-		Configs: {
-			BagsClientConfig: {
-				// DisplayName: Bags Client Config
-
-				SimpleBagStorageSize: {
-					// Label: Simple Bag Storage Size
-					// Tooltip: ""
-				}
-
-				SimpleBagsVacuumAllItems: {
-					// Label: Simple Bags Vacuum All Items
-					// Tooltip: ""
-				}
-
-				AllAmmoItemsGoIntoAmmoBag: {
-					// Label: All Ammo Items Go Into Ammo Bag
-					// Tooltip: ""
-				}
-
-				LogAllPlayerWhiteAndBlackLists: {
-					// Label: Log All Player White And Black Lists
-					// Tooltip: ""
-				}
-
-				AllOtherCreateTileItemsIntoBuildersBox: {
-					// Label: All Other Create Tile Items Into Builders Box
-					// Tooltip: ""
-				}
-
-				PortableStationPassiveBuffsOnlyActiveIfFavorited: {
-					// Label: Portable Station Passive Buffs Only Active If Favorited
-					// Tooltip: ""
-				}
-			}
-
-			BagsServerConfig: {
-				// DisplayName: Bags Server Config
-
-				HarderBagRecipes: {
-					// Label: Harder Bag Recipes
-					// Tooltip: ""
-				}
-
-				BannerBagNumberOfBannersInInventory: {
-					// Label: Banner Bag Number Of Banners In Inventory
-					// Tooltip: ""
-				}
-
-				BannerBagNumberOfBannersWhenPlaced: {
-					// Label: Banner Bag Number Of Banners When Placed
-					// Tooltip: ""
-				}
-
-				PortableStationNumberOfStationsInInventory: {
-					// Label: Portable Station Number Of Stations In Inventory
-					// Tooltip: ""
-				}
-
-				PortableStationNumberOfStationsWhenPlaced: {
-					// Label: Portable Station Number Of Stations When Placed
-					// Tooltip: ""
-				}
-
-				PortableStationPassiveBuffsOnlyActiveIfFavorited: {
-					// Label: Portable Station Passive Buffs Only Active If Favorited
-					// Tooltip: ""
-				}
-
-				PortableStationNumberOfPassiveBuffStationsInInventory: {
-					// Label: Portable Station Number Of Passive Buff Stations In Inventory
-					// Tooltip: ""
-				}
-
-				PortableStationNumberOfPassiveBuffStationsWhenPlaced: {
-					// Label: Portable Station Number Of Passive Buff Stations When Placed
-					// Tooltip: ""
-				}
-
-				PortableStationsActivateActiveBuffsWhenOpened: {
-					// Label: Portable Stations Activate Active Buffs When Opened
-					// Tooltip: ""
-				}
-
-				PortableStationCanGiveHoneyBuff: {
-					// Label: Portable Station Can Give Honey Buff
-					// Tooltip: ""
-				}
-
-				POrtableStationMustBeTouchedToGetHoneyBuff: {
-					// Label: P Ortable Station Must Be Touched To Get Honey Buff
-					// Tooltip: ""
-				}
-			}
+			// PackYellow.MapEntry: Pack Yellow
+			// PackWhite.MapEntry: Pack White
+			// PackRed.MapEntry: Pack Red
+			// PackPurple.MapEntry: Pack Purple
+			// PackPink.MapEntry: Pack Pink
+			// PackOrange.MapEntry: Pack Orange
+			// PackGreen.MapEntry: Pack Green
+			// PackGray.MapEntry: Pack Gray
+			// PackBrown.MapEntry: Pack Brown
+			// PackBlue.MapEntry: Pack Blue
+			// PackBlack.MapEntry: Pack Black
+			// BannerBag.MapEntry: Banner Bag
+			// BagYellow.MapEntry: Bag Yellow
+			// BagWhite.MapEntry: Bag White
+			// BagRed.MapEntry: Bag Red
+			// BagPurple.MapEntry: Bag Purple
+			// BagPink.MapEntry: Bag Pink
+			// BagOrange.MapEntry: Bag Orange
+			// BagGreen.MapEntry: Bag Green
+			// BagGray.MapEntry: Bag Gray
+			// BagBrown.MapEntry: Bag Brown
+			// BagBlue.MapEntry: Bag Blue
+			// BagBlack.MapEntry: Bag Black
 		}
 	}
 }

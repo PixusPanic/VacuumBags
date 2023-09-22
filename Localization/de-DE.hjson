@@ -1,49 +1,12 @@
 #
 Mods: {
 	VacuumBags: {
-		Config: {
-			BagEffectOptions: {
-				BannerBagNumberOfBannersInInventory: {
-					Label: Bannertasche Anzahl der Banner im Inventar
-					Tooltip:
-						'''
-						Wenn sich die Bannertasche in Ihrem Inventar befindet, wirken die ersten X Banner mit ihren Buffs.
-						Wenn Sie ein oder mehrere Banner zu Ihren Favoriten hinzufügen, haben diese Vorrang vor nicht zu Ihren Favoriten gehörenden Bannern.
-						Auf -1 setzen, damit alle Banner in der Tasche ihre Buffs verleihen.
-						'''
-				}
+		Configs: {
+			BagsClientConfig: {
+				BagStorageOptions: Aufbewahrungsmöglichkeiten für Taschen
+				DisplayName: Client-Konfiguration
+				Logging: Protokollierung
 
-				BannerBagNumberOfBannersWhenPlaced: {
-					Label: Anzahl der platzierten Banner im Bannerbeutel
-					Tooltip:
-						'''
-						Wenn die Banner-Tasche in der Welt platziert wird, wirken die ersten X Banner mit ihren Buffs.
-						Wenn du ein oder mehrere Banner als Favorit wählst, haben sie Vorrang vor nicht bevorzugten. Auf -1 setzen, damit alle Banner in der Tasche ihre Buffs geben.
-						'''
-				}
-
-				PortableStationNumberOfStationsInInventory: {
-					Label: Anzahl der tragbaren Stationen im Inventar
-					Tooltip:
-						'''
-						Wenn sich die tragbare Station in Ihrem Inventar befindet, stehen die ersten X Stationen zum Herstellen zur Verfügung.
-						Wenn Sie einen oder mehrere Sender zu Ihren Favoriten hinzufügen, haben diese Vorrang vor nicht bevorzugten Sendern.
-						Auf -1 setzen, damit alle Stationen in der tragbaren Station für die Herstellung verfügbar sind.
-						'''
-				}
-
-				PortableStationNumberOfStationsWhenPlaced: {
-					Label: Anzahl der tragbaren Stationen bei der Platzierung
-					Tooltip:
-						'''
-						Wenn die tragbare Station auf der Welt platziert wird, stehen die ersten X Stationen zum Herstellen zur Verfügung.
-						Wenn Sie einen oder mehrere Sender zu Ihren Favoriten hinzufügen, haben diese Vorrang vor nicht bevorzugten Sendern.
-						Auf -1 setzen, damit alle Stationen in der tragbaren Station für die Herstellung verfügbar sind.
-						'''
-				}
-			}
-
-			BagStorageOptions: {
 				AllAmmoItemsGoIntoAmmoBag: {
 					Label: Alle Munitionsgegenstände kommen in die Munitionstasche
 					Tooltip:
@@ -51,6 +14,38 @@ Mods: {
 						Wenn dies der Fall ist, werden alle Gegenstände, die als Munition für irgendetwas verwendet werden, in den Beutel gelegt.
 						Bei „false“ sind nur die ausgewählten Munitionsartikel auf der Whitelist zulässig, einige Artikel wie Sterne sind jedoch ausgeschlossen.
 						'''
+				}
+
+				AllOtherCreateTileItemsIntoBuildersBox: {
+					Label: Alle anderen erstellen Kachelelemente in der Builders Box
+					Tooltip:
+						'''
+						Wenn diese Option aktiviert ist, wird jeder Gegenstand, der bei Verwendung eine Kachel erzeugt, der Whitelist der Builder's Box hinzugefügt, sofern er nicht bereits in der Whitelist einer anderen Tasche enthalten ist.
+						Dadurch sollen die meisten Möbel aufgefangen werden, es kann aber auch passieren, dass andere Gegenstände hineingezogen werden, die nicht dafür vorgesehen sind.
+						'''
+				}
+
+				LogAllPlayerWhiteAndBlackLists: {
+					Label: Protokollieren Sie die weißen und schwarzen Listen aller Spieler
+					Tooltip:
+						'''
+						Bei „true“ werden alle Whitelists und Blacklists der Spieler im client.log protokolliert.
+						Wenn Sie Änderungen an den White/Black-Listen vornehmen, die Ihrer Meinung nach für alle Standardänderungen sein sollten, drucken Sie diese bitte aus und senden Sie mir Ihr client.log. -andro951
+						'''
+				}
+
+				PortableStationPassiveBuffsOnlyActiveIfFavorited: {
+					Label: Passive Buffs für tragbare Stationen sind nur dann aktiv, wenn sie als Favorit ausgewählt werden
+					Tooltip:
+						'''
+						Wenn diese Option ausgewählt ist, stellen nur die bevorzugten Buff-Stationen ihre Buffs bereit.
+
+						'''
+				}
+
+				SilencePortableStationActiveBuffs: {
+					Label: Bringt aktive Buffs der tragbaren Station zum Schweigen
+					Tooltip: Wenn diese Option ausgewählt ist, spielt die tragbare Station keine Töne ab, wenn sie beim Öffnen der Station aktive Buffs bereitstellt.
 				}
 
 				SimpleBagStorageSize: {
@@ -73,14 +68,97 @@ Mods: {
 				}
 			}
 
-			Crafting: {
+			BagsServerConfig: {
+				BagEffectOptions: Optionen für Tascheneffekte
+				Crafting: Basteln
+				DisplayName: Serverkonfiguration
+
+				BannerBagNumberOfBannersInInventory: {
+					Label: Bannertasche Anzahl der Banner im Inventar
+					Tooltip:
+						'''
+						Wenn sich die Bannertasche in Ihrem Inventar befindet, wirken die ersten X Banner mit ihren Buffs.
+						Wenn Sie ein oder mehrere Banner zu Ihren Favoriten hinzufügen, haben diese Vorrang vor nicht zu Ihren Favoriten gehörenden Bannern.
+						Auf -1 setzen, damit alle Banner in der Tasche ihre Buffs verleihen.
+						'''
+				}
+
+				BannerBagNumberOfBannersWhenPlaced: {
+					Label: Anzahl der platzierten Banner im Bannerbeutel
+					Tooltip:
+						'''
+						Wenn die Banner-Tasche in der Welt platziert wird, wirken die ersten X Banner mit ihren Buffs.
+						Wenn du ein oder mehrere Banner als Favorit wählst, haben sie Vorrang vor nicht bevorzugten. Auf -1 setzen, damit alle Banner in der Tasche ihre Buffs geben.
+						'''
+				}
+
 				HarderBagRecipes: {
 					Label: Rezepte für härtere Taschen
 					Tooltip: Dadurch sind für die Taschenrezepte mehr Gegenstände erforderlich und einige sind schwieriger zu bekommen.
 				}
-			}
 
-			// Logging: Log All Player White And Black Lists Header
+				PortableStationCanGiveHoneyBuff: {
+					Label: Tragbare Station kann Honig-Buff geben
+					Tooltip: Wenn diese Option ausgewählt ist, kann der Honig-Buff von der tragbaren Station gewährt werden.
+				}
+
+				PortableStationMustBeTouchedToGetHoneyBuff: {
+					Label: Um den Honig-Buff zu erhalten, muss die tragbare Station berührt werden
+					Tooltip:
+						'''
+						Wenn diese Option ausgewählt ist, wird der Honig-Bonus gewährt, wenn die tragbare Station berührt wird und sich ein Eimer Honig in der Station befindet.
+						Wenn diese Option nicht ausgewählt ist, wird der Honig-Buff in einem Wirkungsbereich rund um die tragbare Station gewährt.
+						Wenn sich der unbegrenzte Honigeimer in der Station befindet, ist der Wirkungsbereich unabhängig von dieser Option aktiv.
+						'''
+				}
+
+				PortableStationNumberOfPassiveBuffStationsInInventory: {
+					Label: Anzahl der passiven Buff-Stationen im Inventar der tragbaren Station
+					Tooltip:
+						'''
+						Wenn sich die tragbare Station in Ihrem Inventar befindet, sind die passiven Buffs der ersten X Stationen aktiv.
+						Wenn Sie einen oder mehrere Sender zu Ihren Favoriten hinzufügen, haben diese Vorrang vor nicht bevorzugten Sendern.
+						Für alle Stationen in der tragbaren Station auf -1 setzen, um ihre passiven Buffs zu verleihen.
+						Friedenskerzen, Wasserkerzen und Schattenkerzen sind niemals aktiv, es sei denn, sie werden als Favorit markiert und zählen nicht zum Buff-Limit.
+						'''
+				}
+
+				PortableStationNumberOfPassiveBuffStationsWhenPlaced: {
+					Label: Tragbare Station: Anzahl der passiven Buff-Stationen bei der Platzierung
+					Tooltip:
+						'''
+						Wenn die tragbare Station in der Welt platziert wird, sind die passiven Buffs der ersten X Stationen aktiv.
+						Wenn Sie einen oder mehrere Sender zu Ihren Favoriten hinzufügen, haben diese Vorrang vor nicht bevorzugten Sendern.
+						Für alle Stationen in der tragbaren Station auf -1 setzen, um ihre passiven Buffs zu verleihen.
+						Friedenskerzen, Wasserkerzen und Schattenkerzen sind niemals aktiv, es sei denn, sie werden als Favorit markiert und zählen nicht zum Buff-Limit.
+						'''
+				}
+
+				PortableStationNumberOfStationsInInventory: {
+					Label: Anzahl der tragbaren Stationen im Inventar
+					Tooltip:
+						'''
+						Wenn sich die tragbare Station in Ihrem Inventar befindet, stehen die ersten X Stationen zum Herstellen zur Verfügung.
+						Wenn Sie einen oder mehrere Sender zu Ihren Favoriten hinzufügen, haben diese Vorrang vor nicht bevorzugten Sendern.
+						Auf -1 setzen, damit alle Stationen in der tragbaren Station für die Herstellung verfügbar sind.
+						'''
+				}
+
+				PortableStationNumberOfStationsWhenPlaced: {
+					Label: Anzahl der tragbaren Stationen bei der Platzierung
+					Tooltip:
+						'''
+						Wenn die tragbare Station auf der Welt platziert wird, stehen die ersten X Stationen zum Herstellen zur Verfügung.
+						Wenn Sie einen oder mehrere Sender zu Ihren Favoriten hinzufügen, haben diese Vorrang vor nicht bevorzugten Sendern.
+						Auf -1 setzen, damit alle Stationen in der tragbaren Station für die Herstellung verfügbar sind.
+						'''
+				}
+
+				PortableStationsActivateActiveBuffsWhenOpened: {
+					Label: Tragbare Stationen aktivieren beim Öffnen aktive Buffs
+					Tooltip: Wenn diese Option ausgewählt ist, geben die Buffs von Stationen, die bei Interaktion Buffs gewähren, ihre Buffs.
+				}
+			}
 		}
 
 		Items: {
@@ -460,11 +538,17 @@ Mods: {
 					Speichert automatisch Handwerksstationen und Buff-Stationen.
 					Wenn Sie sich in Ihrem Inventar befinden, stehen die Inhalte der Station zum Herstellen zur Verfügung.
 					Klicken Sie mit der rechten Maustaste, um die Station zu öffnen.
-					Wenn Sie sich in Ihrem Inventar befinden, bietet die tragbare Station standardmäßig bis zu 3 Stationen zum Herstellen an, wenn sie sich in Ihrem Inventar befinden.
+					Wenn Sie sich in Ihrem Inventar befinden, bietet die tragbare Station standardmäßig bis zu 1 Station zum Basteln.
 					Wenn es platziert wird, stellt es standardmäßig alle Ihre Stationen zum Basteln zur Verfügung, jedoch im normalen Kachelbereich. Jede tragbare Station teilt ihr Inventar.
 					Der Hintergrund von Stationen ist gelb, wenn sie von der tragbaren Station zum Herstellen bereitgestellt werden.
 					Der Hintergrund ist lila, wenn dieser Stationstyp bereits in der Nähe ist. Stationen in Ihrer Nähe werden bei der Auswahl jedoch nicht automatisch übersprungen
-					Stationen von der tragbaren Station aus, denn mehr ist beim Basteln von Rezepten nicht unbedingt besser. Du hast den Banner-Buff bereits aus einer anderen Quelle.
+					Stationen von der tragbaren Station aus, denn mehr ist beim Basteln von Rezepten nicht unbedingt besser.
+
+					Wenn Sie sich in Ihrem Inventar befinden, stellt Ihnen die tragbare Station standardmäßig bis zu 1 Buff-Station-Buffs zur Verfügung.
+					Wenn es platziert wird, stellt es standardmäßig alle Ihre passiven Buff-Station-Buffs bereit, jedoch im normalen Buff-Bereich.
+					Gegenstände, die ihren Buff verleihen, sind hellgrün. Buffs, die du bereits von benachbarten Kacheln hast, werden übersprungen und haben einen violetten Hintergrund.
+
+					Wenn du den Tisch öffnest, während er platziert ist, interagierst du mit allen aktivierten Buff-Stationen und erhältst deren Buffs.
 					'''
 			}
 
@@ -506,131 +590,36 @@ Mods: {
 			}
 
 			OreBag: {
-				// Tooltip: ""
 				// DisplayName: Ore Bag
+				// Tooltip: ""
 			}
 		}
 
 		Tiles: {
-			// BagBlack.MapEntry: Bag Black
-			// BagBlue.MapEntry: Bag Blue
-			// BagBrown.MapEntry: Bag Brown
-			// BagGray.MapEntry: Bag Gray
-			// BagGreen.MapEntry: Bag Green
-			// BagOrange.MapEntry: Bag Orange
-			// BagPink.MapEntry: Bag Pink
-			// BagPurple.MapEntry: Bag Purple
-			// BagRed.MapEntry: Bag Red
-			// BagWhite.MapEntry: Bag White
-			// BagYellow.MapEntry: Bag Yellow
-			// BannerBag.MapEntry: Banner Bag
-			// PackBlack.MapEntry: Pack Black
-			// PackBlue.MapEntry: Pack Blue
-			// PackBrown.MapEntry: Pack Brown
-			// PackGray.MapEntry: Pack Gray
-			// PackGreen.MapEntry: Pack Green
-			// PackOrange.MapEntry: Pack Orange
-			// PackPink.MapEntry: Pack Pink
-			// PackPurple.MapEntry: Pack Purple
-			// PackRed.MapEntry: Pack Red
-			// PackWhite.MapEntry: Pack White
-			// PackYellow.MapEntry: Pack Yellow
 			// PortableStation.MapEntry: Portable Station
-		}
-
-		Configs: {
-			BagsClientConfig: {
-				// DisplayName: Bags Client Config
-
-				SimpleBagStorageSize: {
-					// Label: Simple Bag Storage Size
-					// Tooltip: ""
-				}
-
-				SimpleBagsVacuumAllItems: {
-					// Label: Simple Bags Vacuum All Items
-					// Tooltip: ""
-				}
-
-				AllAmmoItemsGoIntoAmmoBag: {
-					// Label: All Ammo Items Go Into Ammo Bag
-					// Tooltip: ""
-				}
-
-				LogAllPlayerWhiteAndBlackLists: {
-					// Label: Log All Player White And Black Lists
-					// Tooltip: ""
-				}
-
-				AllOtherCreateTileItemsIntoBuildersBox: {
-					// Label: All Other Create Tile Items Into Builders Box
-					// Tooltip: ""
-				}
-
-				PortableStationPassiveBuffsOnlyActiveIfFavorited: {
-					// Label: Portable Station Passive Buffs Only Active If Favorited
-					// Tooltip: ""
-				}
-			}
-
-			BagsServerConfig: {
-				// DisplayName: Bags Server Config
-
-				HarderBagRecipes: {
-					// Label: Harder Bag Recipes
-					// Tooltip: ""
-				}
-
-				BannerBagNumberOfBannersInInventory: {
-					// Label: Banner Bag Number Of Banners In Inventory
-					// Tooltip: ""
-				}
-
-				BannerBagNumberOfBannersWhenPlaced: {
-					// Label: Banner Bag Number Of Banners When Placed
-					// Tooltip: ""
-				}
-
-				PortableStationNumberOfStationsInInventory: {
-					// Label: Portable Station Number Of Stations In Inventory
-					// Tooltip: ""
-				}
-
-				PortableStationNumberOfStationsWhenPlaced: {
-					// Label: Portable Station Number Of Stations When Placed
-					// Tooltip: ""
-				}
-
-				PortableStationPassiveBuffsOnlyActiveIfFavorited: {
-					// Label: Portable Station Passive Buffs Only Active If Favorited
-					// Tooltip: ""
-				}
-
-				PortableStationNumberOfPassiveBuffStationsInInventory: {
-					// Label: Portable Station Number Of Passive Buff Stations In Inventory
-					// Tooltip: ""
-				}
-
-				PortableStationNumberOfPassiveBuffStationsWhenPlaced: {
-					// Label: Portable Station Number Of Passive Buff Stations When Placed
-					// Tooltip: ""
-				}
-
-				PortableStationsActivateActiveBuffsWhenOpened: {
-					// Label: Portable Stations Activate Active Buffs When Opened
-					// Tooltip: ""
-				}
-
-				PortableStationCanGiveHoneyBuff: {
-					// Label: Portable Station Can Give Honey Buff
-					// Tooltip: ""
-				}
-
-				POrtableStationMustBeTouchedToGetHoneyBuff: {
-					// Label: P Ortable Station Must Be Touched To Get Honey Buff
-					// Tooltip: ""
-				}
-			}
+			// PackYellow.MapEntry: Pack Yellow
+			// PackWhite.MapEntry: Pack White
+			// PackRed.MapEntry: Pack Red
+			// PackPurple.MapEntry: Pack Purple
+			// PackPink.MapEntry: Pack Pink
+			// PackOrange.MapEntry: Pack Orange
+			// PackGreen.MapEntry: Pack Green
+			// PackGray.MapEntry: Pack Gray
+			// PackBrown.MapEntry: Pack Brown
+			// PackBlue.MapEntry: Pack Blue
+			// PackBlack.MapEntry: Pack Black
+			// BannerBag.MapEntry: Banner Bag
+			// BagYellow.MapEntry: Bag Yellow
+			// BagWhite.MapEntry: Bag White
+			// BagRed.MapEntry: Bag Red
+			// BagPurple.MapEntry: Bag Purple
+			// BagPink.MapEntry: Bag Pink
+			// BagOrange.MapEntry: Bag Orange
+			// BagGreen.MapEntry: Bag Green
+			// BagGray.MapEntry: Bag Gray
+			// BagBrown.MapEntry: Bag Brown
+			// BagBlue.MapEntry: Bag Blue
+			// BagBlack.MapEntry: Bag Black
 		}
 	}
 }
