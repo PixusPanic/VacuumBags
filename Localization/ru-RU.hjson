@@ -341,6 +341,30 @@ Mods: {
 					'''
 			}
 
+			ExquisitePotionFlask: {
+				DisplayName: Изысканный флакон с зельем
+				Tooltip:
+					'''
+					Автоматически сохраняет зелья, еду и напитки.
+					Содержимое сумки, находящееся в вашем инвентаре, доступно для крафта.
+					Щелкните правой кнопкой мыши, чтобы открыть сумку.
+					Quick Buff будет использовать продукты из сумки. Если какие-либо продукты питания в сумке добавлены в избранное, будут использоваться только избранные продукты.
+					Quick Buff будет использовать любимые зелья из сумки.
+					Quick Heal будет использовать лечебные предметы из сумки. Если какие-либо лечебные предметы в сумке добавлены в избранное, будут использоваться только избранные лечебные предметы.
+					Quick Mana будет использовать предметы маны из сумки. Если какие-либо предметы маны в сумке добавлены в избранное, будут использоваться только избранные предметы маны.
+					Действие зелий можно приостановить, щелкнув правой кнопкой мыши по баффу, как обычно, чтобы удалить его или удалить зелье из избранного.
+					Зелья, дающие положительный эффект, будут иметь зеленый фон. Приостановленные зелья будут иметь желтый фон.
+					Приостановленные усиления можно возобновить быстрым усилением или выбором зелья из колбы.
+					Эффекты зелий после смерти сохраняются на той же продолжительности, что и до смерти.
+					Получение усиления зелья, когда оно у вас уже есть, суммирует их продолжительность, а не приравнивает ее к продолжительности нового эффекта.
+
+					Зелья будут действовать в два раза дольше, чем обычно, за счет постоянного увеличения оставшегося времени, чтобы каждые 2 секунды использовалась только 1 секунда.
+					(Хорошо сочетается с легендарным заклинанием «Сок» для постоянной бесконечной продолжительности, если вы этого хотите.)
+					Когда до конца зелья остается 2 тика, обратный отсчет прекращается, что дает вам бесконечную продолжительность действия зелья.
+					Когда вы умрете, все эффекты зелий, удерживаемые на 2 тактах до конца, будут сброшены. (Пока смерть не разлучит вас)
+					'''
+			}
+
 			FargosMementos: {
 				DisplayName: Сувениры Фарго
 				Tooltip:
@@ -563,6 +587,11 @@ Mods: {
 					Quick Buff будет использовать любимые зелья из сумки.
 					Quick Heal будет использовать лечебные предметы из сумки. Если какие-либо лечебные предметы в сумке добавлены в избранное, будут использоваться только избранные лечебные предметы.
 					Quick Mana будет использовать предметы маны из сумки. Если какие-либо предметы маны в сумке добавлены в избранное, будут использоваться только избранные предметы маны.
+					Действие зелий можно приостановить, щелкнув правой кнопкой мыши по баффу, как обычно, чтобы удалить его или удалить зелье из избранного.
+					Зелья, дающие положительный эффект, будут иметь зеленый фон. Приостановленные зелья будут иметь желтый фон.
+					Приостановленные усиления можно возобновить быстрым усилением или выбором зелья из колбы.
+					Эффекты зелий после смерти сохраняются на той же продолжительности, что и до смерти.
+					Получение усиления зелья, когда оно у вас уже есть, суммирует их продолжительность, а не приравнивает ее к продолжительности нового эффекта.
 					'''
 			}
 
@@ -590,36 +619,36 @@ Mods: {
 			}
 
 			OreBag: {
-				// DisplayName: Ore Bag
 				// Tooltip: ""
+				// DisplayName: Ore Bag
 			}
 		}
 
 		Tiles: {
-			// PortableStation.MapEntry: Portable Station
-			// PackYellow.MapEntry: Pack Yellow
-			// PackWhite.MapEntry: Pack White
-			// PackRed.MapEntry: Pack Red
-			// PackPurple.MapEntry: Pack Purple
-			// PackPink.MapEntry: Pack Pink
-			// PackOrange.MapEntry: Pack Orange
-			// PackGreen.MapEntry: Pack Green
-			// PackGray.MapEntry: Pack Gray
-			// PackBrown.MapEntry: Pack Brown
-			// PackBlue.MapEntry: Pack Blue
-			// PackBlack.MapEntry: Pack Black
-			// BannerBag.MapEntry: Banner Bag
-			// BagYellow.MapEntry: Bag Yellow
-			// BagWhite.MapEntry: Bag White
-			// BagRed.MapEntry: Bag Red
-			// BagPurple.MapEntry: Bag Purple
-			// BagPink.MapEntry: Bag Pink
-			// BagOrange.MapEntry: Bag Orange
-			// BagGreen.MapEntry: Bag Green
-			// BagGray.MapEntry: Bag Gray
-			// BagBrown.MapEntry: Bag Brown
-			// BagBlue.MapEntry: Bag Blue
 			// BagBlack.MapEntry: Bag Black
+			// BagBlue.MapEntry: Bag Blue
+			// BagBrown.MapEntry: Bag Brown
+			// BagGray.MapEntry: Bag Gray
+			// BagGreen.MapEntry: Bag Green
+			// BagOrange.MapEntry: Bag Orange
+			// BagPink.MapEntry: Bag Pink
+			// BagPurple.MapEntry: Bag Purple
+			// BagRed.MapEntry: Bag Red
+			// BagWhite.MapEntry: Bag White
+			// BagYellow.MapEntry: Bag Yellow
+			// BannerBag.MapEntry: Banner Bag
+			// PackBlack.MapEntry: Pack Black
+			// PackBlue.MapEntry: Pack Blue
+			// PackBrown.MapEntry: Pack Brown
+			// PackGray.MapEntry: Pack Gray
+			// PackGreen.MapEntry: Pack Green
+			// PackOrange.MapEntry: Pack Orange
+			// PackPink.MapEntry: Pack Pink
+			// PackPurple.MapEntry: Pack Purple
+			// PackRed.MapEntry: Pack Red
+			// PackWhite.MapEntry: Pack White
+			// PackYellow.MapEntry: Pack Yellow
+			// PortableStation.MapEntry: Portable Station
 		}
 	}
 }

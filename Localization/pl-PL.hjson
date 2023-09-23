@@ -341,6 +341,30 @@ Mods: {
 					'''
 			}
 
+			ExquisitePotionFlask: {
+				DisplayName: Wyśmienita butelka na eliksiry
+				Tooltip:
+					'''
+					Automatycznie przechowuje mikstury, żywność i napoje.
+					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
+					Szybkie wzmocnienie użyje artykułów spożywczych z torby. Jeśli jakiekolwiek produkty spożywcze w torbie są ulubione, użyte zostaną tylko ulubione produkty spożywcze.
+					Szybkie wzmocnienie użyje ulubionych mikstur z torby.
+					Quick Heal użyje przedmiotów leczących z torby. Jeśli jakiekolwiek przedmioty lecznicze w torbie są ulubione, użyte zostaną tylko ulubione przedmioty lecznicze.
+					Szybka Mana użyje przedmiotów many z torby. Jeśli jakiekolwiek przedmioty z maną w torbie są ulubione, użyte zostaną tylko ulubione przedmioty z maną.
+					Wzmocnienia mikstur można wstrzymać, klikając je prawym przyciskiem myszy, tak jak zwykle, aby je usunąć lub usunąć miksturę z ulubionych.
+					Mikstury zapewniające wzmocnienie będą miały zielone tło. Wstrzymane mikstury będą miały żółte tło.
+					Wstrzymane wzmocnienia można wznowić za pomocą szybkiego wzmocnienia lub faworyzując miksturę w kolbie.
+					Efekty mikstur utrzymują się po śmierci tak samo długo, jak przed śmiercią.
+					Zdobycie wzmocnienia mikstury, gdy już je posiadasz, zsumuje ich czas trwania, zamiast ustawiać go na czas trwania nowego efektu.
+
+					Mikstury będą trwać dwa razy dłużej niż normalnie, poprzez ciągłe zwiększanie pozostałego czasu, tak aby co 2 sekundy zużywana była tylko 1 sekunda.
+					(Dobrze łączy się z Legendarnym Zaklęciem Soku na czas nieskończony, jeśli tego chcesz.)
+					Kiedy mikstury osiągną 2 znaczniki, przestaną odliczać, co zapewni nieskończony czas trwania mikstury.
+					Kiedy umrzesz, wszystkie efekty mikstur, które były utrzymywane przez 2 znaczniki przed końcem, zostaną zresetowane. (Dopóki śmierć was nie rozłączy)
+					'''
+			}
+
 			FargosMementos: {
 				DisplayName: Pamiątki Fargo
 				Tooltip:
@@ -563,6 +587,11 @@ Mods: {
 					Szybkie wzmocnienie użyje ulubionych mikstur z torby.
 					Quick Heal użyje przedmiotów leczących z torby. Jeśli jakiekolwiek przedmioty lecznicze w torbie są ulubione, użyte zostaną tylko ulubione przedmioty lecznicze.
 					Szybka Mana użyje przedmiotów many z torby. Jeśli jakiekolwiek przedmioty z maną w torbie są ulubione, użyte zostaną tylko ulubione przedmioty z maną.
+					Wzmocnienia mikstur można wstrzymać, klikając je prawym przyciskiem myszy, tak jak zwykle, aby je usunąć lub usunąć miksturę z ulubionych.
+					Mikstury zapewniające wzmocnienie będą miały zielone tło. Wstrzymane mikstury będą miały żółte tło.
+					Wstrzymane wzmocnienia można wznowić za pomocą szybkiego wzmocnienia lub faworyzując miksturę w kolbie.
+					Efekty mikstur utrzymują się po śmierci przez taki sam czas, jak przed śmiercią.
+					Zdobycie wzmocnienia mikstury, gdy już je posiadasz, zsumuje ich czas trwania, zamiast ustawiać go na czas trwania nowego efektu.
 					'''
 			}
 
@@ -590,36 +619,36 @@ Mods: {
 			}
 
 			OreBag: {
-				// DisplayName: Ore Bag
 				// Tooltip: ""
+				// DisplayName: Ore Bag
 			}
 		}
 
 		Tiles: {
-			// PortableStation.MapEntry: Portable Station
-			// PackYellow.MapEntry: Pack Yellow
-			// PackWhite.MapEntry: Pack White
-			// PackRed.MapEntry: Pack Red
-			// PackPurple.MapEntry: Pack Purple
-			// PackPink.MapEntry: Pack Pink
-			// PackOrange.MapEntry: Pack Orange
-			// PackGreen.MapEntry: Pack Green
-			// PackGray.MapEntry: Pack Gray
-			// PackBrown.MapEntry: Pack Brown
-			// PackBlue.MapEntry: Pack Blue
-			// PackBlack.MapEntry: Pack Black
-			// BannerBag.MapEntry: Banner Bag
-			// BagYellow.MapEntry: Bag Yellow
-			// BagWhite.MapEntry: Bag White
-			// BagRed.MapEntry: Bag Red
-			// BagPurple.MapEntry: Bag Purple
-			// BagPink.MapEntry: Bag Pink
-			// BagOrange.MapEntry: Bag Orange
-			// BagGreen.MapEntry: Bag Green
-			// BagGray.MapEntry: Bag Gray
-			// BagBrown.MapEntry: Bag Brown
-			// BagBlue.MapEntry: Bag Blue
 			// BagBlack.MapEntry: Bag Black
+			// BagBlue.MapEntry: Bag Blue
+			// BagBrown.MapEntry: Bag Brown
+			// BagGray.MapEntry: Bag Gray
+			// BagGreen.MapEntry: Bag Green
+			// BagOrange.MapEntry: Bag Orange
+			// BagPink.MapEntry: Bag Pink
+			// BagPurple.MapEntry: Bag Purple
+			// BagRed.MapEntry: Bag Red
+			// BagWhite.MapEntry: Bag White
+			// BagYellow.MapEntry: Bag Yellow
+			// BannerBag.MapEntry: Banner Bag
+			// PackBlack.MapEntry: Pack Black
+			// PackBlue.MapEntry: Pack Blue
+			// PackBrown.MapEntry: Pack Brown
+			// PackGray.MapEntry: Pack Gray
+			// PackGreen.MapEntry: Pack Green
+			// PackOrange.MapEntry: Pack Orange
+			// PackPink.MapEntry: Pack Pink
+			// PackPurple.MapEntry: Pack Purple
+			// PackRed.MapEntry: Pack Red
+			// PackWhite.MapEntry: Pack White
+			// PackYellow.MapEntry: Pack Yellow
+			// PortableStation.MapEntry: Portable Station
 		}
 	}
 }

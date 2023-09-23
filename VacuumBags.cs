@@ -58,6 +58,9 @@ namespace VacuumBags
 			On_PlayerDrawLayers.DrawPlayer_27_HeldItem += BagPlayer.On_PlayerDrawLayers_DrawPlayer_27_HeldItem;
 			On_SmartCursorHelper.SmartCursorLookup += BagPlayer.On_SmartCursorHelper_SmartCursorLookup;
 			On_Player.PutItemInInventoryFromItemUsage += MechanicsToolbelt.On_Player_PutItemInInventoryFromItemUsage;
+			On_Player.DelBuff += ExquisitePotionFlask.OnDelBuff;
+			On_Main.TryRemovingBuff += ExquisitePotionFlask.OnTryRemovingBuff;
+			On_Player.AddBuff += ExquisitePotionFlask.OnAddBuff;
 
 			IL_ItemSlot.Draw_SpriteBatch_ItemArray_int_int_Vector2_Color += OnDrawItemSlot;
 			IL_Player.ItemCheck_CheckCanUse += PaintBucket.OnItemCheck_CheckCanUse;
@@ -130,6 +133,8 @@ namespace VacuumBags
 			LokisTesseract.RegisterWithAndroLib(this);
 			EssenceOfGathering.RegisterWithAndroLib(this);
 			FargosMementos.RegisterWithAndroLib(this);
+
+			ExquisitePotionFlask.RegisterWithAndroLibItemTypeOnly();
 
 			PackBlack.RegisterWithAndroLibItemTypeOnly();
 			PackBlue.RegisterWithAndroLibItemTypeOnly();

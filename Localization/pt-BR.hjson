@@ -341,6 +341,30 @@ Mods: {
 					'''
 			}
 
+			ExquisitePotionFlask: {
+				DisplayName: Frasco de Poção Requintada
+				Tooltip:
+					'''
+					Armazena automaticamente poções, comida e bebida.
+					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
+					Clique com o botão direito para abrir a bolsa.
+					Quick Buff usará alimentos da sacola. Se algum alimento na sacola for favorito, apenas os alimentos favoritos serão usados.
+					Quick Buff usará poções favoritas da bolsa.
+					Quick Heal usará itens de cura da bolsa. Se algum item de cura na bolsa for favorito, apenas os itens de cura favoritos serão usados.
+					Quick Mana usará itens de mana da bolsa. Se algum item de mana na bolsa for favorito, apenas os itens de mana favoritos serão usados.
+					Os buffs de poção podem ser pausados clicando com o botão direito no buff, como você faria normalmente para removê-lo ou desfavorecendo a poção.
+					As poções que fornecem um buff terão um fundo verde. As poções pausadas terão um fundo amarelo.
+					Os buffs pausados podem ser retomados com um buff rápido ou favoritando a poção no frasco.
+					Os efeitos da poção são mantidos após a morte pela mesma duração que eram antes de morrer.
+					Ganhar um buff de poção enquanto você já o tem irá somar suas durações em vez de defini-lo para a duração do novo efeito.
+
+					As poções durarão o dobro do normal, aumentando continuamente o tempo restante para que apenas 1 segundo seja usado a cada 2 segundos.
+					(Combina bem com o Legendary Juiced Enchantment por duração infinita permanente, se é isso que você deseja.)
+					Quando as poções atingirem 2 tiques restantes, elas pararão a contagem regressiva, dando a você uma duração infinita da poção.
+					Quando você morrer, todos os efeitos da poção que estão sendo mantidos com 2 tiques restantes serão reiniciados. (Até que a morte os separe)
+					'''
+			}
+
 			FargosMementos: {
 				DisplayName: Lembranças de Fargo
 				Tooltip:
@@ -563,6 +587,11 @@ Mods: {
 					Quick Buff usará poções favoritas da bolsa.
 					Quick Heal usará itens de cura da bolsa. Se algum item de cura na bolsa for favorito, apenas os itens de cura favoritos serão usados.
 					Quick Mana usará itens de mana da bolsa. Se algum item de mana na bolsa for favorito, apenas os itens de mana favoritos serão usados.
+					Os buffs de poção podem ser pausados clicando com o botão direito no buff, como você faria normalmente para removê-lo ou desfavorecendo a poção.
+					As poções que fornecem um buff terão um fundo verde. As poções pausadas terão um fundo amarelo.
+					Os buffs pausados podem ser retomados com um buff rápido ou favoritando a poção no frasco.
+					Os efeitos da poção são mantidos após a morte pela mesma duração que eram antes de morrer.
+					Ganhar um buff de poção enquanto você já o tem irá somar suas durações em vez de defini-lo para a duração do novo efeito.
 					'''
 			}
 
@@ -590,36 +619,36 @@ Mods: {
 			}
 
 			OreBag: {
-				// DisplayName: Ore Bag
 				// Tooltip: ""
+				// DisplayName: Ore Bag
 			}
 		}
 
 		Tiles: {
-			// PortableStation.MapEntry: Portable Station
-			// PackYellow.MapEntry: Pack Yellow
-			// PackWhite.MapEntry: Pack White
-			// PackRed.MapEntry: Pack Red
-			// PackPurple.MapEntry: Pack Purple
-			// PackPink.MapEntry: Pack Pink
-			// PackOrange.MapEntry: Pack Orange
-			// PackGreen.MapEntry: Pack Green
-			// PackGray.MapEntry: Pack Gray
-			// PackBrown.MapEntry: Pack Brown
-			// PackBlue.MapEntry: Pack Blue
-			// PackBlack.MapEntry: Pack Black
-			// BannerBag.MapEntry: Banner Bag
-			// BagYellow.MapEntry: Bag Yellow
-			// BagWhite.MapEntry: Bag White
-			// BagRed.MapEntry: Bag Red
-			// BagPurple.MapEntry: Bag Purple
-			// BagPink.MapEntry: Bag Pink
-			// BagOrange.MapEntry: Bag Orange
-			// BagGreen.MapEntry: Bag Green
-			// BagGray.MapEntry: Bag Gray
-			// BagBrown.MapEntry: Bag Brown
-			// BagBlue.MapEntry: Bag Blue
 			// BagBlack.MapEntry: Bag Black
+			// BagBlue.MapEntry: Bag Blue
+			// BagBrown.MapEntry: Bag Brown
+			// BagGray.MapEntry: Bag Gray
+			// BagGreen.MapEntry: Bag Green
+			// BagOrange.MapEntry: Bag Orange
+			// BagPink.MapEntry: Bag Pink
+			// BagPurple.MapEntry: Bag Purple
+			// BagRed.MapEntry: Bag Red
+			// BagWhite.MapEntry: Bag White
+			// BagYellow.MapEntry: Bag Yellow
+			// BannerBag.MapEntry: Banner Bag
+			// PackBlack.MapEntry: Pack Black
+			// PackBlue.MapEntry: Pack Blue
+			// PackBrown.MapEntry: Pack Brown
+			// PackGray.MapEntry: Pack Gray
+			// PackGreen.MapEntry: Pack Green
+			// PackOrange.MapEntry: Pack Orange
+			// PackPink.MapEntry: Pack Pink
+			// PackPurple.MapEntry: Pack Purple
+			// PackRed.MapEntry: Pack Red
+			// PackWhite.MapEntry: Pack White
+			// PackYellow.MapEntry: Pack Yellow
+			// PortableStation.MapEntry: Portable Station
 		}
 	}
 }

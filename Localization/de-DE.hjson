@@ -341,6 +341,30 @@ Mods: {
 					'''
 			}
 
+			ExquisitePotionFlask: {
+				DisplayName: Exquisites Trankfläschchen
+				Tooltip:
+					'''
+					Tränke, Speisen und Getränke werden automatisch gespeichert.
+					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
+					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
+					Quick Buff verwendet Lebensmittel aus dem Beutel. Wenn Lebensmittel in der Tüte zu den Favoriten gehören, werden nur die bevorzugten Lebensmittel verwendet.
+					Quick Buff verwendet Lieblingstränke aus der Tasche.
+					Bei „Schnellheilung“ werden Heilgegenstände aus der Tasche verwendet. Wenn irgendwelche Heilgegenstände in der Tasche zu den Favoriten gehören, werden nur die bevorzugten Heilgegenstände verwendet.
+					Quick Mana verwendet Managegenstände aus der Tasche. Wenn irgendwelche Managegenstände in der Tasche zu den Favoriten gehören, werden nur die bevorzugten Managegenstände verwendet.
+					Trank-Buffs können angehalten werden, indem Sie mit der rechten Maustaste auf den Buff klicken, wie Sie es normalerweise tun würden, um ihn zu entfernen oder den Trank aus den Favoriten zu entfernen.
+					Tränke, die einen Buff verleihen, haben einen grünen Hintergrund. Angehaltene Tränke haben einen gelben Hintergrund.
+					Angehaltene Buffs können mit einem schnellen Buff oder durch Bevorzugung des Tranks im Fläschchen wieder aufgenommen werden.
+					Die Wirkung von Trank bleibt beim Tod in der gleichen Dauer erhalten wie vor dem Tod.
+					Wenn du einen Trank-Buff erhältst, während du bereits über den Buff verfügst, wird die Dauer addiert, anstatt sie auf die Dauer des neuen Effekts festzulegen.
+
+					Tränke halten doppelt so lange wie normal, indem die verbleibende Zeit kontinuierlich verlängert wird, sodass alle 2 Sekunden nur 1 Sekunde verbraucht wird.
+					(Paart sich gut mit der legendären Saftverzauberung für dauerhaft unbegrenzte Dauer, wenn Sie das wünschen.)
+					Wenn die Tränke nur noch 2 Ticks übrig hat, stoppt der Countdown und die Wirkungsdauer der Tränke ist unbegrenzt.
+					Wenn du stirbst, werden alle Trankeffekte, die noch 2 Ticks übrig bleiben, zurückgesetzt. (Bis der Tod dich scheidet)
+					'''
+			}
+
 			FargosMementos: {
 				DisplayName: Fargos Erinnerungsstücke
 				Tooltip:
@@ -563,6 +587,11 @@ Mods: {
 					Quick Buff verwendet Lieblingstränke aus der Tasche.
 					Bei „Schnellheilung“ werden Heilgegenstände aus der Tasche verwendet. Wenn irgendwelche Heilgegenstände in der Tasche zu den Favoriten gehören, werden nur die bevorzugten Heilgegenstände verwendet.
 					Quick Mana verwendet Managegenstände aus der Tasche. Wenn irgendwelche Managegenstände in der Tasche zu den Favoriten gehören, werden nur die bevorzugten Managegenstände verwendet.
+					Trank-Buffs können angehalten werden, indem Sie mit der rechten Maustaste auf den Buff klicken, wie Sie es normalerweise tun würden, um ihn zu entfernen oder den Trank aus den Favoriten zu entfernen.
+					Tränke, die einen Buff verleihen, haben einen grünen Hintergrund. Angehaltene Tränke haben einen gelben Hintergrund.
+					Angehaltene Buffs können mit einem schnellen Buff oder durch Bevorzugung des Tranks im Fläschchen wieder aufgenommen werden.
+					Die Wirkung von Trank bleibt beim Tod in der gleichen Dauer erhalten wie vor dem Tod.
+					Wenn du einen Trank-Buff erhältst, während du bereits über den Buff verfügst, wird die Dauer addiert, anstatt sie auf die Dauer des neuen Effekts festzulegen.
 					'''
 			}
 
@@ -590,36 +619,36 @@ Mods: {
 			}
 
 			OreBag: {
-				// DisplayName: Ore Bag
 				// Tooltip: ""
+				// DisplayName: Ore Bag
 			}
 		}
 
 		Tiles: {
-			// PortableStation.MapEntry: Portable Station
-			// PackYellow.MapEntry: Pack Yellow
-			// PackWhite.MapEntry: Pack White
-			// PackRed.MapEntry: Pack Red
-			// PackPurple.MapEntry: Pack Purple
-			// PackPink.MapEntry: Pack Pink
-			// PackOrange.MapEntry: Pack Orange
-			// PackGreen.MapEntry: Pack Green
-			// PackGray.MapEntry: Pack Gray
-			// PackBrown.MapEntry: Pack Brown
-			// PackBlue.MapEntry: Pack Blue
-			// PackBlack.MapEntry: Pack Black
-			// BannerBag.MapEntry: Banner Bag
-			// BagYellow.MapEntry: Bag Yellow
-			// BagWhite.MapEntry: Bag White
-			// BagRed.MapEntry: Bag Red
-			// BagPurple.MapEntry: Bag Purple
-			// BagPink.MapEntry: Bag Pink
-			// BagOrange.MapEntry: Bag Orange
-			// BagGreen.MapEntry: Bag Green
-			// BagGray.MapEntry: Bag Gray
-			// BagBrown.MapEntry: Bag Brown
-			// BagBlue.MapEntry: Bag Blue
 			// BagBlack.MapEntry: Bag Black
+			// BagBlue.MapEntry: Bag Blue
+			// BagBrown.MapEntry: Bag Brown
+			// BagGray.MapEntry: Bag Gray
+			// BagGreen.MapEntry: Bag Green
+			// BagOrange.MapEntry: Bag Orange
+			// BagPink.MapEntry: Bag Pink
+			// BagPurple.MapEntry: Bag Purple
+			// BagRed.MapEntry: Bag Red
+			// BagWhite.MapEntry: Bag White
+			// BagYellow.MapEntry: Bag Yellow
+			// BannerBag.MapEntry: Banner Bag
+			// PackBlack.MapEntry: Pack Black
+			// PackBlue.MapEntry: Pack Blue
+			// PackBrown.MapEntry: Pack Brown
+			// PackGray.MapEntry: Pack Gray
+			// PackGreen.MapEntry: Pack Green
+			// PackOrange.MapEntry: Pack Orange
+			// PackPink.MapEntry: Pack Pink
+			// PackPurple.MapEntry: Pack Purple
+			// PackRed.MapEntry: Pack Red
+			// PackWhite.MapEntry: Pack White
+			// PackYellow.MapEntry: Pack Yellow
+			// PortableStation.MapEntry: Portable Station
 		}
 	}
 }

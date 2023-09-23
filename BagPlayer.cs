@@ -19,6 +19,7 @@ using Terraria.Graphics;
 using Terraria.Graphics.Renderers;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 using Terraria.UI;
 using VacuumBags.Common.Globals;
 using VacuumBags.Items;
@@ -49,9 +50,14 @@ namespace VacuumBags
 				honeyWetResetTime = Main.GameUpdateCount + HoneyBuffTime;
 
 			UpdateHoneyBuff();
+			ExquisitePotionFlask.PostUpdateBuffs(Player);
 		}
 		public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource) {
 			honeyWetResetTime = 0;
+			ExquisitePotionFlask.OnKilled(Player);
+		}
+		public override void OnRespawn() {
+			ExquisitePotionFlask.OnRespawn(Player);
 		}
 
 		#endregion
@@ -226,7 +232,7 @@ namespace VacuumBags
 			bool hasHoney = honeyBuffIndex != -1;
 			if (!hasHoney || lastHoneyBucketLocation < 0)
 				return;
-
+			 
 			int context = fromStation == true || honeyWetResetTime < Main.GameUpdateCount || fromStation == null && Player.buffTime[honeyBuffIndex] <= AOEHoneyBuffTime ? ItemSlotContextID.BrightGreenSelected : ItemSlotContextID.Purple;
 			StorageManager.BagUIs[PortableStation.BagStorageID].AddSelectedItemSlot(lastHoneyBucketLocation, context);
 		}

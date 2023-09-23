@@ -33,5 +33,8 @@ namespace VacuumBags
 		public override void PostSetupRecipes() {
 			BagModItem.PostSetupRecipes();
 		}
+		public override void PreSaveAndQuit() {
+			ExquisitePotionFlask.PreSaveAndQuit();
+		}
 	}
 }

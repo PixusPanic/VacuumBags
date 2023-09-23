@@ -199,13 +199,13 @@ namespace VacuumBags.Items
 
 		public static readonly bool PrintDevOnlyAllowedItemListInfo = Debugger.IsAttached && VacuumBags.clientConfig.LogAllPlayerWhiteAndBlackLists;
 		private static void SetupAllAllowedItemManagers() {
-			List<AllowedItemsManager> allowedItemManagers = StorageManager.AllBagTypes.Select(t => ContentSamples.ItemsByType[t].ModItem).OfType<INeedsSetUpAllowedList>().Select(b => b.GetAllowedItemsManager).ToList();
+			List<AllowedItemsManager> allowedItemManagers = StorageManager.AllBagTypes.Select(t => ContentSamples.ItemsByType[t].ModItem).OfType<INeedsSetUpAllowedList>().Where(m => m is not ExquisitePotionFlask).Select(b => b.GetAllowedItemsManager).ToList();
 			SortedDictionary<int, SortedSet<int>> enchantedItemsAllowedInBags = new();
 			foreach (AllowedItemsManager allowedItemsManager in allowedItemManagers) {
 				allowedItemsManager.Load();
 				allowedItemsManager.PostLoadSetup();
 				if (PrintDevOnlyAllowedItemListInfo)
-					enchantedItemsAllowedInBags.Add(allowedItemsManager.OwningBagItemType, new());
+					enchantedItemsAllowedInBags.TryAdd(allowedItemsManager.OwningBagItemType, new());
 			}
 
 			List<int> itemsNotAdded = new List<int>();

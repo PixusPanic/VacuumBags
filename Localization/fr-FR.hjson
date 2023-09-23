@@ -341,6 +341,30 @@ Mods: {
 					'''
 			}
 
+			ExquisitePotionFlask: {
+				DisplayName: Flacon de potion exquis
+				Tooltip:
+					'''
+					Stocke automatiquement les potions, la nourriture et les boissons.
+					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
+					Faites un clic droit pour ouvrir le sac.
+					Quick Buff utilisera les aliments du sac. Si des aliments dans le sac sont favoris, seuls les aliments favoris seront utilisés.
+					Quick Buff utilisera les potions préférées du sac.
+					Quick Heal utilisera les objets de guérison du sac. Si des objets de guérison dans le sac sont favoris, seuls les objets de guérison favoris seront utilisés.
+					Quick Mana utilisera les objets de mana du sac. Si des objets de mana dans le sac sont favoris, seuls les objets de mana favoris seront utilisés.
+					Les buffs de potion peuvent être mis en pause en cliquant avec le bouton droit sur le buff comme vous le feriez normalement pour le supprimer ou en supprimant la potion.
+					Les potions apportant un buff auront un fond vert. Les potions en pause auront un fond jaune.
+					Les buffs interrompus peuvent être repris avec un buff rapide ou en favorisant la potion dans le flacon.
+					Les effets des potions sont conservés à la mort pendant la même durée qu'avant la mort.
+					Gagner un buff de potion alors que vous possédez déjà le buff additionnera leurs durées au lieu de la définir sur la durée du nouvel effet.
+
+					Les potions dureront deux fois plus longtemps que la normale en augmentant continuellement le temps restant afin qu'une seule seconde soit utilisée toutes les 2 secondes.
+					(Se marie bien avec l'enchantement légendaire Juiced pour une durée permanente et infinie si c'est ce que vous voulez.)
+					Lorsque les potions atteignent 2 ticks restants, elles arrêtent le compte à rebours, vous donnant une durée de potion infinie.
+					Lorsque vous mourrez, tous les effets de potion maintenus à 2 ticks restants seront réinitialisés. (Jusqu'à ce que la mort vous sépare)
+					'''
+			}
+
 			FargosMementos: {
 				DisplayName: Les souvenirs de Fargo
 				Tooltip:
@@ -563,6 +587,11 @@ Mods: {
 					Quick Buff utilisera les potions préférées du sac.
 					Quick Heal utilisera les objets de guérison du sac. Si des objets de guérison dans le sac sont favoris, seuls les objets de guérison favoris seront utilisés.
 					Quick Mana utilisera les objets de mana du sac. Si des objets de mana dans le sac sont favoris, seuls les objets de mana favoris seront utilisés.
+					Les buffs de potion peuvent être mis en pause en cliquant avec le bouton droit sur le buff comme vous le feriez normalement pour le supprimer ou en supprimant la potion.
+					Les potions apportant un buff auront un fond vert. Les potions en pause auront un fond jaune.
+					Les buffs interrompus peuvent être repris avec un buff rapide ou en favorisant la potion dans le flacon.
+					Les effets des potions sont conservés à la mort pendant la même durée qu'avant la mort.
+					Gagner un buff de potion alors que vous possédez déjà le buff additionnera leurs durées au lieu de la définir sur la durée du nouvel effet.
 					'''
 			}
 
@@ -590,36 +619,36 @@ Mods: {
 			}
 
 			OreBag: {
-				// DisplayName: Ore Bag
 				// Tooltip: ""
+				// DisplayName: Ore Bag
 			}
 		}
 
 		Tiles: {
-			// PortableStation.MapEntry: Portable Station
-			// PackYellow.MapEntry: Pack Yellow
-			// PackWhite.MapEntry: Pack White
-			// PackRed.MapEntry: Pack Red
-			// PackPurple.MapEntry: Pack Purple
-			// PackPink.MapEntry: Pack Pink
-			// PackOrange.MapEntry: Pack Orange
-			// PackGreen.MapEntry: Pack Green
-			// PackGray.MapEntry: Pack Gray
-			// PackBrown.MapEntry: Pack Brown
-			// PackBlue.MapEntry: Pack Blue
-			// PackBlack.MapEntry: Pack Black
-			// BannerBag.MapEntry: Banner Bag
-			// BagYellow.MapEntry: Bag Yellow
-			// BagWhite.MapEntry: Bag White
-			// BagRed.MapEntry: Bag Red
-			// BagPurple.MapEntry: Bag Purple
-			// BagPink.MapEntry: Bag Pink
-			// BagOrange.MapEntry: Bag Orange
-			// BagGreen.MapEntry: Bag Green
-			// BagGray.MapEntry: Bag Gray
-			// BagBrown.MapEntry: Bag Brown
-			// BagBlue.MapEntry: Bag Blue
 			// BagBlack.MapEntry: Bag Black
+			// BagBlue.MapEntry: Bag Blue
+			// BagBrown.MapEntry: Bag Brown
+			// BagGray.MapEntry: Bag Gray
+			// BagGreen.MapEntry: Bag Green
+			// BagOrange.MapEntry: Bag Orange
+			// BagPink.MapEntry: Bag Pink
+			// BagPurple.MapEntry: Bag Purple
+			// BagRed.MapEntry: Bag Red
+			// BagWhite.MapEntry: Bag White
+			// BagYellow.MapEntry: Bag Yellow
+			// BannerBag.MapEntry: Banner Bag
+			// PackBlack.MapEntry: Pack Black
+			// PackBlue.MapEntry: Pack Blue
+			// PackBrown.MapEntry: Pack Brown
+			// PackGray.MapEntry: Pack Gray
+			// PackGreen.MapEntry: Pack Green
+			// PackOrange.MapEntry: Pack Orange
+			// PackPink.MapEntry: Pack Pink
+			// PackPurple.MapEntry: Pack Purple
+			// PackRed.MapEntry: Pack Red
+			// PackWhite.MapEntry: Pack White
+			// PackYellow.MapEntry: Pack Yellow
+			// PortableStation.MapEntry: Portable Station
 		}
 	}
 }
