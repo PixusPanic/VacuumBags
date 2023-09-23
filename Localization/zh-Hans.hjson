@@ -331,6 +331,16 @@ Mods: {
 					'''
 			}
 
+			EarthenPyramid: {
+				DisplayName: 土金字塔
+				Tooltip:
+					'''
+					自动存储暗影秘密中的物品。
+					当你在库存中时，包里的东西可以用来制作。
+					右键点击打开袋子。
+					'''
+			}
+
 			EssenceOfGathering: {
 				DisplayName: 采集精华
 				Tooltip:
@@ -604,6 +614,16 @@ Mods: {
 					右键点击打开袋子。
 					左键单击麻袋即可将绳子从麻袋中取出。 如果麻袋中的任何绳子被收藏，则仅使用收藏的绳子。
 					拿着shift时，可以从包里使用手电筒和荧光棒，就像它们在你的库存中一样。
+					'''
+			}
+
+			SpookyGourd: {
+				DisplayName: 鬼葫芦
+				Tooltip:
+					'''
+					自动存储来自 Spooky Mod 的物品。
+					当你在库存中时，包里的东西可以用来制作。
+					右键点击打开袋子。
 					'''
 			}
 

@@ -17,7 +17,7 @@ using androLib.UI;
 
 namespace VacuumBags.Items
 {
-	[Autoload(false)]
+    [Autoload(false)]
 	public  class PotionFlask : BagModItem, ISoldByWitch, INeedsSetUpAllowedList
 	{
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
@@ -386,15 +386,18 @@ namespace VacuumBags.Items
 		}
 		internal static void OnAddBuff(On_Player.orig_AddBuff orig, Player self, int type, int timeToAdd, bool quiet, bool foodHack) {
 			Item[] inv = StoragePlayer.LocalStoragePlayer.Storages[BagStorageID].Items;
-			if (hasPotionFlask) {
-				if (Buffs.TryGetValue(type, out BuffInfo infoToPause)) {
-					infoToPause.Pause(inv);
-					infoToPause.RemoveBuff(self);
+			bool foundLocalStoragePlayer = self.TryGetModPlayer(out StoragePlayer storagePlayer);
+			if (foundLocalStoragePlayer) {
+				if (hasPotionFlask) {
+					if (Buffs.TryGetValue(type, out BuffInfo infoToPause)) {
+						infoToPause.Pause(inv);
+						infoToPause.RemoveBuff(self);
+					}
 				}
 			}
 
 			orig(self, type, timeToAdd, quiet, foodHack);
-			if (!hasPotionFlask)
+			if (!hasPotionFlask || !foundLocalStoragePlayer)
 				return;
 
 			if (Buffs.TryGetValue(type, out BuffInfo info)) {

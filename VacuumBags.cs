@@ -118,13 +118,13 @@ namespace VacuumBags
 			BannerBag.RegisterWithAndroLib(this);
 			FishingBelt.RegisterWithAndroLib(this);
 			PortableStation.RegisterWithAndroLib(this);
-			BossBag.RegisterWithAndroLib(this);
 			PaintBucket.RegisterWithAndroLib(this);
 			PotionFlask.RegisterWithAndroLib(this);
 			HerbSatchel.RegisterWithAndroLib(this);
 			MechanicsToolbelt.RegisterWithAndroLib(this);
 			AmmoBag.RegisterWithAndroLib(this);
 			JarOfDirt.RegisterWithAndroLib(this);
+			BossBag.RegisterWithAndroLib(this);
 			BuildersBox.RegisterWithAndroLib(this);
 			WallEr.RegisterWithAndroLib(this);
 			SlayersSack.RegisterWithAndroLib(this);
@@ -133,6 +133,8 @@ namespace VacuumBags
 			LokisTesseract.RegisterWithAndroLib(this);
 			EssenceOfGathering.RegisterWithAndroLib(this);
 			FargosMementos.RegisterWithAndroLib(this);
+			SpookyGourd.RegisterWithAndroLib(this);
+			EarthenPyramid.RegisterWithAndroLib(this);
 
 			ExquisitePotionFlask.RegisterWithAndroLibItemTypeOnly();
 

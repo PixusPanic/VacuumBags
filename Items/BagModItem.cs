@@ -1,6 +1,7 @@
 ﻿using androLib;
 using androLib.Common.Utility;
 using androLib.Items;
+
 using androLib.UI;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,11 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 using VacuumBags.Localization;
+using VacuumOreBag.Items;
 
 namespace VacuumBags.Items
 {
-	public abstract class BagModItem : AndroModItem
+    public abstract class BagModItem : AndroModItem
 	{
 		protected override Action<ModItem, string, string> AddLocalizationTooltipFunc => VacuumBagsLocalizationDataStaticMethods.AddLocalizationTooltip;
 		private static IEnumerable<KeyValuePair<int, Item>> GetFirstItemTypePairsXFromBag(int storageID, Func<Item, bool> itemCondition, Player player, int firstXItems, Func<Item, bool> doesntCountTowardsTotal = null) {
@@ -199,7 +201,8 @@ namespace VacuumBags.Items
 
 		public static readonly bool PrintDevOnlyAllowedItemListInfo = Debugger.IsAttached && VacuumBags.clientConfig.LogAllPlayerWhiteAndBlackLists;
 		private static void SetupAllAllowedItemManagers() {
-			List<AllowedItemsManager> allowedItemManagers = StorageManager.AllBagTypes.Select(t => ContentSamples.ItemsByType[t].ModItem).OfType<INeedsSetUpAllowedList>().Where(m => m is not ExquisitePotionFlask).Select(b => b.GetAllowedItemsManager).ToList();
+			List<INeedsSetUpAllowedList> iNeedsSetUpAllowedLists = new List<INeedsSetUpAllowedList>() { new OreBagAllowedItemsManager() }.Concat(StorageManager.AllBagTypes.Select(t => ContentSamples.ItemsByType[t].ModItem).OfType<INeedsSetUpAllowedList>().Where(m => m is not ExquisitePotionFlask)).ToList();
+			List<AllowedItemsManager> allowedItemManagers = iNeedsSetUpAllowedLists.Select(b => b.GetAllowedItemsManager).ToList();
 			SortedDictionary<int, SortedSet<int>> enchantedItemsAllowedInBags = new();
 			foreach (AllowedItemsManager allowedItemsManager in allowedItemManagers) {
 				allowedItemsManager.Load();
@@ -242,6 +245,10 @@ namespace VacuumBags.Items
 
 			foreach (AllowedItemsManager allowedItemsManager in allowedItemManagers) {
 				allowedItemsManager.ClearSetupLists();
+			}
+
+			foreach (INeedsSetUpAllowedList list in iNeedsSetUpAllowedLists) {
+				list.PostSetup();
 			}
 		}
 	}

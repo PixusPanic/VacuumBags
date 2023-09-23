@@ -17,7 +17,7 @@ using Mono.Cecil.Cil;
 
 namespace VacuumBags.Items
 {
-	[Autoload(false)]
+    [Autoload(false)]
 	public  class PortableStation : BagModItem, ISoldByWitch, INeedsSetUpAllowedList
 	{
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');

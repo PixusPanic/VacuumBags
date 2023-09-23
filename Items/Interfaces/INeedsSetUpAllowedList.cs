@@ -14,6 +14,7 @@ namespace VacuumBags.Items
 	public interface INeedsSetUpAllowedList
 	{
 		public AllowedItemsManager GetAllowedItemsManager { get; }
+		public virtual void PostSetup() { }
 	}
 
 	public class AllowedItemsManager {

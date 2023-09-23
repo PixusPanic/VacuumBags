@@ -331,6 +331,16 @@ Mods: {
 					'''
 			}
 
+			EarthenPyramid: {
+				DisplayName: Ziemna Piramida
+				Tooltip:
+					'''
+					Automatycznie przechowuje przedmioty z Sekretów Cieni.
+					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
+					'''
+			}
+
 			EssenceOfGathering: {
 				DisplayName: Esencja zgromadzenia
 				Tooltip:
@@ -604,6 +614,16 @@ Mods: {
 					Kliknij prawym przyciskiem myszy, aby otworzyć worek.
 					Linę można wyjąć z worka klikając lewym przyciskiem myszy na worku. Jeśli jakakolwiek lina w worku jest ulubiona, zostanie użyta tylko ulubiona lina.
 					Pochodni i świec żarowych można używać z torby, trzymając Shift, tak jakby były w ekwipunku.
+					'''
+			}
+
+			SpookyGourd: {
+				DisplayName: Straszna Tykwa
+				Tooltip:
+					'''
+					Automatycznie przechowuje przedmioty ze Spooky Mod.
+					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
 					'''
 			}
 

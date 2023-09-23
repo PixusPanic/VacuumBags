@@ -18,7 +18,7 @@ using Ionic.Zlib;
 
 namespace VacuumBags.Items
 {
-	[Autoload(false)]
+    [Autoload(false)]
 	public  class JarOfDirt : BagModItem, ISoldByWitch, INeedsSetUpAllowedList
 	{
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');

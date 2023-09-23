@@ -331,6 +331,16 @@ Mods: {
 					'''
 			}
 
+			EarthenPyramid: {
+				DisplayName: Erdpyramide
+				Tooltip:
+					'''
+					Speichert automatisch Gegenstände aus Secrets of the Shadows.
+					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
+					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
+					'''
+			}
+
 			EssenceOfGathering: {
 				DisplayName: Essenz des Sammelns
 				Tooltip:
@@ -604,6 +614,16 @@ Mods: {
 					Klicken Sie mit der rechten Maustaste, um den Sack zu öffnen.
 					Das Seil kann durch Linksklick mit dem Sack aus dem Sack gelegt werden. Wenn ein beliebiges Seil im Sack favorisiert ist, wird nur das favorisierte Seil verwendet.
 					Fackeln und Leuchtstäbe können beim Halten der Schicht aus der Tasche verwendet werden, als ob sie in Ihrem Inventar wären.
+					'''
+			}
+
+			SpookyGourd: {
+				DisplayName: Gruseliger Kürbis
+				Tooltip:
+					'''
+					Speichert automatisch Gegenstände von Spooky Mod.
+					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
+					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
 					'''
 			}
 

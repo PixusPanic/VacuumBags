@@ -331,6 +331,16 @@ Mods: {
 					'''
 			}
 
+			EarthenPyramid: {
+				DisplayName: Pirâmide Terrestre
+				Tooltip:
+					'''
+					Armazena automaticamente itens de Secrets of the Shadows.
+					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
+					Clique com o botão direito para abrir a bolsa.
+					'''
+			}
+
 			EssenceOfGathering: {
 				DisplayName: Essência da Reunião
 				Tooltip:
@@ -604,6 +614,16 @@ Mods: {
 					Clique com o botão direito para abrir o saco.
 					A corda pode ser colocada no saco clicando com o botão esquerdo no saco. Se alguma corda do saco for favorita, apenas a corda favorita será usada.
 					Tochas e bastões luminosos podem ser usados ​​da bolsa ao segurar o turno, como se estivessem em seu inventário.
+					'''
+			}
+
+			SpookyGourd: {
+				DisplayName: Cabaça assustadora
+				Tooltip:
+					'''
+					Armazena automaticamente itens do Spooky Mod.
+					Quando estiver em seu inventário, o conteúdo da sacola estará disponível para confecção.
+					Clique com o botão direito para abrir a bolsa.
 					'''
 			}
 

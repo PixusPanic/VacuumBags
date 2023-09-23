@@ -331,6 +331,16 @@ Mods: {
 					'''
 			}
 
+			EarthenPyramid: {
+				DisplayName: Pyramide de Terre
+				Tooltip:
+					'''
+					Stocke automatiquement les éléments des Secrets des Ombres.
+					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
+					Faites un clic droit pour ouvrir le sac.
+					'''
+			}
+
 			EssenceOfGathering: {
 				DisplayName: Essence de rassemblement
 				Tooltip:
@@ -604,6 +614,16 @@ Mods: {
 					Faites un clic droit pour ouvrir le sac.
 					La corde peut être placée depuis le sac en cliquant avec le bouton gauche sur le sac. Si une corde dans le sac est favorite, seule la corde favorite sera utilisée.
 					Les torches et les bâtons lumineux peuvent être utilisés depuis le sac lorsque vous tenez votre poste comme s'ils étaient dans votre inventaire.
+					'''
+			}
+
+			SpookyGourd: {
+				DisplayName: Gourde effrayante
+				Tooltip:
+					'''
+					Stocke automatiquement les éléments de Spooky Mod.
+					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
+					Faites un clic droit pour ouvrir le sac.
 					'''
 			}
 

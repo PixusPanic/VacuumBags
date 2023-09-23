@@ -331,6 +331,16 @@ Mods: {
 					'''
 			}
 
+			EarthenPyramid: {
+				DisplayName: Earthen Pyramid
+				Tooltip:
+					'''
+					Automatically stores items from Secrets of the Shadows.
+					When in your inventory, the contents of the bag are available for crafting.
+					Right click to open the bag.
+					'''
+			}
+
 			EssenceOfGathering: {
 				DisplayName: Essence of Gathering
 				Tooltip:
@@ -604,6 +614,16 @@ Mods: {
 					Right click to open the sack.
 					Rope can be placed from the sack by left clicking with the sack.  If any rope in the sack is favorited, only favorited rope will be used.
 					Torches and glowsticks can be used from the bag when holding shift as if they were in your inventory.
+					'''
+			}
+
+			SpookyGourd: {
+				DisplayName: Spooky Gourd
+				Tooltip:
+					'''
+					Automatically stores items from Spooky Mod.
+					When in your inventory, the contents of the bag are available for crafting.
+					Right click to open the bag.
 					'''
 			}
 

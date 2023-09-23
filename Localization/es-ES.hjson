@@ -331,6 +331,16 @@ Mods: {
 					'''
 			}
 
+			EarthenPyramid: {
+				DisplayName: Pirámide de tierra
+				Tooltip:
+					'''
+					Almacena automáticamente elementos de Secrets of the Shadows.
+					Cuando esté en su inventario, el contenido de la bolsa estará disponible para su elaboración.
+					Haga clic derecho para abrir la bolsa.
+					'''
+			}
+
 			EssenceOfGathering: {
 				DisplayName: Esencia de reunión
 				Tooltip:
@@ -604,6 +614,16 @@ Mods: {
 					Haz clic derecho para abrir el saco.
 					La cuerda se puede colocar desde el saco haciendo clic izquierdo con el saco. Si alguna cuerda del saco es favorita, solo se utilizará la cuerda favorita.
 					Las antorchas y las barras luminosas se pueden usar desde la bolsa mientras se mantiene el turno como si estuvieran en su inventario.
+					'''
+			}
+
+			SpookyGourd: {
+				DisplayName: Calabaza espeluznante
+				Tooltip:
+					'''
+					Almacena automáticamente elementos de Spooky Mod.
+					Cuando esté en su inventario, el contenido de la bolsa estará disponible para su elaboración.
+					Haga clic derecho para abrir la bolsa.
 					'''
 			}
 

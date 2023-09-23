@@ -16,7 +16,7 @@ using Mono.Cecil.Cil;
 
 namespace VacuumBags.Items
 {
-	[Autoload(false)]
+    [Autoload(false)]
 	public  class SlayersSack : BagModItem, ISoldByWitch, INeedsSetUpAllowedList
 	{
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
@@ -82,10 +82,17 @@ namespace VacuumBags.Items
 			if (info.Rope || info.Torch || info.WaterTorch || info.Glowstick || info.FlairGun)
 				return true;
 
+			if (enemyDropItems.Contains(info.Type))
+				return true;
+
 			if (info.Equipment)
 				return false;
 
 			return null;
+		}
+		protected static SortedSet<int> enemyDropItems = null;
+		public void PostSetup() {
+			enemyDropItems = null;
 		}
 		protected static SortedSet<int> DevWhiteList() {
 			SortedSet<int> devWhiteList = new() {
@@ -210,6 +217,7 @@ namespace VacuumBags.Items
 				ItemID.WolfMountItem,
 			};
 
+			enemyDropItems = new();
 			foreach (KeyValuePair<int, NPC> npcPair in ContentSamples.NpcsByNetId) {
 				int netID = npcPair.Key;
 				NPC npc = npcPair.Value;
@@ -222,11 +230,15 @@ namespace VacuumBags.Items
 					DropRateInfoChainFeed dropRateInfoChainFeed = new(1f);
 					dropRule.ReportDroprates(dropRates, dropRateInfoChainFeed);
 					foreach (DropRateInfo dropRate in dropRates) {
-						ItemSetInfo info = new(dropRate.itemId);
-						if (info.Equipment || info.Ammo || info.CreateWall || info.CreateTile || info.Potion || info.Banner || info.Bomb || info.BossSpawner || info.GrassSeeds || info.Extractable || info.Food || info.Coin)
+						//Vanilla item from modded enemy
+						if (netID >= NPCID.Count && dropRate.itemId < ItemID.Count)
 							continue;
 
-						devWhiteList.Add(info.Type);
+						ItemSetInfo info = new(dropRate.itemId);
+						if (info.Equipment || info.CreateWall || info.CreateTile || info.Coin)
+							continue;
+
+						enemyDropItems.Add(info.Type);
 					}
 				}
 			}

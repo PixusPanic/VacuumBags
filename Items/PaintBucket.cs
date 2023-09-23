@@ -14,7 +14,7 @@ using MonoMod.Cil;
 
 namespace VacuumBags.Items
 {
-	[Autoload(false)]
+    [Autoload(false)]
 	public  class PaintBucket : BagModItem, ISoldByWitch, INeedsSetUpAllowedList
 	{
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');

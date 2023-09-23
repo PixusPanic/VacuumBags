@@ -18,7 +18,7 @@ using androLib.Common.Globals;
 
 namespace VacuumBags.Items
 {
-	[Autoload(false)]
+    [Autoload(false)]
 	public class BossBag : BagModItem, ISoldByWitch, INeedsSetUpAllowedList
 	{
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
@@ -75,7 +75,14 @@ namespace VacuumBags.Items
 			if (info.BossTrophyOrRelic || info.BossSpawner)
 				return true;
 
+			if (bossDropItems.Contains(info.Type))
+				return true;
+
 			return null;
+		}
+		protected static SortedSet<int> bossDropItems = null;
+		public void PostSetup() {
+			bossDropItems = null;
 		}
 		protected static SortedSet<int> DevWhiteList() {
 			SortedSet<int> devWhiteList = new() {
@@ -158,6 +165,7 @@ namespace VacuumBags.Items
 
 			devWhiteList.UnionWith(BossBagsData.BossBags);
 
+			bossDropItems = new();
 			if (BossChecklistIntegration.BossInfos != null) {
 				foreach (BossChecklistBossInfo bossChecklistInfo in BossChecklistIntegration.BossInfos.Select(p => p.Value)) {
 					foreach (int bossSummonType in bossChecklistInfo.spawnItem) {
@@ -170,21 +178,19 @@ namespace VacuumBags.Items
 						if (devWhiteList.Contains(itemType))
 							continue;
 
+						//Vanilla item from modded enemy
+						if (itemType < ItemID.Count && bossChecklistInfo.modSource != "Terraria")
+							continue;
+
 						ItemSetInfo info = new(itemType);
+
+						if (info.Equipment || info.Torch || info.Glowstick || info.Rope || info.Coin)
+							continue;
 
 						if (info.Vanity) {
 							devWhiteList.Add(itemType);
 							continue;
 						}
-
-						if (info.Equipment)
-							continue;
-
-						if (info.Potion)
-							continue;
-
-						if (info.Ammo)
-							continue;
 
 						if (info.Consumable && !info.CreateTile && !info.CreateWall)
 							continue;
@@ -192,7 +198,7 @@ namespace VacuumBags.Items
 						if (info.Material && !info.CreateTile && !info.CreateWall && (info.Consumable || !info.CanShoot && !info.HasBuff))
 							continue;
 
-						devWhiteList.Add(itemType);
+						bossDropItems.Add(itemType);
 					}
 				}
 			}

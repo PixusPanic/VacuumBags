@@ -331,6 +331,16 @@ Mods: {
 					'''
 			}
 
+			EarthenPyramid: {
+				DisplayName: Piramide di terra
+				Tooltip:
+					'''
+					Memorizza automaticamente gli oggetti di Secrets of the Shadows.
+					Quando sei nel tuo inventario, il contenuto della borsa è disponibile per la creazione.
+					Fare clic con il tasto destro per aprire la borsa.
+					'''
+			}
+
 			EssenceOfGathering: {
 				DisplayName: Essenza dell'incontro
 				Tooltip:
@@ -604,6 +614,16 @@ Mods: {
 					Fare clic con il tasto destro per aprire il sacco.
 					La corda può essere posizionata dal sacco facendo clic con il pulsante sinistro del mouse sul sacco. Se una qualsiasi corda nel sacco è preferita, verrà utilizzata solo la corda preferita.
 					Torce e bastoncini luminosi possono essere utilizzati dalla borsa mentre si tiene il turno come se fossero nel proprio inventario.
+					'''
+			}
+
+			SpookyGourd: {
+				DisplayName: Zucca spettrale
+				Tooltip:
+					'''
+					Memorizza automaticamente gli oggetti di Spooky Mod.
+					Quando sei nel tuo inventario, il contenuto della borsa è disponibile per la creazione.
+					Fare clic con il tasto destro per aprire la borsa.
 					'''
 			}
 

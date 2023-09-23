@@ -12,11 +12,10 @@ using static Terraria.ID.ContentSamples.CreativeHelper;
 using MonoMod.Cil;
 using System;
 using Mono.Cecil.Cil;
-using Ionic.Zip;
 
 namespace VacuumBags.Items
 {
-	[Autoload(false)]
+    [Autoload(false)]
 	public class AmmoBag : BagModItem, ISoldByWitch, INeedsSetUpAllowedList
 	{
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
