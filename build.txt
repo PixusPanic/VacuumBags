@@ -1,5 +1,5 @@
 displayName = Vacuum Bags
 author = andro951
-version = 1.2.1.0
+version = 1.2.1.1
 includeSource = true
 modReferences = androLib, VacuumOreBag
