@@ -67,6 +67,7 @@ namespace VacuumBags.Items
 				() => ModContent.ItemType<MechanicsToolbelt>(),//Get ModItem type
 				80,//UI Left
 				675,//UI Top
+				() => AllowedItems,
 				() => {
 					Player player = Main.LocalPlayer;
 					if (WirePlacingTools.Contains(player.HeldItem.type)) {
@@ -182,7 +183,7 @@ namespace VacuumBags.Items
 		};
 
 		public static SortedSet<int> AllowedItems => AllowedItemsManager.AllowedItems;
-		public static AllowedItemsManager AllowedItemsManager = new(ModContent.ItemType<MechanicsToolbelt>, DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
+		public static AllowedItemsManager AllowedItemsManager = new(ModContent.ItemType<MechanicsToolbelt>, () => BagStorageID, DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
 		public AllowedItemsManager GetAllowedItemsManager => AllowedItemsManager;
 		protected static bool? DevCheck(ItemSetInfo info, SortedSet<ItemGroup> itemGroups, SortedSet<string> endWords, SortedSet<string> searchWords) {
 			if (info.Weapon || info.Armor)

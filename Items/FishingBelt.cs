@@ -67,6 +67,7 @@ namespace VacuumBags.Items
 				() => ModContent.ItemType<FishingBelt>(),//Get ModItem type
 				80,//UI Left
 				675,//UI Top
+				() => AllowedItems,
 				() => typeof(Player).GetMethod("Fishing_GetBait", BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(Main.LocalPlayer, new object[] { null }),
 				true//Update info accessories in bag
 			);
@@ -91,7 +92,7 @@ namespace VacuumBags.Items
 		public static bool ItemAllowedToBeStored(Item item) => AllowedItems.Contains(item.type);
 
 		public static SortedSet<int> AllowedItems => AllowedItemsManager.AllowedItems;
-		public static AllowedItemsManager AllowedItemsManager = new(ModContent.ItemType<FishingBelt>, DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
+		public static AllowedItemsManager AllowedItemsManager = new(ModContent.ItemType<FishingBelt>, () => BagStorageID, DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
 		public AllowedItemsManager GetAllowedItemsManager => AllowedItemsManager;
 		protected static bool? DevCheck(ItemSetInfo info, SortedSet<ItemGroup> itemGroups, SortedSet<string> endWords, SortedSet<string> searchWords) {
 			if (ItemID.Sets.CanFishInLava[info.Type]

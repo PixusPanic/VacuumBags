@@ -30,9 +30,6 @@ namespace VacuumBags
 			RecipeGroup banners = new(() => AnyBanner.AddSpaces(), ItemSets.AllBanners.ToArray());
 			RecipeGroup.RegisterGroup($"{typeof(VacuumBags).Name}:{AnyBanner}", banners);
 		}
-		public override void PostSetupRecipes() {
-			BagModItem.PostSetupRecipes();
-		}
 		public override void PreSaveAndQuit() {
 			ExquisitePotionFlask.PreSaveAndQuit();
 		}

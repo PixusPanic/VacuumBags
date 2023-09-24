@@ -64,6 +64,7 @@ namespace VacuumBags.Items
 				() => ModContent.ItemType<PaintBucket>(),//Get ModItem type
 				80,//UI Left
 				675,//UI Top
+				() => AllowedItems,
 				() => ChoosePaintFromBucket(Main.LocalPlayer)
 			);
 		}
@@ -156,7 +157,7 @@ namespace VacuumBags.Items
 		}
 		
 		public static SortedSet<int> AllowedItems => AllowedItemsManager.AllowedItems;
-		public static AllowedItemsManager AllowedItemsManager = new(ModContent.ItemType<PaintBucket>, DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
+		public static AllowedItemsManager AllowedItemsManager = new(ModContent.ItemType<PaintBucket>, () => BagStorageID, DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
 		public AllowedItemsManager GetAllowedItemsManager => AllowedItemsManager;
 		protected static bool? DevCheck(ItemSetInfo info, SortedSet<ItemGroup> itemGroups, SortedSet<string> endWords, SortedSet<string> searchWords) {
 			if (info.Equipment)

@@ -70,7 +70,8 @@ namespace VacuumBags.Items
 				() => new Color(120, 0, 120, androLib.Common.Configs.ConfigValues.UIAlpha),   // Get Button hover color function. Func<using Microsoft.Xna.Framework.Color>
 				() => ModContent.ItemType<PotionFlask>(),//Get ModItem type
 				80,//UI Left
-				675//UI Top
+				675,//UI Top
+				() => AllowedItems
 			);
 		}
 		public static bool ItemAllowedToBeStored(Item item) => AllowedItems.Contains(item.type);
@@ -385,9 +386,10 @@ namespace VacuumBags.Items
 			}
 		}
 		internal static void OnAddBuff(On_Player.orig_AddBuff orig, Player self, int type, int timeToAdd, bool quiet, bool foodHack) {
-			Item[] inv = StoragePlayer.LocalStoragePlayer.Storages[BagStorageID].Items;
+			Item[] inv = null;
 			bool foundLocalStoragePlayer = self.TryGetModPlayer(out StoragePlayer storagePlayer);
 			if (foundLocalStoragePlayer) {
+				inv = storagePlayer.Storages[BagStorageID].Items;
 				if (hasPotionFlask) {
 					if (Buffs.TryGetValue(type, out BuffInfo infoToPause)) {
 						infoToPause.Pause(inv);
@@ -397,7 +399,7 @@ namespace VacuumBags.Items
 			}
 
 			orig(self, type, timeToAdd, quiet, foodHack);
-			if (!hasPotionFlask || !foundLocalStoragePlayer)
+			if (!hasPotionFlask || !foundLocalStoragePlayer || inv == null)
 				return;
 
 			if (Buffs.TryGetValue(type, out BuffInfo info)) {
@@ -407,10 +409,12 @@ namespace VacuumBags.Items
 			}
 		}
 		internal static void OnTryRemovingBuff(On_Main.orig_TryRemovingBuff orig, int i, int b) {
-			Item[] inv = StoragePlayer.LocalStoragePlayer.Storages[BagStorageID].Items;
-			foreach (KeyValuePair<int, BuffInfo> pair in Buffs) {
-				if (pair.Key == b)
-					pair.Value.Pause(inv);
+			if (Main.LocalPlayer.TryGetModPlayer(out StoragePlayer storagePlayer)) {
+				Item[] inv = storagePlayer.Storages[BagStorageID].Items;
+				foreach (KeyValuePair<int, BuffInfo> pair in Buffs) {
+					if (pair.Key == b)
+						pair.Value.Pause(inv);
+				}
 			}
 
 			orig(i, b);
@@ -781,7 +785,7 @@ namespace VacuumBags.Items
 		#endregion
 
 		public static SortedSet<int> AllowedItems => AllowedItemsManager.AllowedItems;
-		public static AllowedItemsManager AllowedItemsManager = new(ModContent.ItemType<PotionFlask>, DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
+		public static AllowedItemsManager AllowedItemsManager = new(ModContent.ItemType<PotionFlask>, () => BagStorageID, DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
 		public AllowedItemsManager GetAllowedItemsManager => AllowedItemsManager;
 		protected static bool? DevCheck(ItemSetInfo info, SortedSet<ItemGroup> itemGroups, SortedSet<string> endWords, SortedSet<string> searchWords) {
 			if (info.Equipment)

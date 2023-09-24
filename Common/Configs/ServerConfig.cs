@@ -104,14 +104,5 @@ namespace VacuumBags.Common.Configs
 
 		[DefaultValue(false)]
 		public bool SilencePortableStationActiveBuffs;
-
-		//Logging
-		[JsonIgnore]
-		public const string LoggingHeaderKey = "Logging";
-		[Header($"$Mods.{VacuumBags.ModName}.{L_ID_Tags.Configs}.{ClientConfigName}.{LoggingHeaderKey}")]
-
-		[DefaultValue(false)]
-		[ReloadRequired]
-		public bool LogAllPlayerWhiteAndBlackLists;
 	}
 }

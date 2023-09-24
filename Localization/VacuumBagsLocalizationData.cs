@@ -131,16 +131,10 @@ namespace VacuumBags.Localization
 									{ L_ID3.Label.ToString(), nameof(clientConfig.SilencePortableStationActiveBuffs).AddSpaces() },
 									{ L_ID3.Tooltip.ToString(), "If selected, the Portable Station will not play any sounds when it provides active buffs on opening the station." }
 								}) },
-								{ nameof(clientConfig.LogAllPlayerWhiteAndBlackLists), new(dict: new() {
-									{ L_ID3.Label.ToString(), nameof(clientConfig.LogAllPlayerWhiteAndBlackLists).AddSpaces() },
-									{ L_ID3.Tooltip.ToString(), "If true, all player white lists and black lists will be logged to the client.log.\n" +
-										"If you make changes to the white/black lists that you think should be standard changes for everyone, please print them and send me your client.log. -andro951" }
-								}) },
 							},
 							dict: new() {
 								{ L_ID2.DisplayName.ToString(), "Client Config" },
 								{ BagStorageOptionsKey, BagStorageOptionsKey.AddSpaces() },
-								{ LoggingHeaderKey, LoggingHeaderKey.AddSpaces() },
 							}) },
 						}) }
 					};

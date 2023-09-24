@@ -72,6 +72,7 @@ namespace VacuumBags.Items
 				() => ModContent.ItemType<BannerBag>(),//Get ModItem type
 				80,//UI Left
 				675,//UI Top
+				() => AllowedItems,
 				() => UpdateAllSelectedFromBag()
 			);
 		}
@@ -142,7 +143,7 @@ namespace VacuumBags.Items
 		}
 
 		public static SortedSet<int> AllowedItems => AllowedItemsManager.AllowedItems;
-		public static AllowedItemsManager AllowedItemsManager = new(ModContent.ItemType<BannerBag>, DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
+		public static AllowedItemsManager AllowedItemsManager = new(ModContent.ItemType<BannerBag>, () => BagStorageID, DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
 		public AllowedItemsManager GetAllowedItemsManager => AllowedItemsManager;
 		protected static bool? DevCheck(ItemSetInfo info, SortedSet<ItemGroup> itemGroups, SortedSet<string> endWords, SortedSet<string> searchWords) {
 			return null;

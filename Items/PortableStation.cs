@@ -71,6 +71,7 @@ namespace VacuumBags.Items
 				() => ModContent.ItemType<PortableStation>(),//Get ModItem type
 				80,//UI Left
 				675,//UI Top
+				() => AllowedItems,
 				() => UpdateAllSelectedFromBag(Main.SceneMetrics)
 			);
 		}
@@ -245,7 +246,7 @@ namespace VacuumBags.Items
 		#endregion
 
 		public static SortedSet<int> AllowedItems => AllowedItemsManager.AllowedItems;
-		public static AllowedItemsManager AllowedItemsManager = new(ModContent.ItemType<PortableStation>, DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
+		public static AllowedItemsManager AllowedItemsManager = new(ModContent.ItemType<PortableStation>, () => BagStorageID, DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
 		public AllowedItemsManager GetAllowedItemsManager => AllowedItemsManager;
 		protected static bool? DevCheck(ItemSetInfo info, SortedSet<ItemGroup> itemGroups, SortedSet<string> endWords, SortedSet<string> searchWords) {
 			if (info.Equipment)

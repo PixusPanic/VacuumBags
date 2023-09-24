@@ -21,7 +21,7 @@ namespace VacuumBags.Items
     public abstract class BagModItem : AndroModItem
 	{
 		protected override Action<ModItem, string, string> AddLocalizationTooltipFunc => VacuumBagsLocalizationDataStaticMethods.AddLocalizationTooltip;
-		private static IEnumerable<KeyValuePair<int, Item>> GetFirstItemTypePairsXFromBag(int storageID, Func<Item, bool> itemCondition, Player player, int firstXItems, Func<Item, bool> doesntCountTowardsTotal = null) {
+		private static IEnumerable<KeyValuePair<int, Item>> GetFirstXItemTypePairsFromBag(int storageID, Func<Item, bool> itemCondition, Player player, int firstXItemTypes, Func<Item, bool> doesntCountTowardsTotal = null) {
 			if (Main.netMode == NetmodeID.MultiplayerClient && player.whoAmI != Main.myPlayer)
 				return null;
 
@@ -51,7 +51,7 @@ namespace VacuumBags.Items
 				return null;
 
 			int itemsCount = sortedItemTypes.Count;
-			if (firstXItems == FirstXItemsChooseAllItems || itemsCount <= firstXItems)
+			if (firstXItemTypes == FirstXItemsChooseAllItems || itemsCount <= firstXItemTypes)
 				return indexItemsPairs;
 
 			//returnFunc is to minimize the effect of doesntCountTowardsTotal when it is null which is most calls.
@@ -84,7 +84,7 @@ namespace VacuumBags.Items
 					};
 
 					itemsCount = itemTypes.Count;
-					if (itemsCount <= firstXItems)
+					if (itemsCount <= firstXItemTypes)
 						return returnFunc(indexItemsPairs, sortedItemTypes);
 				}
 			}
@@ -103,17 +103,17 @@ namespace VacuumBags.Items
 			}
 
 			if (sortedFavoritedTypes.Count < 1) {
-				SortedSet<int> chosenTypes = new(itemTypes.Take(firstXItems));
+				SortedSet<int> chosenTypes = new(itemTypes.Take(firstXItemTypes));
 				return returnFunc(indexItemsPairs, chosenTypes);
 			}
 
 			int favoritedItemsCount = sortedFavoritedTypes.Count;
-			if (favoritedItemsCount >= firstXItems) {
-				if (favoritedItemsCount == firstXItems) {
+			if (favoritedItemsCount >= firstXItemTypes) {
+				if (favoritedItemsCount == firstXItemTypes) {
 					return returnFunc(indexItemsPairs, sortedFavoritedTypes);
 				}
 				else {
-					SortedSet<int> chosenTypes = new(favoritedTypes.Take(firstXItems));
+					SortedSet<int> chosenTypes = new(favoritedTypes.Take(firstXItemTypes));
 					return returnFunc(indexItemsPairs, chosenTypes);
 				}
 			}
@@ -122,8 +122,37 @@ namespace VacuumBags.Items
 				itemTypes.Remove(favoritedItemType);
 			}
 
-			SortedSet<int> chosenTypes2 = new(sortedFavoritedTypes.Concat(itemTypes.Take(firstXItems - sortedFavoritedTypes.Count)));
+			SortedSet<int> chosenTypes2 = new(sortedFavoritedTypes.Concat(itemTypes.Take(firstXItemTypes - sortedFavoritedTypes.Count)));
 			return returnFunc(indexItemsPairs, chosenTypes2);
+		}
+		private static IEnumerable<KeyValuePair<int, Item>> GetFirstItemTypePairFromBag(int storageID, Func<Item, bool> itemCondition, Player player) {
+			if (Main.netMode == NetmodeID.MultiplayerClient && player.whoAmI != Main.myPlayer)
+				return null;
+
+			Item[] inv = StorageManager.GetItems(storageID);
+			Item chosenItem = null;
+			int index = -1;
+			for (int i = 0; i < inv.Length; i++) {
+				Item item = inv[i];
+				if (item.NullOrAir() || item.stack < 1)
+					continue;
+
+				if (!itemCondition(item))
+					continue;
+
+				if (chosenItem == null || item.favorited) {
+					chosenItem = item;
+					index = i;
+				}
+				else {
+					continue;
+				}
+
+				if (chosenItem.favorited)
+					break;
+			}
+
+			return chosenItem == null ? null : new List<KeyValuePair<int, Item>>() { new KeyValuePair<int, Item>(index, chosenItem) };
 		}
 		public const int FirstXItemsChooseAllItems = -1;
 		private static IEnumerable<Item> SelectAndGetItems(IEnumerable<KeyValuePair<int, Item>> indexItemsPairs, int storageID, int context, bool selectItems = true) {
@@ -136,14 +165,14 @@ namespace VacuumBags.Items
 			return indexItemsPairs.Select(p => p.Value);
 		}
 		public static IEnumerable<Item> GetFirstXFromBag(int storageID, Func<Item, bool> itemCondition, Player player, int firstXItems, Func<Item, bool> doesntCountTowardsTotal = null, int context = ItemSlotContextID.YellowSelected, bool selectItems = true) {
-			IEnumerable<KeyValuePair<int, Item>> indexItemsPairs = GetFirstItemTypePairsXFromBag(storageID, itemCondition, player, firstXItems, doesntCountTowardsTotal);
+			IEnumerable<KeyValuePair<int, Item>> indexItemsPairs = GetFirstXItemTypePairsFromBag(storageID, itemCondition, player, firstXItems, doesntCountTowardsTotal);
 			if (indexItemsPairs == null)
 				return new List<Item>();
 
 			return SelectAndGetItems(indexItemsPairs, storageID, context, selectItems);
 		}
 		public static IEnumerable<KeyValuePair<int, Item>> GetFirstFromBag(int storageID, Func<Item, bool> itemCondition, Player player) {
-			return GetFirstItemTypePairsXFromBag(storageID, itemCondition, player, 1);
+			return GetFirstItemTypePairFromBag(storageID, itemCondition, player);
 		}
 		public static Item ChooseFromBag(int storageID, Func<Item, bool> itemCondition, Player player, int context = ItemSlotContextID.YellowSelected, bool selectItems = true) {
 			IEnumerable<KeyValuePair<int, Item>> indexItemsPairs = GetFirstFromBag(storageID, itemCondition, player);
@@ -193,63 +222,6 @@ namespace VacuumBags.Items
 			}
 
 			return fromBag();
-		}
-
-		public static void PostSetupRecipes() {
-			SetupAllAllowedItemManagers();
-		}
-
-		public static readonly bool PrintDevOnlyAllowedItemListInfo = Debugger.IsAttached && VacuumBags.clientConfig.LogAllPlayerWhiteAndBlackLists;
-		private static void SetupAllAllowedItemManagers() {
-			List<INeedsSetUpAllowedList> iNeedsSetUpAllowedLists = new List<INeedsSetUpAllowedList>() { new OreBagAllowedItemsManager() }.Concat(StorageManager.AllBagTypes.Select(t => ContentSamples.ItemsByType[t].ModItem).OfType<INeedsSetUpAllowedList>().Where(m => m is not ExquisitePotionFlask)).ToList();
-			List<AllowedItemsManager> allowedItemManagers = iNeedsSetUpAllowedLists.Select(b => b.GetAllowedItemsManager).ToList();
-			SortedDictionary<int, SortedSet<int>> enchantedItemsAllowedInBags = new();
-			foreach (AllowedItemsManager allowedItemsManager in allowedItemManagers) {
-				allowedItemsManager.Load();
-				allowedItemsManager.PostLoadSetup();
-				if (PrintDevOnlyAllowedItemListInfo)
-					enchantedItemsAllowedInBags.TryAdd(allowedItemsManager.OwningBagItemType, new());
-			}
-
-			List<int> itemsNotAdded = new List<int>();
-
-			for (int i = 0; i < ItemLoader.ItemCount; i++) {
-				ItemSetInfo info = new(i);
-				if (info.NullOrAir())
-					continue;
-
-				if (StorageManager.AllBagTypesSorted.Contains(info.Type))
-					continue;
-
-				bool forWhitelistOnlyCheck = false;
-				foreach (AllowedItemsManager allowedItemsManager in allowedItemManagers) {
-					if (allowedItemsManager.TryAddToAllowedItems(info, forWhitelistOnlyCheck)) {
-						forWhitelistOnlyCheck = true;
-						if (PrintDevOnlyAllowedItemListInfo && ContentSamples.ItemsByType[i].IsEnchantable())
-							enchantedItemsAllowedInBags[allowedItemsManager.OwningBagItemType].Add(info.Type);
-					}
-				}
-
-				if (!forWhitelistOnlyCheck)
-					itemsNotAdded.Add(info.Type);
-			}
-
-			if (PrintDevOnlyAllowedItemListInfo) {
-				IEnumerable<Item> itemsNotSelected = itemsNotAdded.Select(t => ContentSamples.ItemsByType[t]);
-				//itemsNotSelected.Select(i => i.S()).S("All Items that don't fit in bags:").LogSimple();
-				itemsNotSelected.Where(i => !i.IsEnchantable()).Select(i => i.S()).S("All Non-Enchantable Items that don't fit in bags:").LogSimple();
-				SortedSet<int> sortedItemsNotSelected = new (itemsNotAdded);
-				IEnumerable<Item> allOtherItems = ContentSamples.ItemsByType.Select(p => p.Value).Where(i => !sortedItemsNotSelected.Contains(i.type));
-				enchantedItemsAllowedInBags.Select(p => p.Value.Select(i => ContentSamples.ItemsByType[i].S()).S(ContentSamples.ItemsByType[p.Key].Name)).S("All Enchantable Items that fit in bags:").LogSimple();
-			}
-
-			foreach (AllowedItemsManager allowedItemsManager in allowedItemManagers) {
-				allowedItemsManager.ClearSetupLists();
-			}
-
-			foreach (INeedsSetUpAllowedList list in iNeedsSetUpAllowedLists) {
-				list.PostSetup();
-			}
 		}
 	}
 }

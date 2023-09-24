@@ -65,6 +65,7 @@ namespace VacuumBags.Items
 				() => ModContent.ItemType<AmmoBag>(),//Get ModItem type
 				80,//UI Left
 				675,//UI Top
+				() => AllowedItems,
 				() => Main.LocalPlayer.ChooseAmmo(Main.LocalPlayer.HeldItem)
 			);
 		}
@@ -181,7 +182,7 @@ namespace VacuumBags.Items
 		}
 
 		public static SortedSet<int> AllowedItems => AllowedItemsManager.AllowedItems;
-		public static AllowedItemsManager AllowedItemsManager = new(ModContent.ItemType<AmmoBag>, DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
+		public static AllowedItemsManager AllowedItemsManager = new(ModContent.ItemType<AmmoBag>, () => BagStorageID, DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
 		public AllowedItemsManager GetAllowedItemsManager => AllowedItemsManager;
 		protected static bool? DevCheck(ItemSetInfo info, SortedSet<ItemGroup> itemGroups, SortedSet<string> endWords, SortedSet<string> searchWords) {
 			if (VacuumBags.clientConfig.AllAmmoItemsGoIntoAmmoBag && (info.Ammo || info.CheckItemGroup(ItemGroup.Ammo)))
