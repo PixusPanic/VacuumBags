@@ -9,28 +9,17 @@ using Terraria.ModLoader;
 using Terraria;
 using Microsoft.Xna.Framework;
 using Terraria.ModLoader.Default;
+using androLib.Items;
+using static Terraria.ID.ContentSamples.CreativeHelper;
 
 namespace VacuumBags.Items
 {
 	[Autoload(false)]
-	public class LokisTesseract : ModBag
+	public class LokisTesseract : ModBag, INeedsSetUpAllowedList
 	{
 		public override string ModDisplayNameTooltip => "Thorium";
 		public override string LocalizationDisplayName => "Loki's Tesseract";
 		new public static int BagStorageID;
-		public static SortedSet<int> Blacklist {
-			get {
-				if (blacklist == null) {
-					blacklist = new() {
-
-					};
-				}
-
-				return blacklist;
-			}
-		}
-		private static SortedSet<int> blacklist = null;
-		public static bool ItemAllowedToBeStored(Item item) => item?.ModItem != null && (item.ModItem is UnloadedItem unloadedItem ? unloadedItem.ModName : item.ModItem.Mod.Name) == AndroMod.thoriumModName && !Blacklist.Contains(item.type);
 		new public static Color PanelColor => new Color(4, 189, 189, androLib.Common.Configs.ConfigValues.UIAlpha);
 		new public static Color ScrollBarColor => new Color(180, 76, 0, androLib.Common.Configs.ConfigValues.UIAlpha);
 		new public static Color ButtonHoverColor => new Color(150, 255, 255, androLib.Common.Configs.ConfigValues.UIAlpha);
@@ -47,7 +36,8 @@ namespace VacuumBags.Items
 				() => ButtonHoverColor, // Get Button hover color function. Func<using Microsoft.Xna.Framework.Color>
 				() => ModContent.ItemType<LokisTesseract>(),//Get ModItem type
 				80,//UI Left
-				675//UI Top
+				675,//UI Top
+				() => AllowedItems
 			);
 		}
 		public override void AddRecipes() {
@@ -86,6 +76,62 @@ namespace VacuumBags.Items
 					}
 				}
 			}
+		}
+
+		public static bool ItemAllowedToBeStored(Item item) => AllowedItems.Contains(item.type) || item.ModItem is UnloadedItem unloadedItem && unloadedItem.ModName == AndroMod.thoriumModName;
+		public static SortedSet<int> AllowedItems => AllowedItemsManager.AllowedItems;
+		public static AllowedItemsManager AllowedItemsManager = new(ModContent.ItemType<LokisTesseract>, () => BagStorageID, DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
+		public AllowedItemsManager GetAllowedItemsManager => AllowedItemsManager;
+		protected static bool? DevCheck(ItemSetInfo info, SortedSet<ItemGroup> itemGroups, SortedSet<string> endWords, SortedSet<string> searchWords) {
+			return null;
+		}
+		protected static SortedSet<int> DevWhiteList() {
+			SortedSet<int> devWhiteList = AndroMod.thoriumEnabled ? new(AndroMod.thoriumMod.GetContent<ModItem>().Where(m => m != null).Select(m => m.Type)) : new();
+
+			return devWhiteList;
+		}
+		protected static SortedSet<string> DevModWhiteList() {
+			SortedSet<string> devModWhiteList = new() {
+
+			};
+
+			return devModWhiteList;
+		}
+		protected static SortedSet<int> DevBlackList() {
+			SortedSet<int> devBlackList = new() {
+
+			};
+
+			return devBlackList;
+		}
+		protected static SortedSet<string> DevModBlackList() {
+			SortedSet<string> devModBlackList = new() {
+
+			};
+
+			return devModBlackList;
+		}
+		protected static SortedSet<ItemGroup> ItemGroups() {
+			SortedSet<ItemGroup> itemGroups = new() {
+
+			};
+
+			return itemGroups;
+		}
+		protected static SortedSet<string> EndWords() {
+			SortedSet<string> endWords = new() {
+
+			};
+
+			return endWords;
+		}
+
+		protected static SortedSet<string> SearchWords() {
+			SortedSet<string> searchWords = new() {
+
+			};
+
+			return searchWords;
 		}
 	}
 }

@@ -10,41 +10,18 @@ using Terraria;
 using Microsoft.Xna.Framework;
 using Terraria.ModLoader.Default;
 using androLib.Common.Globals;
+using androLib.Items;
+using static Terraria.ID.ContentSamples.CreativeHelper;
 
 namespace VacuumBags.Items
 {
 	[Autoload(false)]
-	public class EssenceOfGathering : ModBag
+	public class EssenceOfGathering : ModBag, INeedsSetUpAllowedList
 	{
 		public override string ModDisplayNameTooltip => "Stars Above";
 		public override string LocalizationDisplayName => "Essence of Gathering";
 		public override string Artist => "Stars Above";
 		new public static int BagStorageID;
-		public static SortedSet<int> Blacklist {
-			get {
-				if (blacklist == null)
-					GetBlackList();
-
-				return blacklist;
-			}
-		}
-		private static SortedSet<int> blacklist = null;
-		private static void GetBlackList() {
-			blacklist = new() {
-
-			};
-
-			SortedSet<string> modItemBlacklist = new() {
-				"StarsAbove/Starlight"
-			};
-
-			for (int i = ItemID.Count; i < ItemLoader.ItemCount; i++) {
-				Item item = ContentSamples.ItemsByType[i];
-				if (modItemBlacklist.Contains(item.ModFullName()))
-					blacklist.Add(item.type);
-			}
-		}
-		public static bool ItemAllowedToBeStored(Item item) => item?.ModItem != null && (item.ModItem is UnloadedItem unloadedItem ? unloadedItem.ModName : item.ModItem.Mod.Name) == AndroMod.starsAboveModName && !Blacklist.Contains(item.type);
 		new public static Color PanelColor => new Color(152, 59, 137, androLib.Common.Configs.ConfigValues.UIAlpha);
 		new public static Color ScrollBarColor => new Color(44, 60, 180, androLib.Common.Configs.ConfigValues.UIAlpha);
 		new public static Color ButtonHoverColor => new Color(200, 75, 160, androLib.Common.Configs.ConfigValues.UIAlpha);
@@ -61,7 +38,8 @@ namespace VacuumBags.Items
 				() => ButtonHoverColor, // Get Button hover color function. Func<using Microsoft.Xna.Framework.Color>
 				() => ModContent.ItemType<EssenceOfGathering>(),//Get ModItem type
 				80,//UI Left
-				675//UI Top
+				675,//UI Top
+				() => AllowedItems
 			);
 		}
 		public override void AddRecipes() {
@@ -85,6 +63,62 @@ namespace VacuumBags.Items
 					.Register();
 				}
 			}
+		}
+
+		public static bool ItemAllowedToBeStored(Item item) => AllowedItems.Contains(item.type) || item.ModItem is UnloadedItem unloadedItem && unloadedItem.ModName == AndroMod.starsAboveModName;
+		public static SortedSet<int> AllowedItems => AllowedItemsManager.AllowedItems;
+		public static AllowedItemsManager AllowedItemsManager = new(ModContent.ItemType<EssenceOfGathering>, () => BagStorageID, DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
+		public AllowedItemsManager GetAllowedItemsManager => AllowedItemsManager;
+		protected static bool? DevCheck(ItemSetInfo info, SortedSet<ItemGroup> itemGroups, SortedSet<string> endWords, SortedSet<string> searchWords) {
+			return null;
+		}
+		protected static SortedSet<int> DevWhiteList() {
+			SortedSet<int> devWhiteList = AndroMod.starsAboveEnabled ? new(AndroMod.starsAboveMod.GetContent<ModItem>().Where(m => m != null).Select(m => m.Type)) : new();
+
+			return devWhiteList;
+		}
+		protected static SortedSet<string> DevModWhiteList() {
+			SortedSet<string> devModWhiteList = new() {
+
+			};
+
+			return devModWhiteList;
+		}
+		protected static SortedSet<int> DevBlackList() {
+			SortedSet<int> devBlackList = new() {
+
+			};
+
+			return devBlackList;
+		}
+		protected static SortedSet<string> DevModBlackList() {
+			SortedSet<string> devModBlackList = new() {
+				
+			};
+
+			return devModBlackList;
+		}
+		protected static SortedSet<ItemGroup> ItemGroups() {
+			SortedSet<ItemGroup> itemGroups = new() {
+
+			};
+
+			return itemGroups;
+		}
+		protected static SortedSet<string> EndWords() {
+			SortedSet<string> endWords = new() {
+
+			};
+
+			return endWords;
+		}
+
+		protected static SortedSet<string> SearchWords() {
+			SortedSet<string> searchWords = new() {
+
+			};
+
+			return searchWords;
 		}
 	}
 }

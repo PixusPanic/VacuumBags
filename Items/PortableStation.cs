@@ -72,6 +72,7 @@ namespace VacuumBags.Items
 				80,//UI Left
 				675,//UI Top
 				() => AllowedItems,
+				false,
 				() => UpdateAllSelectedFromBag(Main.SceneMetrics)
 			);
 		}

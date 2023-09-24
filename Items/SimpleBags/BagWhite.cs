@@ -24,6 +24,8 @@ namespace VacuumBags.Items
 						ModContent.ItemType<BagWhite>(),
 						ModContent.ItemType<PackWhite>(),
 					};
+
+					blacklist.UnionWith(StorageManager.GetPlayerBlackListSortedSet(BagStorageID));
 				}
 
 				return blacklist;
@@ -45,7 +47,9 @@ namespace VacuumBags.Items
 				() => new Color(240, 240, 240, androLib.Common.Configs.ConfigValues.UIAlpha), // Get Button hover color function. Func<using Microsoft.Xna.Framework.Color>
 				() => ModContent.ItemType<BagWhite>(),//Get ModItem type
 				80,//UI Left
-				675//UI Top
+				675,//UI Top
+				() => Blacklist,
+				true
 			);
 		}
 		public override void AddRecipes() {

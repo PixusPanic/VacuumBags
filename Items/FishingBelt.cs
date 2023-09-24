@@ -68,6 +68,7 @@ namespace VacuumBags.Items
 				80,//UI Left
 				675,//UI Top
 				() => AllowedItems,
+				false,
 				() => typeof(Player).GetMethod("Fishing_GetBait", BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(Main.LocalPlayer, new object[] { null }),
 				true//Update info accessories in bag
 			);

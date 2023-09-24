@@ -64,7 +64,8 @@ namespace VacuumBags.Items
 				() => ModContent.ItemType<BossBag>(),//Get ModItem type
 				80,//UI Left
 				675,//UI Top
-				() => AllowedItems
+				() => AllowedItems,
+				false
 			);
 		}
 		public static bool ItemAllowedToBeStored(Item item) => AllowedItems.Contains(item.type);
