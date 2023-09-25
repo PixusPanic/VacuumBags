@@ -633,8 +633,10 @@ namespace VacuumBags.Items
 						}
 						else {
 							if (firstCheckSinceLoad) {
+								if (!favorited) {
 								Pause(inv);
 								RemoveBuff(player);
+							}
 							}
 							else {
 								if (!favorited) {

@@ -12,6 +12,8 @@ using static Terraria.ID.ContentSamples.CreativeHelper;
 using System;
 using androLib.UI;
 using System.Reflection;
+using MonoMod.Cil;
+using Mono.Cecil.Cil;
 
 namespace VacuumBags.Items
 {
@@ -76,19 +78,65 @@ namespace VacuumBags.Items
 
 		internal static void OnFishing_GetBait(On_Player.orig_Fishing_GetBait orig, Player self, out Item bait) {
 			orig(self, out bait);
-			if (Main.LocalPlayer.HeldItem.fishingPole <= 0)
-				return;
-
-			Item bagBait = ChooseFromBagOnlyIfFirstInInventory(
-				bait,
-				self,
-				BagStorageID,
-				(Item item) => item.bait > 0
-			);
+			Item bagBait = GetBaitFromBag(bait, self);
 
 			if (bagBait != null)
 				bait = bagBait;
 		}
+		private static Item GetBaitFromBag(Item vanillaBait, Player player) {
+			return ChooseFromBagOnlyIfFirstInInventory(
+				vanillaBait,
+				player,
+				BagStorageID,
+				(Item item) => item.bait > 0
+			);
+		}
+		private static Item chosenBaitToConsume = null;
+		internal static void OnItemCheck_CheckFishingBobber_PickAndConsumeBait(ILContext il) {
+			//IL_0041: ldloc.0
+			//IL_007e: ldc.i4.m1
+			//IL_007f: bgt.s IL_0082
+
+			//IL_0081: ret
+
+			var c = new ILCursor(il);
+
+			if (!c.TryGotoNext(MoveType.Before,
+				i => i.MatchLdloc(0),
+				i => i.MatchLdcI4(-1),
+				i => i.MatchBgt(out _),
+				i => i.MatchRet()
+			)) { throw new Exception("Failed to find instructions OnItemCheck_CheckFishingBobber_PickAndConsumeBait 1/2"); }
+
+			c.Emit(OpCodes.Ldloca, 0);
+			c.Emit(OpCodes.Ldarg_0);
+
+			c.EmitDelegate((ref int inventoryIndex, Player player) => {
+				chosenBaitToConsume = null;
+				Item vanillaBait = inventoryIndex >= 0 ? player.inventory[inventoryIndex] : null;
+				Item bait = GetBaitFromBag(vanillaBait, player);
+				if (bait != null) {
+					inventoryIndex = 0;
+					chosenBaitToConsume = bait;
+				}
+			});
+
+			//IL_008a: stloc.1
+			//IL_008b: ldc.i4.0
+			//IL_008c: stloc.2
+
+			if (!c.TryGotoNext(MoveType.Before,
+				i => i.MatchStloc(1),
+				i => i.MatchLdcI4(0),
+				i => i.MatchStloc(2)
+			)) { throw new Exception("Failed to find instructions OnItemCheck_CheckFishingBobber_PickAndConsumeBait 2/2"); }
+
+			c.EmitDelegate((ref Item item) => {
+				return chosenBaitToConsume ?? item;
+			});
+		}
+
+		#region AllowedItems
 
 		public static bool ItemAllowedToBeStored(Item item) => AllowedItems.Contains(item.type);
 
@@ -267,6 +315,7 @@ namespace VacuumBags.Items
 			return searchWords;
 		}
 
+		#endregion
 
 		#region AndroModItem attributes that you don't need.
 

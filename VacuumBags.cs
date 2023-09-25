@@ -69,6 +69,7 @@ namespace VacuumBags
 			IL_Player.SmartSelect_PickToolForStrategy += AmmoBag.OnSmartSelect_PickToolForStrategy;
 			IL_Player.AdjTiles += PortableStation.OnAdjTiles;
 			IL_SceneMetrics.ScanAndExportToMain += IL_SceneMetrics_ScanAndExportToMain;
+			IL_Player.ItemCheck_CheckFishingBobber_PickAndConsumeBait += FishingBelt.OnItemCheck_CheckFishingBobber_PickAndConsumeBait;
 
 			VacuumBagsLocalizationData.RegisterSDataPackage();
 
