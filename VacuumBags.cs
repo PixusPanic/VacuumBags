@@ -70,6 +70,7 @@ namespace VacuumBags
 			IL_Player.AdjTiles += PortableStation.OnAdjTiles;
 			IL_SceneMetrics.ScanAndExportToMain += IL_SceneMetrics_ScanAndExportToMain;
 			IL_Player.ItemCheck_CheckFishingBobber_PickAndConsumeBait += FishingBelt.OnItemCheck_CheckFishingBobber_PickAndConsumeBait;
+			IL_Projectile.AI_061_FishingBobber_GiveItemToPlayer += FishingBelt.On_AI_061_FishingBobber_GiveItemToPlayer;
 
 			VacuumBagsLocalizationData.RegisterSDataPackage();
 

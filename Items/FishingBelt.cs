@@ -14,6 +14,7 @@ using androLib.UI;
 using System.Reflection;
 using MonoMod.Cil;
 using Mono.Cecil.Cil;
+using rail;
 
 namespace VacuumBags.Items
 {
@@ -133,6 +134,37 @@ namespace VacuumBags.Items
 
 			c.EmitDelegate((ref Item item) => {
 				return chosenBaitToConsume ?? item;
+			});
+		}
+		internal static void On_AI_061_FishingBobber_GiveItemToPlayer(ILContext il) {
+			var c = new ILCursor(il);
+
+			//IL_0176: callvirt instance class Terraria.Item Terraria.Player::GetItem(int32, class Terraria.Item, valuetype Terraria.GetItemSettings)
+			//IL_017b: stloc.1
+
+			//note to self: If trying to replace a function call, you need to use c.Remove() which removes the next instruction,
+			//	not pop as pop is an instruction and will attempt to be an argument (I think)
+			if (!c.TryGotoNext(MoveType.Before,
+				i => i.MatchCallvirt(typeof(Player).GetMethod("GetItem", new Type[] { typeof(int), typeof(Item), typeof(GetItemSettings) })),
+				i => i.MatchStloc(1)
+			)) { throw new Exception("Failed to find instructions On_AI_061_FishingBobber_GiveItemToPlayer 1/2"); }
+
+			//c.Emit(OpCodes.Ldarg_1);
+			//$"c.Index: {c.Index} Instruction: {c.Next}".LogSimple();
+			//$"c.Index: {c.Index} Instruction: {c.Prev}".LogSimple();
+			//c.EmitPop();
+			c.Remove();
+			//$"c.Index: {c.Index} Instruction: {c.Next}".LogSimple();
+			//$"c.Index: {c.Index} Instruction: {c.Prev}".LogSimple();
+			c.EmitDelegate((Player player, int owner, Item item, GetItemSettings settings) => {//, Player player) => {
+				//return new Item();
+				if (owner == Main.myPlayer) {
+					Item clone = item.Clone();
+					if (StorageManager.TryVacuumItem(ref clone, player))
+						return clone;
+				}
+
+				return player.GetItem(owner, item, settings);
 			});
 		}
 
