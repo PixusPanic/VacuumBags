@@ -83,7 +83,7 @@ namespace VacuumBags.Items
 			if (ActiveBannersFromTileNearbyEffects.Any())
 				return;
 
-			if (StorageManager.HasRequiredItemToUseStorageFromBagType(player, ModContent.ItemType<BannerBag>(), out _))
+			if (StorageManager.HasRequiredItemToUseStorageFromBagTypeSlow(player, ModContent.ItemType<BannerBag>()))
 				ApplyFirstXBanners(ref sceneMetrics, player, VacuumBags.serverConfig.BannerBagNumberOfBannersInInventory);
 		}
 		public static IEnumerable<Item> GetBanners(Player player, int firstXBanners) {

@@ -454,8 +454,8 @@ namespace VacuumBags.Items
 			trackedItemIndexes.Clear();
 		}
 		internal static void PostUpdateBuffs(Player player) {
-			hasExquisiteFlask = StorageManager.HasRequiredItemToUseStorageFromBagType(player, ExquisitePotionFlaskType, out _, true);
-			hasPotionFlask = hasExquisiteFlask || StorageManager.HasRequiredItemToUseStorageFromBagType(player, PotionFlaskType, out _);
+			hasExquisiteFlask = StorageManager.HasRequiredItemToUseStorageFromBagTypeSlow(player, ExquisitePotionFlaskType, out _, true);
+			hasPotionFlask = hasExquisiteFlask || StorageManager.HasRequiredItemToUseStorageFromBagTypeSlow(player, PotionFlaskType);
 			if (!hasPotionFlask && Buffs.Count == 0) {
 				lastHasPotionFlask = false;
 				return;

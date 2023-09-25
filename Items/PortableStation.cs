@@ -107,7 +107,7 @@ namespace VacuumBags.Items
 			if (ActiveStationsFromPortableStation.Any())
 				return;
 
-			if (StorageManager.HasRequiredItemToUseStorageFromBagType(player, ModContent.ItemType<PortableStation>(), out _))
+			if (StorageManager.HasRequiredItemToUseStorageFromBagTypeSlow(player, ModContent.ItemType<PortableStation>()))
 				ApplyFirstXStationTiles(player, VacuumBags.serverConfig.PortableStationNumberOfStationsInInventory);
 		}
 		public static IEnumerable<Item> GetStations(Player player, int firstXBanners) {
@@ -160,7 +160,7 @@ namespace VacuumBags.Items
 			if (ActiveBuffsFromTileNearbyEffects.Any())
 				return;
 
-			if (StorageManager.HasRequiredItemToUseStorageFromBagType(player, ModContent.ItemType<PortableStation>(), out _))
+			if (StorageManager.HasRequiredItemToUseStorageFromBagTypeSlow(player, ModContent.ItemType<PortableStation>()))
 				ApplyFirstXPassiveBuffs(ref sceneMetrics, player, VacuumBags.serverConfig.PortableStationNumberOfPassiveBuffStationsInInventory);
 		}
 		public static IEnumerable<Item> GetPassiveBuffsStations(SceneMetrics sceneMetrics, Player player, int firstXBuffs) {

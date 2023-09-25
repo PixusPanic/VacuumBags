@@ -98,6 +98,9 @@ namespace VacuumBags
 			}
 		}
 		public void RegisterAllBagsWithAndroLib() {
+			if (Main.netMode == NetmodeID.Server)
+				return;
+
 			if (registeredWithAndroLib)
 				return;
 
@@ -216,7 +219,7 @@ namespace VacuumBags
 
 			c.EmitDelegate((int ammoCount, Item weapon) => {
 				int ammoBagItemType = ModContent.ItemType<AmmoBag>();
-				if (!StorageManager.HasRequiredItemToUseStorageFromBagType(Main.LocalPlayer, ammoBagItemType, out _))
+				if (!StorageManager.HasRequiredItemToUseStorageFromBagTypeSlow(Main.LocalPlayer, ammoBagItemType))
 					return ammoCount;
 
 				foreach (Item item in StorageManager.GetItems(AmmoBag.BagStorageID)) {
@@ -247,7 +250,7 @@ namespace VacuumBags
 
 			c.EmitDelegate((int baitCount) => {
 				int fishingBeltItemType = ModContent.ItemType<FishingBelt>();
-				if (!StorageManager.HasRequiredItemToUseStorageFromBagType(Main.LocalPlayer, fishingBeltItemType, out _))
+				if (!StorageManager.HasRequiredItemToUseStorageFromBagTypeSlow(Main.LocalPlayer, fishingBeltItemType, out _))
 					return baitCount;
 
 				foreach (Item item in StorageManager.GetItems(FishingBelt.BagStorageID)) {
@@ -311,7 +314,7 @@ namespace VacuumBags
 
 			c.EmitDelegate((int wireCount) => {
 				int mechanicsToolbeltItemType = ModContent.ItemType<MechanicsToolbelt>();
-				if (!StorageManager.HasRequiredItemToUseStorageFromBagType(Main.LocalPlayer, mechanicsToolbeltItemType, out _))
+				if (!StorageManager.HasRequiredItemToUseStorageFromBagTypeSlow(Main.LocalPlayer, mechanicsToolbeltItemType, out _))
 					return wireCount;
 
 				foreach (Item item in StorageManager.GetItems(MechanicsToolbelt.BagStorageID)) {

@@ -151,7 +151,7 @@ namespace VacuumBags.Items
 					return;
 
 				int mechanicsToolbeltItemType = ModContent.ItemType<MechanicsToolbelt>();
-				if (!StorageManager.HasRequiredItemToUseStorageFromBagType(Main.LocalPlayer, mechanicsToolbeltItemType, out _))
+				if (!StorageManager.HasRequiredItemToUseStorageFromBagTypeSlow(Main.LocalPlayer, mechanicsToolbeltItemType))
 					return;
 
 				Item wireItem = ChooseWireFromBelt(player);

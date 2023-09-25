@@ -46,6 +46,9 @@ namespace VacuumBags
 			TouchingStation = false;
 		}
 		public override void PostUpdateBuffs() {
+			if (Main.netMode == NetmodeID.Server)
+				return;
+
 			if (Player.honeyWet)
 				honeyWetResetTime = Main.GameUpdateCount + HoneyBuffTime;
 
@@ -202,6 +205,9 @@ namespace VacuumBags
 			nextFullCheckTime = Main.GameUpdateCount + TicksPerSecond;
 		}
 		private void UpdatePlayerPortableStorageOverlap() {
+			if (lastHoneyBucketLocation == -1)
+				return;
+
 			Player player = Player;
 			Point p = new Point(0, 2);
 			Vector2 vector = p.ToVector2();
