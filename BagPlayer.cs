@@ -212,7 +212,6 @@ namespace VacuumBags
 			Point p = new Point(0, 2);
 			Vector2 vector = p.ToVector2();
 			List<Point> tilesIn2 = Collision.GetTilesIn(player.TopLeft, player.BottomRight + vector);
-			//Rectangle hitbox = new(player.Hitbox.X, player.Hitbox.Y, player.Hitbox.Width, player.Hitbox.Height + 2);
 			for (int j = 0; j < tilesIn2.Count; j++) {
 				Point point2 = tilesIn2[j];
 				Tile tile2 = Main.tile[point2.X, point2.Y];
