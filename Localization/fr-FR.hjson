@@ -5,7 +5,6 @@ Mods: {
 			BagsClientConfig: {
 				BagStorageOptions: Options de stockage des sacs
 				DisplayName: Configuration client
-				Logging: Enregistrement
 
 				AllAmmoItemsGoIntoAmmoBag: {
 					Label: Toutes les munitions vont dans le sac de munitions
@@ -22,15 +21,6 @@ Mods: {
 						'''
 						Lorsque cette option est activée, chaque élément qui crée une tuile lorsqu'il est utilisé sera ajouté à la liste blanche de la Builder's Box s'il ne figure pas déjà dans la liste blanche d'un autre sac.
 						Ceci est censé attraper la plupart des meubles, mais peut finir par attirer d'autres objets qui ne sont pas prévus.
-						'''
-				}
-
-				LogAllPlayerWhiteAndBlackLists: {
-					Label: Enregistrez toutes les listes blanches et noires de tous les joueurs
-					Tooltip:
-						'''
-						Si c'est vrai, toutes les listes blanches et noires des joueurs seront enregistrées dans le client.log.
-						Si vous apportez des modifications aux listes blanches/noires qui, selon vous, devraient être des modifications standard pour tout le monde, veuillez les imprimer et m'envoyer votre client.log. -andro951
 						'''
 				}
 
@@ -627,6 +617,20 @@ Mods: {
 					'''
 			}
 
+			TrashCan: {
+				DisplayName: Poubelle
+				Tooltip:
+					'''
+					Utilisé pour vendre automatiquement des articles.
+					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
+					Faites un clic droit pour ouvrir le sac.
+					La poubelle agit comme les autres sacs mais à quelques exceptions près :
+					Il ne contiendra qu’un seul objet de chaque type.
+					Si un objet est ajouté à la poubelle alors qu’il y en a déjà un du même type dans la poubelle, le nouveau sera vendu.
+					Le bouton Effacer la corbeille vendra tous les éléments de la corbeille qui ne sont pas favoris.
+					'''
+			}
+
 			WallEr: {
 				DisplayName: Wall-Er
 				Tooltip:
@@ -639,36 +643,36 @@ Mods: {
 			}
 
 			OreBag: {
-				// Tooltip: ""
 				// DisplayName: Ore Bag
+				// Tooltip: ""
 			}
 		}
 
 		Tiles: {
-			// BagBlack.MapEntry: Bag Black
-			// BagBlue.MapEntry: Bag Blue
-			// BagBrown.MapEntry: Bag Brown
-			// BagGray.MapEntry: Bag Gray
-			// BagGreen.MapEntry: Bag Green
-			// BagOrange.MapEntry: Bag Orange
-			// BagPink.MapEntry: Bag Pink
-			// BagPurple.MapEntry: Bag Purple
-			// BagRed.MapEntry: Bag Red
-			// BagWhite.MapEntry: Bag White
-			// BagYellow.MapEntry: Bag Yellow
-			// BannerBag.MapEntry: Banner Bag
-			// PackBlack.MapEntry: Pack Black
-			// PackBlue.MapEntry: Pack Blue
-			// PackBrown.MapEntry: Pack Brown
-			// PackGray.MapEntry: Pack Gray
-			// PackGreen.MapEntry: Pack Green
-			// PackOrange.MapEntry: Pack Orange
-			// PackPink.MapEntry: Pack Pink
-			// PackPurple.MapEntry: Pack Purple
-			// PackRed.MapEntry: Pack Red
-			// PackWhite.MapEntry: Pack White
-			// PackYellow.MapEntry: Pack Yellow
 			// PortableStation.MapEntry: Portable Station
+			// PackYellow.MapEntry: Pack Yellow
+			// PackWhite.MapEntry: Pack White
+			// PackRed.MapEntry: Pack Red
+			// PackPurple.MapEntry: Pack Purple
+			// PackPink.MapEntry: Pack Pink
+			// PackOrange.MapEntry: Pack Orange
+			// PackGreen.MapEntry: Pack Green
+			// PackGray.MapEntry: Pack Gray
+			// PackBrown.MapEntry: Pack Brown
+			// PackBlue.MapEntry: Pack Blue
+			// PackBlack.MapEntry: Pack Black
+			// BannerBag.MapEntry: Banner Bag
+			// BagYellow.MapEntry: Bag Yellow
+			// BagWhite.MapEntry: Bag White
+			// BagRed.MapEntry: Bag Red
+			// BagPurple.MapEntry: Bag Purple
+			// BagPink.MapEntry: Bag Pink
+			// BagOrange.MapEntry: Bag Orange
+			// BagGreen.MapEntry: Bag Green
+			// BagGray.MapEntry: Bag Gray
+			// BagBrown.MapEntry: Bag Brown
+			// BagBlue.MapEntry: Bag Blue
+			// BagBlack.MapEntry: Bag Black
 		}
 	}
 }

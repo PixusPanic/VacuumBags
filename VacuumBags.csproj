@@ -51,6 +51,7 @@
     <None Remove="Items\Sprites\PotionFlask.png" />
     <None Remove="Items\Sprites\SlayersSack.png" />
     <None Remove="Items\Sprites\SpookyGourd.png" />
+    <None Remove="Items\Sprites\TrashCan.png" />
     <None Remove="Items\Sprites\WallEr.png" />
     <None Remove="Localization\de-DE.hjson" />
     <None Remove="Localization\en-UI.hjson" />

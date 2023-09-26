@@ -5,7 +5,6 @@ Mods: {
 			BagsClientConfig: {
 				BagStorageOptions: Bag Storage Options
 				DisplayName: Client Config
-				Logging: Logging
 
 				AllAmmoItemsGoIntoAmmoBag: {
 					Label: All Ammo Items Go Into Ammo Bag
@@ -22,15 +21,6 @@ Mods: {
 						'''
 						When on, every item that creates a tile when used will be added to the Builder's Box whitelist if it does not already go into another bag's whitelist.
 						This is supposed to catch most furniture, but may end up pulling in other items that aren't intended.
-						'''
-				}
-
-				LogAllPlayerWhiteAndBlackLists: {
-					Label: Log All Player White And Black Lists
-					Tooltip:
-						'''
-						If true, all player white lists and black lists will be logged to the client.log.
-						If you make changes to the white/black lists that you think should be standard changes for everyone, please print them and send me your client.log. -andro951
 						'''
 				}
 
@@ -627,6 +617,20 @@ Mods: {
 					'''
 			}
 
+			TrashCan: {
+				DisplayName: Trash Can
+				Tooltip:
+					'''
+					Used to automatically sell items.
+					When in your inventory, the contents of the bag are available for crafting.
+					Right click to open the bag.
+					The trash can acts like other bags but with a few exceptions:
+					It will only hold 1 item of each type.
+					If an item is added to the trash can when there is already one of the same type in the can, the new one will be sold.
+					The Clear Trash button will sell all items in the trash can that are not favorited.
+					'''
+			}
+
 			WallEr: {
 				DisplayName: Wall-Er
 				Tooltip:
@@ -639,36 +643,36 @@ Mods: {
 			}
 
 			OreBag: {
-				Tooltip: ""
 				DisplayName: Ore Bag
+				Tooltip: ""
 			}
 		}
 
 		Tiles: {
-			BagBlack.MapEntry: Bag Black
-			BagBlue.MapEntry: Bag Blue
-			BagBrown.MapEntry: Bag Brown
-			BagGray.MapEntry: Bag Gray
-			BagGreen.MapEntry: Bag Green
-			BagOrange.MapEntry: Bag Orange
-			BagPink.MapEntry: Bag Pink
-			BagPurple.MapEntry: Bag Purple
-			BagRed.MapEntry: Bag Red
-			BagWhite.MapEntry: Bag White
-			BagYellow.MapEntry: Bag Yellow
-			BannerBag.MapEntry: Banner Bag
-			PackBlack.MapEntry: Pack Black
-			PackBlue.MapEntry: Pack Blue
-			PackBrown.MapEntry: Pack Brown
-			PackGray.MapEntry: Pack Gray
-			PackGreen.MapEntry: Pack Green
-			PackOrange.MapEntry: Pack Orange
-			PackPink.MapEntry: Pack Pink
-			PackPurple.MapEntry: Pack Purple
-			PackRed.MapEntry: Pack Red
-			PackWhite.MapEntry: Pack White
-			PackYellow.MapEntry: Pack Yellow
 			PortableStation.MapEntry: Portable Station
+			PackYellow.MapEntry: Pack Yellow
+			PackWhite.MapEntry: Pack White
+			PackRed.MapEntry: Pack Red
+			PackPurple.MapEntry: Pack Purple
+			PackPink.MapEntry: Pack Pink
+			PackOrange.MapEntry: Pack Orange
+			PackGreen.MapEntry: Pack Green
+			PackGray.MapEntry: Pack Gray
+			PackBrown.MapEntry: Pack Brown
+			PackBlue.MapEntry: Pack Blue
+			PackBlack.MapEntry: Pack Black
+			BannerBag.MapEntry: Banner Bag
+			BagYellow.MapEntry: Bag Yellow
+			BagWhite.MapEntry: Bag White
+			BagRed.MapEntry: Bag Red
+			BagPurple.MapEntry: Bag Purple
+			BagPink.MapEntry: Bag Pink
+			BagOrange.MapEntry: Bag Orange
+			BagGreen.MapEntry: Bag Green
+			BagGray.MapEntry: Bag Gray
+			BagBrown.MapEntry: Bag Brown
+			BagBlue.MapEntry: Bag Blue
+			BagBlack.MapEntry: Bag Black
 		}
 	}
 }

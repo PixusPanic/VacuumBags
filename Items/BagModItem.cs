@@ -214,6 +214,8 @@ namespace VacuumBags.Items
 					if (inventory[j].stack > 0 && itemCondition(inventory[j]))
 						return null;
 				}
+
+				return fromBag();
 			}
 
 			for (int k = 0; k < bagIndex; k++) {

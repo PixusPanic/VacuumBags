@@ -103,7 +103,6 @@ namespace VacuumBags.Items
 			var c = new ILCursor(il);
 
 			if (!c.TryGotoNext(MoveType.Before,
-				i => i.MatchLdloc(0),
 				i => i.MatchLdcI4(-1),
 				i => i.MatchBgt(out _),
 				i => i.MatchRet()
@@ -112,7 +111,7 @@ namespace VacuumBags.Items
 			c.Emit(OpCodes.Ldloca, 0);
 			c.Emit(OpCodes.Ldarg_0);
 
-			c.EmitDelegate((ref int inventoryIndex, Player player) => {
+			c.EmitDelegate((int loadedInventoryIndex , ref int inventoryIndex, Player player) => {
 				chosenBaitToConsume = null;
 				Item vanillaBait = inventoryIndex >= 0 ? player.inventory[inventoryIndex] : null;
 				Item bait = GetBaitFromBag(vanillaBait, player);
@@ -120,6 +119,8 @@ namespace VacuumBags.Items
 					inventoryIndex = 0;
 					chosenBaitToConsume = bait;
 				}
+
+				return inventoryIndex;
 			});
 
 			//IL_008a: stloc.1
@@ -132,7 +133,7 @@ namespace VacuumBags.Items
 				i => i.MatchStloc(2)
 			)) { throw new Exception("Failed to find instructions OnItemCheck_CheckFishingBobber_PickAndConsumeBait 2/2"); }
 
-			c.EmitDelegate((ref Item item) => {
+			c.EmitDelegate((Item item) => {
 				return chosenBaitToConsume ?? item;
 			});
 		}
@@ -147,7 +148,7 @@ namespace VacuumBags.Items
 			if (!c.TryGotoNext(MoveType.Before,
 				i => i.MatchCallvirt(typeof(Player).GetMethod("GetItem", new Type[] { typeof(int), typeof(Item), typeof(GetItemSettings) })),
 				i => i.MatchStloc(1)
-			)) { throw new Exception("Failed to find instructions On_AI_061_FishingBobber_GiveItemToPlayer 1/2"); }
+			)) { throw new Exception("Failed to find instructions On_AI_061_FishingBobber_GiveItemToPlayer 1/1"); }
 
 			//c.Emit(OpCodes.Ldarg_1);
 			//$"c.Index: {c.Index} Instruction: {c.Next}".LogSimple();
@@ -156,8 +157,29 @@ namespace VacuumBags.Items
 			c.Remove();
 			//$"c.Index: {c.Index} Instruction: {c.Next}".LogSimple();
 			//$"c.Index: {c.Index} Instruction: {c.Prev}".LogSimple();
-			c.EmitDelegate((Player player, int owner, Item item, GetItemSettings settings) => {//, Player player) => {
-				//return new Item();
+			c.EmitDelegate((Player player, int owner, Item item, GetItemSettings settings) => {
+				if (owner == Main.myPlayer) {
+					Item clone = item.Clone();
+					if (StorageManager.TryVacuumItem(ref clone, player))
+						return clone;
+				}
+
+				return player.GetItem(owner, item, settings);
+			});
+		}
+		internal static void OnGetAnglerReward(ILContext il) {
+			var c = new ILCursor(il);
+
+			//IL_00ac: call instance class Terraria.Item Terraria.Player::GetItem(int32, class Terraria.Item, valuetype Terraria.GetItemSettings)
+			//IL_00b1: stloc.s 7
+
+			if (!c.TryGotoNext(MoveType.Before,
+				i => i.MatchCall(typeof(Player).GetMethod("GetItem", new Type[] { typeof(int), typeof(Item), typeof(GetItemSettings) })),
+				i => i.MatchStloc(7)
+			)) { throw new Exception("Failed to find instructions OnGetAnglerReward 1/1"); }
+
+			c.Remove();
+			c.EmitDelegate((Player player, int owner, Item item, GetItemSettings settings) => {
 				if (owner == Main.myPlayer) {
 					Item clone = item.Clone();
 					if (StorageManager.TryVacuumItem(ref clone, player))
@@ -309,7 +331,8 @@ namespace VacuumBags.Items
 		}
 		protected static SortedSet<int> DevBlackList() {
 			SortedSet<int> devBlackList = new() {
-				ItemID.FishingPotion
+				ItemID.FishingPotion,
+				ItemID.Rockfish
 			};
 
 			return devBlackList;

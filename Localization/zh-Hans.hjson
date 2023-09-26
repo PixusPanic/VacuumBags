@@ -5,7 +5,6 @@ Mods: {
 			BagsClientConfig: {
 				BagStorageOptions: 行李存放选项
 				DisplayName: 客户端配置
-				Logging: 记录
 
 				AllAmmoItemsGoIntoAmmoBag: {
 					Label: 所有弹药物品都放入弹药袋中
@@ -22,15 +21,6 @@ Mods: {
 						'''
 						启用后，如果每个使用时创建图块的物品尚未进入另一个包的白名单，则该物品将被添加到建筑箱白名单中。
 						这应该可以抓住大多数家具，但最终可能会拉入其他不想要的物品。
-						'''
-				}
-
-				LogAllPlayerWhiteAndBlackLists: {
-					Label: 记录所有玩家白名单和黑名单
-					Tooltip:
-						'''
-						如果为 true，所有玩家白名单和黑名单都将记录到 client.log 中。
-						如果您对白/黑名单进行了更改，并且您认为这些更改应该是每个人的标准更改，请打印它们并向我发送您的 client.log。 -andro951
 						'''
 				}
 
@@ -627,6 +617,20 @@ Mods: {
 					'''
 			}
 
+			TrashCan: {
+				DisplayName: 垃圾箱
+				Tooltip:
+					'''
+					用于自动出售物品。
+					当你在库存中时，包里的东西可以用来制作。
+					右键点击打开袋子。
+					垃圾桶的作用与其他袋子类似，但有一些例外：
+					每种类型仅可容纳 1 件物品。
+					如果将一件物品添加到垃圾桶中，而垃圾桶中已有相同类型的物品，则新物品将被出售。
+					清除垃圾按钮将出售垃圾箱中所有不喜欢的物品。
+					'''
+			}
+
 			WallEr: {
 				DisplayName: 沃尔尔
 				Tooltip:
@@ -639,36 +643,36 @@ Mods: {
 			}
 
 			OreBag: {
-				// Tooltip: ""
 				// DisplayName: Ore Bag
+				// Tooltip: ""
 			}
 		}
 
 		Tiles: {
-			// BagBlack.MapEntry: Bag Black
-			// BagBlue.MapEntry: Bag Blue
-			// BagBrown.MapEntry: Bag Brown
-			// BagGray.MapEntry: Bag Gray
-			// BagGreen.MapEntry: Bag Green
-			// BagOrange.MapEntry: Bag Orange
-			// BagPink.MapEntry: Bag Pink
-			// BagPurple.MapEntry: Bag Purple
-			// BagRed.MapEntry: Bag Red
-			// BagWhite.MapEntry: Bag White
-			// BagYellow.MapEntry: Bag Yellow
-			// BannerBag.MapEntry: Banner Bag
-			// PackBlack.MapEntry: Pack Black
-			// PackBlue.MapEntry: Pack Blue
-			// PackBrown.MapEntry: Pack Brown
-			// PackGray.MapEntry: Pack Gray
-			// PackGreen.MapEntry: Pack Green
-			// PackOrange.MapEntry: Pack Orange
-			// PackPink.MapEntry: Pack Pink
-			// PackPurple.MapEntry: Pack Purple
-			// PackRed.MapEntry: Pack Red
-			// PackWhite.MapEntry: Pack White
-			// PackYellow.MapEntry: Pack Yellow
 			// PortableStation.MapEntry: Portable Station
+			// PackYellow.MapEntry: Pack Yellow
+			// PackWhite.MapEntry: Pack White
+			// PackRed.MapEntry: Pack Red
+			// PackPurple.MapEntry: Pack Purple
+			// PackPink.MapEntry: Pack Pink
+			// PackOrange.MapEntry: Pack Orange
+			// PackGreen.MapEntry: Pack Green
+			// PackGray.MapEntry: Pack Gray
+			// PackBrown.MapEntry: Pack Brown
+			// PackBlue.MapEntry: Pack Blue
+			// PackBlack.MapEntry: Pack Black
+			// BannerBag.MapEntry: Banner Bag
+			// BagYellow.MapEntry: Bag Yellow
+			// BagWhite.MapEntry: Bag White
+			// BagRed.MapEntry: Bag Red
+			// BagPurple.MapEntry: Bag Purple
+			// BagPink.MapEntry: Bag Pink
+			// BagOrange.MapEntry: Bag Orange
+			// BagGreen.MapEntry: Bag Green
+			// BagGray.MapEntry: Bag Gray
+			// BagBrown.MapEntry: Bag Brown
+			// BagBlue.MapEntry: Bag Blue
+			// BagBlack.MapEntry: Bag Black
 		}
 	}
 }

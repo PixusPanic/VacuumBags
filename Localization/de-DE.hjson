@@ -5,7 +5,6 @@ Mods: {
 			BagsClientConfig: {
 				BagStorageOptions: Aufbewahrungsmöglichkeiten für Taschen
 				DisplayName: Client-Konfiguration
-				Logging: Protokollierung
 
 				AllAmmoItemsGoIntoAmmoBag: {
 					Label: Alle Munitionsgegenstände kommen in die Munitionstasche
@@ -22,15 +21,6 @@ Mods: {
 						'''
 						Wenn diese Option aktiviert ist, wird jeder Gegenstand, der bei Verwendung eine Kachel erzeugt, der Whitelist der Builder's Box hinzugefügt, sofern er nicht bereits in der Whitelist einer anderen Tasche enthalten ist.
 						Dadurch sollen die meisten Möbel aufgefangen werden, es kann aber auch passieren, dass andere Gegenstände hineingezogen werden, die nicht dafür vorgesehen sind.
-						'''
-				}
-
-				LogAllPlayerWhiteAndBlackLists: {
-					Label: Protokollieren Sie die weißen und schwarzen Listen aller Spieler
-					Tooltip:
-						'''
-						Bei „true“ werden alle Whitelists und Blacklists der Spieler im client.log protokolliert.
-						Wenn Sie Änderungen an den White/Black-Listen vornehmen, die Ihrer Meinung nach für alle Standardänderungen sein sollten, drucken Sie diese bitte aus und senden Sie mir Ihr client.log. -andro951
 						'''
 				}
 
@@ -627,6 +617,20 @@ Mods: {
 					'''
 			}
 
+			TrashCan: {
+				DisplayName: Mülleimer
+				Tooltip:
+					'''
+					Wird zum automatischen Verkauf von Artikeln verwendet.
+					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
+					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
+					Der Mülleimer verhält sich wie andere Beutel, allerdings mit ein paar Ausnahmen:
+					Es kann nur 1 Gegenstand jedes Typs aufbewahrt werden.
+					Wenn ein Artikel in den Mülleimer gelegt wird, obwohl sich bereits ein Artikel desselben Typs im Mülleimer befindet, wird der neue Artikel verkauft.
+					Mit der Schaltfläche „Papierkorb löschen“ werden alle Artikel im Papierkorb verkauft, die nicht zu den Favoriten gehören.
+					'''
+			}
+
 			WallEr: {
 				DisplayName: Wall-Er
 				Tooltip:
@@ -639,36 +643,36 @@ Mods: {
 			}
 
 			OreBag: {
-				// Tooltip: ""
 				// DisplayName: Ore Bag
+				// Tooltip: ""
 			}
 		}
 
 		Tiles: {
-			// BagBlack.MapEntry: Bag Black
-			// BagBlue.MapEntry: Bag Blue
-			// BagBrown.MapEntry: Bag Brown
-			// BagGray.MapEntry: Bag Gray
-			// BagGreen.MapEntry: Bag Green
-			// BagOrange.MapEntry: Bag Orange
-			// BagPink.MapEntry: Bag Pink
-			// BagPurple.MapEntry: Bag Purple
-			// BagRed.MapEntry: Bag Red
-			// BagWhite.MapEntry: Bag White
-			// BagYellow.MapEntry: Bag Yellow
-			// BannerBag.MapEntry: Banner Bag
-			// PackBlack.MapEntry: Pack Black
-			// PackBlue.MapEntry: Pack Blue
-			// PackBrown.MapEntry: Pack Brown
-			// PackGray.MapEntry: Pack Gray
-			// PackGreen.MapEntry: Pack Green
-			// PackOrange.MapEntry: Pack Orange
-			// PackPink.MapEntry: Pack Pink
-			// PackPurple.MapEntry: Pack Purple
-			// PackRed.MapEntry: Pack Red
-			// PackWhite.MapEntry: Pack White
-			// PackYellow.MapEntry: Pack Yellow
 			// PortableStation.MapEntry: Portable Station
+			// PackYellow.MapEntry: Pack Yellow
+			// PackWhite.MapEntry: Pack White
+			// PackRed.MapEntry: Pack Red
+			// PackPurple.MapEntry: Pack Purple
+			// PackPink.MapEntry: Pack Pink
+			// PackOrange.MapEntry: Pack Orange
+			// PackGreen.MapEntry: Pack Green
+			// PackGray.MapEntry: Pack Gray
+			// PackBrown.MapEntry: Pack Brown
+			// PackBlue.MapEntry: Pack Blue
+			// PackBlack.MapEntry: Pack Black
+			// BannerBag.MapEntry: Banner Bag
+			// BagYellow.MapEntry: Bag Yellow
+			// BagWhite.MapEntry: Bag White
+			// BagRed.MapEntry: Bag Red
+			// BagPurple.MapEntry: Bag Purple
+			// BagPink.MapEntry: Bag Pink
+			// BagOrange.MapEntry: Bag Orange
+			// BagGreen.MapEntry: Bag Green
+			// BagGray.MapEntry: Bag Gray
+			// BagBrown.MapEntry: Bag Brown
+			// BagBlue.MapEntry: Bag Blue
+			// BagBlack.MapEntry: Bag Black
 		}
 	}
 }

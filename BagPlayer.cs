@@ -55,6 +55,9 @@ namespace VacuumBags
 			UpdateHoneyBuff();
 			ExquisitePotionFlask.PostUpdateBuffs(Player);
 		}
+		public override void PostUpdate() {
+			TrashCan.TrashCheck();
+		}
 		public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource) {
 			honeyWetResetTime = 0;
 			ExquisitePotionFlask.OnKilled(Player);

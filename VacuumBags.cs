@@ -41,9 +41,6 @@ namespace VacuumBags
 			//	hook.Apply();
 			//}
 
-			if (!AndroMod.weaponEnchantmentsLoaded)
-				RegisterAllBagsWithAndroLib();
-
 			On_Player.ChooseAmmo += AmmoBag.OnChooseAmmo;
 			On_Player.Fishing_GetBait += FishingBelt.OnFishing_GetBait;
 			On_Player.FindPaintOrCoating += PaintBucket.OnFindPaintOrCoating;
@@ -71,13 +68,13 @@ namespace VacuumBags
 			IL_SceneMetrics.ScanAndExportToMain += IL_SceneMetrics_ScanAndExportToMain;
 			IL_Player.ItemCheck_CheckFishingBobber_PickAndConsumeBait += FishingBelt.OnItemCheck_CheckFishingBobber_PickAndConsumeBait;
 			IL_Projectile.AI_061_FishingBobber_GiveItemToPlayer += FishingBelt.On_AI_061_FishingBobber_GiveItemToPlayer;
+			IL_Player.GetAnglerReward += FishingBelt.OnGetAnglerReward;
+
+			TrashCan.RegisterWithAndroLib(this);
+			if (!AndroMod.weaponEnchantmentsLoaded)
+				RegisterAllBagsWithAndroLib();
 
 			VacuumBagsLocalizationData.RegisterSDataPackage();
-
-			BuildersBox.RegisterWithGadgetGalore();
-			WallEr.RegisterWithGadgetGalore();
-			JarOfDirt.RegisterWithGadgetGalore();
-			PaintBucket.RegisterWithGadgetGalore();
 		}
 		private void AddAllContent(VacuumBags mod) {
 			IEnumerable<Type> types = null;
@@ -154,6 +151,11 @@ namespace VacuumBags
 			PackRed.RegisterWithAndroLibItemTypeOnly();
 			PackWhite.RegisterWithAndroLibItemTypeOnly();
 			PackYellow.RegisterWithAndroLibItemTypeOnly();
+
+			BuildersBox.RegisterWithGadgetGalore();
+			WallEr.RegisterWithGadgetGalore();
+			JarOfDirt.RegisterWithGadgetGalore();
+			PaintBucket.RegisterWithGadgetGalore();
 		}
 		public override object Call(params object[] args) {
 			if (args.Length != 1)
