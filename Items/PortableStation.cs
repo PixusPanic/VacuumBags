@@ -104,7 +104,7 @@ namespace VacuumBags.Items
 		#region Crafting Stations
 
 		private static void UpdateStationsFromHeldPortableStation(Player player) {
-			if (ActiveStationsFromPortableStation.Any())
+			if (!Main.playerInventory || ActiveStationsFromPortableStation.Any())
 				return;
 
 			if (StorageManager.HasRequiredItemToUseStorageFromBagTypeSlow(player, ModContent.ItemType<PortableStation>()))
@@ -121,17 +121,32 @@ namespace VacuumBags.Items
 				return;
 
 			IEnumerable<int> stations = GetStations(player, firstXStationTiles).Select(item => item.createTile);
-			if (fromTileNearbyEffects || !ActiveStationsFromPortableStation.Any())
-				ActiveStationsFromPortableStation = stations.ToList();
-
+			SortedSet<int> adjTiles = new(stations);
 			foreach (int station in stations) {
+				if (station < TileID.Count)
+					continue;
+
+				ModTile modTile = TileLoader.GetTile(station);
+				if (modTile is null)
+					continue;
+
+				int[] tiles = modTile.AdjTiles;
+				for (int i = 0; i < tiles.Length; i++) {
+					adjTiles.Add(tiles[i]);
+				}
+			}
+
+			if (fromTileNearbyEffects || !ActiveStationsFromPortableStation.Any())
+				ActiveStationsFromPortableStation = adjTiles;
+
+			foreach (int station in adjTiles) {
 				if (!player.adjTile[station]) {
 					player.adjTile[station] = true;
 					Recipe.FindRecipes(true);
 				}
 			}
 		}
-		public static List<int> ActiveStationsFromPortableStation = new();
+		public static SortedSet<int> ActiveStationsFromPortableStation = new();
 		internal static void OnAdjTiles(ILContext il) {
 			var c = new ILCursor(il);
 

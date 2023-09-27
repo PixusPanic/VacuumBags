@@ -357,6 +357,7 @@ namespace VacuumBags.Items
 		private static bool hasExquisiteFlask = false;
 		public static bool firstCheckSinceLoad = true;
 		private static int maxBuffs = Player.MaxBuffs;
+		private static int nextOpen = 0;
 		public static void OnKilled(Player player) {
 			List<int> toRemove = new();
 			foreach (KeyValuePair<int, BuffInfo> pair in Buffs) {
@@ -372,15 +373,16 @@ namespace VacuumBags.Items
 			if (!hasPotionFlask)
 				return;
 
-			int nextOpen = 0;
+			nextOpen = 0;
 			foreach (BuffInfo info in Buffs.Values) {
 				if (!info.Paused)
-					info.GiveBuffAtNextAvailable(player, ref nextOpen);
+					info.GiveBuffAtNextAvailable(player);
 			}
 		}
 		internal static void OnDelBuff(On_Player.orig_DelBuff orig, Player self, int b) {
 			orig(self, b);
 
+			nextOpen = 0;
 			foreach (BuffInfo info in Buffs.Values) {
 				if (!info.Paused && info.BuffIndex >= b && info.BuffIndex > 0)
 					info.BuffIndex--;
@@ -411,6 +413,7 @@ namespace VacuumBags.Items
 		}
 		internal static void OnTryRemovingBuff(On_Main.orig_TryRemovingBuff orig, int i, int b) {
 			if (Main.LocalPlayer.TryGetModPlayer(out StoragePlayer storagePlayer)) {
+				nextOpen = 0;
 				Item[] inv = storagePlayer.Storages[BagStorageID].Items;
 				foreach (KeyValuePair<int, BuffInfo> pair in Buffs) {
 					if (pair.Key == b)
@@ -425,12 +428,11 @@ namespace VacuumBags.Items
 				return;
 
 			bool playSound = false;
-			int nextOpen = 0;
 			Item[] inv = StoragePlayer.LocalStoragePlayer.Storages[BagStorageID].Items;
 			foreach (BuffInfo info in Buffs.Values) {
 				if (info.Paused) {
 					info.UnPause(inv);
-					info.GiveBuffAtNextAvailable(player, ref nextOpen);
+					info.GiveBuffAtNextAvailable(player);
 					playSound = true;
 				}
 			}
@@ -440,11 +442,11 @@ namespace VacuumBags.Items
 		}
 		internal static void PreSaveAndQuit() {
 			Player player = Main.LocalPlayer;
-			int nextOpen = 0;
+			nextOpen = 0;
 			RefreshTrackedBuffsAndItemIndexes(player);
 			foreach (BuffInfo info in Buffs.Values) {
 				if (!trackedBuffIndexes.ContainsKey(info.Type))
-					info.GiveBuffAtNextAvailable(player, ref nextOpen);
+					info.GiveBuffAtNextAvailable(player);
 			}
 
 			firstCheckSinceLoad = true;
@@ -467,6 +469,7 @@ namespace VacuumBags.Items
 
 			//Buffs.Clear();
 
+			nextOpen = 0;
 			maxBuffs = Player.MaxBuffs;
 			Item[] inv = StoragePlayer.LocalStoragePlayer.Storages[BagStorageID].Items;
 			if (!lastHasPotionFlask) {
@@ -498,9 +501,8 @@ namespace VacuumBags.Items
 			UpdatePlayerBuffs(player, inv, ticksToAdd);
 
 			if (hasPotionFlask) {
-				int nextOpen = 0;
 				foreach (BuffInfo info in Buffs.Values) {
-					info.PostUpdate(player, inv, ref nextOpen);
+					info.PostUpdate(player, inv);
 				}
 
 				lastHasPotionFlask = true;
@@ -509,7 +511,7 @@ namespace VacuumBags.Items
 			firstCheckSinceLoad = false;
 		}
 		private static void ScanForPotions(Item[] inv) {
-			int scansPerTick = (inv.Length - 1) / 4 + 1;//Always finish in 4 ticks
+			int scansPerTick = inv.Length.CeilingDivide(4);//Always finish in 4 ticks
 			int endIndex = (int)Math.Min(scanIndex + scansPerTick, inv.Length);
 			for (; scanIndex < endIndex; scanIndex++) {
 				Item item = inv[scanIndex];
@@ -576,9 +578,8 @@ namespace VacuumBags.Items
 					scanIndex = -1;
 
 				RefreshTrackedBuffsAndItemIndexes(player);
-				int nextOpenBuffIndex = 0;
 				foreach (BuffInfo info in missed) {
-					info.TryFindNextOpenAndGiveBuff(player, inv, ref nextOpenBuffIndex);
+					info.TryFindOrPause(player, inv);
 				}
 			}
 		}
@@ -613,6 +614,7 @@ namespace VacuumBags.Items
 							if (favorited) {
 								if (!WasFavorited) {
 									UnPause(inv);
+									TryFindNextOpenAndGiveBuff(player, inv);
 								}
 							}
 						}
@@ -629,18 +631,20 @@ namespace VacuumBags.Items
 						if (Paused) {
 							if (favorited) {
 								UnPause(inv);
+								TryFindNextOpenAndGiveBuff(player, inv);
 							}
 						}
 						else {
 							if (firstCheckSinceLoad) {
 								if (!favorited) {
-								Pause(inv);
-								RemoveBuff(player);
-							}
+									Pause(inv);
+									RemoveBuff(player);
+								}
 							}
 							else {
 								if (!favorited) {
 									UnPause(inv);
+									TryFindNextOpenAndGiveBuff(player, inv);
 								}
 							}
 						}
@@ -676,7 +680,7 @@ namespace VacuumBags.Items
 
 				return false;
 			}
-			public bool TryFindNextOpenAndGiveBuff(Player player, Item[] inv, ref int nextOpen) {
+			public bool TryFindNextOpenAndGiveBuff(Player player, Item[] inv) {
 				CheckUpdateFavoirtedAndPaused(player, inv);
 
 				//Check newly updated trackedBuffs
@@ -687,9 +691,23 @@ namespace VacuumBags.Items
 						return true;
 				}
 
-				return GiveBuffAtNextAvailable(player, ref nextOpen);
+				return GiveBuffAtNextAvailable(player);
 			}
-			public bool GiveBuffAtNextAvailable(Player player, ref int nextOpen) {
+			public bool TryFindOrPause(Player player, Item[] inv) {
+				CheckUpdateFavoirtedAndPaused(player, inv);
+
+				//Check newly updated trackedBuffs
+				if (trackedBuffIndexes.TryGetValue(Type, out int newIndex)) {
+					BuffIndex = newIndex;
+					Time = player.buffTime[newIndex];
+					if (TryGiveBuffFromPreviousIndex(player, 0))
+						return true;
+				}
+
+				Pause(inv);
+				return false;
+			}
+			public bool GiveBuffAtNextAvailable(Player player) {
 				//Find the next available buff slot
 				while (nextOpen < maxBuffs && player.buffType[nextOpen] > 0) {
 					nextOpen++;
@@ -767,13 +785,13 @@ namespace VacuumBags.Items
 				buffTime = Math.Max(buffTime, Time);
 				Time = buffTime;
 			}
-			internal void PostUpdate(Player player, Item[] inv, ref int nextOpen) {
+			internal void PostUpdate(Player player, Item[] inv) {
 				if (hasExquisiteFlask) {
 					if (Time < PersistantDuration) {
 						Time = PersistantDuration;
 						if (!Paused) {
 							if (player.buffType[Type] != Type)
-								TryFindNextOpenAndGiveBuff(player, inv, ref nextOpen);
+								TryFindNextOpenAndGiveBuff(player, inv);
 						}
 					}
 				}

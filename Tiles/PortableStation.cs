@@ -64,7 +64,7 @@ namespace VacuumBags.Tiles
 		}
 		int portableStationType = -1;
 		public override int[] AdjTiles(int type) {
-			if (Main.netMode != NetmodeID.Server) {
+			if (Main.netMode != NetmodeID.Server && Main.playerInventory) {
 				if (type == PortableStationType)
 					Items.PortableStation.ApplyFirstXStationTiles(Main.LocalPlayer, VacuumBags.serverConfig.PortableStationNumberOfStationsWhenPlaced, true);
 			}
