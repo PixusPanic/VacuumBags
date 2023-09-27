@@ -374,9 +374,21 @@ namespace VacuumBags.Items
 				return;
 
 			nextOpen = 0;
+			SortedSet<int> toRemove = new();
 			foreach (BuffInfo info in Buffs.Values) {
-				if (!info.Paused)
-					info.GiveBuffAtNextAvailable(player);
+				if (!info.Paused) {
+					if (!hasExquisiteFlask && VacuumBags.serverConfig.PotionFlaskSavesBuffsOnDeath) {
+						info.GiveBuffAtNextAvailable(player);
+					}
+					else {
+						if (!player.HasBuff(info.Type))
+							toRemove.Add(info.Type);
+					}
+				}
+			}
+
+			foreach (int key in toRemove) {
+				Buffs.Remove(key);
 			}
 		}
 		internal static void OnDelBuff(On_Player.orig_DelBuff orig, Player self, int b) {

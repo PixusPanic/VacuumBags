@@ -99,7 +99,7 @@ namespace VacuumBags.Items
 			if (!bagUI.CanVacuumItem(contentSampleItem, player, true))
 				return false;
 
-			Item[] inv = bagUI.Storage.Items;
+			Item[] inv = bagUI.MyStorage.Items;
 			for (int i = 0; i < inv.Length; i++) {
 				Item item = inv[i];
 				if (!item.NullOrAir() && item.stack > 0 && item.type == type && item.stack < item.maxStack) {

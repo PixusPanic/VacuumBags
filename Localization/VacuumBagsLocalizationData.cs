@@ -92,6 +92,11 @@ namespace VacuumBags.Localization
 										"If not selected, the Honey buff will be given in an area of effect around the Portable Station.\n" +
 										"If the Unlimited honey bucket is in the station, the area of effect will be active regardless of this option." }
 								}) },
+								{ nameof(serverConfig.PotionFlaskSavesBuffsOnDeath), new(dict: new() {
+									{ L_ID3.Label.ToString(), nameof(serverConfig.PotionFlaskSavesBuffsOnDeath).AddSpaces() },
+									{ L_ID3.Tooltip.ToString(), "If selected, potion buffs the player had when they died will be given back to the player at the remaining duration when they respawn.\n" +
+										"The Exquisite Potion Flask will always have this effect regardless of this option." }
+								}) },
 							},
 							dict: new() {
 								{ L_ID2.DisplayName.ToString(), "Server Config" },

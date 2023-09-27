@@ -82,13 +82,13 @@ namespace VacuumBags.Items
 			);
 
 			StorageManager.AddBagUIEdit(BagStorageID, (BagUI bagUI) => {
-				bagUI.AllButtonProperites.RemoveAt(bagUI.depositAllUIIndex);
+				bagUI.MyButtonProperties.RemoveAt(bagUI.depositAllUIIndex);
 				bagUI.AddButton(ClearTrash, () => StorageTextID.ClearTrash.ToString().Lang(AndroMod.ModName, L_ID1.StorageText));
 			});
 		}
 		public static bool ItemAllowedToBeStored(Item item) => !Blacklist.Contains(item.type) && CanTrash(item);
 		public static void ClearTrash(BagUI bagUI) {
-			Item[] inv = bagUI.Storage.Items;
+			Item[] inv = bagUI.MyStorage.Items;
 			bool trashedAny = false;
 			for (int i = 0; i < inv.Length; i++) {
 				ref Item item = ref inv[i];

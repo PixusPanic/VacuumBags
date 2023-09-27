@@ -68,6 +68,9 @@ namespace VacuumBags.Common.Configs
 
 		[DefaultValue(true)]
 		public bool PortableStationMustBeTouchedToGetHoneyBuff;
+
+		[DefaultValue(true)]
+		public bool PotionFlaskSavesBuffsOnDeath;
 	}
 
 	public class BagsClientConfig : ModConfig {
