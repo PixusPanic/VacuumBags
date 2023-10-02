@@ -182,8 +182,10 @@ namespace VacuumBags.Items
 			c.EmitDelegate((Player player, int owner, Item item, GetItemSettings settings) => {
 				if (owner == Main.myPlayer) {
 					Item clone = item.Clone();
-					if (StorageManager.TryVacuumItem(ref clone, player))
+					if (StorageManager.TryVacuumItem(ref clone, player)) {
+						PopupText.NewText(PopupTextContext.RegularItemPickup, item, clone.stack - item.stack);
 						return clone;
+					}
 				}
 
 				return player.GetItem(owner, item, settings);

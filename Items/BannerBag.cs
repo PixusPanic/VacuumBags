@@ -40,7 +40,7 @@ namespace VacuumBags.Items
 				.AddTile(TileID.Loom)
 				.AddRecipeGroup($"{VacuumBags.ModName}:{VacuumBagSystem.AnyBanner}", 1)
 				.AddIngredient(ItemID.Silk, 5)
-				.AddIngredient(ItemID.GoldBar, 2)
+				.AddRecipeGroup($"{AndroMod.ModName}:{AndroModSystem.GoldOrPlatinumBar}", 2)
 				.Register();
 			}
 			else {
@@ -48,7 +48,7 @@ namespace VacuumBags.Items
 				.AddTile(TileID.Loom)
 				.AddRecipeGroup($"{VacuumBags.ModName}:{VacuumBagSystem.AnyBanner}", 3)
 				.AddIngredient(ItemID.Silk, 10)
-				.AddIngredient(ItemID.GoldBar, 10)
+				.AddRecipeGroup($"{AndroMod.ModName}:{AndroModSystem.GoldOrPlatinumBar}", 10)
 				.Register();
 			}
 		}

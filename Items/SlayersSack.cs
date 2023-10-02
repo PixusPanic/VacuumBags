@@ -232,6 +232,9 @@ namespace VacuumBags.Items
 					DropRateInfoChainFeed dropRateInfoChainFeed = new(1f);
 					dropRule.ReportDroprates(dropRates, dropRateInfoChainFeed);
 					foreach (DropRateInfo dropRate in dropRates) {
+						if (dropRate.itemId <= ItemID.None || dropRate.itemId >= ItemLoader.ItemCount)
+							continue;
+
 						//Vanilla item from modded enemy
 						if (netID >= NPCID.Count && dropRate.itemId < ItemID.Count)
 							continue;

@@ -177,6 +177,9 @@ namespace VacuumBags.Items
 
 				foreach (BossChecklistBossInfo bossChecklistInfo in BossChecklistIntegration.BossInfos.Select(p => p.Value)) {
 					foreach (int itemType in bossChecklistInfo.loot) {
+						if (itemType <= ItemID.None || itemType >= ItemLoader.ItemCount)
+							continue;
+
 						if (devWhiteList.Contains(itemType))
 							continue;
 
