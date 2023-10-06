@@ -114,48 +114,6 @@ namespace VacuumBags.Items
 			return item;
 		}
 		private static Item ChoosePaintFromBucket(Player player) => ChooseFromBag(BagStorageID, (Item item) => item.PaintOrCoating, player, selectItems: false);
-		internal static void OnItemCheck_CheckCanUse(ILContext il) {
-			var c = new ILCursor(il);
-			/*
-	// if (sItem.type == 1071 || sItem.type == 1072)
-	IL_02ae: ldarg.1
-	IL_02af: ldfld int32 Terraria.Item::'type'
-	IL_02b4: ldc.i4 1071
-	IL_02b9: beq.s IL_02c8
-
-	IL_02bb: ldarg.1
-	IL_02bc: ldfld int32 Terraria.Item::'type'
-	IL_02c1: ldc.i4 1072
-	IL_02c6: bne.un.s IL_02f7
-
-	// bool flag2 = false;
-	IL_02c8: ldc.i4.0
-	IL_02c9: stloc.s 9
-	// for (int i = 0; i < 58; i++)
-	IL_02cb: ldc.i4.0
-	IL_02cc: stloc.s 10
-	// if (this.inventory[i].PaintOrCoating)
-	IL_02ce: br.s IL_02eb 
-			*/
-			if (!c.TryGotoNext(MoveType.Before,
-				i => i.MatchLdcI4(0),
-				i => i.MatchStloc(9)
-			)) { throw new Exception("Failed to find instructions PaintBucket.OnItemCheck_CheckCanUse()"); }
-			c.Index++;
-
-			c.EmitDelegate((bool hasPaint) => {
-				int PaintBucketID = ModContent.ItemType<AmmoBag>();
-				if (!Main.LocalPlayer.HasItem(PaintBucketID))
-					return hasPaint;
-
-				foreach (Item item in StorageManager.GetItems(BagStorageID)) {
-					if (!item.NullOrAir() && item.stack > 0 && item.PaintOrCoating)
-						return true;
-				}
-
-				return hasPaint;
-			});
-		}
 		
 		public static SortedSet<int> AllowedItems => AllowedItemsManager.AllowedItems;
 		public static AllowedItemsManager AllowedItemsManager = new(ModContent.ItemType<PaintBucket>, () => BagStorageID, DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
