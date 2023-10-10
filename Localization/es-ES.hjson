@@ -5,6 +5,7 @@ Mods: {
 			BagsClientConfig: {
 				BagStorageOptions: Opciones de almacenamiento de bolsas
 				DisplayName: Configuración del cliente
+				LoggingInformation: Información de registro
 
 				AllAmmoItemsGoIntoAmmoBag: {
 					Label: Todos los artículos de munición van en la bolsa de munición
@@ -30,6 +31,15 @@ Mods: {
 						'''
 						Si se seleccionan, solo las estaciones de beneficios favoritas proporcionarán sus beneficios.
 
+						'''
+				}
+
+				PrintWikiInfo: {
+					Label: Registrar toda la información wiki
+					Tooltip:
+						'''
+						La información se imprime en client.log cuando ingresa a un mundo.
+						La ubicación predeterminada de client.log es C:\Steam\SteamApps\common\tModLoader\tModLoader-Logs
 						'''
 				}
 

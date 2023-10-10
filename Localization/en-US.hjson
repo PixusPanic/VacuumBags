@@ -5,6 +5,7 @@ Mods: {
 			BagsClientConfig: {
 				BagStorageOptions: Bag Storage Options
 				DisplayName: Client Config
+				LoggingInformation: Logging Information
 
 				AllAmmoItemsGoIntoAmmoBag: {
 					Label: All Ammo Items Go Into Ammo Bag
@@ -30,6 +31,15 @@ Mods: {
 						'''
 						If selected, only favorited buff stations will provide their buffs.
 
+						'''
+				}
+
+				PrintWikiInfo: {
+					Label: Log all wiki info
+					Tooltip:
+						'''
+						The info is printed to the client.log when you enter a world.
+						The client.log default location is C:\Steam\SteamApps\common\tModLoader\tModLoader-Logs
 						'''
 				}
 

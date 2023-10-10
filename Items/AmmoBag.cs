@@ -16,7 +16,7 @@ using Mono.Cecil.Cil;
 namespace VacuumBags.Items
 {
     [Autoload(false)]
-	public class AmmoBag : BagModItem, ISoldByWitch, INeedsSetUpAllowedList
+	public class AmmoBag : BagModItem, INeedsSetUpAllowedList
 	{
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {
@@ -73,6 +73,9 @@ namespace VacuumBags.Items
 		public static bool ItemAllowedToBeStored(Item item) => AllowedItems.Contains(item.type);
 		public static Item OnChooseAmmo(On_Player.orig_ChooseAmmo orig, Player self, Item weapon) {
 			Item item = orig(self, weapon);
+			if (Main.netMode == NetmodeID.Server)
+				return item;
+
 			if (weapon.useAmmo == AmmoID.None)
 				return null;
 
@@ -347,9 +350,7 @@ namespace VacuumBags.Items
 
 		#region AndroModItem attributes that you don't need.
 
-		public virtual SellCondition SellCondition => SellCondition.Never;
-		public virtual float SellPriceModifier => 1f;
-		public override List<WikiTypeID> WikiItemTypes => new() { WikiTypeID.Storage };
+		public override string SummaryOfFunction => "Weapon Ammo";
 		public override string LocalizationTooltip =>
 			$"Automatically stores throwables, arrows, bullets, flares, solutions.\n" +
 			$"When in your inventory, the contents of the bag are available for crafting.\n" +

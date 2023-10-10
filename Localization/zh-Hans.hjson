@@ -5,6 +5,7 @@ Mods: {
 			BagsClientConfig: {
 				BagStorageOptions: 行李存放选项
 				DisplayName: 客户端配置
+				LoggingInformation: 记录信息
 
 				AllAmmoItemsGoIntoAmmoBag: {
 					Label: 所有弹药物品都放入弹药袋中
@@ -30,6 +31,15 @@ Mods: {
 						'''
 						如果选择，则只有喜爱的增益站才会提供其增益。
 
+						'''
+				}
+
+				PrintWikiInfo: {
+					Label: 记录所有维基信息
+					Tooltip:
+						'''
+						当您进入世界时，该信息将打印到 client.log 中。
+						client.log 默认位置为 C:\Steam\SteamApps\common\tModLoader\tModLoader-Logs
 						'''
 				}
 

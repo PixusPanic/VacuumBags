@@ -15,7 +15,7 @@ using MonoMod.Cil;
 namespace VacuumBags.Items
 {
     [Autoload(false)]
-	public  class PaintBucket : BagModItem, ISoldByWitch, INeedsSetUpAllowedList
+	public  class PaintBucket : BagModItem, INeedsSetUpAllowedList
 	{
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {
@@ -235,9 +235,7 @@ namespace VacuumBags.Items
 
 		#region AndroModItem attributes that you don't need.
 
-		public virtual SellCondition SellCondition => SellCondition.Never;
-		public virtual float SellPriceModifier => 1f;
-		public override List<WikiTypeID> WikiItemTypes => new() { WikiTypeID.Storage };
+		public override string SummaryOfFunction => "Paints";
 		public override string LocalizationTooltip =>
 			$"Automatically stores paint\n" +
 			$"When in your inventory, the contents of the bucket are available for crafting.\n" +

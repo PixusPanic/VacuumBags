@@ -18,7 +18,7 @@ using Mono.Cecil.Cil;
 namespace VacuumBags.Items
 {
     [Autoload(false)]
-	public  class PortableStation : BagModItem, ISoldByWitch, INeedsSetUpAllowedList
+	public  class PortableStation : BagModItem, INeedsSetUpAllowedList
 	{
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {
@@ -373,9 +373,7 @@ namespace VacuumBags.Items
 
 		#region AndroModItem attributes that you don't need.
 
-		public virtual SellCondition SellCondition => SellCondition.Never;
-		public virtual float SellPriceModifier => 1f;
-		public override List<WikiTypeID> WikiItemTypes => new() { WikiTypeID.Storage };
+		public override string SummaryOfFunction => "Crafting Stations, Passive and Active buff stations";
 		public override string LocalizationTooltip =>
 			$"Automatically stores crafting stations and buff stations.\n" +
 			$"When in your inventory, the contents of the station are available for crafting.\n" +

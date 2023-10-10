@@ -18,7 +18,7 @@ using androLib.UI;
 namespace VacuumBags.Items
 {
     [Autoload(false)]
-	public class BannerBag : BagModItem, ISoldByWitch, INeedsSetUpAllowedList
+	public class BannerBag : BagModItem, INeedsSetUpAllowedList
 	{
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {
@@ -200,9 +200,7 @@ namespace VacuumBags.Items
 
 		#region AndroModItem attributes that you don't need.
 
-		public virtual SellCondition SellCondition => SellCondition.Never;
-		public virtual float SellPriceModifier => 1f;
-		public override List<WikiTypeID> WikiItemTypes => new() { WikiTypeID.Storage };
+		public override string SummaryOfFunction => "Enemy Banners";
 		public override string LocalizationTooltip =>
 			$"Automatically stores banners.\n" +
 			$"When in your inventory, the contents of the bag are available for crafting.\n" +

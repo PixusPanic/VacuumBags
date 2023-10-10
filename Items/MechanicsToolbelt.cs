@@ -18,7 +18,7 @@ using androLib.UI;
 namespace VacuumBags.Items
 {
     [Autoload(false)]
-	public  class MechanicsToolbelt : BagModItem, ISoldByWitch, INeedsSetUpAllowedList
+	public  class MechanicsToolbelt : BagModItem, INeedsSetUpAllowedList
 	{
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {
@@ -301,9 +301,7 @@ namespace VacuumBags.Items
 
 		#region AndroModItem attributes that you don't need.
 
-		public virtual SellCondition SellCondition => SellCondition.Never;
-		public virtual float SellPriceModifier => 1f;
-		public override List<WikiTypeID> WikiItemTypes => new() { WikiTypeID.Storage };
+		public override string SummaryOfFunction => "Place-able Items and Wire";
 		public override string LocalizationDisplayName => "Mechanic's Toolbelt";
 		public override string LocalizationTooltip =>
 			$"Automatically stores wiring related items such as traps and statues.\n" +

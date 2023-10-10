@@ -13,7 +13,7 @@ using System;
 namespace VacuumBags.Items
 {
 	[Autoload(false)]
-	public abstract class SimpleBag : BagModItem, ISoldByWitch {
+	public abstract class SimpleBag : BagModItem {
 
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public abstract int MyTileType { get; }
@@ -39,9 +39,6 @@ namespace VacuumBags.Items
 
 		#region AndroModItem attributes that you don't need.
 
-		public virtual SellCondition SellCondition => SellCondition.Never;
-		public virtual float SellPriceModifier => 1f;
-		public override List<WikiTypeID> WikiItemTypes => new() { WikiTypeID.Storage };
 		public override string LocalizationTooltip =>
 			$"Automatically stores items already contained in the bag.\n" +
 			$"When in your inventory, the contents of the bag are available for crafting.\n" +

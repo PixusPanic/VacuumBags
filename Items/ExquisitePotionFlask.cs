@@ -45,7 +45,6 @@ namespace VacuumBags.Items
 			}
 			else {
 				CreateRecipe()
-				.AddTile(TileID.AlchemyTable)
 				.AddTile(TileID.AdamantiteForge)
 				.AddIngredient(ModContent.ItemType<PotionFlask>())
 				.AddIngredient(ItemID.BeetleHusk, 20)

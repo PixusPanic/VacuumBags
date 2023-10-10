@@ -19,7 +19,7 @@ using Ionic.Zlib;
 namespace VacuumBags.Items
 {
     [Autoload(false)]
-	public  class JarOfDirt : BagModItem, ISoldByWitch, INeedsSetUpAllowedList
+	public  class JarOfDirt : BagModItem, INeedsSetUpAllowedList
 	{
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {
@@ -204,9 +204,8 @@ namespace VacuumBags.Items
 
 
 		#region AndroModItem attributes that you don't need.
-		public virtual SellCondition SellCondition => SellCondition.Never;
-		public virtual float SellPriceModifier => 1f;
-		public override List<WikiTypeID> WikiItemTypes => new() { WikiTypeID.Storage };
+
+		public override string SummaryOfFunction => "Place-able Items";
 		public override string LocalizationDisplayName => "Jar of Dirt";
 		public override string LocalizationTooltip =>
 		$"Automatically stores dirt and other natural blocks (dirt, mud, clay, sand, stone, ice, etc.)\n" +

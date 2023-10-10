@@ -5,6 +5,7 @@ Mods: {
 			BagsClientConfig: {
 				BagStorageOptions: Opzioni di conservazione della borsa
 				DisplayName: Configurazione cliente
+				LoggingInformation: Informazioni di registrazione
 
 				AllAmmoItemsGoIntoAmmoBag: {
 					Label: Tutte le munizioni vanno nella borsa delle munizioni
@@ -30,6 +31,15 @@ Mods: {
 						'''
 						Se selezionate, solo le stazioni di potenziamento preferite forniranno i propri potenziamenti.
 
+						'''
+				}
+
+				PrintWikiInfo: {
+					Label: Registra tutte le informazioni wiki
+					Tooltip:
+						'''
+						Le informazioni vengono stampate nel client.log quando entri in un mondo.
+						Il percorso predefinito di client.log è C:\Steam\SteamApps\common\tModLoader\tModLoader-Logs
 						'''
 				}
 

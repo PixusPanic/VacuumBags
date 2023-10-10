@@ -10,7 +10,7 @@ using Terraria.ID;
 
 namespace VacuumBags.Items
 {
-	public abstract class ModBag : BagModItem, ISoldByWitch
+	public abstract class ModBag : BagModItem
 	{
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public abstract string ModDisplayNameTooltip { get; }
@@ -29,9 +29,6 @@ namespace VacuumBags.Items
 
 		#region AndroModItem attributes that you don't need.
 
-		public virtual SellCondition SellCondition => SellCondition.Never;
-		public virtual float SellPriceModifier => 1f;
-		public override List<WikiTypeID> WikiItemTypes => new() { WikiTypeID.Storage };
 		public override string LocalizationTooltip =>
 			$"Automatically stores items from {ModDisplayNameTooltip}.\n" +
 			$"When in your inventory, the contents of the bag are available for crafting.\n" +

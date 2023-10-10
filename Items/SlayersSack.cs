@@ -17,7 +17,7 @@ using Mono.Cecil.Cil;
 namespace VacuumBags.Items
 {
     [Autoload(false)]
-	public  class SlayersSack : BagModItem, ISoldByWitch, INeedsSetUpAllowedList
+	public  class SlayersSack : BagModItem, INeedsSetUpAllowedList
 	{
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {
@@ -324,9 +324,7 @@ namespace VacuumBags.Items
 
 		#region AndroModItem attributes that you don't need.
 
-		public virtual SellCondition SellCondition => SellCondition.Never;
-		public virtual float SellPriceModifier => 1f;
-		public override List<WikiTypeID> WikiItemTypes => new() { WikiTypeID.Storage };
+		public override string SummaryOfFunction => "Rope, torches, glowsticks, flair guns, keys";
 		public override string LocalizationDisplayName => "Slayer's Sack";
 		public override string LocalizationTooltip =>
 			$"Automatically stores materials dropped by enemies and other items found while adventuring such as torches, rope and keys.\n" +

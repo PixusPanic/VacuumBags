@@ -21,13 +21,34 @@ namespace VacuumBags
 		public const string AnyBossBag = "AnyBossBag";
 		public const string AnyBanner = "AnyBanner";
 		public override void AddRecipeGroups() {
-			RecipeGroup emblems = new(() => AnyBossTrophy.AddSpaces(), ContentSamples.ItemsByType.Select(p => p.Value).Where(i => i.IsBossTrophy()).Select(i => i.type).ToArray());
-			RecipeGroup.RegisterGroup($"{typeof(VacuumBags).Name}:{AnyBossTrophy}", emblems);
+			int[] bossTropies = ContentSamples.ItemsByType.Select(p => p.Value).Where(i => i.IsBossTrophy()).Select(i => i.type).ToArray();
+			int indexOfKingSlimeTrophy = Array.IndexOf(bossTropies, ItemID.KingSlimeTrophy);
+			if (indexOfKingSlimeTrophy != -1) {
+				bossTropies[indexOfKingSlimeTrophy] = bossTropies[0];
+				bossTropies[0] = ItemID.KingSlimeTrophy;
+			}
 
-			RecipeGroup bossBags = new(() => AnyBossBag.AddSpaces(), BossBagsData.BossBags.ToArray());
+			RecipeGroup trophies = new(() => AnyBossTrophy.AddSpaces(), bossTropies);
+			RecipeGroup.RegisterGroup($"{typeof(VacuumBags).Name}:{AnyBossTrophy}", trophies);
+
+			int[] bossBagItemTypes = BossBagsData.BossBags.ToArray();
+			int indexOfKingSlimeBag = Array.IndexOf(bossBagItemTypes, ItemID.KingSlimeBossBag);
+			if (indexOfKingSlimeBag != -1) {
+				bossBagItemTypes[indexOfKingSlimeBag] = bossBagItemTypes[0];
+				bossBagItemTypes[0] = ItemID.KingSlimeBossBag;
+			}
+
+			RecipeGroup bossBags = new(() => AnyBossBag.AddSpaces(), bossBagItemTypes);
 			RecipeGroup.RegisterGroup($"{typeof(VacuumBags).Name}:{AnyBossBag}", bossBags);
 
-			RecipeGroup banners = new(() => AnyBanner.AddSpaces(), ItemSets.AllBanners.ToArray());
+			int[] bannerItemTypes = ItemSets.AllBanners.ToArray();
+			int indexOfSlimeBanner = Array.IndexOf(bannerItemTypes, ItemID.GreenSlimeBanner);
+			if (indexOfSlimeBanner != -1) {
+				bannerItemTypes[indexOfSlimeBanner] = bannerItemTypes[0];
+				bannerItemTypes[0] = ItemID.GreenSlimeBanner;
+			}
+
+			RecipeGroup banners = new(() => AnyBanner.AddSpaces(), bannerItemTypes);
 			RecipeGroup.RegisterGroup($"{typeof(VacuumBags).Name}:{AnyBanner}", banners);
 		}
 		public override void PreSaveAndQuit() {

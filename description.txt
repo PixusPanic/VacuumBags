@@ -1,5 +1,8 @@
+More detailed description on the Wiki:
+https://vacuum-bags.fandom.com/wiki/Vacuum_Bags_Wiki
+
 Vacuum Bags is a mod that adds 2 different types of bags using androLib.
-All bags are compatible with Magic Storage (Requires Magic Storage's Environmental Simulator)
+All bags are compatible with Magic Storage (Requires Magic Storage's Storage Configuration Interface)
 
 Vacuum Bags (100 inventory slots)  (Designed by @KingJoshington)
 	Ammo Bag - Ammo

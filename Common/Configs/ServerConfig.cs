@@ -107,5 +107,14 @@ namespace VacuumBags.Common.Configs
 
 		[DefaultValue(false)]
 		public bool SilencePortableStationActiveBuffs;
+
+		//Logging Information
+		[JsonIgnore]
+		public const string LoggingInformationKey = "LoggingInformation";
+		[Header($"$Mods.{VacuumBags.ModName}.{L_ID_Tags.Configs}.{ClientConfigName}.{LoggingInformationKey}")]
+
+		[DefaultValue(false)]
+		[ReloadRequired]
+		public bool PrintWikiInfo;
 	}
 }

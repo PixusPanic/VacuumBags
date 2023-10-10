@@ -21,7 +21,7 @@ using Terraria.Audio;
 namespace VacuumBags.Items
 {
 	[Autoload(false)]
-	public class TrashCan : BagModItem, ISoldByWitch {
+	public class TrashCan : BagModItem {
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {
 			Item.maxStack = 1;
@@ -167,9 +167,6 @@ namespace VacuumBags.Items
 
 		#region AndroModItem attributes that you don't need.
 
-		public virtual SellCondition SellCondition => SellCondition.Never;
-		public virtual float SellPriceModifier => 1f;
-		public override List<WikiTypeID> WikiItemTypes => new() { WikiTypeID.Storage };
 		public override string LocalizationTooltip =>
 			$"Used to automatically sell items.\n" +
 			$"When in your inventory, the contents of the bag are available for crafting.\n" +

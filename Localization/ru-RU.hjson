@@ -5,6 +5,7 @@ Mods: {
 			BagsClientConfig: {
 				BagStorageOptions: Варианты хранения сумок
 				DisplayName: Конфигурация клиента
+				LoggingInformation: Регистрация информации
 
 				AllAmmoItemsGoIntoAmmoBag: {
 					Label: Все боеприпасы помещаются в сумку для боеприпасов.
@@ -30,6 +31,15 @@ Mods: {
 						'''
 						Если этот флажок установлен, только избранные станции усиления будут предоставлять свои усиления.
 
+						'''
+				}
+
+				PrintWikiInfo: {
+					Label: Записывать всю вики-информацию
+					Tooltip:
+						'''
+						Информация печатается в файле client.log при входе в мир.
+						Местоположение client.log по умолчанию — C:\Steam\SteamApps\common\tModLoader\tModLoader-Logs.
 						'''
 				}
 

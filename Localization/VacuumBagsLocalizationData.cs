@@ -136,10 +136,15 @@ namespace VacuumBags.Localization
 									{ L_ID3.Label.ToString(), nameof(clientConfig.SilencePortableStationActiveBuffs).AddSpaces() },
 									{ L_ID3.Tooltip.ToString(), "If selected, the Portable Station will not play any sounds when it provides active buffs on opening the station." }
 								}) },
+								{ nameof(clientConfig.PrintWikiInfo), new(dict: new() {
+									{ L_ID3.Label.ToString(), "Log all wiki info" },
+									{ L_ID3.Tooltip.ToString(), "The info is printed to the client.log when you enter a world.\nThe client.log default location is C:\\Steam\\SteamApps\\common\\tModLoader\\tModLoader-Logs" }
+								}) },
 							},
 							dict: new() {
 								{ L_ID2.DisplayName.ToString(), "Client Config" },
 								{ BagStorageOptionsKey, BagStorageOptionsKey.AddSpaces() },
+								{ LoggingInformationKey, LoggingInformationKey.AddSpaces() }
 							}) },
 						}) }
 					};

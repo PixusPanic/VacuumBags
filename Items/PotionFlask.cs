@@ -18,7 +18,7 @@ using androLib.UI;
 namespace VacuumBags.Items
 {
     [Autoload(false)]
-	public  class PotionFlask : BagModItem, ISoldByWitch, INeedsSetUpAllowedList
+	public  class PotionFlask : BagModItem, INeedsSetUpAllowedList
 	{
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {
@@ -402,19 +402,23 @@ namespace VacuumBags.Items
 		}
 		internal static void OnAddBuff(On_Player.orig_AddBuff orig, Player self, int type, int timeToAdd, bool quiet, bool foodHack) {
 			Item[] inv = null;
-			bool foundLocalStoragePlayer = self.TryGetModPlayer(out StoragePlayer storagePlayer);
-			if (foundLocalStoragePlayer) {
-				inv = storagePlayer.Storages[BagStorageID].Items;
-				if (hasPotionFlask) {
-					if (Buffs.TryGetValue(type, out BuffInfo infoToPause)) {
-						infoToPause.Pause(inv);
-						infoToPause.RemoveBuff(self);
+			bool shouldCheckBuffs = Main.netMode != NetmodeID.Server;
+			if (shouldCheckBuffs) {
+				shouldCheckBuffs = self.TryGetModPlayer(out StoragePlayer storagePlayer);
+				if (shouldCheckBuffs) {
+					inv = storagePlayer.Storages[BagStorageID].Items;
+					if (hasPotionFlask) {
+						if (Buffs.TryGetValue(type, out BuffInfo infoToPause)) {
+							infoToPause.Pause(inv);
+							infoToPause.RemoveBuff(self);
+						}
 					}
 				}
 			}
 
 			orig(self, type, timeToAdd, quiet, foodHack);
-			if (!hasPotionFlask || !foundLocalStoragePlayer || inv == null)
+
+			if (!shouldCheckBuffs)
 				return;
 
 			if (Buffs.TryGetValue(type, out BuffInfo info)) {
@@ -949,9 +953,7 @@ namespace VacuumBags.Items
 
 		#region AndroModItem attributes that you don't need.
 
-		public virtual SellCondition SellCondition => SellCondition.Never;
-		public virtual float SellPriceModifier => 1f;
-		public override List<WikiTypeID> WikiItemTypes => new() { WikiTypeID.Storage };
+		public override string SummaryOfFunction => "Potions and food";
 		public override string LocalizationTooltip =>
 			$"Automatically stores potions, food and drink.\n" +
 			$"When in your inventory, the contents of the bag are available for crafting.\n" +

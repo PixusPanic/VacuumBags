@@ -18,9 +18,10 @@ using VacuumOreBag.Items;
 
 namespace VacuumBags.Items
 {
-    public abstract class BagModItem : AndroModItem
-	{
+    public abstract class BagModItem : AndroModItem, ISoldByNPC {
 		protected override Action<ModItem, string, string> AddLocalizationTooltipFunc => VacuumBagsLocalizationDataStaticMethods.AddLocalizationTooltip;
+		public virtual string SummaryOfFunction => SummaryOfFunctionDefault;
+		public const string SummaryOfFunctionDefault = "N/A";
 		private static IEnumerable<KeyValuePair<int, Item>> GetFirstXItemTypePairsFromBag(int storageID, Func<Item, bool> itemCondition, Player player, int firstXItemTypes, Func<Item, bool> doesntCountTowardsTotal = null) {
 			if (Main.netMode == NetmodeID.MultiplayerClient && player.whoAmI != Main.myPlayer)
 				return null;
@@ -225,5 +226,10 @@ namespace VacuumBags.Items
 
 			return fromBag();
 		}
+
+		public Func<int> SoldByNPCNetID => null;
+		public virtual SellCondition SellCondition => SellCondition.Never;
+		public virtual float SellPriceModifier => 1f;
+		public override List<WikiTypeID> WikiItemTypes => new() { WikiTypeID.Storage };
 	}
 }

@@ -5,6 +5,7 @@ Mods: {
 			BagsClientConfig: {
 				BagStorageOptions: Opcje przechowywania toreb
 				DisplayName: Konfiguracja klienta
+				LoggingInformation: Informacje o logowaniu
 
 				AllAmmoItemsGoIntoAmmoBag: {
 					Label: Wszystkie elementy amunicji trafiają do torby z amunicją
@@ -30,6 +31,15 @@ Mods: {
 						'''
 						Jeśli ta opcja jest wybrana, tylko ulubione stacje wzmocnień będą zapewniać swoje wzmocnienia.
 
+						'''
+				}
+
+				PrintWikiInfo: {
+					Label: Rejestruj wszystkie informacje na wiki
+					Tooltip:
+						'''
+						Informacje są drukowane w pliku Client.log po wejściu do świata.
+						Domyślna lokalizacja pliku Client.log to C:\Steam\SteamApps\common\tModLoader\tModLoader-Logs
 						'''
 				}
 
