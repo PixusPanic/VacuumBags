@@ -88,6 +88,9 @@ namespace VacuumBags.Items
 				orig(self, type, theSelectedItem);
 		}
 		public static bool TryPutItemInBagFromItemUsage(Player player, int type, int theSelectedItem = -1) {
+			if (!StorageManager.HasRequiredItemToUseStorageFromBagType(player, BagStorageID, out _))
+				return false;
+
 			Item contentSampleItem = type.CSI();
 			if (!contentSampleItem.IsBucket())
 				return false;
