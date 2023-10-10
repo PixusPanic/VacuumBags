@@ -304,7 +304,7 @@ namespace VacuumBags.Items
 
 		#region AndroModItem attributes that you don't need.
 
-		public override string SummaryOfFunction => "Place-able Items and Wire";
+		public override string SummaryOfFunction => "Place-able Items, Buckets and Wire";
 		public override string LocalizationDisplayName => "Mechanic's Toolbelt";
 		public override string LocalizationTooltip =>
 			$"Automatically stores wiring related items such as traps and statues.\n" +
