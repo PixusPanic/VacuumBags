@@ -17,12 +17,17 @@ using static VacuumBags.Common.Configs.BagsClientConfig;
 using static VacuumBags.VacuumBags;
 using VacuumBags.Items;
 using VacuumBags.Common.Configs;
+using Terraria.ID;
+using Terraria;
 
 namespace VacuumBags.Localization
 {
 	public class VacuumBagsLocalizationData
 	{
 		public static void RegisterSDataPackage() {
+			if (Main.netMode == NetmodeID.Server)
+				return;
+
 			AndroLogModSystem.RegisterModLocalizationSDataPackage(new(ModContent.GetInstance<VacuumBags>, () => AllData, () => ChangedData, () => RenamedKeys, () => RenamedFullKeys, () => SameAsEnglish));
 		}
 
@@ -241,7 +246,6 @@ namespace VacuumBags.Localization
 		/// Should only be used for items directly in androLib, not items derived from AndroModItem, or the localization will end up in androLib localization.
 		/// </summary>
 		public static void AddLocalizationTooltip(this ModItem modItem, string tooltip, string name = null) {
-			SortedDictionary<string, SData> all = VacuumBagsLocalizationData.AllData;
 			if (AndroLogModSystem.printLocalization || AndroLogModSystem.printLocalizationKeysAndValues) {
 				VacuumBagsLocalizationData.AllData[L_ID1.Items.ToString()].Children.Add(modItem.Name, new(dict: new()));
 				VacuumBagsLocalizationData.AllData[L_ID1.Items.ToString()].Children[modItem.Name].Dict.Add(L_ID1.Tooltip.ToString(), tooltip);

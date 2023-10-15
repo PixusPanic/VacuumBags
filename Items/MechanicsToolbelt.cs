@@ -88,7 +88,10 @@ namespace VacuumBags.Items
 				orig(self, type, theSelectedItem);
 		}
 		public static bool TryPutItemInBagFromItemUsage(Player player, int type, int theSelectedItem = -1) {
-			if (!StorageManager.HasRequiredItemToUseStorageFromBagType(player, BagStorageID, out _))
+			int bagItemType = ModContent.ItemType<MechanicsToolbelt>();
+			Item bagPlaceItem = BagPlayer.BagPlaceItem(player);
+			bool swapped = !bagPlaceItem.NullOrAir() && bagPlaceItem.type == bagItemType;
+			if (!swapped && !StorageManager.HasRequiredItemToUseStorageFromBagType(player, bagItemType, out _))
 				return false;
 
 			Item contentSampleItem = type.CSI();
@@ -112,13 +115,13 @@ namespace VacuumBags.Items
 			}
 
 			Item[] inventory = player.inventory;
-			if (theSelectedItem >= 0 && (inventory[theSelectedItem].type == 0 || inventory[theSelectedItem].stack <= 0)) {
+			if (theSelectedItem >= 0 && (inventory[theSelectedItem].type == ItemID.None || inventory[theSelectedItem].stack <= 0)) {
 				inventory[theSelectedItem].SetDefaults(type);
 				return true;
 			}
 
 			IEnumerable<KeyValuePair<int, Item>> indexItemsPairs = GetFirstFromBag(BagStorageID, ItemSets.IsBucket, player);
-			int slotAfterBag = indexItemsPairs.Any() ? indexItemsPairs.First().Key + 1 : -1;
+			int slotAfterBag = indexItemsPairs?.Any() == true ? indexItemsPairs.First().Key + 1 : -1;
 
 			int start = slotAfterBag >= 0 && slotAfterBag < inv.Length ? slotAfterBag : 0;
 			for (int i = start; i < inv.Length; i++) {

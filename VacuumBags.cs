@@ -68,11 +68,16 @@ namespace VacuumBags
 			IL_Player.ItemCheck_ApplyHoldStyle_Inner += AmmoBag.OnItemCheck_ApplyHoldStyle_Inner;
 			IL_Player.SmartSelect_PickToolForStrategy += AmmoBag.OnSmartSelect_PickToolForStrategy;
 			IL_Player.AdjTiles += PortableStation.OnAdjTiles;
-			IL_SceneMetrics.ScanAndExportToMain += IL_SceneMetrics_ScanAndExportToMain;
 			IL_Player.ItemCheck_CheckFishingBobber_PickAndConsumeBait += FishingBelt.OnItemCheck_CheckFishingBobber_PickAndConsumeBait;
 			IL_Projectile.AI_061_FishingBobber_GiveItemToPlayer += FishingBelt.On_AI_061_FishingBobber_GiveItemToPlayer;
 			IL_Player.GetAnglerReward += FishingBelt.OnGetAnglerReward;
 			IL_Player.ItemCheck_Inner += IL_Player_ItemCheck_Inner;
+
+			AndroMod.ScenemetrictBeforeAnyCheck += (sceneMetrics, settings) => BannerBag.PreScanAndExportToMain();
+			AndroMod.ScenemetrictBeforeAnyCheck += (sceneMetrics, settings) => PortableStation.PreScanAndExportToMain();
+			AndroMod.ScenemetricsOnNearbyEffects.Add((num, sceneMetrics, settings) => GlobalBagTile.NearbyEffects(num, ref sceneMetrics));
+			AndroMod.ScenemetrictAfterTileCheck += (sceneMetrics, settings) => BannerBag.PostScanAndExportToMain(ref sceneMetrics);
+			AndroMod.ScenemetrictAfterTileCheck += (sceneMetrics, settings) => PortableStation.PostScanAndExportToMain(ref sceneMetrics);
 
 			TrashCan.RegisterWithAndroLib(this);
 			if (!AndroMod.weaponEnchantmentsLoaded)
@@ -508,70 +513,6 @@ namespace VacuumBags
 						}
 					}
 				}
-			});
-		}
-		private void IL_SceneMetrics_ScanAndExportToMain(ILContext il) {
-			var c = new ILCursor(il);
-
-			//IL_0035: ldarga.s settings
-			//IL_0037: ldflda valuetype[System.Runtime]System.Nullable`1 < valuetype[FNA]Microsoft.Xna.Framework.Vector2 > Terraria.SceneMetricsScanSettings::BiomeScanCenterPositionInWorld
-			//IL_003c: call instance !0 valuetype[System.Runtime]System.Nullable`1 < valuetype[FNA]Microsoft.Xna.Framework.Vector2 >::get_Value()
-			//IL_0041: call valuetype[FNA]Microsoft.Xna.Framework.Point Terraria.Utils::ToTileCoordinates(valuetype[FNA]Microsoft.Xna.Framework.Vector2)
-			//IL_0046: stloc.3
-
-			if (!c.TryGotoNext(MoveType.Before,
-				i => i.MatchLdarga(1),
-				i => i.MatchLdflda<SceneMetricsScanSettings>("BiomeScanCenterPositionInWorld"),
-				i => i.MatchCall(out _),
-				i => i.MatchCall(out _),
-				i => i.MatchStloc(3)
-			)) { throw new Exception("Failed to find instructions IL_SceneMetrics_ScanAndExportToMain 1/4"); }
-
-			c.EmitDelegate(() => {
-				BannerBag.PreScanAndExportToMain();
-				PortableStation.PreScanAndExportToMain();
-			});
-
-			//IL_0322: ldloc.s 5
-			//IL_0324: ldloc.s 6
-			//IL_0326: ldloca.s 7
-			//IL_0328: call instance uint16 & Terraria.Tile::get_type()
-			//IL_032d: ldind.u2
-			//IL_032e: ldc.i4.0
-			//IL_032f: call void Terraria.ModLoader.TileLoader::NearbyEffects(int32, int32, int32, bool)
-
-			if (!c.TryGotoNext(MoveType.Before,
-			i => i.MatchLdloc(5),
-				i => i.MatchLdloc(6),
-				i => i.MatchLdloca(7),
-				i => i.MatchCall(out _),
-				i => i.MatchLdindU2(),
-				i => i.MatchLdcI4(0)
-			)) { throw new Exception("Failed to find instructions IL_SceneMetrics_ScanAndExportToMain 2/4"); }
-
-			if (!c.TryGotoNext(MoveType.Before,
-				i => i.MatchLdcI4(0)
-			)) { throw new Exception("Failed to find instructions IL_SceneMetrics_ScanAndExportToMain 3/4"); }
-
-			//c.EmitDelegate((int type) => { return type; });
-
-			c.Emit(OpCodes.Ldarga, 0);
-
-			c.EmitDelegate(GlobalBagTile.NearbyEffects);
-
-			//IL_0677: ldarg.0
-			//IL_0678: call instance void Terraria.SceneMetrics::ExportTileCountsToMain()
-
-			if (!c.TryGotoNext(MoveType.Before,
-				i => i.MatchLdarg(0),
-				i => i.MatchCall<SceneMetrics>("ExportTileCountsToMain")
-			)) { throw new Exception("Failed to find instructions IL_SceneMetrics_ScanAndExportToMain 4/4"); }
-
-			c.Emit(OpCodes.Ldarga, 0);
-
-			c.EmitDelegate((ref SceneMetrics sceneMetrics) => {
-				BannerBag.PostScanAndExportToMain(ref sceneMetrics);
-				PortableStation.PostScanAndExportToMain(ref sceneMetrics);
 			});
 		}
 	}
