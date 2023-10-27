@@ -473,7 +473,13 @@ namespace VacuumBags.Items
 		}
 		internal static void PostUpdateBuffs(Player player) {
 			hasExquisiteFlask = StorageManager.HasRequiredItemToUseStorageFromBagTypeSlow(player, ExquisitePotionFlaskType, out _, true);
-			hasPotionFlask = hasExquisiteFlask || StorageManager.HasRequiredItemToUseStorageFromBagTypeSlow(player, PotionFlaskType);
+			if (hasExquisiteFlask) {
+				hasPotionFlask = true;
+			}
+			else {
+				hasPotionFlask = StorageManager.HasRequiredItemToUseStorageFromBagTypeSlow(player, PotionFlaskType);
+			}
+			
 			if (!hasPotionFlask && Buffs.Count == 0) {
 				lastHasPotionFlask = false;
 				return;
@@ -720,7 +726,13 @@ namespace VacuumBags.Items
 						return true;
 				}
 
-				Pause(inv);
+				if (!hasExquisiteFlask && Time <= 0) {
+					Buffs.Remove(Type);
+				}
+				else {
+					Pause(inv);
+				}
+				
 				return false;
 			}
 			public bool GiveBuffAtNextAvailable(Player player) {
