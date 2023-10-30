@@ -365,7 +365,7 @@ Mods: {
 				Tooltip:
 					'''
 					Memorizza automaticamente pozioni, cibo e bevande.
-					Quando sei nel tuo inventario, il contenuto della borsa è disponibile per la lavorazione.
+					Quando sei nel tuo inventario, il contenuto della borsa è disponibile per la creazione.
 					Fare clic con il tasto destro per aprire la borsa.
 					Il Buff Veloce utilizzerà il cibo dalla borsa. Se qualche alimento nel sacchetto viene aggiunto ai preferiti, verranno utilizzati solo gli alimenti preferiti.
 					Buff veloce utilizzerà le pozioni preferite dalla borsa.
@@ -376,6 +376,7 @@ Mods: {
 					I buff messi in pausa possono essere ripresi con un buff rapido o favorendo la pozione nell'ampolla.
 					Alla morte gli effetti delle pozioni vengono mantenuti per la stessa durata che avevano prima di morire.
 					Ottenere un buff di pozione mentre hai già il buff ne sommerà le durate invece di impostarle sulla durata del nuovo effetto.
+					Rimuovere un potenziamento tenendo premuto il tasto Maiusc eliminerà il potenziamento invece di metterlo in pausa.
 
 					Le pozioni dureranno il doppio del normale aumentando continuamente il tempo rimanente in modo che venga utilizzato solo 1 secondo ogni 2 secondi.
 					(Si abbina bene con l'incantesimo leggendario Juiced per una durata infinita permanente se è quello che vuoi.)
@@ -600,7 +601,7 @@ Mods: {
 				Tooltip:
 					'''
 					Memorizza automaticamente pozioni, cibo e bevande.
-					Quando sei nel tuo inventario, il contenuto della borsa è disponibile per la lavorazione.
+					Quando sei nel tuo inventario, il contenuto della borsa è disponibile per la creazione.
 					Fare clic con il tasto destro per aprire la borsa.
 					Il Buff Veloce utilizzerà il cibo dalla borsa. Se qualche alimento nel sacchetto viene aggiunto ai preferiti, verranno utilizzati solo gli alimenti preferiti.
 					Buff veloce utilizzerà le pozioni preferite dalla borsa.
@@ -611,6 +612,7 @@ Mods: {
 					I buff messi in pausa possono essere ripresi con un buff rapido o favorendo la pozione nell'ampolla.
 					Alla morte gli effetti delle pozioni vengono mantenuti per la stessa durata che avevano prima di morire.
 					Ottenere un buff di pozione mentre hai già il buff ne sommerà le durate invece di impostarle sulla durata del nuovo effetto.
+					Rimuovere un potenziamento tenendo premuto il tasto Maiusc eliminerà il potenziamento invece di metterlo in pausa.
 					'''
 			}
 
@@ -668,30 +670,30 @@ Mods: {
 		}
 
 		Tiles: {
-			// BagBlack.MapEntry: Bag Black
-			// BagBlue.MapEntry: Bag Blue
-			// BagBrown.MapEntry: Bag Brown
-			// BagGray.MapEntry: Bag Gray
-			// BagGreen.MapEntry: Bag Green
-			// BagOrange.MapEntry: Bag Orange
-			// BagPink.MapEntry: Bag Pink
-			// BagPurple.MapEntry: Bag Purple
-			// BagRed.MapEntry: Bag Red
-			// BagWhite.MapEntry: Bag White
-			// BagYellow.MapEntry: Bag Yellow
-			// BannerBag.MapEntry: Banner Bag
-			// PackBlack.MapEntry: Pack Black
-			// PackBlue.MapEntry: Pack Blue
-			// PackBrown.MapEntry: Pack Brown
-			// PackGray.MapEntry: Pack Gray
-			// PackGreen.MapEntry: Pack Green
-			// PackOrange.MapEntry: Pack Orange
-			// PackPink.MapEntry: Pack Pink
-			// PackPurple.MapEntry: Pack Purple
-			// PackRed.MapEntry: Pack Red
-			// PackWhite.MapEntry: Pack White
-			// PackYellow.MapEntry: Pack Yellow
 			// PortableStation.MapEntry: Portable Station
+			// PackYellow.MapEntry: Pack Yellow
+			// PackWhite.MapEntry: Pack White
+			// PackRed.MapEntry: Pack Red
+			// PackPurple.MapEntry: Pack Purple
+			// PackPink.MapEntry: Pack Pink
+			// PackOrange.MapEntry: Pack Orange
+			// PackGreen.MapEntry: Pack Green
+			// PackGray.MapEntry: Pack Gray
+			// PackBrown.MapEntry: Pack Brown
+			// PackBlue.MapEntry: Pack Blue
+			// PackBlack.MapEntry: Pack Black
+			// BannerBag.MapEntry: Banner Bag
+			// BagYellow.MapEntry: Bag Yellow
+			// BagWhite.MapEntry: Bag White
+			// BagRed.MapEntry: Bag Red
+			// BagPurple.MapEntry: Bag Purple
+			// BagPink.MapEntry: Bag Pink
+			// BagOrange.MapEntry: Bag Orange
+			// BagGreen.MapEntry: Bag Green
+			// BagGray.MapEntry: Bag Gray
+			// BagBrown.MapEntry: Bag Brown
+			// BagBlue.MapEntry: Bag Blue
+			// BagBlack.MapEntry: Bag Black
 		}
 	}
 }

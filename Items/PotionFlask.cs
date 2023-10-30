@@ -14,6 +14,8 @@ using System.Reflection;
 using Terraria.Audio;
 using System.Diagnostics.CodeAnalysis;
 using androLib.UI;
+using Terraria.UI;
+using Microsoft.Xna.Framework.Input;
 
 namespace VacuumBags.Items
 {
@@ -392,8 +394,13 @@ namespace VacuumBags.Items
 			}
 		}
 		internal static void OnDelBuff(On_Player.orig_DelBuff orig, Player self, int b) {
-			orig(self, b);
+			if (ItemSlot.ShiftInUse) {
+				int type = self.buffType[b];
+				Buffs.Remove(type);
+			}
 
+			orig(self, b);
+			
 			nextOpen = 0;
 			foreach (BuffInfo info in Buffs.Values) {
 				if (!info.Paused && info.BuffIndex >= b && info.BuffIndex > 0)
@@ -625,6 +632,7 @@ namespace VacuumBags.Items
 				Time = time;
 				ItemIndex = itemIndex;
 				WasFavorited = wasFavorited;
+				lastHasItem = itemIndex >= 0;
 			}
 			public bool HasItem(Item[] inv) => 0 <= ItemIndex && ItemIndex < inv.Length && inv[ItemIndex].buffType == Type;
 			public void CheckUpdateFavoirtedAndPaused(Player player, Item[] inv) {
@@ -978,7 +986,8 @@ namespace VacuumBags.Items
 			$"Potions providing a buff will have a green background.  Paused potions will have a yellow background.\n" +
 			$"Paused buffs can be resumed with quick buff or by favoriting the potion in the flask.\n" +
 			$"Potion effects are kept on death at the same duration they were before dying.\n" +
-			$"Gaining a potion buff while you already have the buff will add their durations together instead of setting it to the new effect's duration.";
+			$"Gaining a potion buff while you already have the buff will add their durations together instead of setting it to the new effect's duration.\n" +
+			$"Removing a buff with the Shift key held will delete the buff instead of pausing it.";
 		public override string Artist => "anodomani";
 		public override string Designer => "@kingjoshington";
 

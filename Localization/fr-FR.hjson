@@ -376,6 +376,7 @@ Mods: {
 					Les buffs interrompus peuvent être repris avec un buff rapide ou en favorisant la potion dans le flacon.
 					Les effets des potions sont conservés à la mort pendant la même durée qu'avant la mort.
 					Gagner un buff de potion alors que vous possédez déjà le buff additionnera leurs durées au lieu de la définir sur la durée du nouvel effet.
+					Supprimer un buff avec la touche Maj enfoncée supprimera le buff au lieu de le mettre en pause.
 
 					Les potions dureront deux fois plus longtemps que la normale en augmentant continuellement le temps restant afin qu'une seule seconde soit utilisée toutes les 2 secondes.
 					(Se marie bien avec l'enchantement légendaire Juiced pour une durée permanente et infinie si c'est ce que vous voulez.)
@@ -611,6 +612,7 @@ Mods: {
 					Les buffs interrompus peuvent être repris avec un buff rapide ou en favorisant la potion dans le flacon.
 					Les effets des potions sont conservés à la mort pendant la même durée qu'avant la mort.
 					Gagner un buff de potion alors que vous possédez déjà le buff additionnera leurs durées au lieu de la définir sur la durée du nouvel effet.
+					Supprimer un buff avec la touche Maj enfoncée supprimera le buff au lieu de le mettre en pause.
 					'''
 			}
 
@@ -668,30 +670,30 @@ Mods: {
 		}
 
 		Tiles: {
-			// BagBlack.MapEntry: Bag Black
-			// BagBlue.MapEntry: Bag Blue
-			// BagBrown.MapEntry: Bag Brown
-			// BagGray.MapEntry: Bag Gray
-			// BagGreen.MapEntry: Bag Green
-			// BagOrange.MapEntry: Bag Orange
-			// BagPink.MapEntry: Bag Pink
-			// BagPurple.MapEntry: Bag Purple
-			// BagRed.MapEntry: Bag Red
-			// BagWhite.MapEntry: Bag White
-			// BagYellow.MapEntry: Bag Yellow
-			// BannerBag.MapEntry: Banner Bag
-			// PackBlack.MapEntry: Pack Black
-			// PackBlue.MapEntry: Pack Blue
-			// PackBrown.MapEntry: Pack Brown
-			// PackGray.MapEntry: Pack Gray
-			// PackGreen.MapEntry: Pack Green
-			// PackOrange.MapEntry: Pack Orange
-			// PackPink.MapEntry: Pack Pink
-			// PackPurple.MapEntry: Pack Purple
-			// PackRed.MapEntry: Pack Red
-			// PackWhite.MapEntry: Pack White
-			// PackYellow.MapEntry: Pack Yellow
 			// PortableStation.MapEntry: Portable Station
+			// PackYellow.MapEntry: Pack Yellow
+			// PackWhite.MapEntry: Pack White
+			// PackRed.MapEntry: Pack Red
+			// PackPurple.MapEntry: Pack Purple
+			// PackPink.MapEntry: Pack Pink
+			// PackOrange.MapEntry: Pack Orange
+			// PackGreen.MapEntry: Pack Green
+			// PackGray.MapEntry: Pack Gray
+			// PackBrown.MapEntry: Pack Brown
+			// PackBlue.MapEntry: Pack Blue
+			// PackBlack.MapEntry: Pack Black
+			// BannerBag.MapEntry: Banner Bag
+			// BagYellow.MapEntry: Bag Yellow
+			// BagWhite.MapEntry: Bag White
+			// BagRed.MapEntry: Bag Red
+			// BagPurple.MapEntry: Bag Purple
+			// BagPink.MapEntry: Bag Pink
+			// BagOrange.MapEntry: Bag Orange
+			// BagGreen.MapEntry: Bag Green
+			// BagGray.MapEntry: Bag Gray
+			// BagBrown.MapEntry: Bag Brown
+			// BagBlue.MapEntry: Bag Blue
+			// BagBlack.MapEntry: Bag Black
 		}
 	}
 }

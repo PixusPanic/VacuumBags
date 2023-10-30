@@ -376,6 +376,7 @@ Mods: {
 					暂停的增益可以通过快速增益或通过收藏烧瓶中的药水来恢复。
 					死亡时药水效果的持续时间与死亡前相同。
 					当您已经拥有药水增益时，获得药水增益会将它们的持续时间加在一起，而不是将其设置为新效果的持续时间。
+					按住 Shift 键删除 buff 将删除该 buff，而不是暂停它。
 
 					通过不断增加剩余时间，每 2 秒仅使用 1 秒，药水的持续时间将是正常时间的两倍。
 					（如果您想要的话，可以与传奇果汁结界完美搭配，永久无限持续时间。）
@@ -611,6 +612,7 @@ Mods: {
 					暂停的增益可以通过快速增益或通过收藏烧瓶中的药水来恢复。
 					死亡时药水效果的持续时间与死亡前相同。
 					当您已经拥有药水增益时，获得药水增益会将它们的持续时间加在一起，而不是将其设置为新效果的持续时间。
+					按住 Shift 键删除 buff 将删除该 buff，而不是暂停它。
 					'''
 			}
 
@@ -668,30 +670,30 @@ Mods: {
 		}
 
 		Tiles: {
-			// BagBlack.MapEntry: Bag Black
-			// BagBlue.MapEntry: Bag Blue
-			// BagBrown.MapEntry: Bag Brown
-			// BagGray.MapEntry: Bag Gray
-			// BagGreen.MapEntry: Bag Green
-			// BagOrange.MapEntry: Bag Orange
-			// BagPink.MapEntry: Bag Pink
-			// BagPurple.MapEntry: Bag Purple
-			// BagRed.MapEntry: Bag Red
-			// BagWhite.MapEntry: Bag White
-			// BagYellow.MapEntry: Bag Yellow
-			// BannerBag.MapEntry: Banner Bag
-			// PackBlack.MapEntry: Pack Black
-			// PackBlue.MapEntry: Pack Blue
-			// PackBrown.MapEntry: Pack Brown
-			// PackGray.MapEntry: Pack Gray
-			// PackGreen.MapEntry: Pack Green
-			// PackOrange.MapEntry: Pack Orange
-			// PackPink.MapEntry: Pack Pink
-			// PackPurple.MapEntry: Pack Purple
-			// PackRed.MapEntry: Pack Red
-			// PackWhite.MapEntry: Pack White
-			// PackYellow.MapEntry: Pack Yellow
 			// PortableStation.MapEntry: Portable Station
+			// PackYellow.MapEntry: Pack Yellow
+			// PackWhite.MapEntry: Pack White
+			// PackRed.MapEntry: Pack Red
+			// PackPurple.MapEntry: Pack Purple
+			// PackPink.MapEntry: Pack Pink
+			// PackOrange.MapEntry: Pack Orange
+			// PackGreen.MapEntry: Pack Green
+			// PackGray.MapEntry: Pack Gray
+			// PackBrown.MapEntry: Pack Brown
+			// PackBlue.MapEntry: Pack Blue
+			// PackBlack.MapEntry: Pack Black
+			// BannerBag.MapEntry: Banner Bag
+			// BagYellow.MapEntry: Bag Yellow
+			// BagWhite.MapEntry: Bag White
+			// BagRed.MapEntry: Bag Red
+			// BagPurple.MapEntry: Bag Purple
+			// BagPink.MapEntry: Bag Pink
+			// BagOrange.MapEntry: Bag Orange
+			// BagGreen.MapEntry: Bag Green
+			// BagGray.MapEntry: Bag Gray
+			// BagBrown.MapEntry: Bag Brown
+			// BagBlue.MapEntry: Bag Blue
+			// BagBlack.MapEntry: Bag Black
 		}
 	}
 }

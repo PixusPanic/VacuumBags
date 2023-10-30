@@ -376,6 +376,7 @@ Mods: {
 					Angehaltene Buffs können mit einem schnellen Buff oder durch Bevorzugung des Tranks im Fläschchen wieder aufgenommen werden.
 					Die Wirkung von Trank bleibt beim Tod in der gleichen Dauer erhalten wie vor dem Tod.
 					Wenn du einen Trank-Buff erhältst, während du bereits über den Buff verfügst, wird die Dauer addiert, anstatt sie auf die Dauer des neuen Effekts festzulegen.
+					Wenn Sie einen Buff bei gedrückter Umschalttaste entfernen, wird der Buff gelöscht, anstatt ihn anzuhalten.
 
 					Tränke halten doppelt so lange wie normal, indem die verbleibende Zeit kontinuierlich verlängert wird, sodass alle 2 Sekunden nur 1 Sekunde verbraucht wird.
 					(Paart sich gut mit der legendären Saftverzauberung für dauerhaft unbegrenzte Dauer, wenn Sie das wünschen.)
@@ -611,6 +612,7 @@ Mods: {
 					Angehaltene Buffs können mit einem schnellen Buff oder durch Bevorzugung des Tranks im Fläschchen wieder aufgenommen werden.
 					Die Wirkung von Trank bleibt beim Tod in der gleichen Dauer erhalten wie vor dem Tod.
 					Wenn du einen Trank-Buff erhältst, während du bereits über den Buff verfügst, wird die Dauer addiert, anstatt sie auf die Dauer des neuen Effekts festzulegen.
+					Wenn Sie einen Buff bei gedrückter Umschalttaste entfernen, wird der Buff gelöscht, anstatt ihn anzuhalten.
 					'''
 			}
 
@@ -668,30 +670,30 @@ Mods: {
 		}
 
 		Tiles: {
-			// BagBlack.MapEntry: Bag Black
-			// BagBlue.MapEntry: Bag Blue
-			// BagBrown.MapEntry: Bag Brown
-			// BagGray.MapEntry: Bag Gray
-			// BagGreen.MapEntry: Bag Green
-			// BagOrange.MapEntry: Bag Orange
-			// BagPink.MapEntry: Bag Pink
-			// BagPurple.MapEntry: Bag Purple
-			// BagRed.MapEntry: Bag Red
-			// BagWhite.MapEntry: Bag White
-			// BagYellow.MapEntry: Bag Yellow
-			// BannerBag.MapEntry: Banner Bag
-			// PackBlack.MapEntry: Pack Black
-			// PackBlue.MapEntry: Pack Blue
-			// PackBrown.MapEntry: Pack Brown
-			// PackGray.MapEntry: Pack Gray
-			// PackGreen.MapEntry: Pack Green
-			// PackOrange.MapEntry: Pack Orange
-			// PackPink.MapEntry: Pack Pink
-			// PackPurple.MapEntry: Pack Purple
-			// PackRed.MapEntry: Pack Red
-			// PackWhite.MapEntry: Pack White
-			// PackYellow.MapEntry: Pack Yellow
 			// PortableStation.MapEntry: Portable Station
+			// PackYellow.MapEntry: Pack Yellow
+			// PackWhite.MapEntry: Pack White
+			// PackRed.MapEntry: Pack Red
+			// PackPurple.MapEntry: Pack Purple
+			// PackPink.MapEntry: Pack Pink
+			// PackOrange.MapEntry: Pack Orange
+			// PackGreen.MapEntry: Pack Green
+			// PackGray.MapEntry: Pack Gray
+			// PackBrown.MapEntry: Pack Brown
+			// PackBlue.MapEntry: Pack Blue
+			// PackBlack.MapEntry: Pack Black
+			// BannerBag.MapEntry: Banner Bag
+			// BagYellow.MapEntry: Bag Yellow
+			// BagWhite.MapEntry: Bag White
+			// BagRed.MapEntry: Bag Red
+			// BagPurple.MapEntry: Bag Purple
+			// BagPink.MapEntry: Bag Pink
+			// BagOrange.MapEntry: Bag Orange
+			// BagGreen.MapEntry: Bag Green
+			// BagGray.MapEntry: Bag Gray
+			// BagBrown.MapEntry: Bag Brown
+			// BagBlue.MapEntry: Bag Blue
+			// BagBlack.MapEntry: Bag Black
 		}
 	}
 }

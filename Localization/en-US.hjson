@@ -376,6 +376,7 @@ Mods: {
 					Paused buffs can be resumed with quick buff or by favoriting the potion in the flask.
 					Potion effects are kept on death at the same duration they were before dying.
 					Gaining a potion buff while you already have the buff will add their durations together instead of setting it to the new effect's duration.
+					Removing a buff with the Shift key held will delete the buff instead of pausing it.
 
 					Potions will last twice as long as normal by continuously adding to the time remaining so that only 1 second is used every 2 seconds.
 					(Pairs well with the Legendary Juiced Enchantment for permanent infinite duration if that's what you want.)
@@ -611,6 +612,7 @@ Mods: {
 					Paused buffs can be resumed with quick buff or by favoriting the potion in the flask.
 					Potion effects are kept on death at the same duration they were before dying.
 					Gaining a potion buff while you already have the buff will add their durations together instead of setting it to the new effect's duration.
+					Removing a buff with the Shift key held will delete the buff instead of pausing it.
 					'''
 			}
 
@@ -668,30 +670,30 @@ Mods: {
 		}
 
 		Tiles: {
-			BagBlack.MapEntry: Bag Black
-			BagBlue.MapEntry: Bag Blue
-			BagBrown.MapEntry: Bag Brown
-			BagGray.MapEntry: Bag Gray
-			BagGreen.MapEntry: Bag Green
-			BagOrange.MapEntry: Bag Orange
-			BagPink.MapEntry: Bag Pink
-			BagPurple.MapEntry: Bag Purple
-			BagRed.MapEntry: Bag Red
-			BagWhite.MapEntry: Bag White
-			BagYellow.MapEntry: Bag Yellow
-			BannerBag.MapEntry: Banner Bag
-			PackBlack.MapEntry: Pack Black
-			PackBlue.MapEntry: Pack Blue
-			PackBrown.MapEntry: Pack Brown
-			PackGray.MapEntry: Pack Gray
-			PackGreen.MapEntry: Pack Green
-			PackOrange.MapEntry: Pack Orange
-			PackPink.MapEntry: Pack Pink
-			PackPurple.MapEntry: Pack Purple
-			PackRed.MapEntry: Pack Red
-			PackWhite.MapEntry: Pack White
-			PackYellow.MapEntry: Pack Yellow
 			PortableStation.MapEntry: Portable Station
+			PackYellow.MapEntry: Pack Yellow
+			PackWhite.MapEntry: Pack White
+			PackRed.MapEntry: Pack Red
+			PackPurple.MapEntry: Pack Purple
+			PackPink.MapEntry: Pack Pink
+			PackOrange.MapEntry: Pack Orange
+			PackGreen.MapEntry: Pack Green
+			PackGray.MapEntry: Pack Gray
+			PackBrown.MapEntry: Pack Brown
+			PackBlue.MapEntry: Pack Blue
+			PackBlack.MapEntry: Pack Black
+			BannerBag.MapEntry: Banner Bag
+			BagYellow.MapEntry: Bag Yellow
+			BagWhite.MapEntry: Bag White
+			BagRed.MapEntry: Bag Red
+			BagPurple.MapEntry: Bag Purple
+			BagPink.MapEntry: Bag Pink
+			BagOrange.MapEntry: Bag Orange
+			BagGreen.MapEntry: Bag Green
+			BagGray.MapEntry: Bag Gray
+			BagBrown.MapEntry: Bag Brown
+			BagBlue.MapEntry: Bag Blue
+			BagBlack.MapEntry: Bag Black
 		}
 	}
 }
