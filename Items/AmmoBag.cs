@@ -16,8 +16,7 @@ using Mono.Cecil.Cil;
 namespace VacuumBags.Items
 {
     [Autoload(false)]
-	public class AmmoBag : BagModItem, INeedsSetUpAllowedList
-	{
+	public class AmmoBag : BagModItem, INeedsSetUpAllowedList {
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {
             Item.maxStack = 1;
@@ -50,14 +49,14 @@ namespace VacuumBags.Items
         }
 
 		public static int BagStorageID;//Set this when registering with androLib.
-
+		protected static int DefaultBagSize => 100;
 		public static void RegisterWithAndroLib(Mod mod) {
 			BagStorageID = StorageManager.RegisterVacuumStorageClass(
 				mod,//Mod
 				typeof(AmmoBag),//type 
 				ItemAllowedToBeStored,//Is allowed function, Func<Item, bool>
 				null,//Localization Key name.  Attempts to determine automatically by treating the type as a ModItem, or you can specify.
-				100,//StorageSize
+				-DefaultBagSize,//StorageSize
 				true,//Can vacuum
 				() => new Color(80, 80, 80, androLib.Common.Configs.ConfigValues.UIAlpha),   // Get color function. Func<using Microsoft.Xna.Framework.Color>
 				() => new Color(90, 90, 90, androLib.Common.Configs.ConfigValues.UIAlpha),   // Get Scroll bar color function. Func<using Microsoft.Xna.Framework.Color>

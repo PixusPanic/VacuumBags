@@ -18,7 +18,7 @@ namespace VacuumBags.Items
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public abstract int MyTileType { get; }
 		public static Color PanelColor => new Color(255, 255, 255, androLib.Common.Configs.ConfigValues.UIAlpha);
-		public static int BagSize => VacuumBags.clientConfig.SimpleBagStorageSize;
+		public static int BagSize => -40;
 		public static bool? IsVacuumBag = VacuumBags.clientConfig.SimpleBagsVacuumAllItems ? true : null;
 		public override void SetDefaults() {
 			Item.createTile = MyTileType;

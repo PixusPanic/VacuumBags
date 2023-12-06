@@ -8,6 +8,7 @@ using Terraria.ID;
 using androLib.Common.Globals;
 using androLib.Common.Utility;
 using VacuumBags.Items;
+using androLib.Common.Configs;
 
 namespace VacuumBags.Common.Configs
 {
@@ -33,31 +34,31 @@ namespace VacuumBags.Common.Configs
 		[Header($"$Mods.{VacuumBags.ModName}.{L_ID_Tags.Configs}.{ServerConfigName}.{BagEffectOptionsKey}")]
 
 		[DefaultValue(BannerBagNumberOfBannersInInventoryDefault)]
-		[Range(BagModItem.FirstXItemsChooseAllItems, BagsClientConfig.BagsMaxStorageSize)]
+		[Range(BagModItem.FirstXItemsChooseAllItems, StorageSizePair.MaxStorageSize)]
 		public int BannerBagNumberOfBannersInInventory;
 
 		[DefaultValue(BagModItem.FirstXItemsChooseAllItems)]
-		[Range(BagModItem.FirstXItemsChooseAllItems, BagsClientConfig.BagsMaxStorageSize)]
+		[Range(BagModItem.FirstXItemsChooseAllItems, StorageSizePair.MaxStorageSize)]
 		public int BannerBagNumberOfBannersWhenPlaced;
 
 		[JsonIgnore]
 		public const int PortableStationNumberOfCraftingStationsInInventoryDefault = 1;
 		[DefaultValue(PortableStationNumberOfCraftingStationsInInventoryDefault)]
-		[Range(BagModItem.FirstXItemsChooseAllItems, BagsClientConfig.BagsMaxStorageSize)]
+		[Range(BagModItem.FirstXItemsChooseAllItems, StorageSizePair.MaxStorageSize)]
 		public int PortableStationNumberOfStationsInInventory;
 
 		[DefaultValue(BagModItem.FirstXItemsChooseAllItems)]
-		[Range(BagModItem.FirstXItemsChooseAllItems, BagsClientConfig.BagsMaxStorageSize)]
+		[Range(BagModItem.FirstXItemsChooseAllItems, StorageSizePair.MaxStorageSize)]
 		public int PortableStationNumberOfStationsWhenPlaced;
 
 		[JsonIgnore]
 		public const int PortableStationNumberOfPassiveBuffStationsInInventoryDefault = 1;
 		[DefaultValue(PortableStationNumberOfPassiveBuffStationsInInventoryDefault)]
-		[Range(BagModItem.FirstXItemsChooseAllItems, BagsClientConfig.BagsMaxStorageSize)]
+		[Range(BagModItem.FirstXItemsChooseAllItems, StorageSizePair.MaxStorageSize)]
 		public int PortableStationNumberOfPassiveBuffStationsInInventory;
 
 		[DefaultValue(BagModItem.FirstXItemsChooseAllItems)]
-		[Range(BagModItem.FirstXItemsChooseAllItems, BagsClientConfig.BagsMaxStorageSize)]
+		[Range(BagModItem.FirstXItemsChooseAllItems, StorageSizePair.MaxStorageSize)]
 		public int PortableStationNumberOfPassiveBuffStationsWhenPlaced;
 
 		[DefaultValue(true)]
@@ -81,14 +82,6 @@ namespace VacuumBags.Common.Configs
 		[JsonIgnore]
 		public const string BagStorageOptionsKey = "BagStorageOptions";
 		[Header($"$Mods.{VacuumBags.ModName}.{L_ID_Tags.Configs}.{ClientConfigName}.{BagStorageOptionsKey}")]
-
-		[JsonIgnore]
-		public const int BagsMaxStorageSize = 10000;
-
-		[ReloadRequired]
-		[Range(1, BagsMaxStorageSize)]
-		[DefaultValue(40)]
-		public int SimpleBagStorageSize;
 
 		[ReloadRequired]
 		[DefaultValue(false)]

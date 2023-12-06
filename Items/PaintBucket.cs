@@ -48,6 +48,7 @@ namespace VacuumBags.Items
 		}
 
 		public static int BagStorageID;//Set this when registering with androLib.
+		protected static int DefaultBagSize => 100;
 
 
 		public static void RegisterWithAndroLib(Mod mod) {
@@ -56,7 +57,7 @@ namespace VacuumBags.Items
 				typeof(PaintBucket),//type 
 				ItemAllowedToBeStored,//Is allowed function, Func<Item, bool>
 				null,//Localization Key name.  Attempts to determine automatically by treating the type as a ModItem, or you can specify.
-				100,//StorageSize
+				-DefaultBagSize,//StorageSize
 				true,//Can vacuum
 				() => new Color(245, 245, 220, androLib.Common.Configs.ConfigValues.UIAlpha),  // Get color function. Func<using Microsoft.Xna.Framework.Color>
 				() => new Color(255, 255, 230, androLib.Common.Configs.ConfigValues.UIAlpha),  // Get Scroll bar color function. Func<using Microsoft.Xna.Framework.Color>

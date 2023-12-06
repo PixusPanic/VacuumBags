@@ -49,6 +49,7 @@ namespace VacuumBags.Items
 		}
 
 		public static int BagStorageID;//Set this when registering with androLib.
+		protected static int DefaultBagSize => 200;
 
 		public static void RegisterWithAndroLib(Mod mod) {
 			BagStorageID = StorageManager.RegisterVacuumStorageClass(
@@ -56,7 +57,7 @@ namespace VacuumBags.Items
 				typeof(BossBag),//type 
 				ItemAllowedToBeStored,//Is allowed function, Func<Item, bool>
 				null,//Localization Key name.  Attempts to determine automatically by treating the type as a ModItem, or you can specify.
-				200,//StorageSize
+				-DefaultBagSize,//StorageSize
 				true,//Can vacuum
 				() => new Color(121, 92, 18, androLib.Common.Configs.ConfigValues.UIAlpha),   // Get color function. Func<using Microsoft.Xna.Framework.Color>
 				() => new Color(155, 130, 20, androLib.Common.Configs.ConfigValues.UIAlpha),   // Get Scroll bar color function. Func<using Microsoft.Xna.Framework.Color>

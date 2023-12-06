@@ -57,6 +57,7 @@ namespace VacuumBags.Items
 		}
 
 		public static int BagStorageID;//Set this when registering with androLib.
+		protected static int DefaultBagSize => 100;
 
 
 		public static void RegisterWithAndroLib(Mod mod) {
@@ -65,7 +66,7 @@ namespace VacuumBags.Items
 				typeof(PotionFlask),//type 
 				ItemAllowedToBeStored,//Is allowed function, Func<Item, bool>
 				null,//Localization Key name.  Attempts to determine automatically by treating the type as a ModItem, or you can specify.
-				100,//StorageSize
+				-DefaultBagSize,//StorageSize
 				true,//Can vacuum
 				() => new Color(80, 10, 80, androLib.Common.Configs.ConfigValues.UIAlpha),    // Get color function. Func<using Microsoft.Xna.Framework.Color>
 				() => new Color(90, 10, 90, androLib.Common.Configs.ConfigValues.UIAlpha),    // Get Scroll bar color function. Func<using Microsoft.Xna.Framework.Color>
@@ -584,7 +585,15 @@ namespace VacuumBags.Items
 					if (!trackedItemIndexes.TryGetValue(buffType, out int inventoryIndex))
 						inventoryIndex = -1;
 
-					Buffs.Add(buffType, new(buffType, buffIndex, player.buffTime[buffIndex], inventoryIndex, firstCheckSinceLoad || inventoryIndex > -1 && inv[inventoryIndex].favorited));
+					bool wasFavorited = firstCheckSinceLoad;
+					if (inventoryIndex > -1) {
+						if (!firstCheckSinceLoad)
+							inv[inventoryIndex].favorited = true;
+
+						wasFavorited |= inv[inventoryIndex].favorited;
+					}
+
+					Buffs.Add(buffType, new(buffType, buffIndex, player.buffTime[buffIndex], inventoryIndex, wasFavorited));
 				}
 			}
 

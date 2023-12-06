@@ -62,14 +62,14 @@ namespace VacuumBags.Items
 		private static SortedSet<int> blacklist = null;
 
 		public static int BagStorageID;//Set this when registering with androLib.
-		private const int TrashCanSize = 200;
+		protected static int DefaultBagSize => 200;
 		public static void RegisterWithAndroLib(Mod mod) {
 			BagStorageID = StorageManager.RegisterVacuumStorageClass(
 				mod,//Mod
 				typeof(TrashCan),//type 
 				ItemAllowedToBeStored,//Is allowed function, Func<Item, bool>
 				null,//Localization Key name.  Attempts to determine automatically by treating the type as a ModItem, or you can specify.
-				TrashCanSize,//StorageSize
+				-DefaultBagSize,//StorageSize
 				null,//Can vacuum
 				() => new Color(100, 100, 116, androLib.Common.Configs.ConfigValues.UIAlpha),   // Get color function. Func<using Microsoft.Xna.Framework.Color>
 				() => new Color(40, 40, 50, androLib.Common.Configs.ConfigValues.UIAlpha),   // Get Scroll bar color function. Func<using Microsoft.Xna.Framework.Color>
@@ -122,7 +122,7 @@ namespace VacuumBags.Items
 			SoundEngine.PlaySound(SoundID.CoinPickup);
 			Recipe.FindRecipes(true);
 		}
-		private static bool[] itemTracker = new bool[TrashCanSize];
+		private static bool[] itemTracker = null;
 		private static SortedSet<int> itemsAlreadyFound = new();
 		public static void TrashCheck() {
 			if (Main.netMode == NetmodeID.Server)
@@ -132,6 +132,9 @@ namespace VacuumBags.Items
 				return;
 
 			Item[] inv = StorageManager.GetItems(BagStorageID);
+			if (itemTracker == null)
+				itemTracker = new bool[inv.Length];
+
 			bool doTrash = false;
 			for (int i = 0; i < inv.Length; i++) {
 				Item item = inv[i];

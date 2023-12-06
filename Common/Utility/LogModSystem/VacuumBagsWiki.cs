@@ -79,7 +79,9 @@ namespace VacuumBags.Common.Utility.LogModSystem
             
             mainPage.NewLine();
             mainPage.AddParagraph($"Bags have default items that are and aren't allowed but each bag can store any item by utilizing the {AllowedListsPageName.ToLink("white and black lists")} which can easily be interacted with in game.");
-            mainPage.NewLine();
+			mainPage.NewLine();
+			mainPage.AddParagraph($"The size of the bags can be adjusted in the androLib Client Config.");
+			mainPage.NewLine();
 
 			AddItemTable(functionalBags, FunctionalBagsHeader, mainPage);
             AddItemTable(simpleBags, SimpleBagsHeader, mainPage);
