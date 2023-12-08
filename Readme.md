@@ -4,20 +4,36 @@ https://vacuum-bags.fandom.com/wiki/Vacuum_Bags_Wiki
 Vacuum Bags is a mod that adds 2 different types of bags using androLib.
 All bags are compatible with Magic Storage (Requires Magic Storage's Storage Configuration Interface)
 
-Vacuum Bags (100 inventory slots)  (Designed by @KingJoshington)
-	Ammo Bag - Ammo
-	Builders Box - Building Blocks
-	Herb Satchel - Seeds/Plants
-	Paint Bucket - Paint
-	Potion Flask - Potions/Food
-	Wall-Er - Walls
+Vacuum Bags (100 inventory slots, adjustable in androLib Client Config)  (Designed by @KingJoshington)
+	Ammo Bag - Ammo			(Art by anodomani, Co-Designed by @KingJoshington)
+	Banner Bag - Banners		(Art by @KingJoshington)
+	Boss Bag - Boss Bags and other boss drops		(Art by @KingJoshington)
+	Builders Box - Building Blocks and Furniture		(Art and design by @KingJoshington)
+	Fishing Belt - Fishing Gear, Bait, and Loot		(Art by anodomani)
+	Herb Satchel - Seeds/Plants		(Art by anodomani)
+	Jar of Dirt - Natural Building Blocks like dirt, stone, sand, clay, wood, etc.		(Art by @KingJoshington)
+	Mechanics Toolbelt - Wiring items, and Buckets		(Art by @KingJoshington)
+	Paint Bucket - Paints, Dyes, and Paint Tools		(Art and design by @KingJoshington)
+	Portable Station - Crafting Stations and Buff Stations		(Art by @KingJoshington)
+	Potion Flask - Potions/Food		(Art by anodomani)
+	Slayer Sack - Monster Drops, lighting items like torches and glowsticks, and rope items		(Art by anodomani, modified by @KingJoshington)
+	Trash Can - Auto-Sells items		(Art from Vanilla Sprite)
+	Wall-Er - Walls		(Art and design by @KingJoshington)
 
 	These bags automatically pick up items if vacuum is toggled on if the item is allowed in the bag.
 
-General Purpose Bags (20 inventory slots)
-	Blue, Brown, Green, Orange, Purple, Red, Yellow
+General Purpose Bags (40 inventory slots, adjustable in androLib Client Config)
+	Black, Blue, Brown, Gray, Green, Orange, Pink, Purple, Red, White, Yellow (Art and Co-Designed by @KingJoshington)
 
 	These bags automatically pick up items if vacuum is toggled on if there is an item of the same type already in the bag.
+	
+Mod Bags (200 inventory slots, adjustable in androLib Client Config)
+	Calamity - Calamitous Cauldron (Art and Co-Designed by @KingJoshington)
+	Fargos Mods - Fargos Mementos (Art and Co-Designed by @KingJoshington)
+	Secrets of the Shadows - Earthen Pyramid (Art and Design by @level12lobester)
+	Spooky Mod - Spooky Gourd (Art and Design by @level12lobester)
+	Stars Above - Essence Of Gathering (Art from Stars Above Sprite, edited by @KingJoshington)
+	Thorium - Lokis Tesseract (Art and Co-Designed by @KingJoshington)
 
 **Attention Modders**
 This mod is built like an example mod to show off how to create a bag with androLib.

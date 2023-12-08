@@ -135,7 +135,12 @@ namespace VacuumBags
 			DoBagItemSwap(player, () => orig(player));
 		}
 		internal static void On_PlayerDrawLayers_DrawPlayer_27_HeldItem(On_PlayerDrawLayers.orig_DrawPlayer_27_HeldItem orig, ref PlayerDrawSet drawinfo) {
-			Player player = Main.LocalPlayer;
+			Player player = drawinfo.drawPlayer;
+			if (player.whoAmI != Main.myPlayer) {
+				orig(ref drawinfo);
+				return;
+			}
+
 			drawinfo.heldItem = player.HeldItem;
 			PlayerDrawSet l = drawinfo;
 			DoBagItemSwap(player, () => {

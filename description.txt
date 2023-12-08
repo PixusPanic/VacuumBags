@@ -26,6 +26,14 @@ General Purpose Bags (40 inventory slots, adjustable in androLib Client Config)
 	Black, Blue, Brown, Gray, Green, Orange, Pink, Purple, Red, White, Yellow (Art and Co-Designed by @KingJoshington)
 
 	These bags automatically pick up items if vacuum is toggled on if there is an item of the same type already in the bag.
+	
+Mod Bags (200 inventory slots, adjustable in androLib Client Config)
+	Calamity - Calamitous Cauldron (Art and Co-Designed by @KingJoshington)
+	Fargos Mods - Fargos Mementos (Art and Co-Designed by @KingJoshington)
+	Secrets of the Shadows - Earthen Pyramid (Art and Design by @level12lobester)
+	Spooky Mod - Spooky Gourd (Art and Design by @level12lobester)
+	Stars Above - Essence Of Gathering (Art from Stars Above Sprite, edited by @KingJoshington)
+	Thorium - Lokis Tesseract (Art and Co-Designed by @KingJoshington)
 
 **Attention Modders**
 This mod is built like an example mod to show off how to create a bag with androLib.

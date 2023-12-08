@@ -23,13 +23,14 @@ namespace VacuumBags.Items
 		new public static Color PanelColor => new Color(226, 109, 0, androLib.Common.Configs.ConfigValues.UIAlpha);
 		new public static Color ScrollBarColor => new Color(170, 40, 40, androLib.Common.Configs.ConfigValues.UIAlpha);
 		new public static Color ButtonHoverColor => new Color(255, 140, 50, androLib.Common.Configs.ConfigValues.UIAlpha);
+		protected static int DefaultBagSize => 200;
 		public static void RegisterWithAndroLib(Mod mod) {
 			BagStorageID = StorageManager.RegisterVacuumStorageClass(
 				mod,//Mod
 				typeof(FargosMementos),//type 
 				ItemAllowedToBeStored,//Is allowed function, Func<Item, bool>
 				null,//Localization Key name.  Attempts to determine automatically by treating the type as a ModItem, or you can specify.
-				200,//StorageSize
+				-DefaultBagSize,//StorageSize
 				true,//Can vacuum
 				() => PanelColor, // Get color function. Func<using Microsoft.Xna.Framework.Color>
 				() => ScrollBarColor, // Get Scroll bar color function. Func<using Microsoft.Xna.Framework.Color>
