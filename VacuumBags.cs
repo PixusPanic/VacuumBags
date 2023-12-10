@@ -115,17 +115,8 @@ namespace VacuumBags
 
 			registeredWithAndroLib = true;
 
-			BagBlack.RegisterWithAndroLib(this);
-			BagBlue.RegisterWithAndroLib(this);
-			BagBrown.RegisterWithAndroLib(this);
-			BagGray.RegisterWithAndroLib(this);
-			BagGreen.RegisterWithAndroLib(this);
-			BagOrange.RegisterWithAndroLib(this);
-			BagPink.RegisterWithAndroLib(this);
-			BagPurple.RegisterWithAndroLib(this);
-			BagRed.RegisterWithAndroLib(this);
-			BagWhite.RegisterWithAndroLib(this);
-			BagYellow.RegisterWithAndroLib(this);
+			if (!clientConfig.SimpleBagsVacuumAllItems)
+				RegisterSimpleBagsWithAndroLib();
 
 			BannerBag.RegisterWithAndroLib(this);
 			FishingBelt.RegisterWithAndroLib(this);
@@ -148,6 +139,9 @@ namespace VacuumBags
 			SpookyGourd.RegisterWithAndroLib(this);
 			EarthenPyramid.RegisterWithAndroLib(this);
 
+			if (clientConfig.SimpleBagsVacuumAllItems)
+				RegisterSimpleBagsWithAndroLib();
+
 			ExquisitePotionFlask.RegisterWithAndroLibItemTypeOnly();
 
 			PackBlack.RegisterWithAndroLibItemTypeOnly();
@@ -166,6 +160,19 @@ namespace VacuumBags
 			WallEr.RegisterWithGadgetGalore();
 			JarOfDirt.RegisterWithGadgetGalore();
 			PaintBucket.RegisterWithGadgetGalore();
+		}
+		private void RegisterSimpleBagsWithAndroLib() {
+			BagBlack.RegisterWithAndroLib(this);
+			BagBlue.RegisterWithAndroLib(this);
+			BagBrown.RegisterWithAndroLib(this);
+			BagGray.RegisterWithAndroLib(this);
+			BagGreen.RegisterWithAndroLib(this);
+			BagOrange.RegisterWithAndroLib(this);
+			BagPink.RegisterWithAndroLib(this);
+			BagPurple.RegisterWithAndroLib(this);
+			BagRed.RegisterWithAndroLib(this);
+			BagWhite.RegisterWithAndroLib(this);
+			BagYellow.RegisterWithAndroLib(this);
 		}
 		public override object Call(params object[] args) {
 			if (args.Length != 1)
