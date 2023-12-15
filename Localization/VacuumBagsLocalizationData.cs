@@ -134,6 +134,10 @@ namespace VacuumBags.Localization
 									{ L_ID3.Label.ToString(), nameof(clientConfig.SilencePortableStationActiveBuffs).AddSpaces() },
 									{ L_ID3.Tooltip.ToString(), "If selected, the Portable Station will not play any sounds when it provides active buffs on opening the station." }
 								}) },
+								{ nameof(clientConfig.TurnOffRegularPotionFlask), new(dict: new() {
+									{ L_ID3.Label.ToString(), nameof(clientConfig.TurnOffRegularPotionFlask).AddSpaces() },
+									{ L_ID3.Tooltip.ToString(), "Turning this on will disable all effects of the Regular Potion Flask.  (Does not affect the Exquisite Potion Flask)" }
+								}) },
 								{ nameof(clientConfig.PrintWikiInfo), new(dict: new() {
 									{ L_ID3.Label.ToString(), "Log all wiki info" },
 									{ L_ID3.Tooltip.ToString(), "The info is printed to the client.log when you enter a world.\nThe client.log default location is C:\\Steam\\SteamApps\\common\\tModLoader\\tModLoader-Logs" }

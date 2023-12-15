@@ -48,16 +48,6 @@ Mods: {
 					Tooltip: Si cette option est sélectionnée, la station portable ne jouera aucun son lorsqu'elle fournira des buffs actifs à l'ouverture de la station.
 				}
 
-				SimpleBagStorageSize: {
-					Label: Taille de stockage du sac simple
-					Tooltip:
-						'''
-						Le nombre d'emplacements dans le rangement simple du sac.
-						Si cette option est utilisée alors que le joueur a plus d'objets dans son sac, la taille du sac sera réduite au nombre d'objets encore dans le sac.
-						Définir ce nombre très élevé pourrait entraîner un décalage ou éventuellement un crash dû à une utilisation trop importante de mémoire si vous n'avez pas beaucoup de RAM. À utiliser à vos risques et périls.
-						'''
-				}
-
 				SimpleBagsVacuumAllItems: {
 					Label: Sacs simples pour aspirer tous les articles
 					Tooltip:
@@ -65,6 +55,11 @@ Mods: {
 						Si cela est vrai, tous les articles seront aspirés dans de simples sacs.
 						Si faux, seuls les articles du même type qu’un article dans le sac seront aspirés.
 						'''
+				}
+
+				TurnOffRegularPotionFlask: {
+					Label: Désactiver le flacon de potion ordinaire
+					Tooltip: L'activer désactivera tous les effets du flacon de potion ordinaire. (N'affecte pas le flacon de potion exquis)
 				}
 			}
 
@@ -664,36 +659,36 @@ Mods: {
 			}
 
 			OreBag: {
-				// Tooltip: ""
 				// DisplayName: Ore Bag
+				// Tooltip: ""
 			}
 		}
 
 		Tiles: {
-			// PortableStation.MapEntry: Portable Station
-			// PackYellow.MapEntry: Pack Yellow
-			// PackWhite.MapEntry: Pack White
-			// PackRed.MapEntry: Pack Red
-			// PackPurple.MapEntry: Pack Purple
-			// PackPink.MapEntry: Pack Pink
-			// PackOrange.MapEntry: Pack Orange
-			// PackGreen.MapEntry: Pack Green
-			// PackGray.MapEntry: Pack Gray
-			// PackBrown.MapEntry: Pack Brown
-			// PackBlue.MapEntry: Pack Blue
-			// PackBlack.MapEntry: Pack Black
-			// BannerBag.MapEntry: Banner Bag
-			// BagYellow.MapEntry: Bag Yellow
-			// BagWhite.MapEntry: Bag White
-			// BagRed.MapEntry: Bag Red
-			// BagPurple.MapEntry: Bag Purple
-			// BagPink.MapEntry: Bag Pink
-			// BagOrange.MapEntry: Bag Orange
-			// BagGreen.MapEntry: Bag Green
-			// BagGray.MapEntry: Bag Gray
-			// BagBrown.MapEntry: Bag Brown
-			// BagBlue.MapEntry: Bag Blue
 			// BagBlack.MapEntry: Bag Black
+			// BagBlue.MapEntry: Bag Blue
+			// BagBrown.MapEntry: Bag Brown
+			// BagGray.MapEntry: Bag Gray
+			// BagGreen.MapEntry: Bag Green
+			// BagOrange.MapEntry: Bag Orange
+			// BagPink.MapEntry: Bag Pink
+			// BagPurple.MapEntry: Bag Purple
+			// BagRed.MapEntry: Bag Red
+			// BagWhite.MapEntry: Bag White
+			// BagYellow.MapEntry: Bag Yellow
+			// BannerBag.MapEntry: Banner Bag
+			// PackBlack.MapEntry: Pack Black
+			// PackBlue.MapEntry: Pack Blue
+			// PackBrown.MapEntry: Pack Brown
+			// PackGray.MapEntry: Pack Gray
+			// PackGreen.MapEntry: Pack Green
+			// PackOrange.MapEntry: Pack Orange
+			// PackPink.MapEntry: Pack Pink
+			// PackPurple.MapEntry: Pack Purple
+			// PackRed.MapEntry: Pack Red
+			// PackWhite.MapEntry: Pack White
+			// PackYellow.MapEntry: Pack Yellow
+			// PortableStation.MapEntry: Portable Station
 		}
 	}
 }

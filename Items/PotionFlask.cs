@@ -80,13 +80,14 @@ namespace VacuumBags.Items
 		}
 		public static bool ItemAllowedToBeStored(Item item) => AllowedItems.Contains(item.type);
 
+		private static bool HasAndCanUsePotionFlask(Player player, bool onlyCheckRegular = false) => !VacuumBags.clientConfig.TurnOffRegularPotionFlask && StorageManager.HasRequiredItemToUseStorageFromBagType(player, PotionFlaskType, out _) || !onlyCheckRegular && StorageManager.HasRequiredItemToUseStorageFromBagType(player, ExquisitePotionFlaskType, out _, true);
+
 		#region QuickBuff/Heal
 
 		public static Item OnQuickBuff_PickBestFoodItem(On_Player.orig_QuickBuff_PickBestFoodItem orig, Player self) {
 			Item item = orig(self);
 
-			int potionFlaskID = ModContent.ItemType<PotionFlask>();
-			if (!StorageManager.HasRequiredItemToUseStorageFromBagType(self, potionFlaskID, out _))
+			if (!HasAndCanUsePotionFlask(self))
 				return item;
 
 			int highestBuffNum = item != null ? QuickBuff_FindFoodPriority(item.buffType) : 0;
@@ -160,8 +161,7 @@ namespace VacuumBags.Items
 			if (self.CountBuffs() == Player.MaxBuffs)
 				return;
 
-			int potionFlaskID = ModContent.ItemType<PotionFlask>(); 
-			if (!StorageManager.HasRequiredItemToUseStorageFromBagType(self, potionFlaskID, out _))
+			if (!HasAndCanUsePotionFlask(self))
 				return;
 
 			MethodInfo itemCheck_CheckCanUse = typeof(Player).GetMethod("ItemCheck_CheckCanUse", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -241,7 +241,7 @@ namespace VacuumBags.Items
 				return foundHealItem;
 
 			int potionFlaskID = ModContent.ItemType<PotionFlask>();
-			if (!StorageManager.HasRequiredItemToUseStorageFromBagType(self, potionFlaskID, out _))
+			if (!HasAndCanUsePotionFlask(self))
 				return foundHealItem;
 
 			IEnumerable<Item> healItems = StorageManager.GetItems(BagStorageID).Where(item =>
@@ -289,7 +289,7 @@ namespace VacuumBags.Items
 				return foundManaItem;
 
 			int potionFlaskID = ModContent.ItemType<PotionFlask>();
-			if (!StorageManager.HasRequiredItemToUseStorageFromBagType(self, potionFlaskID, out _))
+			if (!HasAndCanUsePotionFlask(self))
 				return foundManaItem;
 
 			IEnumerable<Item> manaItems = StorageManager.GetItems(BagStorageID).Where(item =>
@@ -395,7 +395,7 @@ namespace VacuumBags.Items
 			}
 		}
 		internal static void OnDelBuff(On_Player.orig_DelBuff orig, Player self, int b) {
-			if (ItemSlot.ShiftInUse) {
+			if (ItemSlot.ShiftInUse && Main.mouseRight && Main.mouseRightRelease && Main.HoverItem.NullOrAir()) {
 				int type = self.buffType[b];
 				Buffs.Remove(type);
 			}
@@ -429,6 +429,9 @@ namespace VacuumBags.Items
 			if (!shouldCheckBuffs)
 				return;
 
+			if (!hasPotionFlask)
+				return;
+
 			if (Buffs.TryGetValue(type, out BuffInfo info)) {
 				int buffIndex = self.FindBuffIndex(type);
 				if (buffIndex > -1)
@@ -436,7 +439,7 @@ namespace VacuumBags.Items
 			}
 		}
 		internal static void OnTryRemovingBuff(On_Main.orig_TryRemovingBuff orig, int i, int b) {
-			if (Main.LocalPlayer.TryGetModPlayer(out StoragePlayer storagePlayer)) {
+			if (hasPotionFlask && Main.LocalPlayer.TryGetModPlayer(out StoragePlayer storagePlayer)) {
 				nextOpen = 0;
 				Item[] inv = storagePlayer.Storages[BagStorageID].Items;
 				foreach (KeyValuePair<int, BuffInfo> pair in Buffs) {
@@ -465,6 +468,9 @@ namespace VacuumBags.Items
 				SoundEngine.PlaySound(SoundID.Item3);
 		}
 		internal static void PreSaveAndQuit() {
+			if (VacuumBags.clientConfig.TurnOffRegularPotionFlask && !hasExquisiteFlask)
+				return;
+
 			Player player = Main.LocalPlayer;
 			nextOpen = 0;
 			RefreshTrackedBuffsAndItemIndexes(player);
@@ -485,10 +491,10 @@ namespace VacuumBags.Items
 				hasPotionFlask = true;
 			}
 			else {
-				hasPotionFlask = StorageManager.HasRequiredItemToUseStorageFromBagTypeSlow(player, PotionFlaskType);
+				hasPotionFlask = HasAndCanUsePotionFlask(player, false);
 			}
 			
-			if (!hasPotionFlask && Buffs.Count == 0) {
+			if (!hasPotionFlask && (Buffs.Count == 0 || VacuumBags.clientConfig.TurnOffRegularPotionFlask)) {
 				lastHasPotionFlask = false;
 				return;
 			}

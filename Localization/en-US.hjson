@@ -48,16 +48,6 @@ Mods: {
 					Tooltip: If selected, the Portable Station will not play any sounds when it provides active buffs on opening the station.
 				}
 
-				SimpleBagStorageSize: {
-					Label: Simple Bag Storage Size
-					Tooltip:
-						'''
-						The number of slots in the simple bag storage.
-						If this option is used while the player has more items in their bag, the bag size will be reduced to the number of items still in the bag.
-						Setting this number very high could cause lag or possibly a crash from using too much memory if you don't have much RAM.  Use at your own risk.
-						'''
-				}
-
 				SimpleBagsVacuumAllItems: {
 					Label: Simple Bags Vacuum All Items
 					Tooltip:
@@ -65,6 +55,11 @@ Mods: {
 						If true, all items will be vacuumed into the simple bags.
 						If false, only items that are the same type as an item in the bag will be vacuumed.
 						'''
+				}
+
+				TurnOffRegularPotionFlask: {
+					Label: Turn Off Regular Potion Flask
+					Tooltip: Turning this on will disable all effects of the Regular Potion Flask.  (Does not affect the Exquisite Potion Flask)
 				}
 			}
 
@@ -664,36 +659,36 @@ Mods: {
 			}
 
 			OreBag: {
-				Tooltip: ""
 				DisplayName: Ore Bag
+				Tooltip: ""
 			}
 		}
 
 		Tiles: {
-			PortableStation.MapEntry: Portable Station
-			PackYellow.MapEntry: Pack Yellow
-			PackWhite.MapEntry: Pack White
-			PackRed.MapEntry: Pack Red
-			PackPurple.MapEntry: Pack Purple
-			PackPink.MapEntry: Pack Pink
-			PackOrange.MapEntry: Pack Orange
-			PackGreen.MapEntry: Pack Green
-			PackGray.MapEntry: Pack Gray
-			PackBrown.MapEntry: Pack Brown
-			PackBlue.MapEntry: Pack Blue
-			PackBlack.MapEntry: Pack Black
-			BannerBag.MapEntry: Banner Bag
-			BagYellow.MapEntry: Bag Yellow
-			BagWhite.MapEntry: Bag White
-			BagRed.MapEntry: Bag Red
-			BagPurple.MapEntry: Bag Purple
-			BagPink.MapEntry: Bag Pink
-			BagOrange.MapEntry: Bag Orange
-			BagGreen.MapEntry: Bag Green
-			BagGray.MapEntry: Bag Gray
-			BagBrown.MapEntry: Bag Brown
-			BagBlue.MapEntry: Bag Blue
 			BagBlack.MapEntry: Bag Black
+			BagBlue.MapEntry: Bag Blue
+			BagBrown.MapEntry: Bag Brown
+			BagGray.MapEntry: Bag Gray
+			BagGreen.MapEntry: Bag Green
+			BagOrange.MapEntry: Bag Orange
+			BagPink.MapEntry: Bag Pink
+			BagPurple.MapEntry: Bag Purple
+			BagRed.MapEntry: Bag Red
+			BagWhite.MapEntry: Bag White
+			BagYellow.MapEntry: Bag Yellow
+			BannerBag.MapEntry: Banner Bag
+			PackBlack.MapEntry: Pack Black
+			PackBlue.MapEntry: Pack Blue
+			PackBrown.MapEntry: Pack Brown
+			PackGray.MapEntry: Pack Gray
+			PackGreen.MapEntry: Pack Green
+			PackOrange.MapEntry: Pack Orange
+			PackPink.MapEntry: Pack Pink
+			PackPurple.MapEntry: Pack Purple
+			PackRed.MapEntry: Pack Red
+			PackWhite.MapEntry: Pack White
+			PackYellow.MapEntry: Pack Yellow
+			PortableStation.MapEntry: Portable Station
 		}
 	}
 }

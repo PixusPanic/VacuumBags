@@ -101,6 +101,9 @@ namespace VacuumBags.Common.Configs
 		[DefaultValue(false)]
 		public bool SilencePortableStationActiveBuffs;
 
+		[DefaultValue(false)]
+		public bool TurnOffRegularPotionFlask;
+
 		//Logging Information
 		[JsonIgnore]
 		public const string LoggingInformationKey = "LoggingInformation";
