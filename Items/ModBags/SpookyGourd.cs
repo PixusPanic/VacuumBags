@@ -39,7 +39,7 @@ namespace VacuumBags.Items
 				() => ModContent.ItemType<SpookyGourd>(),//Get ModItem type
 				80,//UI Left
 				675,//UI Top
-				() => AllowedItems
+				UpdateAllowedList
 			);
 		}
 		public override void AddRecipes() {
@@ -77,6 +77,14 @@ namespace VacuumBags.Items
 			}
 		}
 
+		private static void UpdateAllowedList(int item, bool add) {
+			if (add) {
+				AllowedItems.Add(item);
+			}
+			else {
+				AllowedItems.Remove(item);
+			}
+		}
 		public static bool ItemAllowedToBeStored(Item item) => AllowedItems.Contains(item.type) || item.ModItem is UnloadedItem unloadedItem && unloadedItem.ModName == AndroMod.spookyModName;
 		public static SortedSet<int> AllowedItems => AllowedItemsManager.AllowedItems;
 		public static AllowedItemsManager AllowedItemsManager = new(ModContent.ItemType<SpookyGourd>, () => BagStorageID, DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);

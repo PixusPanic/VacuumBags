@@ -68,7 +68,7 @@ namespace VacuumBags.Items
 				() => ModContent.ItemType<MechanicsToolbelt>(),//Get ModItem type
 				80,//UI Left
 				675,//UI Top
-				() => AllowedItems,
+				UpdateAllowedList,
 				false,
 				() => {
 					Player player = Main.LocalPlayer;
@@ -190,6 +190,15 @@ namespace VacuumBags.Items
 			ItemID.WireKite
 		};
 
+
+		private static void UpdateAllowedList(int item, bool add) {
+			if (add) {
+				AllowedItems.Add(item);
+			}
+			else {
+				AllowedItems.Remove(item);
+			}
+		}
 		public static SortedSet<int> AllowedItems => AllowedItemsManager.AllowedItems;
 		public static AllowedItemsManager AllowedItemsManager = new(ModContent.ItemType<MechanicsToolbelt>, () => BagStorageID, DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
 		public AllowedItemsManager GetAllowedItemsManager => AllowedItemsManager;

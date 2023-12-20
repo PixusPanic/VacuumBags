@@ -65,7 +65,7 @@ namespace VacuumBags.Items
 				() => ModContent.ItemType<BuildersBox>(),//Get ModItem type
 				80,//UI Left
 				675,//UI Top
-				() => AllowedItems,
+				UpdateAllowedList,
 				false,
 				() => ChooseItemFromBox(Main.LocalPlayer)
 			);
@@ -79,6 +79,15 @@ namespace VacuumBags.Items
 		}
 		public static Item ChooseItemFromBox(Player player) => ChooseFromBag(BagStorageID, (Item item) => item.createTile > -1, player);
 
+
+		private static void UpdateAllowedList(int item, bool add) {
+			if (add) {
+				AllowedItems.Add(item);
+			}
+			else {
+				AllowedItems.Remove(item);
+			}
+		}
 		public static SortedSet<int> AllowedItems => AllowedItemsManager.AllowedItems;
 		public static AllowedItemsManager AllowedItemsManager = new(ModContent.ItemType<BuildersBox>, () => BagStorageID, DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
 		public AllowedItemsManager GetAllowedItemsManager => AllowedItemsManager;

@@ -74,7 +74,7 @@ namespace VacuumBags.Items
 				() => ModContent.ItemType<PotionFlask>(),//Get ModItem type
 				80,//UI Left
 				675,//UI Top
-				() => AllowedItems,
+				UpdateAllowedList,
 				false
 			);
 		}
@@ -856,6 +856,15 @@ namespace VacuumBags.Items
 
 		#endregion
 
+
+		private static void UpdateAllowedList(int item, bool add) {
+			if (add) {
+				AllowedItems.Add(item);
+			}
+			else {
+				AllowedItems.Remove(item);
+			}
+		}
 		public static SortedSet<int> AllowedItems => AllowedItemsManager.AllowedItems;
 		public static AllowedItemsManager AllowedItemsManager = new(ModContent.ItemType<PotionFlask>, () => BagStorageID, DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
 		public AllowedItemsManager GetAllowedItemsManager => AllowedItemsManager;

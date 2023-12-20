@@ -62,7 +62,7 @@ namespace VacuumBags.Items
 				() => ModContent.ItemType<SlayersSack>(),//Get ModItem type
 				80,//UI Left
 				675,//UI Top
-				() => AllowedItems,
+				UpdateAllowedList,
 				false
 			);
 		}
@@ -78,6 +78,15 @@ namespace VacuumBags.Items
 			);
 		}
 
+
+		private static void UpdateAllowedList(int item, bool add) {
+			if (add) {
+				AllowedItems.Add(item);
+			}
+			else {
+				AllowedItems.Remove(item);
+			}
+		}
 		public static SortedSet<int> AllowedItems => AllowedItemsManager.AllowedItems;
 		public static AllowedItemsManager AllowedItemsManager = new(ModContent.ItemType<SlayersSack>, () => BagStorageID, DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
 		public AllowedItemsManager GetAllowedItemsManager => AllowedItemsManager;

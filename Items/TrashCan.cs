@@ -45,8 +45,7 @@ namespace VacuumBags.Items
 			get {
 				if (blacklist == null) {
 					blacklist = new() {
-						ModContent.ItemType<BagBlack>(),
-						ModContent.ItemType<PackBlack>(),
+						ModContent.ItemType<TrashCan>(),
 						ItemID.CopperCoin,
 						ItemID.SilverCoin,
 						ItemID.GoldCoin,
@@ -60,6 +59,15 @@ namespace VacuumBags.Items
 			}
 		}
 		private static SortedSet<int> blacklist = null;
+
+		private static void UpdateAllowedList(int item, bool add) {
+			if (add) {
+				Blacklist.Remove(item);
+			}
+			else {
+				Blacklist.Add(item);
+			}
+		}
 
 		public static int BagStorageID;//Set this when registering with androLib.
 		protected static int DefaultBagSize => 200;
@@ -77,7 +85,7 @@ namespace VacuumBags.Items
 				() => ModContent.ItemType<TrashCan>(),//Get ModItem type
 				80,//UI Left
 				675,//UI Top
-				() => Blacklist,
+				UpdateAllowedList,
 				true
 			);
 

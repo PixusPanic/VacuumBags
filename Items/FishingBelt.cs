@@ -71,7 +71,7 @@ namespace VacuumBags.Items
 				() => ModContent.ItemType<FishingBelt>(),//Get ModItem type
 				80,//UI Left
 				675,//UI Top
-				() => AllowedItems,
+				UpdateAllowedList,
 				false,
 				() => typeof(Player).GetMethod("Fishing_GetBait", BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(Main.LocalPlayer, new object[] { null }),
 				true//Update info accessories in bag
@@ -197,6 +197,15 @@ namespace VacuumBags.Items
 
 		public static bool ItemAllowedToBeStored(Item item) => AllowedItems.Contains(item.type);
 
+
+		private static void UpdateAllowedList(int item, bool add) {
+			if (add) {
+				AllowedItems.Add(item);
+			}
+			else {
+				AllowedItems.Remove(item);
+			}
+		}
 		public static SortedSet<int> AllowedItems => AllowedItemsManager.AllowedItems;
 		public static AllowedItemsManager AllowedItemsManager = new(ModContent.ItemType<FishingBelt>, () => BagStorageID, DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
 		public AllowedItemsManager GetAllowedItemsManager => AllowedItemsManager;

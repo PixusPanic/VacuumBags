@@ -65,7 +65,7 @@ namespace VacuumBags.Items
 				() => ModContent.ItemType<PaintBucket>(),//Get ModItem type
 				80,//UI Left
 				675,//UI Top
-				() => AllowedItems,
+				UpdateAllowedList,
 				false,
 				() => ChoosePaintFromBucket(Main.LocalPlayer)
 			);
@@ -115,7 +115,16 @@ namespace VacuumBags.Items
 			return item;
 		}
 		private static Item ChoosePaintFromBucket(Player player) => ChooseFromBag(BagStorageID, (Item item) => item.PaintOrCoating, player, selectItems: false);
-		
+
+
+		private static void UpdateAllowedList(int item, bool add) {
+			if (add) {
+				AllowedItems.Add(item);
+			}
+			else {
+				AllowedItems.Remove(item);
+			}
+		}
 		public static SortedSet<int> AllowedItems => AllowedItemsManager.AllowedItems;
 		public static AllowedItemsManager AllowedItemsManager = new(ModContent.ItemType<PaintBucket>, () => BagStorageID, DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
 		public AllowedItemsManager GetAllowedItemsManager => AllowedItemsManager;

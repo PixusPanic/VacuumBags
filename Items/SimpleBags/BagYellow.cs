@@ -32,6 +32,19 @@ namespace VacuumBags.Items
 			}
 		}
 		private static SortedSet<int> blacklist = null;
+		public static SortedSet<int> VacuumWhitelist = new();
+		private static bool CanVacuumItem(Item item) => VacuumWhitelist.Contains(item.type);
+		private static void UpdateAllowedList(int item, bool add) {
+			if (add) {
+				VacuumWhitelist.Add(item);
+				Blacklist.Remove(item);
+			}
+			else {
+				VacuumWhitelist.Remove(item);
+				Blacklist.Add(item);
+			}
+		}
+
 		public static bool ItemAllowedToBeStored(Item item) => !Blacklist.Contains(item.type);
 		new public static Color PanelColor => new Color(120, 120, 10, androLib.Common.Configs.ConfigValues.UIAlpha);
 		new public static void RegisterWithAndroLib(Mod mod) {
@@ -48,8 +61,9 @@ namespace VacuumBags.Items
 				() => ModContent.ItemType<BagYellow>(),//Get ModItem type
 				80,//UI Left
 				675,//UI Top
-				() => Blacklist,
-				true
+				UpdateAllowedList,
+				false,
+				canVacuumItem: CanVacuumItem
 			);
 		}
 		public override void AddRecipes() {
