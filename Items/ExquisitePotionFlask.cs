@@ -23,7 +23,7 @@ namespace VacuumBags.Items
 {
 	[Autoload(false)]
 	public  class ExquisitePotionFlask : PotionFlask {
-		public static BagModItem Instance {
+		new public static BagModItem Instance {
 			get {
 				if (instance == null)
 					instance = new ExquisitePotionFlask();

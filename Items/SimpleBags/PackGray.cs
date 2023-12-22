@@ -14,7 +14,7 @@ namespace VacuumBags.Items
 {
 	[Autoload(false)]
 	public class PackGray : BagGray {
-		public static BagModItem Instance {
+		new public static BagModItem Instance {
 			get {
 				if (instance == null)
 					instance = new PackGray();

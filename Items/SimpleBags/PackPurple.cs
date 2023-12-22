@@ -14,7 +14,7 @@ namespace VacuumBags.Items
 {
 	[Autoload(false)]
 	public class PackPurple : BagPurple {
-		public static BagModItem Instance {
+		new public static BagModItem Instance {
 			get {
 				if (instance == null)
 					instance = new PackPurple();

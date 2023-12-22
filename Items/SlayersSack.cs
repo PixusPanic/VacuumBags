@@ -35,7 +35,7 @@ namespace VacuumBags.Items
 			Item.width = 26;
             Item.height = 32;
 			Item.useTurn = true;
-			Item.useStyle = 1;
+			Item.useStyle = ItemUseStyleID.Swing;
 			Item.holdStyle = 1;
 		}
 		public override int GetBagType() => ModContent.ItemType<SlayersSack>();
