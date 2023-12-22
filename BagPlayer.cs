@@ -247,7 +247,7 @@ namespace VacuumBags
 				return;
 			 
 			int context = fromStation == true || honeyWetResetTime < Main.GameUpdateCount || fromStation == null && Player.buffTime[honeyBuffIndex] <= AOEHoneyBuffTime ? ItemSlotContextID.BrightGreenSelected : ItemSlotContextID.Purple;
-			StorageManager.BagUIs[PortableStation.BagStorageID].AddSelectedItemSlot(lastHoneyBucketLocation, context);
+			StorageManager.BagUIs[PortableStation.Instance.BagStorageID].AddSelectedItemSlot(lastHoneyBucketLocation, context);
 		}
 		private bool? HoneyCheck() {
 			if (!VacuumBags.serverConfig.PortableStationCanGiveHoneyBuff)
@@ -262,7 +262,7 @@ namespace VacuumBags
 			bool doOnTouchBuff = false;
 			bool doAOEBuff = false;
 			bool bucketsActSame = !VacuumBags.serverConfig.PortableStationMustBeTouchedToGetHoneyBuff;
-			Item[] inv = storagePlayer.Storages[PortableStation.BagStorageID].Items;
+			Item[] inv = storagePlayer.Storages[PortableStation.Instance.BagStorageID].Items;
 			bool doFullCheck = nextFullCheckTime <= Main.GameUpdateCount;
 			if (!doFullCheck) {
 				if (lastHoneyBucketLocation > -1) {

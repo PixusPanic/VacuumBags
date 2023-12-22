@@ -11,12 +11,15 @@ using Terraria.ObjectData;
 using Terraria.Enums;
 using Terraria.GameContent.ObjectInteractions;
 using Microsoft.Xna.Framework;
+using VacuumBags.Items;
+using androLib;
 
 namespace VacuumBags.Tiles
 {
 	public abstract class VacuumBagTile : ModTile
 	{
-		public abstract Color MapColor { get; }
+		protected abstract BagModItem ModBag { get; }
+		public virtual Color MapColor => ModBag.PanelColor;
 		protected void SetSimpleBagDefaults() {
 			TileObjectData.newTile.CopyFrom(TileObjectData.Style2x1);
 			TileObjectData.newTile.CoordinateHeights = new[] { 16 };
@@ -62,6 +65,13 @@ namespace VacuumBags.Tiles
 				Main.LocalPlayer.cursorItemIconEnabled = false;
 				Main.LocalPlayer.cursorItemIconID = 0;
 			}
+		}
+		public override void KillMultiTile(int i, int j, int frameX, int frameY) {
+			if (Main.netMode == NetmodeID.Server)
+				return;
+
+			if (!StorageManager.HasRequiredItemToUseStorageFromBagType(Main.LocalPlayer, ModBag.GetBagType(), out _))
+				ModBag.CloseBag();
 		}
 
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');

@@ -12,10 +12,11 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
+using VacuumBags.Items;
 
 namespace VacuumBags.Tiles
 {
     public class PackBlue : BagBlue {
-
-    }
+		protected override BagModItem ModBag => Items.PackBlue.Instance;
+	}
 }

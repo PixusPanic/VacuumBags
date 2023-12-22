@@ -21,8 +21,22 @@ using Terraria.Audio;
 namespace VacuumBags.Items
 {
 	[Autoload(false)]
-	public class TrashCan : BagModItem {
+	public class TrashCan : BagModItem_VB {
+		public static BagModItem Instance {
+			get {
+				if (instance == null)
+					instance = new TrashCan();
+
+				return instance;
+			}
+		}
+		private static BagModItem instance;
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
+		public override void Load() {
+			StoragePlayer.OnAndroLibClientConfigChangedInGame += () => {
+				blacklist = null;
+			};
+		}
 		public override void SetDefaults() {
 			Item.maxStack = 1;
 			Item.value = 100000;
@@ -30,6 +44,7 @@ namespace VacuumBags.Items
 			Item.width = 24;
 			Item.height = 32;
 		}
+		public override int GetBagType() => ModContent.ItemType<TrashCan>();
 		public override void AddRecipes() {
 			CreateRecipe()
 			.AddTile(TileID.Anvils)
@@ -41,7 +56,7 @@ namespace VacuumBags.Items
 			.AddIngredient(Type, 1)
 			.Register();
 		}
-		new public static SortedSet<int> Blacklist {
+		public SortedSet<int> Blacklist {
 			get {
 				if (blacklist == null) {
 					blacklist = new() {
@@ -60,7 +75,7 @@ namespace VacuumBags.Items
 		}
 		private static SortedSet<int> blacklist = null;
 
-		private static void UpdateAllowedList(int item, bool add) {
+		protected override void UpdateAllowedList(int item, bool add) {
 			if (add) {
 				Blacklist.Remove(item);
 			}
@@ -69,32 +84,22 @@ namespace VacuumBags.Items
 			}
 		}
 
-		public static int BagStorageID;//Set this when registering with androLib.
-		protected static int DefaultBagSize => 200;
-		public static void RegisterWithAndroLib(Mod mod) {
-			BagStorageID = StorageManager.RegisterVacuumStorageClass(
-				mod,//Mod
-				typeof(TrashCan),//type 
-				ItemAllowedToBeStored,//Is allowed function, Func<Item, bool>
-				null,//Localization Key name.  Attempts to determine automatically by treating the type as a ModItem, or you can specify.
-				-DefaultBagSize,//StorageSize
-				null,//Can vacuum
-				() => new Color(100, 100, 116, androLib.Common.Configs.ConfigValues.UIAlpha),   // Get color function. Func<using Microsoft.Xna.Framework.Color>
-				() => new Color(40, 40, 50, androLib.Common.Configs.ConfigValues.UIAlpha),   // Get Scroll bar color function. Func<using Microsoft.Xna.Framework.Color>
-				() => new Color(140, 140, 162, androLib.Common.Configs.ConfigValues.UIAlpha), // Get Button hover color function. Func<using Microsoft.Xna.Framework.Color>
-				() => ModContent.ItemType<TrashCan>(),//Get ModItem type
-				80,//UI Left
-				675,//UI Top
-				UpdateAllowedList,
-				true
-			);
+		protected override int DefaultBagSize => 200;
+		public override Color PanelColor => new(100, 100, 116, androLib.Common.Configs.ConfigValues.UIAlpha);
+		public override Color ScrollBarColor => new(40, 40, 50, androLib.Common.Configs.ConfigValues.UIAlpha);
+		public override Color ButtonHoverColor => new(140, 140, 162, androLib.Common.Configs.ConfigValues.UIAlpha);
+		protected override bool? CanVacuum => null;
+		protected override bool BlackListOnly => true;
+		public override void RegisterWithAndroLib(Mod mod) {
+			base.RegisterWithAndroLib(mod);
 
 			StorageManager.AddBagUIEdit(BagStorageID, (BagUI bagUI) => {
 				bagUI.MyButtonProperties.RemoveAt(bagUI.depositAllUIIndex);
 				bagUI.AddButton(ClearTrash, () => StorageTextID.ClearTrash.ToString().Lang(AndroMod.ModName, L_ID1.StorageText));
 			});
 		}
-		public static bool ItemAllowedToBeStored(Item item) => !Blacklist.Contains(item.type) && CanTrash(item);
+		public override bool ItemAllowedToBeStored(Item item) => !Blacklist.Contains(item.type) && CanTrash(item);
+		public override Func<Item, bool> CanVacuumItemFunc => BagContainsItem;
 		public static void ClearTrash(BagUI bagUI) {
 			Item[] inv = bagUI.MyStorage.Items;
 			bool trashedAny = false;
@@ -139,7 +144,7 @@ namespace VacuumBags.Items
 			if (!StorageManager.HasRequiredItemToUseStorageFromBagTypeSlow(Main.LocalPlayer, ModContent.ItemType<TrashCan>()))
 				return;
 
-			Item[] inv = StorageManager.GetItems(BagStorageID);
+			Item[] inv = StorageManager.GetItems(Instance.BagStorageID);
 			if (itemTracker == null)
 				itemTracker = new bool[inv.Length];
 

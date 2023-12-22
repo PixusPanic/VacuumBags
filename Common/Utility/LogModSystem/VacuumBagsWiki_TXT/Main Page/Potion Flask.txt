@@ -1,0 +1,41 @@
+<div style="float:right">
+{{Item Infobox
+| name     = Potion Flask
+
+| image   = [[File:PotionFlask.png]]
+| artist  =   (art by [https://instagram.com/anodomani?utm_source=qr&igshid=MzNlNGNkZWQ4Mg%3D%3D anodomani])
+| type    = [https://terraria.fandom.com/wiki/Storage_items Storage]
+| tooltip = <i>'Automatically stores potions, food and drink.<br/>When in your inventory, the contents of the bag are available for crafting.<br/>Right click to open the bag.<br/>Quick Buff will use food items from the bag.  If any food items in the bag are favorited, only favorited food items will be used.<br/>Quick Buff will use favorited potions from the bag.<br/>Quick Heal will use healing items from the bag.  If any healing items in the bag are favorited, only favorited healing items will be used.<br/>Quick Mana will use mana items from the bag.  If any mana items in the bag are favorited, only favorited mana items will be used.<br/>Potion buffs can be paused by right clicking on the buff like you normally would to remove it or unfavoriting the potion.<br/>Potions providing a buff will have a green background.  Paused potions will have a yellow background.<br/>Paused buffs can be resumed with quick buff or by favoriting the potion in the flask.<br/>Potion effects are kept on death at the same duration they were before dying.<br/>Gaining a potion buff while you already have the buff will add their durations together instead of setting it to the new effect's duration.<br/>Removing a buff with the Shift key held will delete the buff instead of pausing it.'</i>
+| rarity  = <b><span style="color:rgb(150, 150, 255);">Blue</span></b>
+| buy      = 
+| sell    = <span>2</span>https://static.wikia.nocookie.net/terraria_gamepedia/images/1/1f/Gold_Coin.png/revision/latest?cb=20200516213029&format=original
+
+| research = 1 required
+}}
+
+</div>
+[[|Main Page]]<br/>
+<br/>
+=== Crafting ===
+{| class="mw-collapsible wikitable"
+|+ Recipes
+! Result
+! Ingredients
+! Crafting station
+|-
+| [[File:PotionFlask.png]] [[Potion Flask]]<br/>
+| https://static.wikia.nocookie.net/terraria_gamepedia/images/1/15/Glass.png/revision/latest?cb=20200516212938&format=original [https://terraria.fandom.com/wiki/Glass Glass] (100)<br/>https://static.wikia.nocookie.net/terraria_gamepedia/images/9/92/Fireblossom.png/revision/latest?cb=20200516212309&format=original [https://terraria.fandom.com/wiki/Fireblossom Fireblossom] (10)<br/>https://static.wikia.nocookie.net/terraria_gamepedia/images/5/5b/Moonglow.png/revision/latest?cb=20200516215435&format=original [https://terraria.fandom.com/wiki/Moonglow Moonglow] (10)<br/>https://static.wikia.nocookie.net/terraria_gamepedia/images/2/23/Shiverthorn.png/revision/latest?cb=20200516221732&format=original [https://terraria.fandom.com/wiki/Shiverthorn Shiverthorn] (10)<br/>
+| https://static.wikia.nocookie.net/terraria_gamepedia/images/d/d5/Any_Work_Bench.gif/revision/latest?cb=20200627022728&format=original [https://terraria.fandom.com/wiki/Work_Bench Work Bench]<br/>
+|}
+
+{| class="mw-collapsible wikitable"
+|+ Used in
+! Result
+! Ingredients
+! Crafting station
+|-
+| [[File:ExquisitePotionFlask.png]] [[Exquisite Potion Flask]]<br/>
+| [[File:PotionFlask.png]] [[Potion Flask]]<br/>https://static.wikia.nocookie.net/terraria_gamepedia/images/c/cb/Beetle_Husk.png/revision/latest?cb=20200730172110&format=original [https://terraria.fandom.com/wiki/Beetle_Husk Beetle Husk] (10)<br/>https://static.wikia.nocookie.net/terraria_gamepedia/images/3/36/Ectoplasm.png/revision/latest?cb=20200516211757&format=original [https://terraria.fandom.com/wiki/Ectoplasm Ectoplasm] (15)<br/>https://static.wikia.nocookie.net/terraria_gamepedia/images/6/67/Unicorn_Horn.png/revision/latest?cb=20200516223250&format=original [https://terraria.fandom.com/wiki/Unicorn_Horn Unicorn Horn] (5)<br/><br/>and<br/>https://static.wikia.nocookie.net/terraria_gamepedia/images/1/19/Cursed_Flame.png/revision/latest?cb=20200516210828&format=original [https://terraria.fandom.com/wiki/Cursed_Flame Cursed Flame] (20)<br/>or<br/>https://static.wikia.nocookie.net/terraria_gamepedia/images/4/47/Ichor.png/revision/latest?cb=20200516214220&format=original [https://terraria.fandom.com/wiki/Ichor Ichor] (20)
+| https://static.wikia.nocookie.net/terraria_gamepedia/images/7/78/Adamantite_Forge.png/revision/latest?cb=20200516182709&format=original [https://terraria.fandom.com/wiki/Adamantite_Forge Adamantite Forge]<br/>
+|}
+

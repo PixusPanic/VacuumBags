@@ -1,0 +1,30 @@
+<div style="float:right">
+{{Item Infobox
+| name     = Wall-Er
+
+| image   = [[File:WallEr.png]]
+| artist  =   (art by @kingjoshington)
+| type    = [https://terraria.fandom.com/wiki/Storage_items Storage]
+| tooltip = <i>'Automatically stores walling materials (walls, fences, beams, etc.)<br/>When in your inventory, the contents of the bag are available for crafting.<br/>Right click to open the bag.<br/>Items can be placed from Wall-Er by left clicking with Wall-Er.  If any items in Wall-Er are favorited, only favorited items will be used.'</i>
+| rarity  = <b><span style="color:rgb(150, 150, 255);">Blue</span></b>
+| buy      = 
+| sell    = <span>2</span>https://static.wikia.nocookie.net/terraria_gamepedia/images/1/1f/Gold_Coin.png/revision/latest?cb=20200516213029&format=original
+
+| research = 1 required
+}}
+
+</div>
+[[|Main Page]]<br/>
+<br/>
+=== Crafting ===
+{| class="mw-collapsible wikitable"
+|+ Recipes
+! Result
+! Ingredients
+! Crafting station
+|-
+| [[File:WallEr.png]] [[Wall Er]]<br/>
+| https://static.wikia.nocookie.net/terraria_gamepedia/images/f/f1/Copper_Bar.png/revision/latest?cb=20200516210020&format=original [https://terraria.fandom.com/wiki/Copper_Bar Copper Bar] (10)<br/>https://static.wikia.nocookie.net/terraria_gamepedia/images/3/3b/Wooden_Beam.png/revision/latest?cb=20200516223636&format=original [https://terraria.fandom.com/wiki/Wooden_Beam Wooden Beam] (20)<br/>https://static.wikia.nocookie.net/terraria_gamepedia/images/9/9d/Iron_Fence.png/revision/latest?cb=20200516214309&format=original [https://terraria.fandom.com/wiki/Iron_Fence Iron Fence] (20)<br/>
+| https://static.wikia.nocookie.net/terraria_gamepedia/images/c/c3/Iron_Anvil.png/revision/latest?cb=20200516214257&format=original [https://terraria.fandom.com/wiki/Iron_Anvil Iron Anvil]<br/>
+|}
+

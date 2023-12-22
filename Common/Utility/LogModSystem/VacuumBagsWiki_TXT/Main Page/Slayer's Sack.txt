@@ -1,0 +1,30 @@
+<div style="float:right">
+{{Item Infobox
+| name     = Slayer's Sack
+
+| image   = [[File:SlayersSack.png]]
+| artist  =   (art by [https://instagram.com/anodomani?utm_source=qr&igshid=MzNlNGNkZWQ4Mg%3D%3D anodomani] modified by @kingjoshington
+| type    = [https://terraria.fandom.com/wiki/Storage_items Storage]
+| tooltip = <i>'Automatically stores materials dropped by enemies and other items found while adventuring such as torches, rope and keys.<br/>When in your inventory, the contents of the sack are available for crafting.<br/>Right click to open the sack.<br/>Rope can be placed from the sack by left clicking with the sack.  If any rope in the sack is favorited, only favorited rope will be used.<br/>Torches and glowsticks can be used from the bag when holding shift as if they were in your inventory.'</i>
+| rarity  = <b><span style="color:rgb(150, 150, 255);">Blue</span></b>
+| buy      = 
+| sell    = <span>2</span>https://static.wikia.nocookie.net/terraria_gamepedia/images/1/1f/Gold_Coin.png/revision/latest?cb=20200516213029&format=original
+
+| research = 1 required
+}}
+
+</div>
+[[|Main Page]]<br/>
+<br/>
+=== Crafting ===
+{| class="mw-collapsible wikitable"
+|+ Recipes
+! Result
+! Ingredients
+! Crafting station
+|-
+| [[File:SlayersSack.png]] [[Slayers Sack]]<br/>
+| https://static.wikia.nocookie.net/terraria_gamepedia/images/8/83/Silk.png/revision/latest?cb=20200820022839&format=original [https://terraria.fandom.com/wiki/Silk Silk] (4)<br/>https://static.wikia.nocookie.net/terraria_gamepedia/images/b/b4/Rope.png/revision/latest?cb=20200516221306&format=original [https://terraria.fandom.com/wiki/Rope Rope] (20)<br/>
+| By Hand
+|}
+

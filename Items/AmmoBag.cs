@@ -16,7 +16,16 @@ using Mono.Cecil.Cil;
 namespace VacuumBags.Items
 {
     [Autoload(false)]
-	public class AmmoBag : BagModItem, INeedsSetUpAllowedList {
+	public class AmmoBag : AllowedListBagModItem_VB {
+		public static BagModItem Instance {
+			get {
+				if (instance == null)
+					instance = new AmmoBag();
+
+				return instance;
+			}
+		}
+		private static BagModItem instance;
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {
             Item.maxStack = 1;
@@ -26,7 +35,8 @@ namespace VacuumBags.Items
             Item.height = 30;
 			Item.ammo = Type;
         }
-        public override void AddRecipes() {
+		public override int GetBagType() => ModContent.ItemType<AmmoBag>();
+		public override void AddRecipes() {
 			if (!VacuumBags.serverConfig.HarderBagRecipes) {
 				CreateRecipe()
 				.AddTile(TileID.WorkBenches)
@@ -47,29 +57,11 @@ namespace VacuumBags.Items
 				.Register();
 			}
         }
+		public override Color PanelColor => new Color(80, 80, 80, androLib.Common.Configs.ConfigValues.UIAlpha);
+		public override Color ScrollBarColor => new Color(90, 90, 90, androLib.Common.Configs.ConfigValues.UIAlpha);
+		public override Color ButtonHoverColor => new Color(120, 120, 120, androLib.Common.Configs.ConfigValues.UIAlpha);
+		protected override Action SelectItemForUIOnly => () => Main.LocalPlayer.ChooseAmmo(Main.LocalPlayer.HeldItem);
 
-		public static int BagStorageID;//Set this when registering with androLib.
-		protected static int DefaultBagSize => 100;
-		public static void RegisterWithAndroLib(Mod mod) {
-			BagStorageID = StorageManager.RegisterVacuumStorageClass(
-				mod,//Mod
-				typeof(AmmoBag),//type 
-				ItemAllowedToBeStored,//Is allowed function, Func<Item, bool>
-				null,//Localization Key name.  Attempts to determine automatically by treating the type as a ModItem, or you can specify.
-				-DefaultBagSize,//StorageSize
-				true,//Can vacuum
-				() => new Color(80, 80, 80, androLib.Common.Configs.ConfigValues.UIAlpha),   // Get color function. Func<using Microsoft.Xna.Framework.Color>
-				() => new Color(90, 90, 90, androLib.Common.Configs.ConfigValues.UIAlpha),   // Get Scroll bar color function. Func<using Microsoft.Xna.Framework.Color>
-				() => new Color(120, 120, 120, androLib.Common.Configs.ConfigValues.UIAlpha), // Get Button hover color function. Func<using Microsoft.Xna.Framework.Color>
-				() => ModContent.ItemType<AmmoBag>(),//Get ModItem type
-				80,//UI Left
-				675,//UI Top
-				UpdateAllowedList,
-				false,
-				() => Main.LocalPlayer.ChooseAmmo(Main.LocalPlayer.HeldItem)
-			);
-		}
-		public static bool ItemAllowedToBeStored(Item item) => AllowedItems.Contains(item.type);
 		public static Item OnChooseAmmo(On_Player.orig_ChooseAmmo orig, Player self, Item weapon) {
 			Item item = orig(self, weapon);
 			if (Main.netMode == NetmodeID.Server)
@@ -86,7 +78,7 @@ namespace VacuumBags.Items
 			return ChooseFromBagOnlyIfFirstInInventory(
 				vanillaChosenItem,
 				player,
-				BagStorageID,
+				Instance.BagStorageID,
 				(Item item) => ItemLoader.CanChooseAmmo(weapon, item, player)
 			);
 		}
@@ -176,7 +168,7 @@ namespace VacuumBags.Items
 			if (hasFlare)
 				return hasFlare;
 
-			Item bagAmmo = ChooseFromBag(BagStorageID, (Item item) => item.ammo == ItemID.Flare, player);
+			Item bagAmmo = ChooseFromBag(Instance.BagStorageID, (Item item) => item.ammo == ItemID.Flare, player);
 
 			if (bagAmmo != null)
 				hasFlare = true;
@@ -184,18 +176,7 @@ namespace VacuumBags.Items
 			return hasFlare;
 		}
 
-		private static void UpdateAllowedList(int item, bool add) {
-			if (add) {
-				AllowedItems.Add(item);
-			}
-			else {
-				AllowedItems.Remove(item);
-			}
-		}
-		public static SortedSet<int> AllowedItems => AllowedItemsManager.AllowedItems;
-		public static AllowedItemsManager AllowedItemsManager = new(ModContent.ItemType<AmmoBag>, () => BagStorageID, DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
-		public AllowedItemsManager GetAllowedItemsManager => AllowedItemsManager;
-		protected static bool? DevCheck(ItemSetInfo info, SortedSet<ItemGroup> itemGroups, SortedSet<string> endWords, SortedSet<string> searchWords) {
+		public override bool? DevCheck(ItemSetInfo info, SortedSet<ItemGroup> itemGroups, SortedSet<string> endWords, SortedSet<string> searchWords) {
 			if (VacuumBags.clientConfig.AllAmmoItemsGoIntoAmmoBag && (info.Ammo || info.CheckItemGroup(ItemGroup.Ammo)))
 				return true;
 
@@ -207,7 +188,7 @@ namespace VacuumBags.Items
 
 			return null;
 		}
-		protected static SortedSet<int> DevWhiteList() {
+		public override SortedSet<int> DevWhiteList() {
 			SortedSet<int> devWhiteList = new() {
 				ItemID.EmptyBullet,
 				ItemID.WoodenArrow,
@@ -307,14 +288,7 @@ namespace VacuumBags.Items
 
 			return devWhiteList;
 		}
-		protected static SortedSet<string> DevModWhiteList() {
-			SortedSet<string> devModWhiteList = new() {
-
-			};
-
-			return devModWhiteList;
-		}
-		protected static SortedSet<int> DevBlackList() {
+		public override SortedSet<int> DevBlackList() {
 			SortedSet<int> devBlackList = new() {
 				ItemID.CopperCoin,
 				ItemID.SilverCoin,
@@ -324,35 +298,13 @@ namespace VacuumBags.Items
 
 			return devBlackList;
 		}
-		protected static SortedSet<string> DevModBlackList() {
-			SortedSet<string> devModBlackList = new() {
-				
-			};
-
-			return devModBlackList;
-		}
-		protected static SortedSet<ItemGroup> ItemGroups() {
-			SortedSet<ItemGroup> itemGroups = new() {
-
-			};
-
-			return itemGroups;
-		}
-		protected static SortedSet<string> EndWords() {
+		public override SortedSet<string> EndWords() {
 			SortedSet<string> endWords = new() {
 				"bomb",
 				"dynamite"
 			};
 
 			return endWords;
-		}
-
-		protected static SortedSet<string> SearchWords() {
-			SortedSet<string> searchWords = new() {
-				
-			};
-
-			return searchWords;
 		}
 
 		#region AndroModItem attributes that you don't need.

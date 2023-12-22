@@ -1,0 +1,30 @@
+<div style="float:right">
+{{Item Infobox
+| name     = Paint Bucket
+
+| image   = [[File:PaintBucket.png]]
+| artist  =   (art by @kingjoshington)
+| type    = [https://terraria.fandom.com/wiki/Storage_items Storage]
+| tooltip = <i>'Automatically stores paint<br/>When in your inventory, the contents of the bucket are available for crafting.<br/>Right click to open the bucket.<br/>Paint in the bucket is used if the paint bucket is in the first paint item found.<br/>If any paint in the bucket that can be used by your paint tool is favorited, only favorited paints will be used.'</i>
+| rarity  = <b><span style="color:rgb(150, 150, 255);">Blue</span></b>
+| buy      = 
+| sell    = <span>2</span>https://static.wikia.nocookie.net/terraria_gamepedia/images/1/1f/Gold_Coin.png/revision/latest?cb=20200516213029&format=original
+
+| research = 1 required
+}}
+
+</div>
+[[|Main Page]]<br/>
+<br/>
+=== Crafting ===
+{| class="mw-collapsible wikitable"
+|+ Recipes
+! Result
+! Ingredients
+! Crafting station
+|-
+| [[File:PaintBucket.png]] [[Paint Bucket]]<br/>
+| https://static.wikia.nocookie.net/terraria_gamepedia/images/6/64/Empty_Bucket.png/revision/latest?cb=20200516211911&format=original [https://terraria.fandom.com/wiki/Empty_Bucket Empty Bucket]<br/>https://static.wikia.nocookie.net/terraria_gamepedia/images/c/c4/Paintbrush.png/revision/latest?cb=20200516220138&format=original [https://terraria.fandom.com/wiki/Paintbrush Paintbrush]<br/>https://static.wikia.nocookie.net/terraria_gamepedia/images/7/75/Paint_Roller.png/revision/latest?cb=20200516220132&format=original [https://terraria.fandom.com/wiki/Paint_Roller Paint Roller]<br/>https://static.wikia.nocookie.net/terraria_gamepedia/images/9/9c/Fallen_Star.png/revision/latest?cb=20200516231331&format=original [https://terraria.fandom.com/wiki/Fallen_Star Fallen Star] (10)<br/>
+| https://static.wikia.nocookie.net/terraria_gamepedia/images/d/d5/Any_Work_Bench.gif/revision/latest?cb=20200627022728&format=original [https://terraria.fandom.com/wiki/Work_Bench Work Bench]<br/>
+|}
+

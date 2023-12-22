@@ -413,6 +413,16 @@ Mods: {
 					'''
 			}
 
+			HoiPoiCapsule: {
+				DisplayName: Hoi-Poi Capsule
+				Tooltip:
+					'''
+					Automatically stores items from Dragon Ball Terraria.
+					When in your inventory, the contents of the bag are available for crafting.
+					Right click to open the bag.
+					'''
+			}
+
 			JarOfDirt: {
 				DisplayName: Jar of Dirt
 				Tooltip:

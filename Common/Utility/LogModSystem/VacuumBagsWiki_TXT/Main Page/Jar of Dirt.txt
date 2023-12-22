@@ -1,0 +1,29 @@
+<div style="float:right">
+{{Item Infobox
+| name     = Jar of Dirt
+
+| image   = [[File:JarOfDirt.png]]
+| type    = [https://terraria.fandom.com/wiki/Storage_items Storage]
+| tooltip = <i>'Automatically stores dirt and other natural blocks (dirt, mud, clay, sand, stone, ice, etc.)<br/>When in your inventory, the contents of the jar are available for crafting.<br/>Right click to open the jar.<br/>Items can be placed from the jar by left clicking with the jar.  If any items in the jar are favorited, only favorited items will be used.<br/><br/>..........guess what's inside it....'</i>
+| rarity  = <b><span style="color:rgb(150, 150, 255);">Blue</span></b>
+| buy      = 
+| sell    = <span>2</span>https://static.wikia.nocookie.net/terraria_gamepedia/images/1/1f/Gold_Coin.png/revision/latest?cb=20200516213029&format=original
+
+| research = 1 required
+}}
+
+</div>
+[[|Main Page]]<br/>
+<br/>
+=== Crafting ===
+{| class="mw-collapsible wikitable"
+|+ Recipes
+! Result
+! Ingredients
+! Crafting station
+|-
+| [[File:JarOfDirt.png]] [[Jar Of Dirt]]<br/>
+| https://static.wikia.nocookie.net/terraria_gamepedia/images/1/15/Glass.png/revision/latest?cb=20200516212938&format=original [https://terraria.fandom.com/wiki/Glass Glass] (10)<br/>https://static.wikia.nocookie.net/terraria_gamepedia/images/5/55/Dirt_Block.png/revision/latest?cb=20200516211400&format=original [https://terraria.fandom.com/wiki/Dirt_Block Dirt Block] (20)<br/>https://static.wikia.nocookie.net/terraria_gamepedia/images/0/05/Life_Crystal.png/revision/latest?cb=20200516214721&format=original [https://terraria.fandom.com/wiki/Life_Crystal Life Crystal]<br/>
+| By Hand
+|}
+

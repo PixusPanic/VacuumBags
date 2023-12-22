@@ -14,10 +14,18 @@ namespace VacuumBags.Items
 {
 	[Autoload(false)]
 	public class PackBlue : BagBlue {
-		public override int MyTileType => ModContent.TileType<Tiles.PackBlue>();
-		public static void RegisterWithAndroLibItemTypeOnly() {
-			StorageManager.RegisterVacuumStorageClassItemTypeOnly(() => ModContent.ItemType<PackBlue>(), BagStorageID);
+		public static BagModItem Instance {
+			get {
+				if (instance == null)
+					instance = new PackBlue();
+
+				return instance;
+			}
 		}
+		private static BagModItem instance;
+		public override int BagStorageID { get => BagBlue.Instance.BagStorageID; set => BagBlue.Instance.BagStorageID = value; }
+		public override int GetBagType() => ModContent.ItemType<PackBlue>();
+		public override int MyTileType => ModContent.TileType<Tiles.PackBlue>();
 		public override void AddRecipes() {
 			base.AddRecipes();
 

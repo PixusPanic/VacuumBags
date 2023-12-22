@@ -19,8 +19,16 @@ using Ionic.Zlib;
 namespace VacuumBags.Items
 {
     [Autoload(false)]
-	public  class JarOfDirt : BagModItem, INeedsSetUpAllowedList
-	{
+	public  class JarOfDirt : AllowedListBagModItem_VB {
+		public static BagModItem Instance {
+			get {
+				if (instance == null)
+					instance = new JarOfDirt();
+
+				return instance;
+			}
+		}
+		private static BagModItem instance;
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {
             Item.maxStack = 1;
@@ -28,8 +36,9 @@ namespace VacuumBags.Items
 			Item.rare = ItemRarityID.Blue;
 			Item.width = 24;
             Item.height = 32;
-        }
-        public override void AddRecipes() {
+		}
+		public override int GetBagType() => ModContent.ItemType<JarOfDirt>();
+		public override void AddRecipes() {
 			if (!VacuumBags.serverConfig.HarderBagRecipes) {
 				CreateRecipe()
 				.AddIngredient(ItemID.Glass, 10)
@@ -51,52 +60,14 @@ namespace VacuumBags.Items
 				.Register();
 			}
 		}
+		public override Color PanelColor => new Color(42, 28, 1, androLib.Common.Configs.ConfigValues.UIAlpha);
+		public override Color ScrollBarColor => new Color(33, 19, 0, androLib.Common.Configs.ConfigValues.UIAlpha);
+		public override Color ButtonHoverColor => new Color(92, 71, 5, androLib.Common.Configs.ConfigValues.UIAlpha);
+		protected override Action SelectItemForUIOnly => () => ChooseItemFromJar(Main.LocalPlayer);
+		
+		public static Item ChooseItemFromJar(Player player) => ChooseFromBag(Instance.BagStorageID, (Item item) => item.createTile > -1, player);
 
-		public static int BagStorageID;//Set this when registering with androLib.
-		protected static int DefaultBagSize => 100;
-
-
-		public static void RegisterWithAndroLib(Mod mod) {
-			BagStorageID = StorageManager.RegisterVacuumStorageClass(
-				mod,//Mod
-				typeof(JarOfDirt),//type 
-				ItemAllowedToBeStored,//Is allowed function, Func<Item, bool>
-				null,//Localization Key name.  Attempts to determine automatically by treating the type as a ModItem, or you can specify.
-				-DefaultBagSize,//StorageSize
-				true,//Can vacuum
-				() => new Color(42, 28, 1, androLib.Common.Configs.ConfigValues.UIAlpha),//Get color function. Func<using Microsoft.Xna.Framework.Color>
-				() => new Color(33, 19, 0, androLib.Common.Configs.ConfigValues.UIAlpha),//Get Scroll bar color function. Func<using Microsoft.Xna.Framework.Color>
-				() => new Color(92, 71, 5, androLib.Common.Configs.ConfigValues.UIAlpha),//Get Button hover color function. Func<using Microsoft.Xna.Framework.Color>
-				() => ModContent.ItemType<JarOfDirt>(),//Get ModItem type
-				80,//UI Left
-				675,//UI Top
-				UpdateAllowedList,
-				false,
-				() => ChooseItemFromJar(Main.LocalPlayer)
-			);
-		}
-		public static bool ItemAllowedToBeStored(Item item) => AllowedItems.Contains(item.type);
-		public static void RegisterWithGadgetGalore() {
-			if (!VacuumBags.gadgetGaloreEnabled)
-				return;
-
-			VacuumBags.GadgetGalore.Call("RegisterBuildInventory", () => StorageManager.GetItems(BagStorageID));
-		}
-		public static Item ChooseItemFromJar(Player player) => ChooseFromBag(BagStorageID, (Item item) => item.createTile > -1, player);
-
-
-		private static void UpdateAllowedList(int item, bool add) {
-			if (add) {
-				AllowedItems.Add(item);
-			}
-			else {
-				AllowedItems.Remove(item);
-			}
-		}
-		public static SortedSet<int> AllowedItems => AllowedItemsManager.AllowedItems;
-		public static AllowedItemsManager AllowedItemsManager = new(ModContent.ItemType<JarOfDirt>, () => BagStorageID, DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
-		public AllowedItemsManager GetAllowedItemsManager => AllowedItemsManager;
-		protected static bool? DevCheck(ItemSetInfo info, SortedSet<ItemGroup> itemGroups, SortedSet<string> endWords, SortedSet<string> searchWords) {
+		public override bool? DevCheck(ItemSetInfo info, SortedSet<ItemGroup> itemGroups, SortedSet<string> endWords, SortedSet<string> searchWords) {
 			if (!info.CreateTile)
 				return false;
 			
@@ -108,7 +79,7 @@ namespace VacuumBags.Items
 
 			return null;
 		}
-		protected static SortedSet<int> DevWhiteList() {
+		public override SortedSet<int> DevWhiteList() {
 			SortedSet<int> devWhiteList = new() {
 				ItemID.DirtBlock,
 				ItemID.StoneBlock,
@@ -167,49 +138,13 @@ namespace VacuumBags.Items
 
 			return devWhiteList;
 		}
-		protected static SortedSet<string> DevModWhiteList() {
-			SortedSet<string> devModWhiteList = new() {
-
-			};
-
-			return devModWhiteList;
-		}
-		protected static SortedSet<int> DevBlackList() {
-			SortedSet<int> devBlackList = new() {
-
-			};
-
-			return devBlackList;
-		}
-		protected static SortedSet<string> DevModBlackList() {
-			SortedSet<string> devModBlackList = new() {
-
-			};
-
-			return devModBlackList;
-		}
-		protected static SortedSet<ItemGroup> ItemGroups() {
-			SortedSet<ItemGroup> itemGroups = new() {
-
-			};
-
-			return itemGroups;
-		}
-		protected static SortedSet<string> EndWords() {
+		public override SortedSet<string> EndWords() {
 			SortedSet<string> endWords = new() {
 				"iceblock",
 				"moss"
 			};
 
 			return endWords;
-		}
-
-		protected static SortedSet<string> SearchWords() {
-			SortedSet<string> searchWords = new() {
-
-			};
-
-			return searchWords;
 		}
 
 

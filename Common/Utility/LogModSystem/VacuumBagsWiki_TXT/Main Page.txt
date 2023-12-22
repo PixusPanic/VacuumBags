@@ -1,0 +1,97 @@
+<mainpage-leftcolumn-start />
+<div style="text-align: center;>[[File:Icon.png]]</div>
+<div style="text-align: center; font-size: x-large; padding: 1em;">'''Welcome to the {{SITENAME}}!'''</div>
+
+If you are interested in contributing to this wiki, please let me know: https://discord.gg/hEKKVsFBMd - andro951
+<br/>
+
+=== Description ===
+Vacuum bags adds three groups of bags to Terraria.<br/>
+* [[#Functional Bags|Functional Bags]] - They store a specific set of items by default, and many of them have special functions such as allowing you to place items by using the bag, providing contents of the bag for ammo, and other ways of using items in the bags.
+* [[#Simple Bags|Simple Bags]] - They are able to store any items by default, but do not automatically pick up items unless they already contain an item of that type.  (Simple Packs are alternate sprites for the bags.  They provide no functional difference.)
+* [[#Mod Bags|Mod Bags]] - They are for specific mods such as Calamity and Thorium.  By default, they only store items from their associated mod.
+
+
+Bags have default items that are and aren't allowed but each bag can store any item by utilizing the [[Allowed Lists|white and black lists]] which can easily be interacted with in game.<br/>
+
+The size of the bags can be adjusted in the androLib Client Config.<br/>
+
+=== Functional Bags ===
+{| class="wikitable"
+|+ Functional Bags
+| [[File:AmmoBag.png]] [[Ammo Bag]]
+| [[File:BannerBag.png]] [[Banner Bag]]
+| [[File:BossBag.png]] [[Boss Bag]]
+| [[File:BuildersBox.png]] [[Builders Box]]
+|-
+| [[File:ExquisitePotionFlask.png]] [[Exquisite Potion Flask]]
+| [[File:FishingBelt.png]] [[Fishing Belt]]
+| [[File:HerbSatchel.png]] [[Herb Satchel]]
+| [[File:JarOfDirt.png]] [[Jar Of Dirt]]
+|-
+| [[File:MechanicsToolbelt.png]] [[Mechanics Toolbelt]]
+| [[File:OreBag.png]] [[Ore Bag]]
+| [[File:OreBag.png]] [[Ore Bag]]
+| [[File:PaintBucket.png]] [[Paint Bucket]]
+|-
+| [[File:PortableStation.png]] [[Portable Station]]
+| [[File:PotionFlask.png]] [[Potion Flask]]
+| [[File:SlayersSack.png]] [[Slayers Sack]]
+| [[File:TrashCan.png]] [[Trash Can]]
+|-
+| [[File:WallEr.png]] [[Wall Er]]
+|}
+
+
+=== Simple Bags ===
+{| class="wikitable"
+|+ Simple Bags
+| [[File:BagBlack.png]] [[Bag Black]]
+| [[File:BagBlue.png]] [[Bag Blue]]
+| [[File:BagBrown.png]] [[Bag Brown]]
+| [[File:BagGray.png]] [[Bag Gray]]
+|-
+| [[File:BagGreen.png]] [[Bag Green]]
+| [[File:BagOrange.png]] [[Bag Orange]]
+| [[File:BagPink.png]] [[Bag Pink]]
+| [[File:BagPurple.png]] [[Bag Purple]]
+|-
+| [[File:BagRed.png]] [[Bag Red]]
+| [[File:BagWhite.png]] [[Bag White]]
+| [[File:BagYellow.png]] [[Bag Yellow]]
+|}
+
+
+=== Simple Packs ===
+{| class="wikitable"
+|+ Simple Packs
+| [[File:PackBlack.png]] [[Pack Black]]
+| [[File:PackBlue.png]] [[Pack Blue]]
+| [[File:PackBrown.png]] [[Pack Brown]]
+| [[File:PackGray.png]] [[Pack Gray]]
+|-
+| [[File:PackGreen.png]] [[Pack Green]]
+| [[File:PackOrange.png]] [[Pack Orange]]
+| [[File:PackPink.png]] [[Pack Pink]]
+| [[File:PackPurple.png]] [[Pack Purple]]
+|-
+| [[File:PackRed.png]] [[Pack Red]]
+| [[File:PackWhite.png]] [[Pack White]]
+| [[File:PackYellow.png]] [[Pack Yellow]]
+|}
+
+
+=== Mod Bags ===
+{| class="wikitable"
+|+ Mod Bags
+| [[File:CalamitousCauldron.png]] [[Calamitous Cauldron]]
+| [[File:EarthenPyramid.png]] [[Earthen Pyramid]]
+| [[File:EssenceOfGathering.png]] [[Essence Of Gathering]]
+| [[File:FargosMementos.png]] [[Fargos Mementos]]
+|-
+| [[File:HoiPoiCapsule.png]] [[Hoi Poi Capsule]]
+| [[File:LokisTesseract.png]] [[Lokis Tesseract]]
+| [[File:SpookyGourd.png]] [[Spooky Gourd]]
+|}
+
+

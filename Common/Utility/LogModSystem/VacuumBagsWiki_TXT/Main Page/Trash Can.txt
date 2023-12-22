@@ -1,0 +1,41 @@
+<div style="float:right">
+{{Item Infobox
+| name     = Trash Can
+
+| image   = [[File:TrashCan.png]]
+| artist  =   (art by @kingjoshington)
+| type    = [https://terraria.fandom.com/wiki/Storage_items Storage]
+| tooltip = <i>'Used to automatically sell items.<br/>When in your inventory, the contents of the bag are available for crafting.<br/>Right click to open the bag.<br/>The trash can acts like other bags but with a few exceptions:<br/>It will only hold 1 item of each type.<br/>If an item is added to the trash can when there is already one of the same type in the can, the new one will be sold.<br/>The Clear Trash button will sell all items in the trash can that are not favorited.'</i>
+| rarity  = <b><span style="color:rgb(150, 150, 255);">Blue</span></b>
+| buy      = 
+| sell    = <span>2</span>https://static.wikia.nocookie.net/terraria_gamepedia/images/1/1f/Gold_Coin.png/revision/latest?cb=20200516213029&format=original
+
+| research = 1 required
+}}
+
+</div>
+[[|Main Page]]<br/>
+<br/>
+=== Crafting ===
+{| class="mw-collapsible wikitable"
+|+ Recipes
+! Result
+! Ingredients
+! Crafting station
+|-
+| [[File:TrashCan.png]] [[Trash Can]]<br/>
+| https://static.wikia.nocookie.net/terraria_gamepedia/images/2/28/Trash_Can.png/revision/latest?cb=20200516223105&format=original [https://terraria.fandom.com/wiki/Trash_Can Trash Can]<br/>
+| https://static.wikia.nocookie.net/terraria_gamepedia/images/c/c3/Iron_Anvil.png/revision/latest?cb=20200516214257&format=original [https://terraria.fandom.com/wiki/Iron_Anvil Iron Anvil]<br/>
+|}
+
+{| class="mw-collapsible wikitable"
+|+ Used in
+! Result
+! Ingredients
+! Crafting station
+|-
+| https://static.wikia.nocookie.net/terraria_gamepedia/images/2/28/Trash_Can.png/revision/latest?cb=20200516223105&format=original [https://terraria.fandom.com/wiki/Trash_Can Trash Can]<br/>
+| [[File:TrashCan.png]] [[Trash Can]]<br/>
+| https://static.wikia.nocookie.net/terraria_gamepedia/images/c/c3/Iron_Anvil.png/revision/latest?cb=20200516214257&format=original [https://terraria.fandom.com/wiki/Iron_Anvil Iron Anvil]<br/>
+|}
+

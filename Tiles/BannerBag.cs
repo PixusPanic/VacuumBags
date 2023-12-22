@@ -11,19 +11,12 @@ using Terraria.Enums;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
+using VacuumBags.Items;
 
 namespace VacuumBags.Tiles
 {
-	public class BannerBag : VacuumBagTile
-	{
-		public override Color MapColor => Items.BannerBag.PanelColor;
-		public override void KillMultiTile(int i, int j, int frameX, int frameY) {
-			if (Main.netMode == NetmodeID.Server)
-				return;
-
-			if (!StorageManager.HasRequiredItemToUseStorageFromBagType(Main.LocalPlayer, ModContent.ItemType<Items.BannerBag>(), out _))
-				Items.BannerBag.CloseBag();
-		}
+	public class BannerBag : VacuumBagTile {
+		protected override BagModItem ModBag => Items.BannerBag.Instance;
 		public override void SetStaticDefaults() {
 			base.SetStaticDefaults();
 			TileObjectData.newTile.CopyFrom(TileObjectData.Style1x2Top);

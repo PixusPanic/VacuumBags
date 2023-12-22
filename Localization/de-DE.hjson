@@ -413,6 +413,16 @@ Mods: {
 					'''
 			}
 
+			HoiPoiCapsule: {
+				DisplayName: Hoi-Poi-Kapsel
+				Tooltip:
+					'''
+					Speichert automatisch Gegenstände aus Dragon Ball Terraria.
+					Wenn Sie sich in Ihrem Inventar befinden, steht der Inhalt der Tasche zum Herstellen zur Verfügung.
+					Klicken Sie mit der rechten Maustaste, um die Tasche zu öffnen.
+					'''
+			}
+
 			JarOfDirt: {
 				DisplayName: Glas mit Dreck
 				Tooltip:

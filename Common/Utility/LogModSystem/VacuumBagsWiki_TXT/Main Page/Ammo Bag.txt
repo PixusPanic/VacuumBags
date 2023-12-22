@@ -1,0 +1,30 @@
+<div style="float:right">
+{{Item Infobox
+| name     = Ammo Bag
+
+| image   = [[File:AmmoBag.png]]
+| artist  =   (art by [https://instagram.com/anodomani?utm_source=qr&igshid=MzNlNGNkZWQ4Mg%3D%3D anodomani])
+| type    = [https://terraria.fandom.com/wiki/Storage_items Storage]
+| tooltip = <i>'Automatically stores throwables, arrows, bullets, flares, solutions.<br/>When in your inventory, the contents of the bag are available for crafting.<br/>Right click to open the bag.<br/>Ammo in the bag is used if the ammo bag is in the first ammo item found.<br/>If any ammo in the bag that can be used by your equipped weapon is favorited, only favorited ammos will be used.'</i>
+| rarity  = <b><span style="color:rgb(150, 150, 255);">Blue</span></b>
+| buy      = 
+| sell    = <span>2</span>https://static.wikia.nocookie.net/terraria_gamepedia/images/1/1f/Gold_Coin.png/revision/latest?cb=20200516213029&format=original
+
+| research = 1 required
+}}
+
+</div>
+[[|Main Page]]<br/>
+<br/>
+=== Crafting ===
+{| class="mw-collapsible wikitable"
+|+ Recipes
+! Result
+! Ingredients
+! Crafting station
+|-
+| [[File:AmmoBag.png]] [[Ammo Bag]]<br/>
+| https://static.wikia.nocookie.net/terraria_gamepedia/images/3/3d/Leather.png/revision/latest?cb=20200516214635&format=original [https://terraria.fandom.com/wiki/Leather Leather] (2)<br/>https://static.wikia.nocookie.net/terraria_gamepedia/images/f/ff/Wooden_Arrow.png/revision/latest?cb=20200516223634&format=original [https://terraria.fandom.com/wiki/Wooden_Arrow Wooden Arrow] (100)<br/>https://static.wikia.nocookie.net/terraria_gamepedia/images/a/ac/Shuriken.png/revision/latest?cb=20200516221751&format=original [https://terraria.fandom.com/wiki/Shuriken Shuriken] (100)<br/>
+| https://static.wikia.nocookie.net/terraria_gamepedia/images/d/d5/Any_Work_Bench.gif/revision/latest?cb=20200627022728&format=original [https://terraria.fandom.com/wiki/Work_Bench Work Bench]<br/>
+|}
+

@@ -22,8 +22,17 @@ using androLib.UI;
 namespace VacuumBags.Items
 {
 	[Autoload(false)]
-	public  class ExquisitePotionFlask : PotionFlask
-	{
+	public  class ExquisitePotionFlask : PotionFlask {
+		public static BagModItem Instance {
+			get {
+				if (instance == null)
+					instance = new ExquisitePotionFlask();
+
+				return instance;
+			}
+		}
+		private static BagModItem instance;
+		public override int BagStorageID { get => PotionFlask.Instance.BagStorageID; set => PotionFlask.Instance.BagStorageID = value; }
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {
             Item.maxStack = 1;
@@ -31,8 +40,9 @@ namespace VacuumBags.Items
 			Item.rare = ItemRarityID.Cyan;
 			Item.width = 32;
             Item.height = 32;
-        }
-        public override void AddRecipes() {
+		}
+		public override int GetBagType() => ModContent.ItemType<ExquisitePotionFlask>();
+		public override void AddRecipes() {
 			if (!VacuumBags.serverConfig.HarderBagRecipes) {
 				CreateRecipe()
 				.AddTile(TileID.AdamantiteForge)
@@ -56,9 +66,6 @@ namespace VacuumBags.Items
 				.AddIngredient(ItemID.SoulofSight, 10)
 				.Register();
 			}
-		}
-		public static void RegisterWithAndroLibItemTypeOnly() {
-			StorageManager.RegisterVacuumStorageClassItemTypeOnly(() => ModContent.ItemType<ExquisitePotionFlask>(), BagStorageID);
 		}
 
 		#region AndroModItem attributes that you don't need.

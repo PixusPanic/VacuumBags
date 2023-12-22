@@ -18,8 +18,16 @@ using androLib.UI;
 namespace VacuumBags.Items
 {
     [Autoload(false)]
-	public  class MechanicsToolbelt : BagModItem, INeedsSetUpAllowedList
-	{
+	public  class MechanicsToolbelt : AllowedListBagModItem_VB {
+		public static BagModItem Instance {
+			get {
+				if (instance == null)
+					instance = new MechanicsToolbelt();
+
+				return instance;
+			}
+		}
+		private static BagModItem instance;
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {
             Item.maxStack = 1;
@@ -29,7 +37,8 @@ namespace VacuumBags.Items
             Item.height = 26;
 			Item.ammo = Type;
 		}
-        public override void AddRecipes() {
+		public override int GetBagType() => ModContent.ItemType<MechanicsToolbelt>();
+		public override void AddRecipes() {
 			if (!VacuumBags.serverConfig.HarderBagRecipes) {
 				CreateRecipe()
 				.AddTile(TileID.WorkBenches)
@@ -49,40 +58,20 @@ namespace VacuumBags.Items
 				.Register();
 			}
 		}
-
-		public static int BagStorageID;//Set this when registering with androLib.
-		protected static int DefaultBagSize => 100;
-
-
-		public static void RegisterWithAndroLib(Mod mod) {
-			BagStorageID = StorageManager.RegisterVacuumStorageClass(
-				mod,//Mod
-				typeof(MechanicsToolbelt),//type 
-				ItemAllowedToBeStored,//Is allowed function, Func<Item, bool>
-				null,//Localization Key name.  Attempts to determine automatically by treating the type as a ModItem, or you can specify.
-				-DefaultBagSize,//StorageSize
-				true,//Can vacuum
-				() => new Color(99, 63, 33, androLib.Common.Configs.ConfigValues.UIAlpha),    // Get color function. Func<using Microsoft.Xna.Framework.Color>
-				() => new Color(155, 110, 45, androLib.Common.Configs.ConfigValues.UIAlpha),    // Get Scroll bar color function. Func<using Microsoft.Xna.Framework.Color>
-				() => new Color(200, 140, 65, androLib.Common.Configs.ConfigValues.UIAlpha),    // Get Button hover color function. Func<using Microsoft.Xna.Framework.Color>
-				() => ModContent.ItemType<MechanicsToolbelt>(),//Get ModItem type
-				80,//UI Left
-				675,//UI Top
-				UpdateAllowedList,
-				false,
-				() => {
-					Player player = Main.LocalPlayer;
-					if (WirePlacingTools.Contains(player.HeldItem.type)) {
-						ChooseWireFromBelt(player);
-					}
-					else {
-						ChoosePlacableItemFromBelt(player);
-					}
-				}
-			);
-		}
-		public static bool ItemAllowedToBeStored(Item item) => AllowedItems.Contains(item.type);
-		public static Item ChoosePlacableItemFromBelt(Player player) => ChooseFromBag(BagStorageID, item => item.createTile > -1 || item.IsBucket(), player);
+		public override Color PanelColor => new Color(99, 63, 33, androLib.Common.Configs.ConfigValues.UIAlpha);
+		public override Color ScrollBarColor => new Color(155, 110, 45, androLib.Common.Configs.ConfigValues.UIAlpha);
+		public override Color ButtonHoverColor => new Color(200, 140, 65, androLib.Common.Configs.ConfigValues.UIAlpha);
+		protected override Action SelectItemForUIOnly => () => {
+			Player player = Main.LocalPlayer;
+			if (WirePlacingTools.Contains(player.HeldItem.type)) {
+				ChooseWireFromBelt(player);
+			}
+			else {
+				ChoosePlacableItemFromBelt(player);
+			}
+		};
+		
+		public static Item ChoosePlacableItemFromBelt(Player player) => ChooseFromBag(Instance.BagStorageID, item => item.createTile > -1 || item.IsBucket(), player);
 
 		internal static void On_Player_PutItemInInventoryFromItemUsage(On_Player.orig_PutItemInInventoryFromItemUsage orig, Player self, int type, int theSelectedItem) {
 			if (!TryPutItemInBagFromItemUsage(self, type, theSelectedItem))
@@ -99,10 +88,10 @@ namespace VacuumBags.Items
 			if (!contentSampleItem.IsBucket())
 				return false;
 
-			if (!ItemAllowedToBeStored(contentSampleItem))
+			if (!Instance.ItemAllowedToBeStored(contentSampleItem))
 				return false;
 
-			BagUI bagUI = StorageManager.BagUIs[BagStorageID];
+			BagUI bagUI = StorageManager.BagUIs[Instance.BagStorageID];
 			if (!bagUI.CanVacuumItem(contentSampleItem, player, true))
 				return false;
 
@@ -121,7 +110,7 @@ namespace VacuumBags.Items
 				return true;
 			}
 
-			IEnumerable<KeyValuePair<int, Item>> indexItemsPairs = GetFirstFromBag(BagStorageID, ItemSets.IsBucket, player);
+			IEnumerable<KeyValuePair<int, Item>> indexItemsPairs = GetFirstFromBag(Instance.BagStorageID, ItemSets.IsBucket, player);
 			int slotAfterBag = indexItemsPairs?.Any() == true ? indexItemsPairs.First().Key + 1 : -1;
 
 			int start = slotAfterBag >= 0 && slotAfterBag < inv.Length ? slotAfterBag : 0;
@@ -135,49 +124,153 @@ namespace VacuumBags.Items
 
 			return false;
 		}
-		public static Item ChooseWireFromBelt(Player player) => ChooseFromBag(BagStorageID, item => item.type == ItemID.Wire, player);
+		public static Item ChooseWireFromBelt(Player player) => ChooseFromBag(Instance.BagStorageID, item => item.type == ItemID.Wire, player);
+		public static Item ChooseFromBelt(Player player, int itemType) => ChooseFromBag(Instance.BagStorageID, item => item.type == itemType, player);
 		internal static void OnItemCheck_UseWiringTools(ILContext il) {
 			//IL_01e3: ldloc.2
 			//IL_01e4: ldc.i4.0
 
 			var c = new ILCursor(il);
+
+			//note to self: If need to log the rest of the IL instructions, use this:
+			//while (c.Next != null) {
+			//	bool catchingExceptions = true;
+			//	$"c.Index: {c.Index}, Instruction: {c.Next}".LogSimple();
+			//	while (catchingExceptions) {
+			//		c.Index++;
+			//		try {
+			//			if (c.Next != null) {
+			//				string tempString = c.Next.ToString();
+			//			}
+
+			//			catchingExceptions = false;
+			//		}
+			//		catch (Exception e) {
+			//			$"c.Index: {c.Index}, exception: {e.ToString().Substring(0, 20)}".LogSimple();
+			//		}
+			//	}
+			//}
+
 			if (!c.TryGotoNext(MoveType.After,
 				i => i.MatchLdloc(2),
 				i => i.MatchLdcI4(0)
-			)) { throw new Exception("Failed to find instructions OnItemCheck_UseWiringTools 1/1"); }
+			)) { throw new Exception("Failed to find instructions OnItemCheck_UseWiringTools 1/4"); }
 
 			c.Emit(OpCodes.Ldloc_2);
 			c.Emit(OpCodes.Ldarg_0);
 			c.Emit(OpCodes.Ldarg_1);
 			c.Emit(OpCodes.Ldloc_0);
 			c.Emit(OpCodes.Ldloc_1);
+			c.EmitDelegate((int indexOfWireInInventory, Player player, Item heldItem, int tileTargetX, int tileTargetY) =>
+				CheckPlaceWireFromBag(indexOfWireInInventory, player, heldItem, tileTargetX, tileTargetY, WorldGen.PlaceWire));
 
 
-			c.EmitDelegate((int indexOfWireInInventory, Player player, Item heldItem, int tileTargetX, int tileTargetY) => {
-				if (indexOfWireInInventory != -1)
-					return;
+			//IL_02b7: ldloc.s 4
+			//IL_02b9: ldc.i4.0
 
+			if (!c.TryGotoNext(MoveType.After,
+				i => i.MatchLdloc(5)//,
+				//i => i.MatchLdcI4(0)
+			)) { throw new Exception("Failed to find instructions OnItemCheck_UseWiringTools 2/4"); }
+
+
+			c.Emit(OpCodes.Ldloc, 5);
+			c.Emit(OpCodes.Ldarg_0);
+			c.Emit(OpCodes.Ldarg_1);
+			c.Emit(OpCodes.Ldloc_0);
+			c.Emit(OpCodes.Ldloc_1);
+			c.EmitDelegate((int indexOfWireInInventory, Player player, Item heldItem, int tileTargetX, int tileTargetY) =>
+				CheckPlaceWireFromBag(indexOfWireInInventory, player, heldItem, tileTargetX, tileTargetY, WorldGen.PlaceWire2));
+
+
+			//IL_0372: ldloc.s 6
+			//IL_0374: ldc.i4.0
+
+			if (!c.TryGotoNext(MoveType.After,
+				i => i.MatchLdloc(7),
+				i => i.MatchLdcI4(0)
+			)) { throw new Exception("Failed to find instructions OnItemCheck_UseWiringTools 3/4"); }
+
+			c.Emit(OpCodes.Ldloc, 7);
+			c.Emit(OpCodes.Ldarg_0);
+			c.Emit(OpCodes.Ldarg_1);
+			c.Emit(OpCodes.Ldloc_0);
+			c.Emit(OpCodes.Ldloc_1);
+			c.EmitDelegate((int indexOfWireInInventory, Player player, Item heldItem, int tileTargetX, int tileTargetY) =>
+				CheckPlaceWireFromBag(indexOfWireInInventory, player, heldItem, tileTargetX, tileTargetY, WorldGen.PlaceWire3));
+
+
+			//IL_042d: ldloc.s 8
+			//IL_042f: ldc.i4.0
+
+			if (!c.TryGotoNext(MoveType.After,
+				i => i.MatchLdloc(9),
+				i => i.MatchLdcI4(0)
+			)) { throw new Exception("Failed to find instructions OnItemCheck_UseWiringTools 4/4"); }
+
+			c.Emit(OpCodes.Ldloc, 9);
+			c.Emit(OpCodes.Ldarg_0);
+			c.Emit(OpCodes.Ldarg_1);
+			c.Emit(OpCodes.Ldloc_0);
+			c.Emit(OpCodes.Ldloc_1);
+			c.EmitDelegate((int indexOfWireInInventory, Player player, Item heldItem, int tileTargetX, int tileTargetY) =>
+				CheckPlaceWireFromBag(indexOfWireInInventory, player, heldItem, tileTargetX, tileTargetY, WorldGen.PlaceWire4));
+		}
+		private static void CheckPlaceWireFromBag(int indexOfWireInInventory, Player player, Item heldItem, int tileTargetX, int tileTargetY, Func<int, int, bool> placeWire) {
+			if (indexOfWireInInventory != -1)
+				return;
+
+			int mechanicsToolbeltItemType = ModContent.ItemType<MechanicsToolbelt>();
+			if (!StorageManager.HasRequiredItemToUseStorageFromBagTypeSlow(Main.LocalPlayer, mechanicsToolbeltItemType))
+				return;
+
+			Item wireItem = ChooseWireFromBelt(player);
+			if (wireItem == null)
+				return;
+
+			if (!placeWire(tileTargetX, tileTargetY))
+				return;
+
+			if (ItemLoader.ConsumeItem(wireItem, player))
+				wireItem.stack--;
+
+			if (wireItem.stack <= 0)
+				wireItem.SetDefaults();
+
+			player.ApplyItemTime(heldItem);
+			NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 5, Player.tileTargetX, Player.tileTargetX);
+		}
+		internal static void OnMassWireOperation(ILContext il) {
+			var c = new ILCursor(il);
+
+			// int num = wireCount;
+			//IL_0061: ldloc.0
+
+			if (!c.TryGotoNext(MoveType.Before,
+				i => i.MatchLdloc(0),
+				i => i.MatchLdloc(1)
+			)) { throw new Exception("Failed to find instructions OnMassWireOperation 1/4"); }
+
+			c.Emit(OpCodes.Ldloca, 0);
+			c.Emit(OpCodes.Ldloca, 1);
+			c.EmitDelegate((ref int wireCount, ref int actuatorCount) => {
 				int mechanicsToolbeltItemType = ModContent.ItemType<MechanicsToolbelt>();
-				if (!StorageManager.HasRequiredItemToUseStorageFromBagTypeSlow(Main.LocalPlayer, mechanicsToolbeltItemType))
+				if (!StorageManager.HasRequiredItemToUseStorageFromBagTypeSlow(Main.LocalPlayer, mechanicsToolbeltItemType, out _))
 					return;
 
-				Item wireItem = ChooseWireFromBelt(player);
-				if (wireItem == null)
-					return;
-
-				if (!WorldGen.PlaceWire(tileTargetX, tileTargetY))
-					return;
-
-				if (ItemLoader.ConsumeItem(wireItem, player))
-					wireItem.stack--;
-
-				if (wireItem.stack <= 0)
-					wireItem.SetDefaults();
-
-				player.ApplyItemTime(heldItem);
-				NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 5, Player.tileTargetX, Player.tileTargetX);
+				foreach (Item item in StorageManager.GetItems(Instance.BagStorageID)) {
+					if (!item.NullOrAir()) {
+						if (item.type == ItemID.Wire) {
+							wireCount += item.stack;
+						}
+						else if (item.type == ItemID.Actuator) {
+							actuatorCount += item.stack;
+						}
+					}
+				}
 			});
 		}
+
 		/// <summary>
 		/// From ItemSlot Draw(SpriteBatch spriteBatch, Item[] inv, int context, int slot, Vector2 position, Color lightColor = default(Color)), context 13
 		/// </summary>
@@ -191,18 +284,7 @@ namespace VacuumBags.Items
 		};
 
 
-		private static void UpdateAllowedList(int item, bool add) {
-			if (add) {
-				AllowedItems.Add(item);
-			}
-			else {
-				AllowedItems.Remove(item);
-			}
-		}
-		public static SortedSet<int> AllowedItems => AllowedItemsManager.AllowedItems;
-		public static AllowedItemsManager AllowedItemsManager = new(ModContent.ItemType<MechanicsToolbelt>, () => BagStorageID, DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
-		public AllowedItemsManager GetAllowedItemsManager => AllowedItemsManager;
-		protected static bool? DevCheck(ItemSetInfo info, SortedSet<ItemGroup> itemGroups, SortedSet<string> endWords, SortedSet<string> searchWords) {
+		public override bool? DevCheck(ItemSetInfo info, SortedSet<ItemGroup> itemGroups, SortedSet<string> endWords, SortedSet<string> searchWords) {
 			if (info.Weapon || info.Armor)
 				return false;
 
@@ -211,7 +293,7 @@ namespace VacuumBags.Items
 
 			return null;
 		}
-		protected static SortedSet<int> DevWhiteList() {
+		public override SortedSet<int> DevWhiteList() {
 			SortedSet<int> devWhiteList = new() {
 				ItemID.Spike,
 				ItemID.Wrench,
@@ -260,14 +342,7 @@ namespace VacuumBags.Items
 
 			return devWhiteList;
 		}
-		protected static SortedSet<string> DevModWhiteList() {
-			SortedSet<string> devModWhiteList = new() {
-
-			};
-
-			return devModWhiteList;
-		}
-		protected static SortedSet<int> DevBlackList() {
+		public override SortedSet<int> DevBlackList() {
 			SortedSet<int> devBlackList = new() {
 				ItemID.HoneyBucket,
 				ItemID.BottomlessHoneyBucket,
@@ -275,21 +350,14 @@ namespace VacuumBags.Items
 
 			return devBlackList;
 		}
-		protected static SortedSet<string> DevModBlackList() {
-			SortedSet<string> devModBlackList = new() {
-
-			};
-
-			return devModBlackList;
-		}
-		protected static SortedSet<ItemGroup> ItemGroups() {
+		public override SortedSet<ItemGroup> ItemGroups() {
 			SortedSet<ItemGroup> itemGroups = new() {
 				ItemGroup.Wiring
 			};
 
 			return itemGroups;
 		}
-		protected static SortedSet<string> EndWords() {
+		public override SortedSet<string> EndWords() {
 			SortedSet<string> endWords = new() {
 				"fountain"
 			};
@@ -297,7 +365,7 @@ namespace VacuumBags.Items
 			return endWords;
 		}
 
-		protected static SortedSet<string> SearchWords() {
+		public override SortedSet<string> SearchWords() {
 			SortedSet<string> searchWords = new() {
 				"statue",
 				"pressureplate",

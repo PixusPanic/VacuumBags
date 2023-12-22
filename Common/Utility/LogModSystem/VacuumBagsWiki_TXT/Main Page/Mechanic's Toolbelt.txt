@@ -1,0 +1,30 @@
+<div style="float:right">
+{{Item Infobox
+| name     = Mechanic's Toolbelt
+
+| image   = [[File:MechanicsToolbelt.png]]
+| artist  =   (art by @kingjoshington)
+| type    = [https://terraria.fandom.com/wiki/Storage_items Storage]
+| tooltip = <i>'Automatically stores wiring related items such as traps and statues.<br/>When in your inventory, the contents of the belt are available for crafting.<br/>Right click to open the belt.<br/>Items can be placed from the belt by left clicking with the belt.  If any items in the belt are favorited, only favorited items will be used.<br/>Wire in the belt can be used by wiring tools as if it were in your inventory.'</i>
+| rarity  = <b><span style="color:rgb(150, 150, 255);">Blue</span></b>
+| buy      = 
+| sell    = <span>2</span>https://static.wikia.nocookie.net/terraria_gamepedia/images/1/1f/Gold_Coin.png/revision/latest?cb=20200516213029&format=original
+
+| research = 1 required
+}}
+
+</div>
+[[|Main Page]]<br/>
+<br/>
+=== Crafting ===
+{| class="mw-collapsible wikitable"
+|+ Recipes
+! Result
+! Ingredients
+! Crafting station
+|-
+| [[File:MechanicsToolbelt.png]] [[Mechanics Toolbelt]]<br/>
+| https://static.wikia.nocookie.net/terraria_gamepedia/images/3/3d/Leather.png/revision/latest?cb=20200516214635&format=original [https://terraria.fandom.com/wiki/Leather Leather] (2)<br/>https://static.wikia.nocookie.net/terraria_gamepedia/images/4/4e/Gold_Bar.png/revision/latest?cb=20200516213006&format=original [https://terraria.fandom.com/wiki/Gold_Bar Gold Bar] (2)<br/>https://static.wikia.nocookie.net/terraria_gamepedia/images/b/bc/Dart_Trap.png/revision/latest?cb=20200516211137&format=original [https://terraria.fandom.com/wiki/Dart_Trap Dart Trap]<br/>
+| https://static.wikia.nocookie.net/terraria_gamepedia/images/d/d5/Any_Work_Bench.gif/revision/latest?cb=20200627022728&format=original [https://terraria.fandom.com/wiki/Work_Bench Work Bench]<br/>
+|}
+

@@ -123,6 +123,7 @@
 		</Reference>
 	</ItemGroup>
 	<ItemGroup>
+	  <Folder Include="Common\Utility\LogModSystem\VacuumBagsWiki_TXT\" />
 	  <Folder Include="UI\" />
 	</ItemGroup>
 </Project>

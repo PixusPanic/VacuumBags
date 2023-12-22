@@ -1,0 +1,19 @@
+<div style="float:right">
+{{Item Infobox
+| name     = Spooky Gourd
+
+| image   = [[File:SpookyGourd.png]]
+| artist  =   (art by @level12lobster)
+| type    = [https://terraria.fandom.com/wiki/Storage_items Storage]
+| tooltip = <i>'Automatically stores items from Spooky Mod.<br/>When in your inventory, the contents of the bag are available for crafting.<br/>Right click to open the bag.'</i>
+| rarity  = <b><span style="color:rgb(150, 150, 255);">Blue</span></b>
+| buy      = 
+| sell    = <span>2</span>https://static.wikia.nocookie.net/terraria_gamepedia/images/1/1f/Gold_Coin.png/revision/latest?cb=20200516213029&format=original
+
+| research = 1 required
+}}
+
+</div>
+[[|Main Page]]<br/>
+<br/>
+=== Crafting ===

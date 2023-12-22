@@ -1,0 +1,30 @@
+<div style="float:right">
+{{Item Infobox
+| name     = Boss Bag
+
+| image   = [[File:BossBag.png]]
+| artist  =   (art by @kingjoshington)
+| type    = [https://terraria.fandom.com/wiki/Storage_items Storage]
+| tooltip = <i>'Automatically stores boss bags, trophies, boss statues, and cosmetic boss drops.<br/>When in your inventory, the contents of the bag are available for crafting.<br/>Right click to open the bag.<br/>Uses Boss Checklist to add modded items to the allowed items if it is enabled.'</i>
+| rarity  = <b><span style="color:rgb(150, 150, 255);">Blue</span></b>
+| buy      = 
+| sell    = <span>2</span>https://static.wikia.nocookie.net/terraria_gamepedia/images/1/1f/Gold_Coin.png/revision/latest?cb=20200516213029&format=original
+
+| research = 1 required
+}}
+
+</div>
+[[|Main Page]]<br/>
+<br/>
+=== Crafting ===
+{| class="mw-collapsible wikitable"
+|+ Recipes
+! Result
+! Ingredients
+! Crafting station
+|-
+| [[File:BossBag.png]] [[Boss Bag]]<br/>
+| https://static.wikia.nocookie.net/terraria_gamepedia/images/d/d9/Gold_Chest.png/revision/latest?cb=20200516213027&format=original [https://terraria.fandom.com/wiki/Gold_Chest Gold Chest]<br/><br/>and<br/>https://static.wikia.nocookie.net/terraria_gamepedia/images/4/45/Trophies.gif/revision/latest?cb=20220122175606&format=original [https://terraria.fandom.com/wiki/King_Slime_Trophy Any Boss Trophy]<br/>and<br/>https://static.wikia.nocookie.net/terraria_gamepedia/images/2/2a/Treasure_Bag.gif/revision/latest?cb=20211119015752&format=original [https://terraria.fandom.com/wiki/Treasure_Bag_(King_Slime) Any Boss Bag]
+| https://static.wikia.nocookie.net/terraria_gamepedia/images/d/d5/Any_Work_Bench.gif/revision/latest?cb=20200627022728&format=original [https://terraria.fandom.com/wiki/Work_Bench Work Bench]<br/>
+|}
+

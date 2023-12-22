@@ -1,0 +1,31 @@
+[[|Main Page]]<br/>
+Each bag has a default set of items that it can store.  These sets can be modified using the white lists and black lists.  Each bag has it's own whitelist and blacklist.  The normal way of changing the lists is by interacting with the bags in game.  They can also be modified in the configs, but I suggest against it.  Modifying them in the configs is very slow, difficult to navigate and has the potential to accidentally delete an entire list or all lists if you aren't careful.<br/>
+
+WARNING: Functional bags are designed to have the default items in them.  The functions of the bags only work when the items are in the correct bags.<br/>
+=== Functional bags summary ===
+* [[File:AmmoBag.png]] [[Ammo Bag]] - Weapon Ammo
+* [[File:BannerBag.png]] [[Banner Bag]] - Enemy Banners
+* [[File:BossBag.png]] [[Boss Bag]] - N/A
+* [[File:BuildersBox.png]] [[Builders Box]] - Place-able Items
+* [[File:ExquisitePotionFlask.png]] [[Exquisite Potion Flask]] - Potions and food
+* [[File:FishingBelt.png]] [[Fishing Belt]] - Fishing Bait
+* [[File:HerbSatchel.png]] [[Herb Satchel]] - N/A
+* [[File:JarOfDirt.png]] [[Jar Of Dirt]] - Place-able Items
+* [[File:MechanicsToolbelt.png]] [[Mechanics Toolbelt]] - Place-able Items, Buckets and Wire
+* [[File:OreBag.png]] [[Ore Bag]] - N/A
+* [[File:OreBag.png]] [[Ore Bag]] - N/A
+* [[File:PaintBucket.png]] [[Paint Bucket]] - Paints
+* [[File:PortableStation.png]] [[Portable Station]] - Crafting Stations, Passive and Active buff stations
+* [[File:PotionFlask.png]] [[Potion Flask]] - Potions and food
+* [[File:SlayersSack.png]] [[Slayers Sack]] - Rope, torches, glowsticks, flair guns, keys
+* [[File:TrashCan.png]] [[Trash Can]] - N/A
+* [[File:WallEr.png]] [[Wall Er]] - Place-able Wall Items
+
+
+=== Modifying lists in Game ===
+==== Whitelists ====
+Items can be whitelisted for a bag by using your mouse to put an item into a bag.  When an item is not whitelisted, this is the only way to put an item into a bag.  When items are whitelisted, they can be put into a bag in various ways including on pickup, shift left clicking from your inventory and using the deposit all button.<br/>
+==== Blacklists ====
+Items can be blacklisted for a bag by shift RIGHT clicking on them while they are in the bag.  This will attempt to remove all items of that type from the bag. (Removal can be toggled in the config.).<br/>
+
+Player allowed lists take priority over the default ones that I created to allow customizing bags as you like.  If you feel that certain items were missed as the default for a bag such as an ore or bar from a mod in the Ore Bag and you want to help out, there is a config option to print all of your allowed lists to your client.log.  If you provide me your client.log, I will add them to the default lists. (client.log found here by default: C:\Steam\SteamApps\common\tModLoader\tModLoader-Logs)<br/>

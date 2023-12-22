@@ -413,6 +413,16 @@ Mods: {
 					'''
 			}
 
+			HoiPoiCapsule: {
+				DisplayName: Cápsula Hoi-Poi
+				Tooltip:
+					'''
+					Almacena automáticamente elementos de Dragon Ball Terraria.
+					Cuando esté en su inventario, el contenido de la bolsa estará disponible para su elaboración.
+					Haga clic derecho para abrir la bolsa.
+					'''
+			}
+
 			JarOfDirt: {
 				DisplayName: Tarro de mugre
 				Tooltip:

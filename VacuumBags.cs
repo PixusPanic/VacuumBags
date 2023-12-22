@@ -31,8 +31,6 @@ namespace VacuumBags
 		public const string ModName = "VacuumBags";
 		public static BagsServerConfig serverConfig = ModContent.GetInstance<BagsServerConfig>();
 		public static BagsClientConfig clientConfig = ModContent.GetInstance<BagsClientConfig>();
-		public static Mod GadgetGalore;
-		public static bool gadgetGaloreEnabled = ModLoader.TryGetMod("GadgetGalore", out GadgetGalore);
 		public static bool registeredWithAndroLib = false;
 
 		//List<Hook> hooks = new();
@@ -57,21 +55,25 @@ namespace VacuumBags
 			On_PlayerDrawLayers.DrawPlayer_27_HeldItem += BagPlayer.On_PlayerDrawLayers_DrawPlayer_27_HeldItem;
 			On_SmartCursorHelper.SmartCursorLookup += BagPlayer.On_SmartCursorHelper_SmartCursorLookup;
 			On_Player.PutItemInInventoryFromItemUsage += MechanicsToolbelt.On_Player_PutItemInInventoryFromItemUsage;
-			On_Player.DelBuff += ExquisitePotionFlask.OnDelBuff;
-			On_Main.TryRemovingBuff += ExquisitePotionFlask.OnTryRemovingBuff;
-			On_Player.AddBuff += ExquisitePotionFlask.OnAddBuff;
+			On_Player.DelBuff += PotionFlask.OnDelBuff;
+			On_Main.TryRemovingBuff += PotionFlask.OnTryRemovingBuff;
+			On_Player.AddBuff += PotionFlask.OnAddBuff;
 			On_Player.PlaceThing_Tiles_CheckWandUsability += On_Player_PlaceThing_Tiles_CheckWandUsability;
+			On_Player.ConsumeItem += On_Player_ConsumeItem;
 
 			IL_ItemSlot.Draw_SpriteBatch_ItemArray_int_int_Vector2_Color += OnDrawItemSlot;
 			IL_Player.ItemCheck_CheckCanUse += OnItemCheck_CheckCanUse;
 			IL_Player.ItemCheck_UseWiringTools += MechanicsToolbelt.OnItemCheck_UseWiringTools;
+			IL_Wiring.MassWireOperation += MechanicsToolbelt.OnMassWireOperation;
 			IL_Player.ItemCheck_ApplyHoldStyle_Inner += AmmoBag.OnItemCheck_ApplyHoldStyle_Inner;
 			IL_Player.SmartSelect_PickToolForStrategy += AmmoBag.OnSmartSelect_PickToolForStrategy;
 			IL_Player.AdjTiles += PortableStation.OnAdjTiles;
 			IL_Player.ItemCheck_CheckFishingBobber_PickAndConsumeBait += FishingBelt.OnItemCheck_CheckFishingBobber_PickAndConsumeBait;
 			IL_Projectile.AI_061_FishingBobber_GiveItemToPlayer += FishingBelt.On_AI_061_FishingBobber_GiveItemToPlayer;
 			IL_Player.GetAnglerReward += FishingBelt.OnGetAnglerReward;
+			IL_Main.GUIChatDrawInner += FishingBelt.OnGUIChatDrawInner;
 			IL_Player.ItemCheck_Inner += IL_Player_ItemCheck_Inner;
+			IL_Player.TileInteractionsUse += SlayersSack.OnTileInteractionsUse;
 
 			AndroMod.ScenemetrictBeforeAnyCheck += (sceneMetrics, settings) => BannerBag.PreScanAndExportToMain();
 			AndroMod.ScenemetrictBeforeAnyCheck += (sceneMetrics, settings) => PortableStation.PreScanAndExportToMain();
@@ -79,11 +81,12 @@ namespace VacuumBags
 			AndroMod.ScenemetrictAfterTileCheck += (sceneMetrics, settings) => BannerBag.PostScanAndExportToMain(ref sceneMetrics);
 			AndroMod.ScenemetrictAfterTileCheck += (sceneMetrics, settings) => PortableStation.PostScanAndExportToMain(ref sceneMetrics);
 
-			TrashCan.RegisterWithAndroLib(this);
+			TrashCan.Instance.RegisterWithAndroLib(this);
 			if (!AndroMod.weaponEnchantmentsLoaded)
 				RegisterAllBagsWithAndroLib();
 
 			VacuumBagsLocalizationData.RegisterSDataPackage();
+			StoragePlayer.OnAndroLibClientConfigChangedInGame += SimpleBag.ClearAllowedLists;
 		}
 
 		private void AddAllContent(VacuumBags mod) {
@@ -118,61 +121,62 @@ namespace VacuumBags
 			if (!clientConfig.SimpleBagsVacuumAllItems)
 				RegisterSimpleBagsWithAndroLib();
 
-			BannerBag.RegisterWithAndroLib(this);
-			FishingBelt.RegisterWithAndroLib(this);
-			PortableStation.RegisterWithAndroLib(this);
-			PaintBucket.RegisterWithAndroLib(this);
-			PotionFlask.RegisterWithAndroLib(this);
-			HerbSatchel.RegisterWithAndroLib(this);
-			MechanicsToolbelt.RegisterWithAndroLib(this);
-			JarOfDirt.RegisterWithAndroLib(this);
-			AmmoBag.RegisterWithAndroLib(this);
-			BossBag.RegisterWithAndroLib(this);
-			BuildersBox.RegisterWithAndroLib(this);
-			WallEr.RegisterWithAndroLib(this);
-			SlayersSack.RegisterWithAndroLib(this);
+			BannerBag.Instance.RegisterWithAndroLib(this);
+			FishingBelt.Instance.RegisterWithAndroLib(this);
+			PortableStation.Instance.RegisterWithAndroLib(this);
+			PaintBucket.Instance.RegisterWithAndroLib(this);
+			PotionFlask.Instance.RegisterWithAndroLib(this);
+			HerbSatchel.Instance.RegisterWithAndroLib(this);
+			MechanicsToolbelt.Instance.RegisterWithAndroLib(this);
+			JarOfDirt.Instance.RegisterWithAndroLib(this);
+			AmmoBag.Instance.RegisterWithAndroLib(this);
+			BossBag.Instance.RegisterWithAndroLib(this);
+			BuildersBox.Instance.RegisterWithAndroLib(this);
+			WallEr.Instance.RegisterWithAndroLib(this);
+			SlayersSack.Instance.RegisterWithAndroLib(this);
 
-			CalamitousCauldron.RegisterWithAndroLib(this);
-			LokisTesseract.RegisterWithAndroLib(this);
-			EssenceOfGathering.RegisterWithAndroLib(this);
-			FargosMementos.RegisterWithAndroLib(this);
-			SpookyGourd.RegisterWithAndroLib(this);
-			EarthenPyramid.RegisterWithAndroLib(this);
+			CalamitousCauldron.Instance.RegisterWithAndroLib(this);
+			LokisTesseract.Instance.RegisterWithAndroLib(this);
+			EssenceOfGathering.Instance.RegisterWithAndroLib(this);
+			FargosMementos.Instance.RegisterWithAndroLib(this);
+			SpookyGourd.Instance.RegisterWithAndroLib(this);
+			EarthenPyramid.Instance.RegisterWithAndroLib(this);
+			HoiPoiCapsule.Instance.RegisterWithAndroLib(this);
 
 			if (clientConfig.SimpleBagsVacuumAllItems)
 				RegisterSimpleBagsWithAndroLib();
 
-			ExquisitePotionFlask.RegisterWithAndroLibItemTypeOnly();
+			ExquisitePotionFlask.Instance.RegisterWithAndroLibItemTypeOnly();
 
-			PackBlack.RegisterWithAndroLibItemTypeOnly();
-			PackBlue.RegisterWithAndroLibItemTypeOnly();
-			PackBrown.RegisterWithAndroLibItemTypeOnly();
-			PackGray.RegisterWithAndroLibItemTypeOnly();
-			PackGreen.RegisterWithAndroLibItemTypeOnly();
-			PackOrange.RegisterWithAndroLibItemTypeOnly();
-			PackPink.RegisterWithAndroLibItemTypeOnly();
-			PackPurple.RegisterWithAndroLibItemTypeOnly();
-			PackRed.RegisterWithAndroLibItemTypeOnly();
-			PackWhite.RegisterWithAndroLibItemTypeOnly();
-			PackYellow.RegisterWithAndroLibItemTypeOnly();
-
-			BuildersBox.RegisterWithGadgetGalore();
-			WallEr.RegisterWithGadgetGalore();
-			JarOfDirt.RegisterWithGadgetGalore();
-			PaintBucket.RegisterWithGadgetGalore();
+			BuildersBox.Instance.RegisterWithGadgetGalore();
+			WallEr.Instance.RegisterWithGadgetGalore();
+			JarOfDirt.Instance.RegisterWithGadgetGalore();
+			PaintBucket.Instance.RegisterWithGadgetGalore();
 		}
 		private void RegisterSimpleBagsWithAndroLib() {
-			BagBlack.RegisterWithAndroLib(this);
-			BagBlue.RegisterWithAndroLib(this);
-			BagBrown.RegisterWithAndroLib(this);
-			BagGray.RegisterWithAndroLib(this);
-			BagGreen.RegisterWithAndroLib(this);
-			BagOrange.RegisterWithAndroLib(this);
-			BagPink.RegisterWithAndroLib(this);
-			BagPurple.RegisterWithAndroLib(this);
-			BagRed.RegisterWithAndroLib(this);
-			BagWhite.RegisterWithAndroLib(this);
-			BagYellow.RegisterWithAndroLib(this);
+			BagBlack.Instance.RegisterWithAndroLib(this);
+			BagBlue.Instance.RegisterWithAndroLib(this);
+			BagBrown.Instance.RegisterWithAndroLib(this);
+			BagGray.Instance.RegisterWithAndroLib(this);
+			BagGreen.Instance.RegisterWithAndroLib(this);
+			BagOrange.Instance.RegisterWithAndroLib(this);
+			BagPink.Instance.RegisterWithAndroLib(this);
+			BagPurple.Instance.RegisterWithAndroLib(this);
+			BagRed.Instance.RegisterWithAndroLib(this);
+			BagWhite.Instance.RegisterWithAndroLib(this);
+			BagYellow.Instance.RegisterWithAndroLib(this);
+
+			PackBlack.Instance.RegisterWithAndroLibItemTypeOnly();
+			PackBlue.Instance.RegisterWithAndroLibItemTypeOnly();
+			PackBrown.Instance.RegisterWithAndroLibItemTypeOnly();
+			PackGray.Instance.RegisterWithAndroLibItemTypeOnly();
+			PackGreen.Instance.RegisterWithAndroLibItemTypeOnly();
+			PackOrange.Instance.RegisterWithAndroLibItemTypeOnly();
+			PackPink.Instance.RegisterWithAndroLibItemTypeOnly();
+			PackPurple.Instance.RegisterWithAndroLibItemTypeOnly();
+			PackRed.Instance.RegisterWithAndroLibItemTypeOnly();
+			PackWhite.Instance.RegisterWithAndroLibItemTypeOnly();
+			PackYellow.Instance.RegisterWithAndroLibItemTypeOnly();
 		}
 		public override object Call(params object[] args) {
 			if (args.Length != 1)
@@ -243,7 +247,7 @@ namespace VacuumBags
 				if (!StorageManager.HasRequiredItemToUseStorageFromBagTypeSlow(Main.LocalPlayer, ammoBagItemType))
 					return ammoCount;
 
-				foreach (Item item in StorageManager.GetItems(AmmoBag.BagStorageID)) {
+				foreach (Item item in StorageManager.GetItems(AmmoBag.Instance.BagStorageID)) {
 					if (!item.NullOrAir() && item.stack > 0 && ItemLoader.CanChooseAmmo(weapon, item, Main.LocalPlayer))
 						ammoCount += item.stack;
 				}
@@ -274,7 +278,7 @@ namespace VacuumBags
 				if (!StorageManager.HasRequiredItemToUseStorageFromBagTypeSlow(Main.LocalPlayer, fishingBeltItemType, out _))
 					return baitCount;
 
-				foreach (Item item in StorageManager.GetItems(FishingBelt.BagStorageID)) {
+				foreach (Item item in StorageManager.GetItems(FishingBelt.Instance.BagStorageID)) {
 					if (!item.NullOrAir() && item.bait > 0)
 						baitCount += item.stack;
 				}
@@ -308,9 +312,9 @@ namespace VacuumBags
 			c.EmitDelegate((int wandAmmo, int tileWand) => {
 				Item wandAmmoItem = tileWand.CSI();
 				List<(int, int)> list = new() {
-					(ModContent.ItemType<AmmoBag>(), AmmoBag.BagStorageID),
-					(ModContent.ItemType<JarOfDirt>(), JarOfDirt.BagStorageID),
-					(ModContent.ItemType<BuildersBox>(), BuildersBox.BagStorageID),
+					(ModContent.ItemType<AmmoBag>(), AmmoBag.Instance.BagStorageID),
+					(ModContent.ItemType<JarOfDirt>(), JarOfDirt.Instance.BagStorageID),
+					(ModContent.ItemType<BuildersBox>(), BuildersBox.Instance.BagStorageID),
 				};
 
 				foreach ((int bagType, int storageID) pair in list) {
@@ -348,7 +352,7 @@ namespace VacuumBags
 				if (!StorageManager.HasRequiredItemToUseStorageFromBagTypeSlow(Main.LocalPlayer, mechanicsToolbeltItemType, out _))
 					return wireCount;
 
-				foreach (Item item in StorageManager.GetItems(MechanicsToolbelt.BagStorageID)) {
+				foreach (Item item in StorageManager.GetItems(MechanicsToolbelt.Instance.BagStorageID)) {
 					if (!item.NullOrAir() && item.type == ItemID.Wire)
 						wireCount += item.stack;
 				}
@@ -364,9 +368,9 @@ namespace VacuumBags
 
 			Item wandAmmoItem = tileWand.CSI();
 			List<(int, int)> list = new() {
-				(ModContent.ItemType<AmmoBag>(), AmmoBag.BagStorageID),
-				(ModContent.ItemType<JarOfDirt>(), JarOfDirt.BagStorageID),
-				(ModContent.ItemType<BuildersBox>(), BuildersBox.BagStorageID),
+				(ModContent.ItemType<AmmoBag>(), AmmoBag.Instance.BagStorageID),
+				(ModContent.ItemType<JarOfDirt>(), JarOfDirt.Instance.BagStorageID),
+				(ModContent.ItemType<BuildersBox>(), BuildersBox.Instance.BagStorageID),
 			};
 
 			foreach ((int bagType, int storageID) pair in list) {
@@ -419,9 +423,9 @@ namespace VacuumBags
 
 				Item wandAmmoItem = tileWand.CSI();
 				List<(int, int)> list = new() {
-					(ModContent.ItemType<AmmoBag>(), AmmoBag.BagStorageID),
-					(ModContent.ItemType<JarOfDirt>(), JarOfDirt.BagStorageID),
-					(ModContent.ItemType<BuildersBox>(), BuildersBox.BagStorageID),
+					(ModContent.ItemType<AmmoBag>(), AmmoBag.Instance.BagStorageID),
+					(ModContent.ItemType<JarOfDirt>(), JarOfDirt.Instance.BagStorageID),
+					(ModContent.ItemType<BuildersBox>(), BuildersBox.Instance.BagStorageID),
 				};
 
 				foreach ((int bagType, int storageID) pair in list) {
@@ -478,7 +482,7 @@ namespace VacuumBags
 				if (!Main.LocalPlayer.HasItem(PaintBucketID))
 					return hasPaint;
 
-				foreach (Item item in StorageManager.GetItems(PaintBucket.BagStorageID)) {
+				foreach (Item item in StorageManager.GetItems(PaintBucket.Instance.BagStorageID)) {
 					if (!item.NullOrAir() && item.stack > 0 && item.PaintOrCoating)
 						return true;
 				}
@@ -502,9 +506,9 @@ namespace VacuumBags
 					return;
 
 				List<(int, int)> list = new() {
-					(ModContent.ItemType<AmmoBag>(), AmmoBag.BagStorageID),
-					(ModContent.ItemType<JarOfDirt>(), JarOfDirt.BagStorageID),
-					(ModContent.ItemType<BuildersBox>(), BuildersBox.BagStorageID),
+					(ModContent.ItemType<AmmoBag>(), AmmoBag.Instance.BagStorageID),
+					(ModContent.ItemType<JarOfDirt>(), JarOfDirt.Instance.BagStorageID),
+					(ModContent.ItemType<BuildersBox>(), BuildersBox.Instance.BagStorageID),
 				};
 
 				foreach ((int bagType, int storageID) pair in list) {
@@ -521,6 +525,33 @@ namespace VacuumBags
 					}
 				}
 			});
+		}
+		private bool On_Player_ConsumeItem(On_Player.orig_ConsumeItem orig, Player self, int type, bool reverseOrder, bool includeVoidBag) {
+			bool foundItemToConsume = orig(self, type, reverseOrder, includeVoidBag);
+			if (foundItemToConsume)
+				return foundItemToConsume;
+
+			switch(type) {
+				case ItemID.Wire:
+				case ItemID.Actuator:
+					int mechanicsToolbeltItemType = ModContent.ItemType<MechanicsToolbelt>();
+					if (!StorageManager.HasRequiredItemToUseStorageFromBagTypeSlow(Main.LocalPlayer, mechanicsToolbeltItemType))
+						return foundItemToConsume;
+
+					Item itemToConsume = MechanicsToolbelt.ChooseFromBelt(self, type);
+					if (itemToConsume == null)
+						return foundItemToConsume;
+
+					if (ItemLoader.ConsumeItem(itemToConsume, self))
+						itemToConsume.stack--;
+
+					if (itemToConsume.stack <= 0)
+						itemToConsume.SetDefaults();
+
+					break;
+			}
+
+			return foundItemToConsume;
 		}
 	}
 }

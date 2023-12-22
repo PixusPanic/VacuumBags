@@ -15,8 +15,16 @@ using MonoMod.Cil;
 namespace VacuumBags.Items
 {
     [Autoload(false)]
-	public  class PaintBucket : BagModItem, INeedsSetUpAllowedList
-	{
+	public  class PaintBucket : AllowedListBagModItem_VB {
+		public static BagModItem Instance {
+			get {
+				if (instance == null)
+					instance = new PaintBucket();
+
+				return instance;
+			}
+		}
+		private static BagModItem instance;
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {
             Item.maxStack = 1;
@@ -26,7 +34,8 @@ namespace VacuumBags.Items
             Item.height = 28;
 			Item.ammo = Type;
 		}
-        public override void AddRecipes() {
+		public override int GetBagType() => ModContent.ItemType<PaintBucket>();
+		public override void AddRecipes() {
 			if (!VacuumBags.serverConfig.HarderBagRecipes) {
 				CreateRecipe()
 				.AddTile(TileID.WorkBenches)
@@ -47,36 +56,10 @@ namespace VacuumBags.Items
 			}
 		}
 
-		public static int BagStorageID;//Set this when registering with androLib.
-		protected static int DefaultBagSize => 100;
-
-
-		public static void RegisterWithAndroLib(Mod mod) {
-			BagStorageID = StorageManager.RegisterVacuumStorageClass(
-				mod,//Mod
-				typeof(PaintBucket),//type 
-				ItemAllowedToBeStored,//Is allowed function, Func<Item, bool>
-				null,//Localization Key name.  Attempts to determine automatically by treating the type as a ModItem, or you can specify.
-				-DefaultBagSize,//StorageSize
-				true,//Can vacuum
-				() => new Color(245, 245, 220, androLib.Common.Configs.ConfigValues.UIAlpha),  // Get color function. Func<using Microsoft.Xna.Framework.Color>
-				() => new Color(255, 255, 230, androLib.Common.Configs.ConfigValues.UIAlpha),  // Get Scroll bar color function. Func<using Microsoft.Xna.Framework.Color>
-				() => new Color(255, 250, 240, androLib.Common.Configs.ConfigValues.UIAlpha),  // Get Button hover color function. Func<using Microsoft.Xna.Framework.Color>
-				() => ModContent.ItemType<PaintBucket>(),//Get ModItem type
-				80,//UI Left
-				675,//UI Top
-				UpdateAllowedList,
-				false,
-				() => ChoosePaintFromBucket(Main.LocalPlayer)
-			);
-		}
-		public static bool ItemAllowedToBeStored(Item item) => AllowedItems.Contains(item.type);
-		public static void RegisterWithGadgetGalore() {
-			if (!VacuumBags.gadgetGaloreEnabled)
-				return;
-
-			VacuumBags.GadgetGalore.Call("RegisterPaintInventory", () => StorageManager.GetItems(BagStorageID).Where(item => item.NullOrAir()));
-		}
+		public override Color PanelColor => new Color(245, 245, 220, androLib.Common.Configs.ConfigValues.UIAlpha);
+		public override Color ScrollBarColor => new Color(255, 255, 230, androLib.Common.Configs.ConfigValues.UIAlpha);
+		public override Color ButtonHoverColor => new Color(255, 250, 240, androLib.Common.Configs.ConfigValues.UIAlpha);
+		protected override Action SelectItemForUIOnly => () => ChoosePaintFromBucket(Main.LocalPlayer);
 
 		internal static Item OnFindPaintOrCoating(On_Player.orig_FindPaintOrCoating orig, Player self) {
 			Item item = orig(self);
@@ -114,27 +97,15 @@ namespace VacuumBags.Items
 
 			return item;
 		}
-		private static Item ChoosePaintFromBucket(Player player) => ChooseFromBag(BagStorageID, (Item item) => item.PaintOrCoating, player, selectItems: false);
+		private static Item ChoosePaintFromBucket(Player player) => ChooseFromBag(Instance.BagStorageID, (Item item) => item.PaintOrCoating, player);
 
-
-		private static void UpdateAllowedList(int item, bool add) {
-			if (add) {
-				AllowedItems.Add(item);
-			}
-			else {
-				AllowedItems.Remove(item);
-			}
-		}
-		public static SortedSet<int> AllowedItems => AllowedItemsManager.AllowedItems;
-		public static AllowedItemsManager AllowedItemsManager = new(ModContent.ItemType<PaintBucket>, () => BagStorageID, DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
-		public AllowedItemsManager GetAllowedItemsManager => AllowedItemsManager;
-		protected static bool? DevCheck(ItemSetInfo info, SortedSet<ItemGroup> itemGroups, SortedSet<string> endWords, SortedSet<string> searchWords) {
+		public override bool? DevCheck(ItemSetInfo info, SortedSet<ItemGroup> itemGroups, SortedSet<string> endWords, SortedSet<string> searchWords) {
 			if (info.Equipment)
 				return false;
 
 			return null;
 		}
-		protected static SortedSet<int> DevWhiteList() {
+		public override SortedSet<int> DevWhiteList() {
 			SortedSet<int> devWhiteList = new() {
 				ItemID.GlowPaint,
 				ItemID.RedPaint,
@@ -192,7 +163,7 @@ namespace VacuumBags.Items
 
 			return devWhiteList;
 		}
-		protected static SortedSet<string> DevModWhiteList() {
+		public override SortedSet<string> DevModWhiteList() {
 			SortedSet<string> devModWhiteList = new() {
 				"GadgetGalore/BucketOfPaintTools",
 				"GadgetGalore/GhostlyPainter",
@@ -200,21 +171,7 @@ namespace VacuumBags.Items
 
 			return devModWhiteList;
 		}
-		protected static SortedSet<int> DevBlackList() {
-			SortedSet<int> devBlackList = new() {
-
-			};
-
-			return devBlackList;
-		}
-		protected static SortedSet<string> DevModBlackList() {
-			SortedSet<string> devModBlackList = new() {
-
-			};
-
-			return devModBlackList;
-		}
-		protected static SortedSet<ItemGroup> ItemGroups() {
+		public override SortedSet<ItemGroup> ItemGroups() {
 			SortedSet<ItemGroup> itemGroups = new() {
 				ItemGroup.Paint,
 				ItemGroup.Dye,
@@ -223,7 +180,7 @@ namespace VacuumBags.Items
 
 			return itemGroups;
 		}
-		protected static SortedSet<string> EndWords() {
+		public override SortedSet<string> EndWords() {
 			SortedSet<string> endWords = new() {
 				"paint",
 				"coating",
@@ -233,7 +190,7 @@ namespace VacuumBags.Items
 			return endWords;
 		}
 
-		protected static SortedSet<string> SearchWords() {
+		public override SortedSet<string> SearchWords() {
 			SortedSet<string> searchWords = new() {
 				"paintbrush",
 				"paintroller",

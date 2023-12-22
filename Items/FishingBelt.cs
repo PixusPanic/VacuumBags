@@ -15,12 +15,21 @@ using System.Reflection;
 using MonoMod.Cil;
 using Mono.Cecil.Cil;
 using rail;
+using Terraria.Audio;
 
 namespace VacuumBags.Items
 {
     [Autoload(false)]
-	public  class FishingBelt : BagModItem, INeedsSetUpAllowedList
-	{
+	public  class FishingBelt : AllowedListBagModItem_VB {
+		public static BagModItem Instance {
+			get {
+				if (instance == null)
+					instance = new FishingBelt();
+
+				return instance;
+			}
+		}
+		private static BagModItem instance;
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {
             Item.maxStack = 1;
@@ -30,7 +39,8 @@ namespace VacuumBags.Items
             Item.height = 26;
 			Item.ammo = Type;
 		}
-        public override void AddRecipes() {
+		public override int GetBagType() => ModContent.ItemType<FishingBelt>();
+		public override void AddRecipes() {
 			if (!VacuumBags.serverConfig.HarderBagRecipes) {
 				CreateRecipe()
 				.AddTile(TileID.Loom)
@@ -51,32 +61,11 @@ namespace VacuumBags.Items
 				.Register();
 			}
 		}
-
-		public static int BagStorageID;//Set this when registering with androLib.
-		new public static Color PanelColor => new Color(38, 38, 67, androLib.Common.Configs.ConfigValues.UIAlpha);
-		new public static Color ScrollBarColor => new Color(46, 31, 18, androLib.Common.Configs.ConfigValues.UIAlpha);
-		new public static Color ButtonHoverColor => new Color(92, 122, 173, androLib.Common.Configs.ConfigValues.UIAlpha);
-		protected static int DefaultBagSize => 100;
-		public static void RegisterWithAndroLib(Mod mod) {
-			BagStorageID = StorageManager.RegisterVacuumStorageClass(
-				mod,//Mod
-				typeof(FishingBelt),//type 
-				ItemAllowedToBeStored,//Is allowed function, Func<Item, bool>
-				null,//Localization Key name.  Attempts to determine automatically by treating the type as a ModItem, or you can specify.
-				-DefaultBagSize,//StorageSize
-				true,//Can vacuum
-				() => PanelColor, // Get color function. Func<using Microsoft.Xna.Framework.Color>
-				() => ScrollBarColor, // Get Scroll bar color function. Func<using Microsoft.Xna.Framework.Color>
-				() => ButtonHoverColor, // Get Button hover color function. Func<using Microsoft.Xna.Framework.Color>
-				() => ModContent.ItemType<FishingBelt>(),//Get ModItem type
-				80,//UI Left
-				675,//UI Top
-				UpdateAllowedList,
-				false,
-				() => typeof(Player).GetMethod("Fishing_GetBait", BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(Main.LocalPlayer, new object[] { null }),
-				true//Update info accessories in bag
-			);
-		}
+		public override Color PanelColor => new Color(38, 38, 67, androLib.Common.Configs.ConfigValues.UIAlpha);
+		public override Color ScrollBarColor => new Color(46, 31, 18, androLib.Common.Configs.ConfigValues.UIAlpha);
+		public override Color ButtonHoverColor => new Color(92, 122, 173, androLib.Common.Configs.ConfigValues.UIAlpha);
+		protected override Action SelectItemForUIOnly => () => typeof(Player).GetMethod("Fishing_GetBait", BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(Main.LocalPlayer, new object[] { null });
+		protected override bool ShouldUpdateInfoAccessories => true;
 
 		internal static void OnFishing_GetBait(On_Player.orig_Fishing_GetBait orig, Player self, out Item bait) {
 			orig(self, out bait);
@@ -89,7 +78,7 @@ namespace VacuumBags.Items
 			return ChooseFromBagOnlyIfFirstInInventory(
 				vanillaBait,
 				player,
-				BagStorageID,
+				Instance.BagStorageID,
 				(Item item) => item.bait > 0
 			);
 		}
@@ -112,7 +101,7 @@ namespace VacuumBags.Items
 			c.Emit(OpCodes.Ldloca, 0);
 			c.Emit(OpCodes.Ldarg_0);
 
-			c.EmitDelegate((int loadedInventoryIndex , ref int inventoryIndex, Player player) => {
+			c.EmitDelegate((int loadedInventoryIndex, ref int inventoryIndex, Player player) => {
 				chosenBaitToConsume = null;
 				Item vanillaBait = inventoryIndex >= 0 ? player.inventory[inventoryIndex] : null;
 				Item bait = GetBaitFromBag(vanillaBait, player);
@@ -192,24 +181,54 @@ namespace VacuumBags.Items
 				return player.GetItem(owner, item, settings);
 			});
 		}
+		internal static void OnGUIChatDrawInner(ILContext il) {
+			var c = new ILCursor(il);
+
+			//IL_16d3: ldloc.s 48
+			//IL_16d5: ldc.i4.m1
+
+			if (!c.TryGotoNext(MoveType.Before,
+				i => i.MatchLdloc(52),
+				i => i.MatchLdcI4(-1)
+			)) { throw new Exception("Failed to find instructions OnGUIChatDrawInner 1/1"); }
+
+			c.Emit(OpCodes.Ldloc, 52);
+			c.Emit(OpCodes.Ldloca, 51);
+
+			c.EmitDelegate((int foundQuestFishIndex, ref bool questCompleted) => {
+				if (foundQuestFishIndex >= 0)
+					return;
+
+				int questFish = Main.anglerQuestItemNetIDs[Main.anglerQuest];
+				Item[] inv = StorageManager.GetItems(Instance.BagStorageID);
+				Item foundItem = null;
+				for (int i = 0; i < inv.Length; i++) {
+					if (inv[i].netID == questFish) {
+						foundItem = inv[i];
+						break;
+					}
+				}
+
+				if (foundItem == null)
+					return;
+
+				foundItem.stack--;
+				if (foundItem.stack <= 0)
+					foundItem.TurnToAir();
+
+				questCompleted = true;
+
+				SoundEngine.PlaySound(SoundID.Chat);
+
+				Player player = Main.LocalPlayer;
+				player.anglerQuestsFinished++;
+				player.GetAnglerReward(Main.npc[player.talkNPC], Main.anglerQuestItemNetIDs[Main.anglerQuest]);
+			});
+		}
 
 		#region AllowedItems
 
-		public static bool ItemAllowedToBeStored(Item item) => AllowedItems.Contains(item.type);
-
-
-		private static void UpdateAllowedList(int item, bool add) {
-			if (add) {
-				AllowedItems.Add(item);
-			}
-			else {
-				AllowedItems.Remove(item);
-			}
-		}
-		public static SortedSet<int> AllowedItems => AllowedItemsManager.AllowedItems;
-		public static AllowedItemsManager AllowedItemsManager = new(ModContent.ItemType<FishingBelt>, () => BagStorageID, DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
-		public AllowedItemsManager GetAllowedItemsManager => AllowedItemsManager;
-		protected static bool? DevCheck(ItemSetInfo info, SortedSet<ItemGroup> itemGroups, SortedSet<string> endWords, SortedSet<string> searchWords) {
+		public override bool? DevCheck(ItemSetInfo info, SortedSet<ItemGroup> itemGroups, SortedSet<string> endWords, SortedSet<string> searchWords) {
 			if (ItemID.Sets.CanFishInLava[info.Type]
 				|| ItemID.Sets.IsLavaBait[info.Type]
 				|| ItemID.Sets.IsFishingCrate[info.Type]
@@ -219,7 +238,7 @@ namespace VacuumBags.Items
 
 			return null;
 		}
-		protected static SortedSet<int> DevWhiteList() {
+		public override SortedSet<int> DevWhiteList() {
 			SortedSet<int> devWhiteList = new() {
 				ItemID.FishBowl,
 				ItemID.Fish,
@@ -334,14 +353,7 @@ namespace VacuumBags.Items
 
 			return devWhiteList;
 		}
-		protected static SortedSet<string> DevModWhiteList() {
-			SortedSet<string> devModWhiteList = new() {
-
-			};
-
-			return devModWhiteList;
-		}
-		protected static SortedSet<int> DevBlackList() {
+		public override SortedSet<int> DevBlackList() {
 			SortedSet<int> devBlackList = new() {
 				ItemID.FishingPotion,
 				ItemID.Rockfish
@@ -349,14 +361,7 @@ namespace VacuumBags.Items
 
 			return devBlackList;
 		}
-		protected static SortedSet<string> DevModBlackList() {
-			SortedSet<string> devModBlackList = new() {
-
-			};
-
-			return devModBlackList;
-		}
-		protected static SortedSet<ItemGroup> ItemGroups() {
+		public override SortedSet<ItemGroup> ItemGroups() {
 			SortedSet<ItemGroup> itemGroups = new() {
 				ItemGroup.Fish,
 				ItemGroup.FishingBait,
@@ -366,15 +371,7 @@ namespace VacuumBags.Items
 
 			return itemGroups;
 		}
-		protected static SortedSet<string> EndWords() {
-			SortedSet<string> endWords = new() {
-
-			};
-
-			return endWords;
-		}
-
-		protected static SortedSet<string> SearchWords() {
+		public override SortedSet<string> SearchWords() {
 			SortedSet<string> searchWords = new() {
 				"fishingbobber"
 			};

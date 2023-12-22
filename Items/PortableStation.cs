@@ -18,8 +18,16 @@ using Mono.Cecil.Cil;
 namespace VacuumBags.Items
 {
     [Autoload(false)]
-	public  class PortableStation : BagModItem, INeedsSetUpAllowedList
-	{
+	public  class PortableStation : AllowedListBagModItem_VB {
+		public static BagModItem Instance {
+			get {
+				if (instance == null)
+					instance = new PortableStation();
+
+				return instance;
+			}
+		}
+		private static BagModItem instance;
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {
             Item.maxStack = 1;
@@ -34,7 +42,8 @@ namespace VacuumBags.Items
 			Item.useAnimation = 15;
 			Item.useTurn = true;
 		}
-        public override void AddRecipes() {
+		public override int GetBagType() => ModContent.ItemType<PortableStation>();
+		public override void AddRecipes() {
 			if (!VacuumBags.serverConfig.HarderBagRecipes) {
 				CreateRecipe()
 				.AddRecipeGroup($"{AndroMod.ModName}:{AndroModSystem.Workbenches}", 1)
@@ -51,37 +60,15 @@ namespace VacuumBags.Items
 				.Register();
 			}
 		}
-
-		public static int BagStorageID;//Set this when registering with androLib.
-		public static void CloseBag() => StorageManager.CloseBag(BagStorageID);
-		new public static Color PanelColor => new Color(127, 92, 69, androLib.Common.Configs.ConfigValues.UIAlpha);
-		new public static Color ScrollBarColor => new Color(30, 40, 102, androLib.Common.Configs.ConfigValues.UIAlpha);
-		new public static Color ButtonHoverColor => new Color(160, 110, 80, androLib.Common.Configs.ConfigValues.UIAlpha);
-		protected static int DefaultBagSize => 100;
-		public static void RegisterWithAndroLib(Mod mod) {
-			BagStorageID = StorageManager.RegisterVacuumStorageClass(
-				mod,//Mod
-				typeof(PortableStation),//type 
-				ItemAllowedToBeStored,//Is allowed function, Func<Item, bool>
-				null,//Localization Key name.  Attempts to determine automatically by treating the type as a ModItem, or you can specify.
-				-DefaultBagSize,//StorageSize
-				true,//Can vacuum
-				() => PanelColor, // Get color function. Func<using Microsoft.Xna.Framework.Color>
-				() => ScrollBarColor, // Get Scroll bar color function. Func<using Microsoft.Xna.Framework.Color>
-				() => ButtonHoverColor, // Get Button hover color function. Func<using Microsoft.Xna.Framework.Color>
-				() => ModContent.ItemType<PortableStation>(),//Get ModItem type
-				80,//UI Left
-				675,//UI Top
-				UpdateAllowedList,
-				false,
-				() => UpdateAllSelectedFromBag(Main.SceneMetrics)
-			);
-		}
-		public static bool ItemAllowedToBeStored(Item item) => AllowedItems.Contains(item.type);
+		public override Color PanelColor => new Color(127, 92, 69, androLib.Common.Configs.ConfigValues.UIAlpha);
+		public override Color ScrollBarColor => new Color(30, 40, 102, androLib.Common.Configs.ConfigValues.UIAlpha);
+		public override Color ButtonHoverColor => new Color(160, 110, 80, androLib.Common.Configs.ConfigValues.UIAlpha);
+		protected override Action SelectItemForUIOnly => () => UpdateAllSelectedFromBag(Main.SceneMetrics);
+		
 		public static void UpdateAllSelectedFromBag(SceneMetrics sceneMetrics) {
 			Player player = Main.LocalPlayer;
-			Item[] items = StorageManager.GetItems(BagStorageID);
-			BagUI bagUI = StorageManager.BagUIs[BagStorageID];
+			Item[] items = StorageManager.GetItems(Instance.BagStorageID);
+			BagUI bagUI = StorageManager.BagUIs[Instance.BagStorageID];
 			for (int i = 0; i < items.Length; i++) {
 				Item item = items[i];
 				if (item.NullOrAir())
@@ -113,7 +100,7 @@ namespace VacuumBags.Items
 		}
 		public static IEnumerable<Item> GetStations(Player player, int firstXBanners) {
 			return GetFirstXFromBag(
-				BagStorageID,
+				Instance.BagStorageID,
 				(Item item) => item.IsRequiredTile() && item.createTile < player.adjTile.Length,
 				player, firstXBanners);
 		}
@@ -181,7 +168,7 @@ namespace VacuumBags.Items
 		}
 		public static IEnumerable<Item> GetPassiveBuffsStations(SceneMetrics sceneMetrics, Player player, int firstXBuffs) {
 			return GetFirstXFromBag(
-				BagStorageID,
+				Instance.BagStorageID,
 				(Item item) => {
 					if (!item.IsPassiveBuffTile())
 						return false;
@@ -244,7 +231,7 @@ namespace VacuumBags.Items
 
 			Player player = Main.LocalPlayer;
 			IEnumerable<Item> activeBuffStationItems = GetAllFromBag(
-				BagStorageID,
+				Instance.BagStorageID,
 				ItemSets.IsActiveBuffTile,
 				player,
 				ItemSlotContextID.BrightGreenSelected
@@ -263,18 +250,7 @@ namespace VacuumBags.Items
 		#endregion
 
 
-		private static void UpdateAllowedList(int item, bool add) {
-			if (add) {
-				AllowedItems.Add(item);
-			}
-			else {
-				AllowedItems.Remove(item);
-			}
-		}
-		public static SortedSet<int> AllowedItems => AllowedItemsManager.AllowedItems;
-		public static AllowedItemsManager AllowedItemsManager = new(ModContent.ItemType<PortableStation>, () => BagStorageID, DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
-		public AllowedItemsManager GetAllowedItemsManager => AllowedItemsManager;
-		protected static bool? DevCheck(ItemSetInfo info, SortedSet<ItemGroup> itemGroups, SortedSet<string> endWords, SortedSet<string> searchWords) {
+		public override bool? DevCheck(ItemSetInfo info, SortedSet<ItemGroup> itemGroups, SortedSet<string> endWords, SortedSet<string> searchWords) {
 			if (info.Equipment)
 				return false;
 
@@ -283,7 +259,7 @@ namespace VacuumBags.Items
 
 			return null;
 		}
-		protected static SortedSet<int> DevWhiteList() {
+		public override SortedSet<int> DevWhiteList() {
 			SortedSet<int> devWhiteList = new() {
 				ItemID.Furnace,
 				ItemID.IronAnvil,
@@ -330,35 +306,14 @@ namespace VacuumBags.Items
 
 			return devWhiteList;
 		}
-		protected static SortedSet<string> DevModWhiteList() {
-			SortedSet<string> devModWhiteList = new() {
-
-			};
-
-			return devModWhiteList;
-		}
-		protected static SortedSet<int> DevBlackList() {
-			SortedSet<int> devBlackList = new() {
-
-			};
-
-			return devBlackList;
-		}
-		protected static SortedSet<string> DevModBlackList() {
-			SortedSet<string> devModBlackList = new() {
-
-			};
-
-			return devModBlackList;
-		}
-		protected static SortedSet<ItemGroup> ItemGroups() {
+		public override SortedSet<ItemGroup> ItemGroups() {
 			SortedSet<ItemGroup> itemGroups = new() {
 				ItemGroup.CraftingObjects
 			};
 
 			return itemGroups;
 		}
-		protected static SortedSet<string> EndWords() {
+		public override SortedSet<string> EndWords() {
 			SortedSet<string> endWords = new() {
 				"campfire"
 			};
@@ -366,7 +321,7 @@ namespace VacuumBags.Items
 			return endWords;
 		}
 
-		protected static SortedSet<string> SearchWords() {
+		public override SortedSet<string> SearchWords() {
 			SortedSet<string> searchWords = new() {
 				"anvil",
 				"furnace",

@@ -1,0 +1,30 @@
+<div style="float:right">
+{{Item Infobox
+| name     = Herb Satchel
+
+| image   = [[File:HerbSatchel.png]]
+| artist  =   (art by [https://instagram.com/anodomani?utm_source=qr&igshid=MzNlNGNkZWQ4Mg%3D%3D anodomani])
+| type    = [https://terraria.fandom.com/wiki/Storage_items Storage]
+| tooltip = <i>'Automatically stores seeds, herbs, flowers, etc.<br/>When in your inventory, the contents of the bag are available for crafting.<br/>Right click to open the bag.'</i>
+| rarity  = <b><span style="color:rgb(150, 150, 255);">Blue</span></b>
+| buy      = 
+| sell    = <span>2</span>https://static.wikia.nocookie.net/terraria_gamepedia/images/1/1f/Gold_Coin.png/revision/latest?cb=20200516213029&format=original
+
+| research = 1 required
+}}
+
+</div>
+[[|Main Page]]<br/>
+<br/>
+=== Crafting ===
+{| class="mw-collapsible wikitable"
+|+ Recipes
+! Result
+! Ingredients
+! Crafting station
+|-
+| [[File:HerbSatchel.png]] [[Herb Satchel]]<br/>
+| https://static.wikia.nocookie.net/terraria_gamepedia/images/3/3d/Leather.png/revision/latest?cb=20200516214635&format=original [https://terraria.fandom.com/wiki/Leather Leather] (2)<br/>https://static.wikia.nocookie.net/terraria_gamepedia/images/e/ef/Grass_Seeds.png/revision/latest?cb=20200516213524&format=original [https://terraria.fandom.com/wiki/Grass_Seeds Grass Seeds] (3)<br/>https://static.wikia.nocookie.net/terraria_gamepedia/images/4/41/Daybloom_Seeds.png/revision/latest?cb=20200516211139&format=original [https://terraria.fandom.com/wiki/Daybloom_Seeds Daybloom Seeds] (3)<br/>https://static.wikia.nocookie.net/terraria_gamepedia/images/4/46/Moonglow_Seeds.png/revision/latest?cb=20200516215434&format=original [https://terraria.fandom.com/wiki/Moonglow_Seeds Moonglow Seeds] (3)<br/>
+| https://static.wikia.nocookie.net/terraria_gamepedia/images/d/d5/Any_Work_Bench.gif/revision/latest?cb=20200627022728&format=original [https://terraria.fandom.com/wiki/Work_Bench Work Bench]<br/>
+|}
+

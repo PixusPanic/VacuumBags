@@ -14,58 +14,27 @@ namespace VacuumBags.Items
 {
 	[Autoload(false)]
 	public class BagWhite : SimpleBag {
-		new public static int BagStorageID;
-		public override int MyTileType => ModContent.TileType<Tiles.BagWhite>();
-		public static void CloseBag() => StorageManager.CloseBag(BagStorageID);
-		new public static SortedSet<int> Blacklist {
+		public static BagModItem Instance {
 			get {
-				if (blacklist == null) {
-					blacklist = new() {
-						ModContent.ItemType<BagWhite>(),
-						ModContent.ItemType<PackWhite>(),
-					};
+				if (instance == null)
+					instance = new BagWhite();
 
-					blacklist.UnionWith(StorageManager.GetPlayerBlackListSortedSet(BagStorageID));
-				}
-
-				return blacklist;
+				return instance;
 			}
 		}
-		private static SortedSet<int> blacklist = null;
-		public static SortedSet<int> VacuumWhitelist = new();
-		private static bool CanVacuumItem(Item item) => VacuumWhitelist.Contains(item.type);
-		private static void UpdateAllowedList(int item, bool add) {
-			if (add) {
-				VacuumWhitelist.Add(item);
-				Blacklist.Remove(item);
-			}
-			else {
-				VacuumWhitelist.Remove(item);
-				Blacklist.Add(item);
-			}
+		private static BagModItem instance;
+		public override int GetBagType() => ModContent.ItemType<BagWhite>();
+		public override int MyTileType => ModContent.TileType<Tiles.BagWhite>();
+		protected override SortedSet<int> GetDefaultBlacklist() {
+			return new() {
+				ModContent.ItemType<BagWhite>(),
+				ModContent.ItemType<PackWhite>(),
+			};
 		}
 
-		public static bool ItemAllowedToBeStored(Item item) => !Blacklist.Contains(item.type);
-		new public static Color PanelColor => new Color(255, 255, 255, androLib.Common.Configs.ConfigValues.UIAlpha);
-		new public static void RegisterWithAndroLib(Mod mod) {
-			BagStorageID = StorageManager.RegisterVacuumStorageClass(
-				mod,//Mod
-				typeof(BagWhite),//type 
-				ItemAllowedToBeStored,//Is allowed function, Func<Item, bool>
-				null,//Localization Key name.  Attempts to determine automatically by treating the type as a ModItem, or you can specify.
-				BagSize,//StorageSize
-				IsVacuumBag,//Can vacuum
-				() => PanelColor, // Get color function. Func<using Microsoft.Xna.Framework.Color>
-				() => new Color(245, 245, 245, androLib.Common.Configs.ConfigValues.UIAlpha), // Get Scroll bar color function. Func<using Microsoft.Xna.Framework.Color>
-				() => new Color(240, 240, 240, androLib.Common.Configs.ConfigValues.UIAlpha), // Get Button hover color function. Func<using Microsoft.Xna.Framework.Color>
-				() => ModContent.ItemType<BagWhite>(),//Get ModItem type
-				80,//UI Left
-				675,//UI Top
-				UpdateAllowedList,
-				false,
-				canVacuumItem: CanVacuumItem
-			);
-		}
+		public override Color PanelColor => new Color(255, 255, 255, androLib.Common.Configs.ConfigValues.UIAlpha);
+		public override Color ScrollBarColor => new Color(245, 245, 245, androLib.Common.Configs.ConfigValues.UIAlpha);
+		public override Color ButtonHoverColor => new Color(240, 240, 240, androLib.Common.Configs.ConfigValues.UIAlpha);
 		public override void AddRecipes() {
 			if (!VacuumBags.serverConfig.HarderBagRecipes) {
 				CreateRecipe()

@@ -17,8 +17,16 @@ using Mono.Cecil.Cil;
 namespace VacuumBags.Items
 {
     [Autoload(false)]
-	public  class SlayersSack : BagModItem, INeedsSetUpAllowedList
-	{
+	public  class SlayersSack : AllowedListBagModItem_VB {
+		public static BagModItem Instance {
+			get {
+				if (instance == null)
+					instance = new SlayersSack();
+
+				return instance;
+			}
+		}
+		private static BagModItem instance;
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {
             Item.maxStack = 1;
@@ -30,7 +38,8 @@ namespace VacuumBags.Items
 			Item.useStyle = 1;
 			Item.holdStyle = 1;
 		}
-        public override void AddRecipes() {
+		public override int GetBagType() => ModContent.ItemType<SlayersSack>();
+		public override void AddRecipes() {
 			if (!VacuumBags.serverConfig.HarderBagRecipes) {
 				CreateRecipe()
 				.AddIngredient(ItemID.Silk, 4)
@@ -44,53 +53,72 @@ namespace VacuumBags.Items
 				.Register();
 			}
 		}
+		public override Color PanelColor => new Color(167, 162, 164, androLib.Common.Configs.ConfigValues.UIAlpha);
+		public override Color ScrollBarColor => new Color(65, 0, 0, androLib.Common.Configs.ConfigValues.UIAlpha);
+		public override Color ButtonHoverColor => new Color(255, 248, 252, androLib.Common.Configs.ConfigValues.UIAlpha);
 
-		public static int BagStorageID;//Set this when registering with androLib.
-		protected static int DefaultBagSize => 100;
-
-		public static void RegisterWithAndroLib(Mod mod) {
-			BagStorageID = StorageManager.RegisterVacuumStorageClass(
-				mod,//Mod
-				typeof(SlayersSack),//type 
-				ItemAllowedToBeStored,//Is allowed function, Func<Item, bool>
-				null,//Localization Key name.  Attempts to determine automatically by treating the type as a ModItem, or you can specify.
-				-DefaultBagSize,//StorageSize
-				true,//Can vacuum
-				() => new Color(167, 162, 164, androLib.Common.Configs.ConfigValues.UIAlpha),    // Get color function. Func<using Microsoft.Xna.Framework.Color>
-				() => new Color(65, 0, 0, androLib.Common.Configs.ConfigValues.UIAlpha),    // Get Scroll bar color function. Func<using Microsoft.Xna.Framework.Color>
-				() => new Color(255, 248, 252, androLib.Common.Configs.ConfigValues.UIAlpha),    // Get Button hover color function. Func<using Microsoft.Xna.Framework.Color>
-				() => ModContent.ItemType<SlayersSack>(),//Get ModItem type
-				80,//UI Left
-				675,//UI Top
-				UpdateAllowedList,
-				false
-			);
-		}
-		public static bool ItemAllowedToBeStored(Item item) => AllowedItems.Contains(item.type);
-		public static Item ChooseRopeFromSack(Player player) => ChooseFromBag(BagStorageID, ItemSets.IsRope, player);
+		public static Item ChooseRopeFromSack(Player player) => ChooseFromBag(Instance.BagStorageID, ItemSets.IsRope, player);
 		public static Item ChooseTorchFromSack(Player player, Func<Item, bool> torchCondition) {
 			Item heldItem = torchCondition(player.HeldItem) ? player.HeldItem : null;
 			return ChooseFromBagOnlyIfFirstInInventory(
 				heldItem, 
 				player,
-				BagStorageID,
+				Instance.BagStorageID,
 				torchCondition
 			);
 		}
+		internal static void OnTileInteractionsUse(ILContext il) {
+			var c = new ILCursor(il);
 
+			//IL_2532: ldloc.s 102
+			//IL_2534: brtrue.s IL_2541
 
-		private static void UpdateAllowedList(int item, bool add) {
-			if (add) {
-				AllowedItems.Add(item);
-			}
-			else {
-				AllowedItems.Remove(item);
-			}
+			if (!c.TryGotoNext(MoveType.Before,
+				i => i.MatchLdloc(100),
+				i => i.MatchBrtrue(out _)
+			)) { throw new Exception("Failed to find instructions OnGUIChatDrawInner 1/2"); }
+
+			if (!c.TryGotoNext(MoveType.Before,
+				i => i.MatchBrtrue(out _)
+			)) { throw new Exception("Failed to find instructions OnGUIChatDrawInner 2/2"); }
+
+			c.Emit(OpCodes.Ldloc, 100);
+			c.Emit(OpCodes.Ldloc, 96);
+			c.Emit(OpCodes.Ldloc, 97);
+			c.Emit(OpCodes.Ldloc, 102);
+			c.Emit(OpCodes.Ldarg_0);
+
+			c.EmitDelegate((bool flag14, int num69, int num70, int num72, Player player) => {
+				if (!flag14 || !Chest.IsLocked(num69, num70))
+					return;
+
+				Item[] inv = StorageManager.GetItems(Instance.BagStorageID);
+				Item foundItem = null;
+				for (int i = 0; i < inv.Length; i++) {
+					if (inv[i].netID == num72) {
+						foundItem = inv[i];
+						break;
+					}
+				}
+
+				if (foundItem == null || foundItem.stack <= 0 || !Chest.Unlock(num69, num70))
+					return;
+
+				bool consumable = num72 != ItemID.ShadowKey;
+				if (consumable) {
+					if (ItemLoader.ConsumeItem(foundItem, player))
+						foundItem.stack--;
+
+					if (foundItem.stack <= 0)
+						foundItem.TurnToAir();
+				}
+
+				if (Main.netMode == NetmodeID.MultiplayerClient)
+					NetMessage.SendData(MessageID.LockAndUnlock, -1, -1, null, player.whoAmI, 1f, num69, num70);
+			});
 		}
-		public static SortedSet<int> AllowedItems => AllowedItemsManager.AllowedItems;
-		public static AllowedItemsManager AllowedItemsManager = new(ModContent.ItemType<SlayersSack>, () => BagStorageID, DevCheck, DevWhiteList, DevModWhiteList, DevBlackList, DevModBlackList, ItemGroups, EndWords, SearchWords);
-		public AllowedItemsManager GetAllowedItemsManager => AllowedItemsManager;
-		protected static bool? DevCheck(ItemSetInfo info, SortedSet<ItemGroup> itemGroups, SortedSet<string> endWords, SortedSet<string> searchWords) {
+
+		public override bool? DevCheck(ItemSetInfo info, SortedSet<ItemGroup> itemGroups, SortedSet<string> endWords, SortedSet<string> searchWords) {
 			if (info.Rope || info.Torch || info.WaterTorch || info.Glowstick || info.FlairGun)
 				return true;
 
@@ -102,11 +130,11 @@ namespace VacuumBags.Items
 
 			return null;
 		}
-		protected static SortedSet<int> enemyDropItems = null;
-		public void PostSetup() {
+		private static SortedSet<int> enemyDropItems = null;
+		public override void PostSetup() {
 			enemyDropItems = null;
 		}
-		protected static SortedSet<int> DevWhiteList() {
+		public override SortedSet<int> DevWhiteList() {
 			SortedSet<int> devWhiteList = new() {
 				ItemID.Torch,
 				ItemID.Lens,
@@ -284,14 +312,7 @@ namespace VacuumBags.Items
 
 			return devWhiteList;
 		}
-		protected static SortedSet<string> DevModWhiteList() {
-			SortedSet<string> devModWhiteList = new() {
-
-			};
-
-			return devModWhiteList;
-		}
-		protected static SortedSet<int> DevBlackList() {
+		public override SortedSet<int> DevBlackList() {
 			SortedSet<int> devBlackList = new() {
 				ItemID.TikiTorch,
 				ItemID.Vine,
@@ -300,14 +321,7 @@ namespace VacuumBags.Items
 
 			return devBlackList;
 		}
-		protected static SortedSet<string> DevModBlackList() {
-			SortedSet<string> devModBlackList = new() {
-
-			};
-
-			return devModBlackList;
-		}
-		protected static SortedSet<ItemGroup> ItemGroups() {
+		public override SortedSet<ItemGroup> ItemGroups() {
 			SortedSet<ItemGroup> itemGroups = new() {
 				ItemGroup.GoodieBags,
 				ItemGroup.Critters,
@@ -316,15 +330,14 @@ namespace VacuumBags.Items
 			
 			return itemGroups;
 		}
-		protected static SortedSet<string> EndWords() {
+		public override SortedSet<string> EndWords() {
 			SortedSet<string> endWords = new() {
 				"present"
 			};
 
 			return endWords;
 		}
-
-		protected static SortedSet<string> SearchWords() {
+		public override SortedSet<string> SearchWords() {
 			SortedSet<string> searchWords = new() {
 				"soulof",
 			};

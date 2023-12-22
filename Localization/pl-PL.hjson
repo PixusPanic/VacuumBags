@@ -413,6 +413,16 @@ Mods: {
 					'''
 			}
 
+			HoiPoiCapsule: {
+				DisplayName: Kapsuła Hoi Poi
+				Tooltip:
+					'''
+					Automatycznie przechowuje przedmioty z Dragon Ball Terraria.
+					Gdy znajdziesz się w ekwipunku, zawartość torby będzie dostępna do wytworzenia.
+					Kliknij prawym przyciskiem myszy, aby otworzyć torbę.
+					'''
+			}
+
 			JarOfDirt: {
 				DisplayName: Słoik ziemi
 				Tooltip:

@@ -413,6 +413,16 @@ Mods: {
 					'''
 			}
 
+			HoiPoiCapsule: {
+				DisplayName: Capsule Hôi-Poi
+				Tooltip:
+					'''
+					Stocke automatiquement les éléments de Dragon Ball Terraria.
+					Une fois dans votre inventaire, le contenu du sac est disponible pour la fabrication.
+					Faites un clic droit pour ouvrir le sac.
+					'''
+			}
+
 			JarOfDirt: {
 				DisplayName: Pot de terre
 				Tooltip:

@@ -1,0 +1,44 @@
+<div style="float:right">
+{{Item Infobox
+| name     = Bag (Brown)
+
+| image   = [[File:BagBrown.png]]
+| artist  =   (art by @kingjoshington)
+| type    = [https://terraria.fandom.com/wiki/Storage_items Storage]
+| tooltip = <i>'Automatically stores items already contained in the bag.<br/>When in your inventory, the contents of the bag are available for crafting.<br/>Right click to open the bag.'</i>
+| rarity  = <b><span style="color:rgb(150, 150, 255);">Blue</span></b>
+| buy      = 
+| sell    = <span>2</span>https://static.wikia.nocookie.net/terraria_gamepedia/images/1/1f/Gold_Coin.png/revision/latest?cb=20200516213029&format=original
+
+| research = 1 required
+}}
+
+</div>
+[[|Main Page]]<br/>
+<br/>
+=== Crafting ===
+{| class="mw-collapsible wikitable"
+|+ Recipes
+! Result
+! Ingredients
+! Crafting station
+|-
+| rowspan="2" | [[File:BagBrown.png]] [[Bag Brown]]<br/>
+| [[File:PackBrown.png]] [[Pack Brown]]<br/>
+| https://static.wikia.nocookie.net/terraria_gamepedia/images/3/3b/Loom.png/revision/latest?cb=20200516214936&format=original [https://terraria.fandom.com/wiki/Loom Loom]<br/>
+|-
+| https://static.wikia.nocookie.net/terraria_gamepedia/images/8/83/Silk.png/revision/latest?cb=20200820022839&format=original [https://terraria.fandom.com/wiki/Silk Silk] (2)<br/>https://static.wikia.nocookie.net/terraria_gamepedia/images/3/3d/Leather.png/revision/latest?cb=20200516214635&format=original [https://terraria.fandom.com/wiki/Leather Leather] (5)<br/>https://static.wikia.nocookie.net/terraria_gamepedia/images/3/3e/White_String.png/revision/latest?cb=20200516223540&format=original [https://terraria.fandom.com/wiki/White_String White String]<br/>
+| https://static.wikia.nocookie.net/terraria_gamepedia/images/d/d5/Any_Work_Bench.gif/revision/latest?cb=20200627022728&format=original [https://terraria.fandom.com/wiki/Work_Bench Work Bench]<br/>
+|}
+
+{| class="mw-collapsible wikitable"
+|+ Used in
+! Result
+! Ingredients
+! Crafting station
+|-
+| [[File:PackBrown.png]] [[Pack Brown]]<br/>
+| [[File:BagBrown.png]] [[Bag Brown]]<br/>
+| https://static.wikia.nocookie.net/terraria_gamepedia/images/3/3b/Loom.png/revision/latest?cb=20200516214936&format=original [https://terraria.fandom.com/wiki/Loom Loom]<br/>
+|}
+

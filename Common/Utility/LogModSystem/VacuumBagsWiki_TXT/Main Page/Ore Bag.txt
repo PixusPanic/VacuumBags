@@ -1,0 +1,30 @@
+<div style="float:right">
+{{Item Infobox
+| name     = Ore Bag
+
+| image   = [[File:OreBag.png]]
+| artist  =   (art by [https://instagram.com/anodomani?utm_source=qr&igshid=MzNlNGNkZWQ4Mg%3D%3D anodomani])
+| type    = [https://terraria.fandom.com/wiki/Storage_items Storage]
+| tooltip = <i>''</i>
+| rarity  = <b><span style="color:rgb(150, 150, 255);">Blue</span></b>
+| buy      = <span>10</span>https://static.wikia.nocookie.net/terraria_gamepedia/images/1/1f/Gold_Coin.png/revision/latest?cb=20200516213029&format=original
+| sell    = <span>2</span>https://static.wikia.nocookie.net/terraria_gamepedia/images/1/1f/Gold_Coin.png/revision/latest?cb=20200516213029&format=original
+
+| research = 1 required
+}}
+
+</div>
+[[|Main Page]]<br/>
+<br/>
+=== Crafting ===
+{| class="mw-collapsible wikitable"
+|+ Recipes
+! Result
+! Ingredients
+! Crafting station
+|-
+| [[File:OreBag.png]] [[Ore Bag]]<br/>
+| https://static.wikia.nocookie.net/terraria_gamepedia/images/5/52/Tattered_Cloth.png/revision/latest?cb=20200516222738&format=original [https://terraria.fandom.com/wiki/Tattered_Cloth Tattered Cloth]<br/>https://static.wikia.nocookie.net/terraria_gamepedia/images/3/3e/White_String.png/revision/latest?cb=20200516223540&format=original [https://terraria.fandom.com/wiki/White_String White String]<br/>
+| https://static.wikia.nocookie.net/terraria_gamepedia/images/d/d5/Any_Work_Bench.gif/revision/latest?cb=20200627022728&format=original [https://terraria.fandom.com/wiki/Work_Bench Work Bench]<br/>
+|}
+

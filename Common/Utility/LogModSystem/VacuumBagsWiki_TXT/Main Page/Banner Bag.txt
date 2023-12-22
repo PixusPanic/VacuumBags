@@ -1,0 +1,30 @@
+<div style="float:right">
+{{Item Infobox
+| name     = Banner Bag
+
+| image   = [[File:BannerBag.png]]
+| artist  =   (art by @kingjoshington)
+| type    = [https://terraria.fandom.com/wiki/Storage_items Storage]
+| tooltip = <i>'Automatically stores banners.<br/>When in your inventory, the contents of the bag are available for crafting.<br/>Right click to open the bag.<br/>The bag provides up to 3 banner effects by default when in your inventory.<br/>When placed, it provides all of your banner effects by default, but in the normal banner range.  Each banner bag shares it's inventory.<br/>When selecting banner buffs to give you, banners will be ignored if you already have them nearby.<br/>The background of banners is yellow when there buff is being granted by the banner bag.<br/>The background is purple if you already have the banner buff from another source.'</i>
+| rarity  = <b><span style="color:rgb(150, 150, 255);">Blue</span></b>
+| buy      = 
+| sell    = <span>2</span>https://static.wikia.nocookie.net/terraria_gamepedia/images/1/1f/Gold_Coin.png/revision/latest?cb=20200516213029&format=original
+
+| research = 1 required
+}}
+
+</div>
+[[|Main Page]]<br/>
+<br/>
+=== Crafting ===
+{| class="mw-collapsible wikitable"
+|+ Recipes
+! Result
+! Ingredients
+! Crafting station
+|-
+| [[File:BannerBag.png]] [[Banner Bag]]<br/>
+| https://static.wikia.nocookie.net/terraria_gamepedia/images/8/83/Silk.png/revision/latest?cb=20200820022839&format=original [https://terraria.fandom.com/wiki/Silk Silk] (5)<br/><br/>and<br/>https://static.wikia.nocookie.net/terraria_gamepedia/images/4/4e/Gold_Bar.png/revision/latest?cb=20200516213006&format=original [https://terraria.fandom.com/wiki/Gold_Bar Gold Bar] (2)<br/>or<br/>https://static.wikia.nocookie.net/terraria_gamepedia/images/d/d2/Platinum_Bar.png/revision/latest?cb=20200516220632&format=original [https://terraria.fandom.com/wiki/Platinum_Bar Platinum Bar] (2)<br/>and<br/>https://static.wikia.nocookie.net/terraria_gamepedia/images/9/9b/Green_Slime_Banner_%28placed%29.png/revision/latest?cb=20150705170028&format=original [https://terraria.fandom.com/wiki/Green_Slime_Banner Any Banner]
+| https://static.wikia.nocookie.net/terraria_gamepedia/images/3/3b/Loom.png/revision/latest?cb=20200516214936&format=original [https://terraria.fandom.com/wiki/Loom Loom]<br/>
+|}
+

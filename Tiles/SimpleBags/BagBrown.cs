@@ -14,19 +14,12 @@ using Terraria.ModLoader;
 using Terraria.ObjectData;
 using Microsoft.Xna.Framework;
 using androLib;
+using VacuumBags.Items;
 
 namespace VacuumBags.Tiles
 {
     public class BagBrown : SimpleBagTile
     {
-		public override Color MapColor => Items.BagBrown.PanelColor;
-
-		public override void KillMultiTile(int i, int j, int frameX, int frameY) {
-			if (Main.netMode == NetmodeID.Server)
-				return;
-
-			if (!StorageManager.HasRequiredItemToUseStorageFromBagType(Main.LocalPlayer, ModContent.ItemType<Items.BagBrown>(), out _))
-				Items.BagBrown.CloseBag();
-        }
-    }
+		protected override BagModItem ModBag => Items.BagBrown.Instance;
+	}
 }

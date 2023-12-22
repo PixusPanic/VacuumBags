@@ -413,6 +413,16 @@ Mods: {
 					'''
 			}
 
+			HoiPoiCapsule: {
+				DisplayName: Capsula Hoi-Poi
+				Tooltip:
+					'''
+					Memorizza automaticamente gli oggetti di Dragon Ball Terraria.
+					Quando sei nel tuo inventario, il contenuto della borsa è disponibile per la creazione.
+					Fare clic con il tasto destro per aprire la borsa.
+					'''
+			}
+
 			JarOfDirt: {
 				DisplayName: Vaso di terra
 				Tooltip:
