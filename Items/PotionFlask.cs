@@ -414,17 +414,19 @@ namespace VacuumBags.Items
 
 			orig(self, type, timeToAdd, quiet, foodHack);
 
-			if (!shouldCheckBuffs)
-				return;
+			//Fixes AlchemistNPC Alchemist Charm buff duration issue because it adds the same buff 3 times.
+			//Maybe add a check for AlchemistNPCLite here instead of removing it?
+			//if (!shouldCheckBuffs)
+			//	return;
 
-			if (!hasPotionFlask)
-				return;
+			//if (!hasPotionFlask)
+			//	return;
 
-			if (Buffs.TryGetValue(type, out BuffInfo info)) {
-				int buffIndex = self.FindBuffIndex(type);
-				if (buffIndex > -1)
-					info.CheckIndexTryCombineTime(self, inv, buffIndex);
-			}
+			//if (Buffs.TryGetValue(type, out BuffInfo info)) {
+			//	int buffIndex = self.FindBuffIndex(type);
+			//	if (buffIndex > -1)
+			//		info.CheckIndexTryCombineTime(self, inv, buffIndex);
+			//}
 		}
 		internal static void OnTryRemovingBuff(On_Main.orig_TryRemovingBuff orig, int i, int b) {
 			if (hasPotionFlask && Main.LocalPlayer.TryGetModPlayer(out StoragePlayer storagePlayer)) {
@@ -638,8 +640,9 @@ namespace VacuumBags.Items
 				lastHasItem = itemIndex >= 0;
 			}
 			public bool HasItem(Item[] inv) => 0 <= ItemIndex && ItemIndex < inv.Length && inv[ItemIndex].buffType == Type;
-			public void CheckUpdateFavoirtedAndPaused(Player player, Item[] inv) {
+			public void CheckUpdateFavoritedAndPaused(Player player, Item[] inv) {
 				bool hasItem = HasItem(inv);
+
 				bool favorited = hasItem && inv[ItemIndex].favorited;
 				if (hasItem) {
 					if (lastHasItem) {
@@ -654,8 +657,14 @@ namespace VacuumBags.Items
 						else {
 							if (!favorited) {
 								if (WasFavorited) {
-									Pause(inv);
-									RemoveBuff(player);
+									if (AndroModSystem.FavoriteKeyDown) {
+										Pause(inv);
+										RemoveBuff(player);
+									}
+									else {
+										//Manually clicking a new potion item that isn't favorited onto the existing favorited one unfavorites it and pauses the buff.
+										inv[ItemIndex].favorited = true;
+									}
 								}
 							}
 						}
@@ -685,7 +694,7 @@ namespace VacuumBags.Items
 				}
 			}
 			public bool TryGiveBuff(Player player, Item[] inv, int ticksToAdd) {
-				CheckUpdateFavoirtedAndPaused(player, inv);
+				CheckUpdateFavoritedAndPaused(player, inv);
 				if (Paused)
 					return true;
 
@@ -714,7 +723,7 @@ namespace VacuumBags.Items
 				return false;
 			}
 			public bool TryFindNextOpenAndGiveBuff(Player player, Item[] inv) {
-				CheckUpdateFavoirtedAndPaused(player, inv);
+				CheckUpdateFavoritedAndPaused(player, inv);
 
 				//Check newly updated trackedBuffs
 				if (trackedBuffIndexes.TryGetValue(Type, out int newIndex)) {
@@ -727,7 +736,7 @@ namespace VacuumBags.Items
 				return GiveBuffAtNextAvailable(player);
 			}
 			public bool TryFindOrPause(Player player, Item[] inv) {
-				CheckUpdateFavoirtedAndPaused(player, inv);
+				CheckUpdateFavoritedAndPaused(player, inv);
 
 				//Check newly updated trackedBuffs
 				if (trackedBuffIndexes.TryGetValue(Type, out int newIndex)) {
