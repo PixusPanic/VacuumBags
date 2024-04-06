@@ -192,12 +192,8 @@ namespace VacuumBags
 			return null;
 		}
 		private void OnRightClick_ItemArray_int_int(On_ItemSlot.orig_RightClick_ItemArray_int_int orig, Item[] inv, int context, int slot) {
-			int clickedItemType = inv[slot].type;
-			if (clickedItemType == ModContent.ItemType<AmmoBag>()
-				|| clickedItemType == ModContent.ItemType<PaintBucket>()
-				|| clickedItemType == ModContent.ItemType<FishingBelt>()
-				|| clickedItemType == ModContent.ItemType<MechanicsToolbelt>()
-			) {
+			Item clickedItem = inv[slot];
+			if (clickedItem.ModItem is BagModItem) {
 				orig(inv, 0, slot);
 			}
 			else {
