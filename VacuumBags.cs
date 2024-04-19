@@ -402,7 +402,7 @@ namespace VacuumBags
 			)) { throw new Exception("Failed to find instructions IL_Player_ItemCheck_Inner 1/2"); }
 
 			c.Emit(OpCodes.Ldarg_0);
-			c.EmitLdloc(48);
+			c.Emit(OpCodes.Ldloc, 48);
 
 			c.EmitDelegate((Player player, int tileWand) => {
 				bool found = false;
