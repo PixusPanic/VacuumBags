@@ -3,7 +3,7 @@
   <Import Project="..\tModLoader.targets" />
   <PropertyGroup>
     <AssemblyName>VacuumBags</AssemblyName>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
@@ -125,5 +125,9 @@
 	<ItemGroup>
 	  <Folder Include="Common\Utility\LogModSystem\VacuumBagsWiki_TXT\" />
 	  <Folder Include="UI\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\androLib\androLib.csproj" />
+	  <ProjectReference Include="..\VacuumOreBag\VacuumOreBag.csproj" />
 	</ItemGroup>
 </Project>

@@ -282,28 +282,29 @@ namespace VacuumBags
 				return baitCount;
 			});
 
-			// if (item.tileWand > 0)
-			//	IL_0d4a: ldloc.1
-			//IL_0d4b: ldfld int32 Terraria.Item::tileWand
-			//IL_0d50: ldc.i4.0
-			//IL_0d51: ble.s IL_0d8a
 
-			// int tileWand = item.tileWand;
-			//IL_0d53: ldloc.1
-			//IL_0d54: ldfld int32 Terraria.Item::tileWand
-			//IL_0d59: stloc.s 44
-			// num11 = 0;
-			//IL_0d5b: ldc.i4.0
-			//IL_0d5c: stloc.s 29
+			//// if (item.tileWand > 0)
+			//IL_0d4e: ldloc.1
+			//IL_0d4f: ldfld int32 Terraria.Item::tileWand
+			//IL_0d54: ldc.i4.0
+			//IL_0d55: ble.s IL_0d8e
+
+			//// int tileWand = item.tileWand;
+			//IL_0d57: ldloc.1
+			//IL_0d58: ldfld int32 Terraria.Item::tileWand
+			//IL_0d5d: stloc.s 45
+			//// num11 = 0;
+			//IL_0d5f: ldc.i4.0
+			//IL_0d60: stloc.s 30
 
 			if (!c.TryGotoNext(MoveType.After,
 				i => i.MatchLdloc(1),
 				i => i.MatchLdfld<Item>("tileWand"),
-				i => i.MatchStloc(44),
+				i => i.MatchStloc(45),
 				i => i.MatchLdcI4(0)
 			)) { throw new Exception("Failed to find instructions OnDrawItemSlot 3/4"); }
 
-			c.Emit(OpCodes.Ldloc, 44);
+			c.Emit(OpCodes.Ldloc, 45);
 
 			c.EmitDelegate((int wandAmmo, int tileWand) => {
 				Item wandAmmoItem = tileWand.CSI();
@@ -328,19 +329,20 @@ namespace VacuumBags
 				return wandAmmo;
 			});
 
-			// num11 = 0;
-			//	IL_0dd8: ldc.i4.0
-			//IL_0dd9: stloc.s 29
+			//// num11 = 0;
+			//IL_0ddc: ldc.i4.0
+			//IL_0ddd: stloc.s 30
 			//// for (int m = 0; m < 58; m++)
-			//IL_0ddb: ldc.i4.0
-			//IL_0ddc: stloc.s 46
+			//IL_0ddf: ldc.i4.0
+			//IL_0de0: stloc.s 47
 			//// if (inv[m].type == 530)
-			//IL_0dde: br.s IL_0e04
+			//IL_0de2: br.s IL_0e08
+			//// loop start (head: IL_0e08)
 
 			if (!c.TryGotoNext(MoveType.Before,
-				i => i.MatchStloc(29),
+				i => i.MatchStloc(30),
 				i => i.MatchLdcI4(0),
-				i => i.MatchStloc(46)
+				i => i.MatchStloc(47)
 			)) { throw new Exception("Failed to find instructions OnDrawItemSlot 4/4"); }
 
 			c.EmitDelegate((int wireCount) => {
