@@ -3,6 +3,8 @@ using androLib.Common.Utility;
 using androLib.Items;
 using androLib.Localization;
 using androLib.UI;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using MonoMod.RuntimeDetour;
@@ -19,6 +21,7 @@ using Terraria.Graphics.Renderers;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.UI;
+using Terraria.UI.Chat;
 using VacuumBags.Common.Configs;
 using VacuumBags.Common.Globals;
 using VacuumBags.Items;
@@ -33,13 +36,19 @@ namespace VacuumBags
 		public static BagsClientConfig clientConfig = ModContent.GetInstance<BagsClientConfig>();
 		public static bool registeredWithAndroLib = false;
 
-		//List<Hook> hooks = new();
+		List<Hook> hooks = new();
 		public override void Load() {
 			AddAllContent(this);
 
-			//foreach (Hook hook in hooks) {
-			//	hook.Apply();
-			//}
+			if (AndroMod.ammoToolModEnabled) {
+				hooks.Add(new(ModLoaderGlobalItemPostDrawInInventory, GlobalItemPostDrawInInventoryDetour));
+				hooks.Add(new(ModLoaderGlobalItemCanBeChosenAsAmmo, GlobalItemCanBeChosenAsAmmoDetour));
+				hooks.Add(new(ModLoaderGlobalItemPreDrawTooltipLine, GlobalItemPreDrawTooltipLineDetour));
+			}
+
+			foreach (Hook hook in hooks) {
+				hook.Apply();
+			}
 
 			On_Player.ChooseAmmo += AmmoBag.OnChooseAmmo;
 			On_Player.Fishing_GetBait += FishingBelt.OnFishing_GetBait;
@@ -85,9 +94,94 @@ namespace VacuumBags
 			if (!AndroMod.weaponEnchantmentsLoaded)
 				RegisterAllBagsWithAndroLib();
 
+			if (AndroMod.ammoToolModEnabled) {
+				On_ChatManager.DrawColorCodedStringWithShadow_SpriteBatch_DynamicSpriteFont_string_Vector2_Color_float_Vector2_Vector2_float_float += On_ChatManager_DrawColorCodedStringWithShadow_SpriteBatch_DynamicSpriteFont_string_Vector2_Color_float_Vector2_Vector2_float_float;
+				On_Player.HasItem_int += On_Player_HasItem_int;
+			}
+
 			VacuumBagsLocalizationData.RegisterSDataPackage();
 			StoragePlayer.OnAndroLibClientConfigChangedInGame += SimpleBag.ClearAllowedLists;
 		}
+
+
+		#region AmmoTool Integration
+
+		private Vector2 On_ChatManager_DrawColorCodedStringWithShadow_SpriteBatch_DynamicSpriteFont_string_Vector2_Color_float_Vector2_Vector2_float_float(On_ChatManager.orig_DrawColorCodedStringWithShadow_SpriteBatch_DynamicSpriteFont_string_Vector2_Color_float_Vector2_Vector2_float_float orig, Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch, ReLogic.Graphics.DynamicSpriteFont font, string text, Vector2 position, Color baseColor, float rotation, Vector2 origin, Vector2 baseScale, float maxWidth, float spread) {
+			if (baseColor == Color.SkyBlue) {
+				Item weapon = Main.LocalPlayer.HeldItem;
+				if (!weapon.NullOrAir() && weapon.useAmmo > AmmoID.None && int.TryParse(text, out int stack)) {
+					AmmoBag.AddAmmoCountFromAmmoBag(weapon, ref stack);
+					text = $"{stack}";
+				}
+			}
+
+			return orig(spriteBatch, font, text, position, baseColor, rotation, origin, baseScale, maxWidth, spread);
+		}
+
+
+		private static bool ammoToolCountingAmmo = false;
+		private delegate void orig_ModLoaderGlobalItemPostDrawInInventory(Item item, SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale);
+		private delegate void hook_ModLoaderGlobalItemPostDrawInInventory(orig_ModLoaderGlobalItemPostDrawInInventory orig, Item item, SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale);
+		private static readonly MethodInfo ModLoaderGlobalItemPostDrawInInventory = typeof(ItemLoader).GetMethod("PostDrawInInventory");
+		private void GlobalItemPostDrawInInventoryDetour(orig_ModLoaderGlobalItemPostDrawInInventory orig, Item item, SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale) {
+			ammoToolCountingAmmo = true;
+
+			orig(item, spriteBatch, position, frame, drawColor, itemColor, origin, scale);
+
+			ammoToolCountingAmmo = false;
+		}
+
+
+		private delegate bool orig_GlobalItemCanBeChosenAsAmmo(Item ammo, Item weapon, Player player);
+		private delegate void hook_GlobalItemCanBeChosenAsAmmo(orig_GlobalItemCanBeChosenAsAmmo orig, Item ammo, Item weapon, Player player);
+		private static readonly MethodInfo ModLoaderGlobalItemCanBeChosenAsAmmo = typeof(ItemLoader).GetMethod("CanChooseAmmo");
+		private bool GlobalItemCanBeChosenAsAmmoDetour(orig_GlobalItemCanBeChosenAsAmmo orig, Item ammo, Item weapon, Player player) {
+			ammoToolCountingAmmo = true;
+
+			bool result = orig(ammo, weapon, player);
+
+			ammoToolCountingAmmo = false;
+
+			return result;
+		}
+
+		private delegate bool orig_GlobalItemPreDrawTooltipLine(Item item, DrawableTooltipLine line, ref int yOffset);
+		private delegate void hook_GlobalItemPreDrawTooltipLine(orig_GlobalItemPreDrawTooltipLine orig, Item item, DrawableTooltipLine line, ref int yOffset);
+		private static readonly MethodInfo ModLoaderGlobalItemPreDrawTooltipLine = typeof(ItemLoader).GetMethod("PreDrawTooltipLine");
+		private bool GlobalItemPreDrawTooltipLineDetour(orig_GlobalItemPreDrawTooltipLine orig, Item item, DrawableTooltipLine line, ref int yOffset) {
+			ammoToolCountingAmmo = true;
+
+			bool result = orig(item, line, ref yOffset);
+
+			ammoToolCountingAmmo = false;
+
+			return result;
+		}
+
+
+		private bool On_Player_HasItem_int(On_Player.orig_HasItem_int orig, Player self, int type) {
+			bool result = orig(self, type);
+
+			if (!result && ammoToolCountingAmmo) {
+				Item ammoItem = type.CSI();
+				if (ammoItem.ammo > AmmoID.None) {
+					int ammoBagItemType = ModContent.ItemType<AmmoBag>();
+					if (StorageManager.HasRequiredItemToUseStorageFromBagTypeSlow(Main.LocalPlayer, ammoBagItemType)) {
+						foreach (Item item in StorageManager.GetItems(AmmoBag.Instance.BagStorageID)) {
+							if (!item.NullOrAir() && item.stack > 0 && item.type == type) {
+								result = true;
+
+								break;
+							}
+						}
+					}
+				}
+			}
+
+			return result;
+		}
+
+		#endregion
 
 		private void AddAllContent(VacuumBags mod) {
 			IEnumerable<Type> types = null;
@@ -239,14 +333,7 @@ namespace VacuumBags
 			c.Emit(OpCodes.Ldloc, 1);
 
 			c.EmitDelegate((int ammoCount, Item weapon) => {
-				int ammoBagItemType = ModContent.ItemType<AmmoBag>();
-				if (!StorageManager.HasRequiredItemToUseStorageFromBagTypeSlow(Main.LocalPlayer, ammoBagItemType))
-					return ammoCount;
-
-				foreach (Item item in StorageManager.GetItems(AmmoBag.Instance.BagStorageID)) {
-					if (!item.NullOrAir() && item.stack > 0 && ItemLoader.CanChooseAmmo(weapon, item, Main.LocalPlayer))
-						ammoCount += item.stack;
-				}
+				AmmoBag.AddAmmoCountFromAmmoBag(weapon, ref ammoCount);
 
 				return ammoCount;
 			});

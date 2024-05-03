@@ -307,6 +307,17 @@ namespace VacuumBags.Items
 			return endWords;
 		}
 
+		public static void AddAmmoCountFromAmmoBag(Item weapon, ref int ammoCount) {
+			int ammoBagItemType = ModContent.ItemType<AmmoBag>();
+			if (!StorageManager.HasRequiredItemToUseStorageFromBagTypeSlow(Main.LocalPlayer, ammoBagItemType))
+				return;
+
+			foreach (Item item in StorageManager.GetItems(AmmoBag.Instance.BagStorageID)) {
+				if (!item.NullOrAir() && item.stack > 0 && ItemLoader.CanChooseAmmo(weapon, item, Main.LocalPlayer))
+					ammoCount += item.stack;
+			}
+		}
+
 		#region AndroModItem attributes that you don't need.
 
 		public override string SummaryOfFunction => "Weapon Ammo";
