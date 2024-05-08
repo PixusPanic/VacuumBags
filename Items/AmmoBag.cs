@@ -64,13 +64,13 @@ namespace VacuumBags.Items
 
 		public static Item OnChooseAmmo(On_Player.orig_ChooseAmmo orig, Player self, Item weapon) {
 			Item item = orig(self, weapon);
-			if (Main.netMode == NetmodeID.Server)
+			if (Main.netMode == NetmodeID.Server || self.whoAmI != Main.myPlayer)
 				return item;
 
 			if (weapon.useAmmo == AmmoID.None)
 				return null;
 
-			Item bagAmmo = ChooseAmmoFromBag(item, weapon, self);
+			Item bagAmmo = ChooseAmmoFromBag(item, weapon, Main.LocalPlayer);
 
 			return bagAmmo ?? item;
 		}
