@@ -37,6 +37,8 @@ namespace VacuumBags.Items
 			Item.useTurn = true;
 			Item.useStyle = ItemUseStyleID.Swing;
 			Item.holdStyle = 1;
+			Item.useTime = 10;
+			Item.useAnimation = 10;
 		}
 		public override int GetBagType() => ModContent.ItemType<SlayersSack>();
 		public override void AddRecipes() {
