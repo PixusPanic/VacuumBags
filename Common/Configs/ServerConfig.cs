@@ -9,6 +9,7 @@ using androLib.Common.Globals;
 using androLib.Common.Utility;
 using VacuumBags.Items;
 using androLib.Common.Configs;
+using androLib.Items;
 
 namespace VacuumBags.Common.Configs
 {
@@ -34,31 +35,31 @@ namespace VacuumBags.Common.Configs
 		[Header($"$Mods.{VacuumBags.ModName}.{L_ID_Tags.Configs}.{ServerConfigName}.{BagEffectOptionsKey}")]
 
 		[DefaultValue(BannerBagNumberOfBannersInInventoryDefault)]
-		[Range(BagModItem.FirstXItemsChooseAllItems, StorageSizePair.MaxStorageSize)]
+		[Range(IBagModItem.FirstXItemsChooseAllItems, StorageSizePair.MaxStorageSize)]
 		public int BannerBagNumberOfBannersInInventory;
 
-		[DefaultValue(BagModItem.FirstXItemsChooseAllItems)]
-		[Range(BagModItem.FirstXItemsChooseAllItems, StorageSizePair.MaxStorageSize)]
+		[DefaultValue(IBagModItem.FirstXItemsChooseAllItems)]
+		[Range(IBagModItem.FirstXItemsChooseAllItems, StorageSizePair.MaxStorageSize)]
 		public int BannerBagNumberOfBannersWhenPlaced;
 
 		[JsonIgnore]
 		public const int PortableStationNumberOfCraftingStationsInInventoryDefault = 1;
 		[DefaultValue(PortableStationNumberOfCraftingStationsInInventoryDefault)]
-		[Range(BagModItem.FirstXItemsChooseAllItems, StorageSizePair.MaxStorageSize)]
+		[Range(IBagModItem.FirstXItemsChooseAllItems, StorageSizePair.MaxStorageSize)]
 		public int PortableStationNumberOfStationsInInventory;
 
-		[DefaultValue(BagModItem.FirstXItemsChooseAllItems)]
-		[Range(BagModItem.FirstXItemsChooseAllItems, StorageSizePair.MaxStorageSize)]
+		[DefaultValue(IBagModItem.FirstXItemsChooseAllItems)]
+		[Range(IBagModItem.FirstXItemsChooseAllItems, StorageSizePair.MaxStorageSize)]
 		public int PortableStationNumberOfStationsWhenPlaced;
 
 		[JsonIgnore]
 		public const int PortableStationNumberOfPassiveBuffStationsInInventoryDefault = 1;
 		[DefaultValue(PortableStationNumberOfPassiveBuffStationsInInventoryDefault)]
-		[Range(BagModItem.FirstXItemsChooseAllItems, StorageSizePair.MaxStorageSize)]
+		[Range(IBagModItem.FirstXItemsChooseAllItems, StorageSizePair.MaxStorageSize)]
 		public int PortableStationNumberOfPassiveBuffStationsInInventory;
 
-		[DefaultValue(BagModItem.FirstXItemsChooseAllItems)]
-		[Range(BagModItem.FirstXItemsChooseAllItems, StorageSizePair.MaxStorageSize)]
+		[DefaultValue(IBagModItem.FirstXItemsChooseAllItems)]
+		[Range(IBagModItem.FirstXItemsChooseAllItems, StorageSizePair.MaxStorageSize)]
 		public int PortableStationNumberOfPassiveBuffStationsWhenPlaced;
 
 		[DefaultValue(true)]

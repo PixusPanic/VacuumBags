@@ -16,7 +16,7 @@ namespace VacuumBags.Items
 {
 	[Autoload(false)]
 	public class CalamitousCauldron : ModBag {
-		public static BagModItem Instance {
+		public static IBagModItem Instance {
 			get {
 				if (instance == null)
 					instance = new CalamitousCauldron();
@@ -24,7 +24,7 @@ namespace VacuumBags.Items
 				return instance;
 			}
 		}
-		private static BagModItem instance;
+		private static IBagModItem instance;
 		public override string ModDisplayNameTooltip => "Calamity";
 		public override string LocalizationDisplayName => "Calamitous Cauldron";
 		public override int GetBagType() => ModContent.ItemType<CalamitousCauldron>();

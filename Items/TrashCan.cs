@@ -17,12 +17,13 @@ using Terraria.GameContent.LootSimulation;
 using androLib.Common.Globals;
 using androLib.UI;
 using Terraria.Audio;
+using static androLib.Items.IBagModItem;
 
 namespace VacuumBags.Items
 {
 	[Autoload(false)]
 	public class TrashCan : BagModItem_VB {
-		public static BagModItem Instance {
+		public static IBagModItem Instance {
 			get {
 				if (instance == null)
 					instance = new TrashCan();
@@ -30,7 +31,7 @@ namespace VacuumBags.Items
 				return instance;
 			}
 		}
-		private static BagModItem instance;
+		private static IBagModItem instance;
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void Load() {
 			StoragePlayer.OnAndroLibClientConfigChangedInGame += () => {
@@ -75,7 +76,7 @@ namespace VacuumBags.Items
 		}
 		private static SortedSet<int> blacklist = null;
 
-		protected override void UpdateAllowedList(int item, bool add) {
+		public override void UpdateAllowedList(int item, bool add) {
 			if (add) {
 				Blacklist.Remove(item);
 			}
@@ -99,7 +100,7 @@ namespace VacuumBags.Items
 			});
 		}
 		public override bool ItemAllowedToBeStored(Item item) => !Blacklist.Contains(item.type) && CanTrash(item);
-		public override Func<Item, bool> CanVacuumItemFunc => BagContainsItem;
+		public override Func<Item, bool> CanVacuumItemFunc => ((IBagModItem)this).BagContainsItem;
 		public static void ClearTrash(BagUI bagUI) {
 			Item[] inv = bagUI.MyStorage.Items;
 			bool trashedAny = false;

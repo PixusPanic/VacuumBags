@@ -15,11 +15,12 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 using VacuumBags.Items;
+using androLib.Items;
 
 namespace VacuumBags.Tiles
 {
     public class BagBlack : SimpleBagTile
     {
-		protected override BagModItem ModBag => Items.BagBlack.Instance;
+		protected override IBagModItem ModBag => Items.BagBlack.Instance;
     }
 }

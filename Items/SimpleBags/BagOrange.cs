@@ -14,7 +14,7 @@ namespace VacuumBags.Items
 {
 	[Autoload(false)]
 	public class BagOrange : SimpleBag {
-		public static BagModItem Instance {
+		public static IBagModItem Instance {
 			get {
 				if (instance == null)
 					instance = new BagOrange();
@@ -22,7 +22,7 @@ namespace VacuumBags.Items
 				return instance;
 			}
 		}
-		private static BagModItem instance;
+		private static IBagModItem instance;
 		public override int GetBagType() => ModContent.ItemType<BagOrange>();
 		public override int MyTileType => ModContent.TileType<Tiles.BagOrange>();
 		protected override SortedSet<int> GetDefaultBlacklist() {

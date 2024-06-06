@@ -14,6 +14,7 @@ using System.Diagnostics;
 using Terraria.Localization;
 using VacuumBags.Common.Configs;
 using androLib.UI;
+using static androLib.Items.IBagModItem;
 
 namespace VacuumBags.Items
 {

@@ -15,8 +15,8 @@ using static Terraria.ID.ContentSamples.CreativeHelper;
 namespace VacuumBags.Items
 {
 	[Autoload(false)]
-	public class SpookyGourd : ModBag, INeedsSetUpAllowedList {
-		public static BagModItem Instance {
+	public class SpookyGourd : ModBag {
+		public static IBagModItem Instance {
 			get {
 				if (instance == null)
 					instance = new SpookyGourd();
@@ -24,7 +24,7 @@ namespace VacuumBags.Items
 				return instance;
 			}
 		}
-		private static BagModItem instance;
+		private static IBagModItem instance;
 		public override string ModDisplayNameTooltip => "Spooky Mod";
 		public override string Designer => "@level12lobster";
 		public override string Artist => "@level12lobster";

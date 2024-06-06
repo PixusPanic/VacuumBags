@@ -18,12 +18,13 @@ using Humanizer;
 using System.Security.Policy;
 using Terraria.GameContent;
 using androLib.UI;
+using static androLib.Items.IBagModItem;
 
 namespace VacuumBags.Items
 {
 	[Autoload(false)]
 	public  class ExquisitePotionFlask : PotionFlask {
-		new public static BagModItem Instance {
+		new public static IBagModItem Instance {
 			get {
 				if (instance == null)
 					instance = new ExquisitePotionFlask();
@@ -31,7 +32,7 @@ namespace VacuumBags.Items
 				return instance;
 			}
 		}
-		private static BagModItem instance;
+		private static IBagModItem instance;
 		public override int BagStorageID { get => PotionFlask.Instance.BagStorageID; set => PotionFlask.Instance.BagStorageID = value; }
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {

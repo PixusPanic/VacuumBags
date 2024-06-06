@@ -16,8 +16,8 @@ using static Terraria.ID.ContentSamples.CreativeHelper;
 namespace VacuumBags.Items
 {
 	[Autoload(false)]
-	public class EssenceOfGathering : ModBag, INeedsSetUpAllowedList {
-		public static BagModItem Instance {
+	public class EssenceOfGathering : ModBag {
+		public static IBagModItem Instance {
 			get {
 				if (instance == null)
 					instance = new EssenceOfGathering();
@@ -25,7 +25,7 @@ namespace VacuumBags.Items
 				return instance;
 			}
 		}
-		private static BagModItem instance;
+		private static IBagModItem instance;
 		public override string ModDisplayNameTooltip => "Stars Above";
 		public override string LocalizationDisplayName => "Essence of Gathering";
 		public override string Artist => "Stars Above";

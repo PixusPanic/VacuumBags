@@ -14,12 +14,13 @@ using MonoMod.Cil;
 using System;
 using Mono.Cecil.Cil;
 using androLib.UI;
+using static androLib.Items.IBagModItem;
 
 namespace VacuumBags.Items
 {
     [Autoload(false)]
 	public  class MechanicsToolbelt : AllowedListBagModItem_VB {
-		public static BagModItem Instance {
+		public static IBagModItem Instance {
 			get {
 				if (instance == null)
 					instance = new MechanicsToolbelt();
@@ -27,7 +28,7 @@ namespace VacuumBags.Items
 				return instance;
 			}
 		}
-		private static BagModItem instance;
+		private static IBagModItem instance;
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {
             Item.maxStack = 1;
@@ -81,7 +82,7 @@ namespace VacuumBags.Items
 			int bagItemType = ModContent.ItemType<MechanicsToolbelt>();
 			Item bagPlaceItem = BagPlayer.BagPlaceItem(player);
 			bool swapped = !bagPlaceItem.NullOrAir() && bagPlaceItem.type == bagItemType;
-			if (!swapped && !StorageManager.HasRequiredItemToUseStorageFromBagType(player, bagItemType, out _))
+			if (!swapped && !StorageManager.HasRequiredItemToUseStorageFromBagType(player, bagItemType, out _, out _, out _))
 				return false;
 
 			Item contentSampleItem = type.CSI();
@@ -255,7 +256,7 @@ namespace VacuumBags.Items
 			c.Emit(OpCodes.Ldloca, 1);
 			c.EmitDelegate((ref int wireCount, ref int actuatorCount) => {
 				int mechanicsToolbeltItemType = ModContent.ItemType<MechanicsToolbelt>();
-				if (!StorageManager.HasRequiredItemToUseStorageFromBagTypeSlow(Main.LocalPlayer, mechanicsToolbeltItemType, out _))
+				if (!StorageManager.HasRequiredItemToUseStorageFromBagTypeSlow(Main.LocalPlayer, mechanicsToolbeltItemType, out _, out _, out _))
 					return;
 
 				foreach (Item item in StorageManager.GetItems(Instance.BagStorageID)) {

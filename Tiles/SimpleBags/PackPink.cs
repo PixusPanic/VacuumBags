@@ -13,10 +13,11 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 using VacuumBags.Items;
+using androLib.Items;
 
 namespace VacuumBags.Tiles
 {
     public class PackPink : BagPink {
-		protected override BagModItem ModBag => Items.PackPink.Instance;
+		protected override IBagModItem ModBag => Items.PackPink.Instance;
 	}
 }

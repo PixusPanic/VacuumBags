@@ -16,7 +16,7 @@ namespace VacuumBags.Items
 {
 	[Autoload(false)]
 	public class HoiPoiCapsule : ModBag {
-		public static BagModItem Instance {
+		public static IBagModItem Instance {
 			get {
 				if (instance == null)
 					instance = new HoiPoiCapsule();
@@ -24,7 +24,7 @@ namespace VacuumBags.Items
 				return instance;
 			}
 		}
-		private static BagModItem instance;
+		private static IBagModItem instance;
 		public override string ModDisplayNameTooltip => "Dragon Ball Terraria";
 		public override string LocalizationDisplayName => "Hoi-Poi Capsule";
 		public override string Designer => "@_godslayer";

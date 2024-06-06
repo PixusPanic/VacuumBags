@@ -60,33 +60,10 @@ namespace VacuumBags.Items
 				return vacuumWhitelist;
 			}
 		}
-
-		//public SortedSet<int> Blacklist {
-		//	get {
-		//		if (blacklist == null) {
-		//			blacklist = GetDefaultBlacklist();
-
-		//			blacklist.UnionWith(StorageManager.GetPlayerBlackListSortedSet(BagStorageID));
-		//		}
-
-		//		return blacklist;
-		//	}
-		//}
-		//public SortedSet<int> blacklist = null;
-		//public SortedSet<int> VacuumWhitelist {
-		//	get {
-		//		if (vacuumWhitelist == null) {
-		//			vacuumWhitelist = StorageManager.GetPlayerWhiteListSortedSet(BagStorageID);
-		//		}
-
-		//		return vacuumWhitelist;
-		//	}
-		//}
-		//public SortedSet<int> vacuumWhitelist = null;
 		protected abstract SortedSet<int> GetDefaultBlacklist();
 		public override Func<Item, bool> CanVacuumItemFunc => CanVacuumItem;
 		private bool CanVacuumItem(Item item) => VacuumWhitelist.Contains(item.type);
-		protected override void UpdateAllowedList(int item, bool add) {
+		public override void UpdateAllowedList(int item, bool add) {
 			if (add) {
 				VacuumWhitelist.Add(item);
 				Blacklist.Remove(item);

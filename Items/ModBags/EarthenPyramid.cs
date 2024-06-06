@@ -16,7 +16,7 @@ namespace VacuumBags.Items
 {
 	[Autoload(false)]
 	public class EarthenPyramid : ModBag {
-		public static BagModItem Instance {
+		public static IBagModItem Instance {
 			get {
 				if (instance == null)
 					instance = new EarthenPyramid();
@@ -24,7 +24,7 @@ namespace VacuumBags.Items
 				return instance;
 			}
 		}
-		private static BagModItem instance;
+		private static IBagModItem instance;
 		public override void SetStaticDefaults() {
 			base.SetStaticDefaults();
 			Item.width = 30;

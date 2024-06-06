@@ -12,12 +12,13 @@ using static Terraria.ID.ContentSamples.CreativeHelper;
 using MonoMod.Cil;
 using System;
 using Mono.Cecil.Cil;
+using static androLib.Items.IBagModItem;
 
 namespace VacuumBags.Items
 {
     [Autoload(false)]
 	public class AmmoBag : AllowedListBagModItem_VB {
-		public static BagModItem Instance {
+		public static IBagModItem Instance {
 			get {
 				if (instance == null)
 					instance = new AmmoBag();
@@ -25,7 +26,7 @@ namespace VacuumBags.Items
 				return instance;
 			}
 		}
-		private static BagModItem instance;
+		private static IBagModItem instance;
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {
             Item.maxStack = 1;

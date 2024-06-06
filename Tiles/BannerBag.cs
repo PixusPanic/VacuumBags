@@ -1,4 +1,5 @@
 ﻿using androLib;
+using androLib.Items;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ using VacuumBags.Items;
 namespace VacuumBags.Tiles
 {
 	public class BannerBag : VacuumBagTile {
-		protected override BagModItem ModBag => Items.BannerBag.Instance;
+		protected override IBagModItem ModBag => Items.BannerBag.Instance;
 		private static int platformYOffset = -8;
 		public override void SetStaticDefaults() {
 			base.SetStaticDefaults();

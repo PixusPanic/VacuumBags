@@ -16,12 +16,13 @@ using System.Diagnostics.CodeAnalysis;
 using androLib.UI;
 using Terraria.UI;
 using Microsoft.Xna.Framework.Input;
+using static androLib.Items.IBagModItem;
 
 namespace VacuumBags.Items
 {
     [Autoload(false)]
 	public  class PotionFlask : AllowedListBagModItem_VB {
-		public static BagModItem Instance {
+		public static IBagModItem Instance {
 			get {
 				if (instance == null)
 					instance = new PotionFlask();
@@ -29,7 +30,7 @@ namespace VacuumBags.Items
 				return instance;
 			}
 		}
-		private static BagModItem instance;
+		private static IBagModItem instance;
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {
             Item.maxStack = 1;
@@ -68,7 +69,7 @@ namespace VacuumBags.Items
 		public override Color ScrollBarColor => new Color(90, 10, 90, androLib.Common.Configs.ConfigValues.UIAlpha);
 		public override Color ButtonHoverColor => new Color(120, 0, 120, androLib.Common.Configs.ConfigValues.UIAlpha);
 
-		private static bool HasAndCanUsePotionFlask(Player player, bool onlyCheckRegular = false) => !VacuumBags.clientConfig.TurnOffRegularPotionFlask && StorageManager.HasRequiredItemToUseStorageFromBagType(player, PotionFlaskType, out _) || !onlyCheckRegular && StorageManager.HasRequiredItemToUseStorageFromBagType(player, ExquisitePotionFlaskType, out _, true);
+		private static bool HasAndCanUsePotionFlask(Player player, bool onlyCheckRegular = false) => !VacuumBags.clientConfig.TurnOffRegularPotionFlask && StorageManager.HasRequiredItemToUseStorageFromBagType(player, PotionFlaskType, out _, out _, out _) || !onlyCheckRegular && StorageManager.HasRequiredItemToUseStorageFromBagType(player, ExquisitePotionFlaskType, out _, out _, out _, true);
 
 		#region QuickBuff/Heal
 
@@ -476,7 +477,7 @@ namespace VacuumBags.Items
 			trackedItemIndexes.Clear();
 		}
 		internal static void PostUpdateBuffs(Player player) {
-			hasExquisiteFlask = StorageManager.HasRequiredItemToUseStorageFromBagTypeSlow(player, ExquisitePotionFlaskType, out _, true);
+			hasExquisiteFlask = StorageManager.HasRequiredItemToUseStorageFromBagTypeSlow(player, ExquisitePotionFlaskType, out _, out _, out _, true);
 			if (hasExquisiteFlask) {
 				hasPotionFlask = true;
 			}

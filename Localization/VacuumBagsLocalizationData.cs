@@ -19,6 +19,7 @@ using VacuumBags.Items;
 using VacuumBags.Common.Configs;
 using Terraria.ID;
 using Terraria;
+using androLib.Items;
 
 namespace VacuumBags.Localization
 {
@@ -49,38 +50,38 @@ namespace VacuumBags.Localization
 									{ L_ID3.Label.ToString(), nameof(serverConfig.BannerBagNumberOfBannersInInventory).AddSpaces() },
 									{ L_ID3.Tooltip.ToString(), "When the Banner bag is in your inventory, the first X number of banners will apply their buffs.\n" +
 										"Favoriting a banner or banners gives them priority over non-favorited ones.\n" +
-										$"Set to {BannerBag.FirstXItemsChooseAllItems} for all banners in the bag to give their buffs." }
+										$"Set to {IBagModItem.FirstXItemsChooseAllItems} for all banners in the bag to give their buffs." }
 								}) },
 								{ nameof(serverConfig.BannerBagNumberOfBannersWhenPlaced), new(dict: new() {
 									{ L_ID3.Label.ToString(), nameof(serverConfig.BannerBagNumberOfBannersWhenPlaced).AddSpaces() },
 									{ L_ID3.Tooltip.ToString(), "When the Banner bag is placed in the world, the first X number of banners will apply their buffs.\n" +
 										"Favoriting a banner or banners gives them priority over non-favorited ones." +
-										$"Set to {BannerBag.FirstXItemsChooseAllItems} for all banners in the bag to give their buffs." }
+										$"Set to {IBagModItem.FirstXItemsChooseAllItems} for all banners in the bag to give their buffs." }
 								}) },
 								{ nameof(serverConfig.PortableStationNumberOfStationsInInventory), new(dict: new() {
 									{ L_ID3.Label.ToString(), nameof(serverConfig.PortableStationNumberOfStationsInInventory).AddSpaces() },
 									{ L_ID3.Tooltip.ToString(), "When the Portable Station is in your inventory, the first X number of stations will be available for crafting.\n" +
 										"Favoriting a station or stations gives them priority over non-favorited ones.\n" +
-										$"Set to {BannerBag.FirstXItemsChooseAllItems} for all stations in the Portable Station to be available for crafting." }
+										$"Set to {IBagModItem.FirstXItemsChooseAllItems} for all stations in the Portable Station to be available for crafting." }
 								}) },
 								{ nameof(serverConfig.PortableStationNumberOfStationsWhenPlaced), new(dict: new() {
 									{ L_ID3.Label.ToString(), nameof(serverConfig.PortableStationNumberOfStationsWhenPlaced).AddSpaces() },
 									{ L_ID3.Tooltip.ToString(), "When the Portable Station is placed in the world, the first X number of stations will be available for crafting.\n" +
 										"Favoriting a station or stations gives them priority over non-favorited ones.\n" +
-										$"Set to {BannerBag.FirstXItemsChooseAllItems} for all stations in the Portable Station to be available for crafting." }
+										$"Set to {IBagModItem.FirstXItemsChooseAllItems} for all stations in the Portable Station to be available for crafting." }
 								}) },
 								{ nameof(serverConfig.PortableStationNumberOfPassiveBuffStationsInInventory), new(dict: new() {
 									{ L_ID3.Label.ToString(), nameof(serverConfig.PortableStationNumberOfPassiveBuffStationsInInventory).AddSpaces() },
 									{ L_ID3.Tooltip.ToString(), "When the Portable Station is in your inventory, the passive buffs from the first X number of stations will be active.\n" +
 										"Favoriting a station or stations gives them priority over non-favorited ones.\n" +
-										$"Set to {BannerBag.FirstXItemsChooseAllItems} for all stations in the Portable Station to give their passive buffs.\n" +
+										$"Set to {IBagModItem.FirstXItemsChooseAllItems} for all stations in the Portable Station to give their passive buffs.\n" +
 										$"Peace Candles, Water candles and Shadow candles will not ever be active unless favorited and do not count towards the buff limit." }
 								}) },
 								{ nameof(serverConfig.PortableStationNumberOfPassiveBuffStationsWhenPlaced), new(dict: new() {
 									{ L_ID3.Label.ToString(), nameof(serverConfig.PortableStationNumberOfPassiveBuffStationsWhenPlaced).AddSpaces() },
 									{ L_ID3.Tooltip.ToString(), "When the Portable Station is placed in the world, the passive buffs from the first X number of stations will be active.\n" +
 										"Favoriting a station or stations gives them priority over non-favorited ones.\n" +
-										$"Set to {BannerBag.FirstXItemsChooseAllItems} for all stations in the Portable Station to give their passive buffs.\n" +
+										$"Set to {IBagModItem.FirstXItemsChooseAllItems} for all stations in the Portable Station to give their passive buffs.\n" +
 										$"Peace Candles, Water candles and Shadow candles will not ever be active unless favorited and do not count towards the buff limit." }
 								}) },
 								{ nameof(serverConfig.PortableStationsActivateActiveBuffsWhenOpened), new(dict: new() {

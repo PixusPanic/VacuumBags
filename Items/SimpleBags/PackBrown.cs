@@ -14,7 +14,7 @@ namespace VacuumBags.Items
 {
 	[Autoload(false)]
 	public class PackBrown : BagBrown {
-		new public static BagModItem Instance {
+		new public static IBagModItem Instance {
 			get {
 				if (instance == null)
 					instance = new PackBrown();
@@ -22,7 +22,7 @@ namespace VacuumBags.Items
 				return instance;
 			}
 		}
-		private static BagModItem instance;
+		private static IBagModItem instance;
 		public override int BagStorageID { get => BagBrown.Instance.BagStorageID; set => BagBrown.Instance.BagStorageID = value; }
 		public override int GetBagType() => ModContent.ItemType<PackBrown>();
 		public override int MyTileType => ModContent.TileType<Tiles.PackBrown>();

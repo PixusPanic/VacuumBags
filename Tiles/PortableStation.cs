@@ -12,12 +12,13 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 using VacuumBags.Items;
+using androLib.Items;
 
 namespace VacuumBags.Tiles
 {
 	public class PortableStation : VacuumBagTile
 	{
-		protected override BagModItem ModBag => Items.PortableStation.Instance;
+		protected override IBagModItem ModBag => Items.PortableStation.Instance;
 		public override void SetStaticDefaults() {
 			base.SetStaticDefaults();
 			Main.tileTable[Type] = true;

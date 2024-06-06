@@ -38,7 +38,9 @@ namespace VacuumBags
 			bagItemChecked = false;
 			bagSmartSelectItem = null;
 			bagSmartSelectItemChecked = false;
-			bagInventoryIndex = Storage.RequiredItemNotFound;
+			inventoryFoundIn = null;
+			foundInventoryIndex = Storage.ItemNotFound;
+			bagFoundIn = -1;
 			TouchingStation = false;
 		}
 		public override void PreUpdate() {
@@ -88,7 +90,9 @@ namespace VacuumBags
 		}
 
 		private static Item bagSmartSelectItem = null;
-		private static int bagInventoryIndex = Storage.RequiredItemNotFound;
+		private static IList<Item> inventoryFoundIn = null;
+		private static int foundInventoryIndex = Storage.ItemNotFound;
+		private static int bagFoundIn = -1;
 
 		private static List<KeyValuePair<Func<int>, Func<Player, Item>>> choseFromBagFunctions = new() {
 			new(ModContent.ItemType<BuildersBox>, BuildersBox.ChooseItemFromBox),
@@ -111,12 +115,13 @@ namespace VacuumBags
 
 			return null;
 		}
+		private static bool ValidateStoredBagInfo => bagFoundIn == -1 && foundInventoryIndex > Storage.ItemNotFound && inventoryFoundIn != null && ReferenceEquals(inventoryFoundIn?[foundInventoryIndex], Main.LocalPlayer.inventory[foundInventoryIndex]);
 		private static Item GetBagSmartSelectItem(Player player, Func<Item, bool> itemCondition) {
 			bagSmartSelectItemChecked = true;
 			foreach (KeyValuePair<Func<int>, Func<Player, Func<Item, bool>, Item>> choseFromBagPair in chooseFromBagForQuickSelectFunctions) {
 				int bagType = choseFromBagPair.Key();
-				if (StorageManager.HasRequiredItemToUseStorageFromBagType(player, bagType, out bagInventoryIndex)) {
-					if (bagInventoryIndex > Storage.RequiredItemNotFound)
+				if (StorageManager.HasRequiredItemToUseStorageFromBagType(player, bagType, out inventoryFoundIn, out foundInventoryIndex, out bagFoundIn)) {
+					if (ValidateStoredBagInfo)
 						return choseFromBagPair.Value(player, itemCondition);
 				}
 			}
@@ -136,7 +141,7 @@ namespace VacuumBags
 		}
 		internal static void On_PlayerDrawLayers_DrawPlayer_27_HeldItem(On_PlayerDrawLayers.orig_DrawPlayer_27_HeldItem orig, ref PlayerDrawSet drawinfo) {
 			Player player = drawinfo.drawPlayer;
-			if (player.whoAmI != Main.myPlayer) {
+			if (player.whoAmI != Main.myPlayer || Main.gameMenu) {
 				orig(ref drawinfo);
 				return;
 			}
@@ -162,11 +167,11 @@ namespace VacuumBags
 				if (!swapSmartSelect && lastToolStrategy == ToolStrategyID.Light)
 					swapSmartSelect = BagSmartSelectItem(player, ToolStrategyID.ToolStrategyConditions[ToolStrategyID.Light2ndPassGlowStickOnly]) != null;
 
-				if (swapSmartSelect && bagInventoryIndex > Storage.RequiredItemNotFound) {
+				if (swapSmartSelect && ValidateStoredBagInfo) {
 					if (player.nonTorch == -1)
 						player.nonTorch = player.selectedItem;
 
-					player.selectedItem = bagInventoryIndex;
+					player.selectedItem = foundInventoryIndex;
 					ref Item beingReplaced = ref player.inventory[player.selectedItem];
 					ref Item toReplace = ref bagSmartSelectItem;
 					SwapAndCallOriginal(ref beingReplaced, ref toReplace, () => orig(), swapMouseItem);

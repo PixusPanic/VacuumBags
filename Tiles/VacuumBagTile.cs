@@ -13,12 +13,13 @@ using Terraria.GameContent.ObjectInteractions;
 using Microsoft.Xna.Framework;
 using VacuumBags.Items;
 using androLib;
+using androLib.Items;
 
 namespace VacuumBags.Tiles
 {
 	public abstract class VacuumBagTile : ModTile
 	{
-		protected abstract BagModItem ModBag { get; }
+		protected abstract IBagModItem ModBag { get; }
 		public virtual Color MapColor => ModBag.PanelColor;
 		protected void SetSimpleBagDefaults() {
 			TileObjectData.newTile.CopyFrom(TileObjectData.Style2x1);
@@ -70,7 +71,7 @@ namespace VacuumBags.Tiles
 			if (Main.netMode == NetmodeID.Server)
 				return;
 
-			if (!StorageManager.HasRequiredItemToUseStorageFromBagType(Main.LocalPlayer, ModBag.GetBagType(), out _))
+			if (!StorageManager.HasRequiredItemToUseStorageFromBagType(Main.LocalPlayer, ModBag.GetBagType(), out _, out _, out _))
 				ModBag.CloseBag();
 		}
 

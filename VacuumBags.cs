@@ -57,7 +57,6 @@ namespace VacuumBags
 			On_Player.QuickBuff += PotionFlask.OnQuickBuff;
 			On_Player.QuickHeal_GetItemToUse += PotionFlask.OnQuickHeal_GetItemToUse;
 			On_Player.QuickMana_GetItemToUse += PotionFlask.OnQuickMana_GetItemToUse;
-			On_ItemSlot.RightClick_ItemArray_int_int += OnRightClick_ItemArray_int_int;
 
 			On_Player.ItemCheck_Inner += BagPlayer.OnItemCheck_Inner;
 			On_Main.DrawInterface_40_InteractItemIcon += BagPlayer.On_Main_DrawInterface_40_InteractItemIcon;
@@ -192,10 +191,10 @@ namespace VacuumBags
 				types = e.Types.Where(t => t != null);
 			}
 
-			types = types.Where(t => !t.IsAbstract && (t.IsSubclassOf(typeof(BagModItem))));
+			types = types.Where(t => !t.IsAbstract && (t.InheritsFrom(typeof(IBagModItem))));
 
 			IEnumerable<ModItem> allItems = types.Select(t => Activator.CreateInstance(t)).Where(i => i != null).OfType<ModItem>().Append(new VacuumOreBag.Items.OreBag())
-				.GroupBy(i => i.GetType().BaseType == typeof(BagModItem) || i is VacuumOreBag.Items.OreBag ? 0 : i.GetType().BaseType == typeof(ModBag) ? 1 : i.GetType().BaseType == typeof(SimpleBag) ? 2 : 3)
+				.GroupBy(i => i.GetType().BaseType == typeof(IBagModItem) || i is VacuumOreBag.Items.OreBag ? 0 : i.GetType().BaseType == typeof(ModBag) ? 1 : i.GetType().BaseType == typeof(SimpleBag) ? 2 : 3)
 				.Select(g => g.ToList().OrderBy(i => i.Name))
 				.SelectMany(i => i);
 
@@ -285,15 +284,6 @@ namespace VacuumBags
 			RegisterAllBagsWithAndroLib();
 			return null;
 		}
-		private void OnRightClick_ItemArray_int_int(On_ItemSlot.orig_RightClick_ItemArray_int_int orig, Item[] inv, int context, int slot) {
-			Item clickedItem = inv[slot];
-			if (clickedItem.ModItem is BagModItem) {
-				orig(inv, 0, slot);
-			}
-			else {
-				orig(inv, context, slot);
-			}
-		}
 		internal static void OnDrawItemSlot(ILContext il) {
 			var c = new ILCursor(il);
 
@@ -358,7 +348,7 @@ namespace VacuumBags
 
 			c.EmitDelegate((int baitCount) => {
 				int fishingBeltItemType = ModContent.ItemType<FishingBelt>();
-				if (!StorageManager.HasRequiredItemToUseStorageFromBagTypeSlow(Main.LocalPlayer, fishingBeltItemType, out _))
+				if (!StorageManager.HasRequiredItemToUseStorageFromBagTypeSlow(Main.LocalPlayer, fishingBeltItemType, out _, out _, out _))
 					return baitCount;
 
 				foreach (Item item in StorageManager.GetItems(FishingBelt.Instance.BagStorageID)) {
@@ -434,7 +424,7 @@ namespace VacuumBags
 
 			c.EmitDelegate((int wireCount) => {
 				int mechanicsToolbeltItemType = ModContent.ItemType<MechanicsToolbelt>();
-				if (!StorageManager.HasRequiredItemToUseStorageFromBagTypeSlow(Main.LocalPlayer, mechanicsToolbeltItemType, out _))
+				if (!StorageManager.HasRequiredItemToUseStorageFromBagTypeSlow(Main.LocalPlayer, mechanicsToolbeltItemType, out _, out _, out _))
 					return wireCount;
 
 				foreach (Item item in StorageManager.GetItems(MechanicsToolbelt.Instance.BagStorageID)) {

@@ -41,8 +41,8 @@ namespace VacuumBags.Common.Utility.LogModSystem
                     continue;
                 }
 
-                if (modItem is BagModItem bagModItem) {
-					functionalBags.Add(bagModItem);
+                if (modItem is AndroModItem androModItem && androModItem is IBagModItem bagModItem) {
+					functionalBags.Add(androModItem);
                     continue;
 				}
             }
@@ -107,7 +107,7 @@ namespace VacuumBags.Common.Utility.LogModSystem
                 $"The functions of the bags only work when the items are in the correct bags.");
             allowedListsPage.AddSubHeading("Functional bags summary");
             allowedListsPage.AddBulletedList(elements: functionalBags.Select(b => $"{b.Item.ToItemPNG(link: true)} - " +
-                $"{(b is BagModItem bagModItem ? bagModItem.SummaryOfFunction : BagModItem.SummaryOfFunctionDefault)}").ToArray());
+                $"{(b is IBagModItem bagModItem ? bagModItem.SummaryOfFunction : IBagModItem.SummaryOfFunctionDefault)}").ToArray());
             allowedListsPage.NewLine();
 
             allowedListsPage.AddSubHeading("Modifying lists in Game");
