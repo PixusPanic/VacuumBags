@@ -17,7 +17,7 @@ namespace VacuumBags.Items
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public abstract int MyTileType { get; }
 		public static int BagSize => -40;
-		protected override bool? CanVacuum => VacuumBags.clientConfig.SimpleBagsVacuumAllItems ? true : null;
+		public override bool? CanVacuum => VacuumBags.clientConfig.SimpleBagsVacuumAllItems ? true : null;
 		public override void SetDefaults() {
 			Item.createTile = MyTileType;
 			Item.consumable = true;

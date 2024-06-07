@@ -22,13 +22,15 @@ namespace VacuumBags.Items {
 		public abstract int GetBagType();
 		public abstract bool ItemAllowedToBeStored(Item item);
 		public abstract void UpdateAllowedList(int item, bool add);
-		protected virtual int DefaultBagSize => 100;
-		protected virtual bool? CanVacuum => true;
-		protected virtual bool BlackListOnly => false;
+		public virtual int DefaultBagSize => 100;
+		public virtual bool? CanVacuum => true;
+		public virtual bool BlackListOnly => false;
 		public virtual Func<Item, bool> CanVacuumItemFunc => null;
 		public virtual void RegisterWithAndroLib(Mod mod) {
 			((IBagModItem)this).RegisterWithAndroLibIBagModItem(mod);
 		}
 		public override List<WikiTypeID> WikiItemTypes => new() { WikiTypeID.Storage };
+		public virtual Action SelectItemForUIOnly => null;
+		public virtual bool ShouldUpdateInfoAccessories => false;
 	}
 }

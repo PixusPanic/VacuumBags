@@ -85,12 +85,12 @@ namespace VacuumBags.Items
 			}
 		}
 
-		protected override int DefaultBagSize => 200;
+		public override int DefaultBagSize => 200;
 		public override Color PanelColor => new(100, 100, 116, androLib.Common.Configs.ConfigValues.UIAlpha);
 		public override Color ScrollBarColor => new(40, 40, 50, androLib.Common.Configs.ConfigValues.UIAlpha);
 		public override Color ButtonHoverColor => new(140, 140, 162, androLib.Common.Configs.ConfigValues.UIAlpha);
-		protected override bool? CanVacuum => null;
-		protected override bool BlackListOnly => true;
+		public override bool? CanVacuum => null;
+		public override bool BlackListOnly => true;
 		public override void RegisterWithAndroLib(Mod mod) {
 			base.RegisterWithAndroLib(mod);
 
@@ -100,7 +100,9 @@ namespace VacuumBags.Items
 			});
 		}
 		public override bool ItemAllowedToBeStored(Item item) => !Blacklist.Contains(item.type) && CanTrash(item);
-		public override Func<Item, bool> CanVacuumItemFunc => ((IBagModItem)this).BagContainsItem;
+		public override Func<Item, bool> CanVacuumItemFunc => (item) => {
+			return ((IBagModItem)this).BagContainsItem(item);
+		};
 		public static void ClearTrash(BagUI bagUI) {
 			Item[] inv = bagUI.MyStorage.Items;
 			bool trashedAny = false;
