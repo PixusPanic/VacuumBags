@@ -30,6 +30,12 @@ namespace VacuumBags
 
 		#region General Overrides
 
+		public override void Load() {
+			AndroMod.OnResetGameCounter += () => {
+				honeyWetResetTime = 0;
+				nextFullCheckTime = 0;
+			};
+		}
 		public override void PostUpdateMiscEffects() {
 			BannerBag.PostUpdateMiscEffects(Player);
 		}

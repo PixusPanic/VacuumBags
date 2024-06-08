@@ -294,6 +294,7 @@ namespace VacuumBags.Items
 
 			return null;
 		}
+		public static List<Func<int>> AdditonalDevWhitelistItems = new();
 		public override SortedSet<int> DevWhiteList() {
 			SortedSet<int> devWhiteList = new() {
 				ItemID.Spike,
@@ -340,6 +341,8 @@ namespace VacuumBags.Items
 			devWhiteList.UnionWith(ItemSets.Buckets);
 
 			devWhiteList.UnionWith(WirePlacingTools);
+
+			devWhiteList.UnionWith(AdditonalDevWhitelistItems.Select(a => a()));
 
 			return devWhiteList;
 		}

@@ -39,6 +39,9 @@ namespace VacuumBags.Items
 			Item.width = 32;
             Item.height = 32;
 		}
+		public override void Load() {
+			AndroMod.OnResetGameCounter += () => ticksAdded = 0;
+		}
 		public override int GetBagType() => ModContent.ItemType<PotionFlask>();
 		public override void AddRecipes() {
 			if (!VacuumBags.serverConfig.HarderBagRecipes) {
