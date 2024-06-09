@@ -79,6 +79,9 @@ namespace VacuumBags.Items
 		public static Item OnQuickBuff_PickBestFoodItem(On_Player.orig_QuickBuff_PickBestFoodItem orig, Player self) {
 			Item item = orig(self);
 
+			if (self.whoAmI != Main.myPlayer)
+				return null;
+
 			if (!HasAndCanUsePotionFlask(self))
 				return item;
 
@@ -354,6 +357,9 @@ namespace VacuumBags.Items
 		private static int maxBuffs = Player.MaxBuffs;
 		private static int nextOpen = 0;
 		public static void OnKilled(Player player) {
+			if (player.whoAmI != Main.myPlayer)
+				return;
+
 			List<int> toRemove = new();
 			foreach (KeyValuePair<int, BuffInfo> pair in Buffs) {
 				if (pair.Value.OnKilledShouldRemove())
@@ -365,6 +371,9 @@ namespace VacuumBags.Items
 			}
 		}
 		public static void OnRespawn(Player player) {
+			if (player.whoAmI != Main.myPlayer)
+				return;
+
 			if (!hasPotionFlask)
 				return;
 
@@ -387,13 +396,17 @@ namespace VacuumBags.Items
 			}
 		}
 		internal static void OnDelBuff(On_Player.orig_DelBuff orig, Player self, int b) {
-			if (ItemSlot.ShiftInUse && Main.mouseRight && Main.mouseRightRelease && Main.HoverItem.NullOrAir()) {
+			bool myPlayer = self.whoAmI == Main.myPlayer;
+			if (myPlayer && ItemSlot.ShiftInUse && Main.mouseRight && Main.mouseRightRelease && Main.HoverItem.NullOrAir()) {
 				int type = self.buffType[b];
 				Buffs.Remove(type);
 			}
 
 			orig(self, b);
 			
+			if (!myPlayer)
+				return;
+
 			nextOpen = 0;
 			foreach (BuffInfo info in Buffs.Values) {
 				if (!info.Paused && info.BuffIndex >= b && info.BuffIndex > 0)
@@ -402,7 +415,7 @@ namespace VacuumBags.Items
 		}
 		internal static void OnAddBuff(On_Player.orig_AddBuff orig, Player self, int type, int timeToAdd, bool quiet, bool foodHack) {
 			Item[] inv = null;
-			bool shouldCheckBuffs = Main.netMode != NetmodeID.Server;
+			bool shouldCheckBuffs = self.whoAmI == Main.myPlayer;
 			if (shouldCheckBuffs) {
 				shouldCheckBuffs = self.TryGetModPlayer(out StoragePlayer storagePlayer);
 				if (shouldCheckBuffs) {
@@ -433,6 +446,8 @@ namespace VacuumBags.Items
 			//}
 		}
 		internal static void OnTryRemovingBuff(On_Main.orig_TryRemovingBuff orig, int i, int b) {
+			//Only called on owning clients, no need to check for other players.
+
 			if (hasPotionFlask && Main.LocalPlayer.TryGetModPlayer(out StoragePlayer storagePlayer)) {
 				nextOpen = 0;
 				Item[] inv = storagePlayer.Storages[Instance.BagStorageID].Items;
@@ -445,6 +460,9 @@ namespace VacuumBags.Items
 			orig(i, b);
 		}
 		public static void QuickBuff_Unpause(Player player) {
+			if (player.whoAmI != Main.myPlayer)
+				return;
+
 			if (!hasPotionFlask)
 				return;
 
@@ -480,6 +498,9 @@ namespace VacuumBags.Items
 			trackedItemIndexes.Clear();
 		}
 		internal static void PostUpdateBuffs(Player player) {
+			if (player.whoAmI != Main.myPlayer)
+				return;
+
 			hasExquisiteFlask = StorageManager.HasRequiredItemToUseStorageFromBagTypeSlow(player, ExquisitePotionFlaskType, out _, out _, out _, true);
 			if (hasExquisiteFlask) {
 				hasPotionFlask = true;
