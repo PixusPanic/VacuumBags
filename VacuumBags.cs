@@ -26,6 +26,7 @@ using VacuumBags.Common.Configs;
 using VacuumBags.Common.Globals;
 using VacuumBags.Items;
 using VacuumBags.Localization;
+using VacuumBags.ModIntegration.RegisteringStorages;
 
 namespace VacuumBags
 {
@@ -100,6 +101,7 @@ namespace VacuumBags
 
 			VacuumBagsLocalizationData.RegisterSDataPackage();
 			StoragePlayer.OnAndroLibClientConfigChangedInGame += SimpleBag.ClearAllowedLists;
+			TerrariaAutomationsIntegration.Load();
 		}
 
 
