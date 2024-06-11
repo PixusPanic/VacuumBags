@@ -35,7 +35,6 @@ namespace VacuumBags.Tiles
 				TileID.RollingCactus
 			};
 			TileObjectData.newTile.StyleHorizontal = true;
-			TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.SolidTile | AnchorType.SolidWithTop | AnchorType.SolidSide | AnchorType.Table, TileObjectData.newTile.Width, 0);
 			AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
 			AdjTiles = AdjTiles.Append(TileID.WorkBenches).ToArray();
 			TileObjectData.addTile(Type);

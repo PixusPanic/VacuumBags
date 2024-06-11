@@ -118,6 +118,9 @@
 		<Reference Include="androLib">
 			<HintPath>..\androLib\bin\Debug\net6.0\androLib.dll</HintPath>
 		</Reference>
+		<Reference Include="MagicStorage">
+		  <HintPath>..\Mods\lib\MagicStorage.dll</HintPath>
+		</Reference>
 		<Reference Include="TerrariaAutomations">
 		  <HintPath>..\TerrariaAutomations\bin\Debug\net8.0\TerrariaAutomations.dll</HintPath>
 		</Reference>
