@@ -1,6 +1,7 @@
 ﻿using androLib;
 using androLib.Common.Globals;
 using androLib.Common.Utility;
+using androLib.ModIntegration;
 using Ionic.Zlib;
 using System;
 using System.Collections.Generic;
@@ -53,6 +54,9 @@ namespace VacuumBags
 		}
 		public override void PreSaveAndQuit() {
 			ExquisitePotionFlask.PreSaveAndQuit();
+		}
+		public override void PostSetupContent() {
+			TA_MagicStorageIntegration.PostSetupContent();
 		}
 	}
 }

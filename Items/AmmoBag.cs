@@ -61,7 +61,7 @@ namespace VacuumBags.Items
 		public override Color PanelColor => new Color(80, 80, 80, androLib.Common.Configs.ConfigValues.UIAlpha);
 		public override Color ScrollBarColor => new Color(90, 90, 90, androLib.Common.Configs.ConfigValues.UIAlpha);
 		public override Color ButtonHoverColor => new Color(120, 120, 120, androLib.Common.Configs.ConfigValues.UIAlpha);
-		protected override Action SelectItemForUIOnly => () => Main.LocalPlayer.ChooseAmmo(Main.LocalPlayer.HeldItem);
+		public override Action SelectItemForUIOnly => () => Main.LocalPlayer.ChooseAmmo(Main.LocalPlayer.HeldItem);
 
 		public static Item OnChooseAmmo(On_Player.orig_ChooseAmmo orig, Player self, Item weapon) {
 			Item item = orig(self, weapon);

@@ -65,7 +65,7 @@ namespace VacuumBags.Items
 		public override Color PanelColor => new Color(140, 140, 160, androLib.Common.Configs.ConfigValues.UIAlpha);
 		public override Color ScrollBarColor => new Color(100, 70, 15, androLib.Common.Configs.ConfigValues.UIAlpha);
 		public override Color ButtonHoverColor => new Color(240, 240, 240, androLib.Common.Configs.ConfigValues.UIAlpha);
-		protected override Action SelectItemForUIOnly => UpdateAllSelectedFromBag;
+		public override Action SelectItemForUIOnly => UpdateAllSelectedFromBag;
 
 		public static void UpdateBannersFromHeldBag(ref SceneMetrics sceneMetrics, Player player) {
 			if (ActiveBannersFromTileNearbyEffects.Any())

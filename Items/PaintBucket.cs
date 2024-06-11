@@ -60,7 +60,7 @@ namespace VacuumBags.Items
 		public override Color PanelColor => new Color(245, 245, 220, androLib.Common.Configs.ConfigValues.UIAlpha);
 		public override Color ScrollBarColor => new Color(255, 255, 230, androLib.Common.Configs.ConfigValues.UIAlpha);
 		public override Color ButtonHoverColor => new Color(255, 250, 240, androLib.Common.Configs.ConfigValues.UIAlpha);
-		protected override Action SelectItemForUIOnly => () => ChoosePaintFromBucket(Main.LocalPlayer);
+		public override Action SelectItemForUIOnly => () => ChoosePaintFromBucket(Main.LocalPlayer);
 
 		internal static Item OnFindPaintOrCoating(On_Player.orig_FindPaintOrCoating orig, Player self) {
 			Item item = orig(self);

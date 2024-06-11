@@ -59,7 +59,7 @@ namespace VacuumBags.Items
 		public override Color PanelColor => new Color(80, 10, 10, androLib.Common.Configs.ConfigValues.UIAlpha);
 		public override Color ScrollBarColor => new Color(90, 10, 10, androLib.Common.Configs.ConfigValues.UIAlpha);
 		public override Color ButtonHoverColor => new Color(120, 0, 0, androLib.Common.Configs.ConfigValues.UIAlpha);
-		protected override Action SelectItemForUIOnly => () => ChooseItemFromBox(Main.LocalPlayer);
+		public override Action SelectItemForUIOnly => () => ChooseItemFromBox(Main.LocalPlayer);
 
 		public static Item ChooseItemFromBox(Player player) => ChooseFromBag(Instance.BagStorageID, (Item item) => item.createTile > -1, player);
 

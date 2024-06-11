@@ -2,5 +2,5 @@ displayName = Vacuum Bags
 author = andro951
 version = 1.2.4.16
 includeSource = true
-modReferences = androLib@1.0.7.10, VacuumOreBag@1.0.2.2
+modReferences = androLib@1.0.7.12, VacuumOreBag@1.0.2.2
 weakReferences = TerrariaAutomations, MagicStorage

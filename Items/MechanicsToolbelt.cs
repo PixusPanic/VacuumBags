@@ -62,7 +62,7 @@ namespace VacuumBags.Items
 		public override Color PanelColor => new Color(99, 63, 33, androLib.Common.Configs.ConfigValues.UIAlpha);
 		public override Color ScrollBarColor => new Color(155, 110, 45, androLib.Common.Configs.ConfigValues.UIAlpha);
 		public override Color ButtonHoverColor => new Color(200, 140, 65, androLib.Common.Configs.ConfigValues.UIAlpha);
-		protected override Action SelectItemForUIOnly => () => {
+		public override Action SelectItemForUIOnly => () => {
 			Player player = Main.LocalPlayer;
 			if (WirePlacingTools.Contains(player.HeldItem.type)) {
 				ChooseWireFromBelt(player);
@@ -71,7 +71,8 @@ namespace VacuumBags.Items
 				ChoosePlacableItemFromBelt(player);
 			}
 		};
-		
+		public override bool ShouldUpdateInfoAccessories => true;
+
 		public static Item ChoosePlacableItemFromBelt(Player player) => ChooseFromBag(Instance.BagStorageID, item => item.createTile > -1 || item.IsBucket(), player);
 
 		internal static void On_Player_PutItemInInventoryFromItemUsage(On_Player.orig_PutItemInInventoryFromItemUsage orig, Player self, int type, int theSelectedItem) {

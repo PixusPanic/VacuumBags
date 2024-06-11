@@ -23,8 +23,8 @@ namespace VacuumBags.Items {
 		public virtual SellCondition SellCondition => SellCondition.Never;
 		public virtual float SellPriceModifier => 1f;
 		public abstract int GetBagType();
-		protected virtual Action SelectItemForUIOnly => null;
-		protected virtual bool ShouldUpdateInfoAccessories => false;
+		public virtual Action SelectItemForUIOnly => null;
+		public virtual bool ShouldUpdateInfoAccessories => false;
 		public virtual void RegisterWithAndroLib(Mod mod) {
 			((IBagModItem)this).RegisterWithAndroLibIBagModItem(mod);
 

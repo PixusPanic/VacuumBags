@@ -65,8 +65,8 @@ namespace VacuumBags.Items
 		public override Color PanelColor => new Color(38, 38, 67, androLib.Common.Configs.ConfigValues.UIAlpha);
 		public override Color ScrollBarColor => new Color(46, 31, 18, androLib.Common.Configs.ConfigValues.UIAlpha);
 		public override Color ButtonHoverColor => new Color(92, 122, 173, androLib.Common.Configs.ConfigValues.UIAlpha);
-		protected override Action SelectItemForUIOnly => () => typeof(Player).GetMethod("Fishing_GetBait", BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(Main.LocalPlayer, new object[] { null });
-		protected override bool ShouldUpdateInfoAccessories => true;
+		public override Action SelectItemForUIOnly => () => typeof(Player).GetMethod("Fishing_GetBait", BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(Main.LocalPlayer, new object[] { null });
+		public override bool ShouldUpdateInfoAccessories => true;
 
 		internal static void OnFishing_GetBait(On_Player.orig_Fishing_GetBait orig, Player self, out Item bait) {
 			orig(self, out bait);

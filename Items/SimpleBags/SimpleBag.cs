@@ -18,6 +18,7 @@ namespace VacuumBags.Items
 		public abstract int MyTileType { get; }
 		public static int BagSize => -40;
 		public override bool? CanVacuum => VacuumBags.clientConfig.SimpleBagsVacuumAllItems ? true : null;
+		public override bool ShouldUpdateInfoAccessories => true;
 		public override void SetDefaults() {
 			Item.createTile = MyTileType;
 			Item.consumable = true;
@@ -93,7 +94,8 @@ namespace VacuumBags.Items
 				675,//UI Top
 				UpdateAllowedList,
 				false,
-				canVacuumItem: CanVacuumItem
+				canVacuumItem: CanVacuumItem,
+				shouldRefreshInfoAccs: ShouldUpdateInfoAccessories
 			);
 		}
 

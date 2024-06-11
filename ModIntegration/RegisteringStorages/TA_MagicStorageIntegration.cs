@@ -20,30 +20,18 @@ namespace androLib.ModIntegration
 {
     [JITWhenModsEnabled(AndroMod.magicStorageName)]
     public class TA_MagicStorageIntegration {
-        public static int SearchForBiomeGlobe(Player player, IList<Item> items) {
-            if (!AndroMod.magicStorageEnabled)
-                return - 1;
+        public static void PostSetupContent() {
+			if (!AndroMod.magicStorageEnabled)
+				return;
 
-            return SearchForBiomeGlobeInner(player, items);
-        }
-
+			PostSetupContentInner();
+		}
 		[MethodImpl(MethodImplOptions.NoInlining)]
-		public static int SearchForBiomeGlobeInner(Player player,IList<Item> items) {
-            int biomeGlobeItem = ModContent.ItemType<MagicStorage.Items.BiomeGlobe>();
-            if (player.TryGetModPlayer(out MagicStorage.Items.BiomePlayer biomePlayer)) {
-                for (int i = 0; i < items.Count; i++) {
-                    Item item = items[i];
-                    if (item.NullOrAir() || item.stack < 1)
-                        continue;
-
-					if (item.type == biomeGlobeItem) {
-						biomePlayer.biomeGlobe = true;
-						return i;
-					}
-				}
+		public static void PostSetupContentInner() {
+			int biomeGlobeItem = ModContent.ItemType<MagicStorage.Items.BiomeGlobe>();
+			if (biomeGlobeItem != -1) {
+				ItemID.Sets.WorksInVoidBag[biomeGlobeItem] = true;
 			}
-
-            return -1;
 		}
 	}
 }
