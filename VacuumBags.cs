@@ -304,8 +304,11 @@ namespace VacuumBags
 			//IL_0cd9: stloc.s 29
 
 			//Note to self.  All instructions have to be perfectly in order if using TryGotoNext.  Use multiple calls of TryGotoNext if you need to skip instructions.
+
+			int itemLoc = -1;
+
 			if (!c.TryGotoNext(MoveType.After,
-				i => i.MatchLdloc(1),
+				i => i.MatchLdloc(out itemLoc),
 				i => i.MatchLdfld<Item>("useAmmo"),
 				i => i.MatchPop(),
 				i => i.MatchLdcI4(0)
@@ -322,7 +325,7 @@ namespace VacuumBags
 				i => i.MatchLdcI4(0)
 			)) { throw new Exception("Failed to find instructions OnDrawItemSlot 2/2"); }*/
 			//c.LogRest(10);
-			c.Emit(OpCodes.Ldloc, 1);
+			c.Emit(OpCodes.Ldloc, itemLoc);
 
 			c.EmitDelegate((int ammoCount, Item weapon) => {
 				AmmoBag.AddAmmoCountFromAmmoBag(weapon, ref ammoCount);
@@ -341,7 +344,7 @@ namespace VacuumBags
 			//IL_0d1d: stloc.s 29
 
 			if (!c.TryGotoNext(MoveType.After,
-				i => i.MatchLdloc(1),
+				i => i.MatchLdloc(itemLoc),
 				i => i.MatchLdfld<Item>("fishingPole"),
 				i => i.MatchLdcI4(0),
 				i => i.MatchBle(out _),
@@ -376,14 +379,16 @@ namespace VacuumBags
 			//IL_0d5f: ldc.i4.0
 			//IL_0d60: stloc.s 30
 
+			int tileWandLoc = -1;
+
 			if (!c.TryGotoNext(MoveType.After,
-				i => i.MatchLdloc(1),
+				i => i.MatchLdloc(itemLoc),
 				i => i.MatchLdfld<Item>("tileWand"),
-				i => i.MatchStloc(45),
+				i => i.MatchStloc(out tileWandLoc),
 				i => i.MatchLdcI4(0)
 			)) { throw new Exception("Failed to find instructions OnDrawItemSlot 3/4"); }
 
-			c.Emit(OpCodes.Ldloc, 45);
+			c.Emit(OpCodes.Ldloc, tileWandLoc);
 
 			c.EmitDelegate((int wandAmmo, int tileWand) => {
 				Item wandAmmoItem = tileWand.CSI();
@@ -418,10 +423,13 @@ namespace VacuumBags
 			//IL_0de2: br.s IL_0e08
 			//// loop start (head: IL_0e08)
 
+			int num11Loc = -1;
+			int lLoc = -1;
+
 			if (!c.TryGotoNext(MoveType.Before,
-				i => i.MatchStloc(30),
+				i => i.MatchStloc(out num11Loc),
 				i => i.MatchLdcI4(0),
-				i => i.MatchStloc(47)
+				i => i.MatchStloc(out lLoc)
 			)) { throw new Exception("Failed to find instructions OnDrawItemSlot 4/4"); }
 
 			c.EmitDelegate((int wireCount) => {
