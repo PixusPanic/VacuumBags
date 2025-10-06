@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework;
 using Terraria.ModLoader.Default;
 using androLib.Common.Globals;
 using androLib.Items;
+using VacuumBags.Common.Configs;
 using static Terraria.ID.ContentSamples.CreativeHelper;
 
 namespace VacuumBags.Items
@@ -25,6 +26,13 @@ namespace VacuumBags.Items
 				return instance;
 			}
 		}
+		
+		public override bool IsLoadingEnabled(Mod mod)
+		{
+			return ModContent.GetInstance<BagToggle>().EssenceOfGathering && ModContent.GetInstance<BagToggle>().ModBags &&
+			       (AndroMod.starsAboveEnabled || !ModContent.GetInstance<BagToggle>().RequireModsForModBags);
+		}
+		
 		private static IBagModItem instance;
 		public override string ModDisplayNameTooltip => "Stars Above";
 		public override string LocalizationDisplayName => "Essence of Gathering";

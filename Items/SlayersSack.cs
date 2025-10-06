@@ -13,6 +13,7 @@ using Terraria.GameContent.ItemDropRules;
 using System;
 using MonoMod.Cil;
 using Mono.Cecil.Cil;
+using VacuumBags.Common.Configs;
 using static androLib.Items.IBagModItem;
 
 namespace VacuumBags.Items
@@ -27,6 +28,12 @@ namespace VacuumBags.Items
 				return instance;
 			}
 		}
+		
+		public override bool IsLoadingEnabled(Mod mod)
+		{
+			return ModContent.GetInstance<BagToggle>().SlayersSack;
+		}
+		
 		private static IBagModItem instance;
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {

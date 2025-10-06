@@ -28,6 +28,12 @@ namespace VacuumBags.Items
 				return instance;
 			}
 		}
+		
+		public override bool IsLoadingEnabled(Mod mod)
+		{
+			return ModContent.GetInstance<BagToggle>().BannerBag;
+		}
+		
 		private static BannerBag instance;
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {

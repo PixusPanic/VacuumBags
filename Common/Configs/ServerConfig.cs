@@ -113,5 +113,135 @@ namespace VacuumBags.Common.Configs
 		[DefaultValue(false)]
 		[ReloadRequired]
 		public bool PrintWikiInfo;
+		
+		// Debugging
+		[JsonIgnore]
+		public const string DebuggingInformationKey = "DebuggingInformation";
+		[Header($"$Mods.{VacuumBags.ModName}.{L_ID_Tags.Configs}.{ClientConfigName}.{DebuggingInformationKey}")]
+
+		[DefaultValue(false)]
+		[ReloadRequired]
+		public bool ThrowExceptions;
 	}
+	
+	#region BagToggle
+	//[SeparatePage]
+	public class BagToggle : ModConfig
+	{
+		public override ConfigScope Mode => ConfigScope.ServerSide;
+		public const string BagToggleConfigName = "BagToggle";
+		
+		[JsonIgnore]
+		public const string BagToggleHeaderKey = "BagToggle";
+		[Header($"$Mods.{VacuumBags.ModName}.{L_ID_Tags.Configs}.{BagToggleConfigName}.{BagToggleHeaderKey}")]
+		
+		/*[ReloadRequired]
+		[DefaultValue(true)]
+		public bool OreBag;*/
+		
+		[ReloadRequired]
+		[DefaultValue(true)]
+		public bool BannerBag;
+
+		[ReloadRequired]
+		[DefaultValue(true)]
+		public bool FishingBelt;
+		
+		[ReloadRequired]
+		[DefaultValue(true)]
+		public bool PortableStation;
+		
+		[ReloadRequired]
+		[DefaultValue(true)]
+		public bool PaintBucket;
+		
+		[ReloadRequired]
+		[DefaultValue(true)]
+		public bool PotionFlask;
+		
+		[ReloadRequired]
+		[DefaultValue(true)]
+		public bool ExquisitePotionFlask;
+		
+		[ReloadRequired]
+		[DefaultValue(true)]
+		public bool HerbSatchel;
+		
+		[ReloadRequired]
+		[DefaultValue(true)]
+		public bool MechanicsToolbelt;
+
+		[ReloadRequired]
+		[DefaultValue(true)]
+		public bool JarOfDirt;
+		
+		[ReloadRequired]
+		[DefaultValue(true)]
+		public bool AmmoBag;
+
+		[ReloadRequired]
+		[DefaultValue(true)]
+		public bool BossBag;
+
+		[ReloadRequired]
+		[DefaultValue(true)]
+		public bool BuildersBox;
+		
+		[ReloadRequired]
+		[DefaultValue(true)]
+		public bool WallEr;
+		
+		[ReloadRequired]
+		[DefaultValue(true)]
+		public bool SlayersSack;
+
+		[ReloadRequired]
+		[DefaultValue(true)]
+		public bool TrashCan;
+
+		[ReloadRequired]
+		[DefaultValue(true)]
+		public bool BagsAndPacks;
+		
+		[JsonIgnore]
+		public const string ModSupportHeaderKey = "ModSupport";
+		[Header($"$Mods.{VacuumBags.ModName}.{L_ID_Tags.Configs}.{BagToggleConfigName}.{ModSupportHeaderKey}")]
+		
+		[ReloadRequired]
+		[DefaultValue(true)]
+		public bool ModBags;
+		
+		[ReloadRequired]
+		[DefaultValue(false)]
+		public bool RequireModsForModBags;
+		
+		[ReloadRequired]
+		[DefaultValue(true)]
+		public bool CalamitousCauldron;
+		
+		[ReloadRequired]
+		[DefaultValue(true)]
+		public bool LokisTesseract;
+		
+		[ReloadRequired]
+		[DefaultValue(true)]
+		public bool EssenceOfGathering;
+		
+		[ReloadRequired]
+		[DefaultValue(true)]
+		public bool FargosMementos;
+		
+		[ReloadRequired]
+		[DefaultValue(true)]
+		public bool SpookyGourd;
+		
+		[ReloadRequired]
+		[DefaultValue(true)]
+		public bool EarthenPyramid;
+		
+		[ReloadRequired]
+		[DefaultValue(true)]
+		public bool HoiPoiCapsule;
+	}
+	#endregion
 }

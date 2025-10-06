@@ -18,6 +18,7 @@ using Humanizer;
 using System.Security.Policy;
 using Terraria.GameContent;
 using androLib.UI;
+using VacuumBags.Common.Configs;
 using static androLib.Items.IBagModItem;
 
 namespace VacuumBags.Items
@@ -32,6 +33,12 @@ namespace VacuumBags.Items
 				return instance;
 			}
 		}
+		
+		public override bool IsLoadingEnabled(Mod mod)
+		{
+			return ModContent.GetInstance<BagToggle>().ExquisitePotionFlask;
+		}
+		
 		private static IBagModItem instance;
 		public override int BagStorageID { get => PotionFlask.Instance.BagStorageID; set => PotionFlask.Instance.BagStorageID = value; }
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');

@@ -39,5 +39,6 @@ namespace VacuumBags.Items
 				.AddTile(TileID.Loom)
 				.Register();
 		}
+		
 	}
 }

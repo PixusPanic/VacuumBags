@@ -16,14 +16,14 @@ namespace VacuumBags.ModIntegration.RegisteringStorages {
 			if (!AndroMod.terrariaAutomationsModEnabled)
 				return;
 
-			RegisterPipesStorage();
+			//RegisterPipesStorage();
 		}
 
-		[MethodImpl(MethodImplOptions.NoInlining)]
+		/*[MethodImpl(MethodImplOptions.NoInlining)]
 		private static void RegisterPipesStorage() {
 			TerrariaAutomations.TileData.TA_TileData.RegisterAdditionalPipeInventory(() => StorageManager.GetItems(MechanicsToolbelt.Instance.BagStorageID));
 			MechanicsToolbelt.AdditonalDevWhitelistItems.Add(() => TerrariaAutomations.Items.Pipe.PipeType);
 			MechanicsToolbelt.AdditonalDevWhitelistItems.Add(() => TerrariaAutomations.Items.PipeWrench.PipeWrenchType);
-		}
+		}*/
 	}
 }

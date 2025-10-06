@@ -10,6 +10,7 @@ using Terraria;
 using Microsoft.Xna.Framework;
 using Terraria.ModLoader.Default;
 using androLib.Items;
+using VacuumBags.Common.Configs;
 using static Terraria.ID.ContentSamples.CreativeHelper;
 
 namespace VacuumBags.Items
@@ -24,6 +25,13 @@ namespace VacuumBags.Items
 				return instance;
 			}
 		}
+		
+		public override bool IsLoadingEnabled(Mod mod)
+		{
+			return ModContent.GetInstance<BagToggle>().CalamitousCauldron && ModContent.GetInstance<BagToggle>().ModBags &&
+			       (AndroMod.calamityEnabled || !ModContent.GetInstance<BagToggle>().RequireModsForModBags);
+		}
+		
 		private static IBagModItem instance;
 		public override string ModDisplayNameTooltip => "Calamity";
 		public override string LocalizationDisplayName => "Calamitous Cauldron";

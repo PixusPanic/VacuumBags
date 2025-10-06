@@ -12,6 +12,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.Default;
+using VacuumBags.Common.Configs;
 
 namespace VacuumBags.Items
 {
@@ -37,6 +38,11 @@ namespace VacuumBags.Items
 			}
 
 			return devWhiteList;
+		}
+
+		public override bool IsLoadingEnabled(Mod mod)
+		{
+			return ModContent.GetInstance<BagToggle>().ModBags;
 		}
 
 		#region AndroModItem attributes that you don't need.

@@ -61,6 +61,13 @@ Mods: {
 					Label: 关闭常规药水瓶
 					Tooltip: 打开此选项将禁用常规药水瓶的所有效果。 （不影响精致药剂瓶）
 				}
+
+				// DebuggingInformation: Debugging information
+
+				ThrowExceptions: {
+					// Label: Throw Exceptions
+					// Tooltip: If enabled, if an IL edit fails, it will instead throw an exception. Only useful for debugging purposes.
+				}
 			}
 
 			BagsServerConfig: {
@@ -161,6 +168,152 @@ Mods: {
 						如果选择，玩家死亡时拥有的药水增益将在玩家重生时的剩余持续时间内返还给玩家。
 						无论此选项如何，精致药水瓶始终具有此效果。
 						'''
+				}
+
+				CanPlaceBags: {
+					// Label: Enable placing Bags and Packs
+					// Tooltip: ""
+				}
+			}
+
+			BagToggle: {
+				// DisplayName: Bag Toggle
+				// BagToggle: Note that items if a bag is not loaded, its items will still persist between saves!
+
+				OreBag: {
+					// Label: Enable Ore Bag
+					// Tooltip: ""
+				}
+
+				BannerBag: {
+					// Label: "[i:VacuumBags/BannerBag] Enable Banner Bag"
+					// Tooltip: Toggles loading of the Banner Bag.
+				}
+
+				FishingBelt: {
+					// Label: "[i:VacuumBags/FishingBelt] Enable Fishing Belt"
+					// Tooltip: Toggles loading of the Fishing Belt.
+				}
+
+				PortableStation: {
+					// Label: "[i:VacuumBags/PortableStation] Enable Portable Station"
+					// Tooltip: Toggles loading of the Portable Station.
+				}
+
+				PaintBucket: {
+					// Label: "[i:VacuumBags/PaintBucket] Enable Paint Bucket"
+					// Tooltip: Toggles loading of the Paint Bucket.
+				}
+
+				PotionFlask: {
+					// Label: "[i:VacuumBags/PotionFlask] Enable Potion Flask"
+					// Tooltip: Toggles loading of the Potion Flask.
+				}
+
+				ExquisitePotionFlask: {
+					// Label: "[i:VacuumBags/ExquisitePotionFlask] Enable Exquisite Potion Flask"
+					/* Tooltip:
+						'''
+						Toggles loading of the Exquisite Potion Flask.
+						Requires the Potion Flask to be enabled.
+						''' */
+				}
+
+				HerbSatchel: {
+					// Label: "[i:VacuumBags/HerbSatchel] Enable Herb Satchel"
+					// Tooltip: Toggles loading of the Herb Satchel.
+				}
+
+				MechanicsToolbelt: {
+					// Label: "[i:VacuumBags/MechanicsToolbelt] Enable Mechanic's Toolbelt"
+					// Tooltip: Toggles loading of the Mechanic's Toolbelt.
+				}
+
+				JarOfDirt: {
+					// Label: "[i:VacuumBags/JarOfDirt] Enable Jar Of Dirt"
+					// Tooltip: Toggles loading of the Jar of Dirt.
+				}
+
+				AmmoBag: {
+					// Label: "[i:VacuumBags/AmmoBag] Enable Ammo Bag"
+					// Tooltip: Toggles loading of the Ammo Bag.
+				}
+
+				BossBag: {
+					// Label: "[i:VacuumBags/BossBag] Enable Boss Bag"
+					// Tooltip: Toggles loading of the Boss Bag.
+				}
+
+				BuildersBox: {
+					// Label: "[i:VacuumBags/BuildersBox] Enable Builders Box"
+					// Tooltip: Toggles loading of the Builder's Box.
+				}
+
+				WallEr: {
+					// Label: "[i:VacuumBags/WallEr] Enable Wall-Er"
+					// Tooltip: Toggles loading of the Wall-Er.
+				}
+
+				SlayersSack: {
+					// Label: "[i:VacuumBags/SlayersSack] Enable Slayer's Sack"
+					// Tooltip: Toggles loading of the Slayer's Sack.
+				}
+
+				TrashCan: {
+					// Label: "[i:VacuumBags/TrashCan] Enable Trash Can"
+					// Tooltip: Toggles loading of the Trash Can.
+				}
+
+				BagsAndPacks: {
+					// Label: "[i:VacuumBags/BagBrown] [i:VacuumBags/PackBrown] Enable Bags and Packs"
+					// Tooltip: Toggles loading of simple Bags and Packs.
+				}
+
+				// ModSupport: Mod Compatibility bags
+
+				ModBags: {
+					// Label: Load Mod Bags
+					// Tooltip: Toggles loading of all mod bags, regardless of the below settings.
+				}
+
+				RequireModsForModBags: {
+					// Label: Require Respective Mods for Mod Bags
+					// Tooltip: Should you require having the mods enabled to load their respective bags?
+				}
+
+				CalamitousCauldron: {
+					// Label: Calamity Mod - [i:VacuumBags/CalamitousCauldron] Calamitous Cauldron
+					// Tooltip: Toggles loading of the Calamitous Cauldron.
+				}
+
+				LokisTesseract: {
+					// Label: Thorium Mod - [i:VacuumBags/LokisTesseract] Loki's Tesseract
+					// Tooltip: Toggles loading of Loki's Tesseract.
+				}
+
+				EssenceOfGathering: {
+					// Label: Stars Above - [i:VacuumBags/EssenceOfGathering] Essence Of Gathering
+					// Tooltip: Toggles loading of the Essence of Gathering.
+				}
+
+				FargosMementos: {
+					// Label: Fargo's Mutant/Souls Mod - [i:VacuumBags/FargosMementos] Fargo's Mementos
+					// Tooltip: Toggles loading of the Fargo's Momentos.
+				}
+
+				SpookyGourd: {
+					// Label: Spooky Mod - [i:VacuumBags/SpookyGourd] Spooky Gourd
+					// Tooltip: Toggles loading of the Spooky Gourd.
+				}
+
+				EarthenPyramid: {
+					// Label: Secret of the Shadows - [i:VacuumBags/EarthenPyramid] Earthen Pyramid
+					// Tooltip: Toggles loading of the Earthen Pyramid.
+				}
+
+				HoiPoiCapsule: {
+					// Label: DBZ Terraria - [i:VacuumBags/HoiPoiCapsule] Hoi Poi Capsule
+					// Tooltip: Toggles loading of the Hoi Poi Capsule.
 				}
 			}
 		}

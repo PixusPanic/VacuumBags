@@ -12,6 +12,7 @@ using System;
 using static Terraria.ModLoader.PlayerDrawLayer;
 using MonoMod.Cil;
 using Mono.Cecil.Cil;
+using VacuumBags.Common.Configs;
 using static Terraria.ID.ContentSamples.CreativeHelper;
 using static androLib.Items.IBagModItem;
 
@@ -27,6 +28,12 @@ namespace VacuumBags.Items
 				return instance;
 			}
 		}
+		
+		public override bool IsLoadingEnabled(Mod mod)
+		{
+			return ModContent.GetInstance<BagToggle>().BuildersBox;
+		}
+		
 		private static IBagModItem instance;
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {

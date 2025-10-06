@@ -9,6 +9,7 @@ using androLib.Items;
 using androLib.Common.Globals;
 using androLib;
 using System;
+using VacuumBags.Common.Configs;
 
 namespace VacuumBags.Items
 {
@@ -55,6 +56,11 @@ namespace VacuumBags.Items
 				.AddIngredient(ItemID.JungleSpores, 5)
 				.Register();
 			}
+		}
+		
+		public override bool IsLoadingEnabled(Mod mod)
+		{
+			return ModContent.GetInstance<BagToggle>().BagsAndPacks;
 		}
 	}
 }

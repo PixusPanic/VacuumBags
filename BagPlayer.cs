@@ -21,6 +21,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using Terraria.UI;
+using VacuumBags.Common.Configs;
 using VacuumBags.Common.Globals;
 using VacuumBags.Items;
 
@@ -31,13 +32,38 @@ namespace VacuumBags
 		#region General Overrides
 
 		public override void Load() {
+			#region Loading toggles
+			// This is so the game doesn't crash whenever it's trying to access something that's not loaded
+			if (ModContent.GetInstance<BagToggle>().BuildersBox)
+				choseFromBagFunctions.Add(new KeyValuePair<Func<int>, Func<Player, Item>>(ModContent.ItemType<BuildersBox>, BuildersBox.ChooseItemFromBox));
+			if (ModContent.GetInstance<BagToggle>().WallEr)
+				choseFromBagFunctions.Add(new KeyValuePair<Func<int>, Func<Player, Item>>(ModContent.ItemType<WallEr>, WallEr.ChooseItemFromWallEr));
+			if (ModContent.GetInstance<BagToggle>().JarOfDirt)
+				choseFromBagFunctions.Add(new(ModContent.ItemType<JarOfDirt>, JarOfDirt.ChooseItemFromJar));
+			if (ModContent.GetInstance<BagToggle>().SlayersSack)
+			{
+				choseFromBagFunctions.Add(new(ModContent.ItemType<SlayersSack>, SlayersSack.ChooseRopeFromSack));
+				chooseFromBagForQuickSelectFunctions.Add(new KeyValuePair<Func<int>, Func<Player, Func<Item, bool>, Item>>(ModContent.ItemType<SlayersSack>, SlayersSack.ChooseTorchFromSack));
+			}
+			if (ModContent.GetInstance<BagToggle>().MechanicsToolbelt)
+				choseFromBagFunctions.Add(new(ModContent.ItemType<MechanicsToolbelt>, MechanicsToolbelt.ChoosePlacableItemFromBelt));
+			#endregion
+			
 			AndroMod.OnResetGameCounter += () => {
 				honeyWetResetTime = 0;
 				nextFullCheckTime = 0;
 			};
 		}
+		
+		public override void Unload()
+		{
+			choseFromBagFunctions.Clear();
+			chooseFromBagForQuickSelectFunctions.Clear();
+		}
+		
 		public override void PostUpdateMiscEffects() {
-			BannerBag.PostUpdateMiscEffects(Player);
+			if (ModContent.GetInstance<BagToggle>().BannerBag)
+				BannerBag.PostUpdateMiscEffects(Player);
 		}
 		public override void ResetEffects() {
 			bagPlaceItem = null;
@@ -54,24 +80,30 @@ namespace VacuumBags
 			TouchingStation = false;
 		}
 		public override void PostUpdateBuffs() {
-			if (Main.netMode == NetmodeID.Server)
+			if (Main.netMode == NetmodeID.Server || !ModContent.GetInstance<BagToggle>().PortableStation
+			    && !ModContent.GetInstance<BagToggle>().ExquisitePotionFlask)
 				return;
 
 			if (Player.honeyWet)
 				honeyWetResetTime = Main.GameUpdateCount + HoneyBuffTime;
 
-			UpdateHoneyBuff();
-			ExquisitePotionFlask.PostUpdateBuffs(Player);
+			if (ModContent.GetInstance<BagToggle>().PortableStation)
+				UpdateHoneyBuff();
+			if (ModContent.GetInstance<BagToggle>().ExquisitePotionFlask && ModContent.GetInstance<BagToggle>().PotionFlask)
+				ExquisitePotionFlask.PostUpdateBuffs(Player);
 		}
 		public override void PostUpdate() {
-			TrashCan.TrashCheck();
+			if (ModContent.GetInstance<BagToggle>().TrashCan)
+				TrashCan.TrashCheck();
 		}
 		public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource) {
 			honeyWetResetTime = 0;
-			ExquisitePotionFlask.OnKilled(Player);
+			if (ModContent.GetInstance<BagToggle>().ExquisitePotionFlask && ModContent.GetInstance<BagToggle>().PotionFlask)
+				ExquisitePotionFlask.OnKilled(Player);
 		}
 		public override void OnRespawn() {
-			ExquisitePotionFlask.OnRespawn(Player);
+			if (ModContent.GetInstance<BagToggle>().ExquisitePotionFlask && ModContent.GetInstance<BagToggle>().PotionFlask)
+				ExquisitePotionFlask.OnRespawn(Player);
 		}
 
 		#endregion
@@ -100,16 +132,9 @@ namespace VacuumBags
 		private static int foundInventoryIndex = Storage.ItemNotFound;
 		private static int bagFoundIn = -1;
 
-		private static List<KeyValuePair<Func<int>, Func<Player, Item>>> choseFromBagFunctions = new() {
-			new(ModContent.ItemType<BuildersBox>, BuildersBox.ChooseItemFromBox),
-			new(ModContent.ItemType<WallEr>, WallEr.ChooseItemFromWallEr),
-			new(ModContent.ItemType<JarOfDirt>, JarOfDirt.ChooseItemFromJar),
-			new(ModContent.ItemType<SlayersSack>, SlayersSack.ChooseRopeFromSack),
-			new(ModContent.ItemType<MechanicsToolbelt>, MechanicsToolbelt.ChoosePlacableItemFromBelt)
-		};
-		private static List<KeyValuePair<Func<int>, Func<Player, Func<Item, bool>, Item>>> chooseFromBagForQuickSelectFunctions = new() {
-			new(ModContent.ItemType<SlayersSack>, SlayersSack.ChooseTorchFromSack)
-		};
+		private static List<KeyValuePair<Func<int>, Func<Player, Item>>> choseFromBagFunctions = [];
+		private static List<KeyValuePair<Func<int>, Func<Player, Func<Item, bool>, Item>>> chooseFromBagForQuickSelectFunctions =
+			[];
 
 		private static Item GetBagPlaceItem(Player player) {
 			bagItemChecked = true;

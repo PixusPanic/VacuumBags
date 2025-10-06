@@ -11,6 +11,7 @@ using androLib;
 using static Terraria.ID.ContentSamples.CreativeHelper;
 using System;
 using MonoMod.Cil;
+using VacuumBags.Common.Configs;
 using static androLib.Items.IBagModItem;
 
 namespace VacuumBags.Items
@@ -25,6 +26,12 @@ namespace VacuumBags.Items
 				return instance;
 			}
 		}
+		
+		public override bool IsLoadingEnabled(Mod mod)
+		{
+			return ModContent.GetInstance<BagToggle>().PaintBucket;
+		}
+		
 		private static IBagModItem instance;
 		public override string Texture => (GetType().Namespace + ".Sprites." + Name).Replace('.', '/');
 		public override void SetDefaults() {
